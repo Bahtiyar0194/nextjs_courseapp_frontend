@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes spinner-border {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@font-face {
+    font-family: 'Montserrat-Thin';
+    src: local('Montserrat-Thin'), url('../fonts/montserrat/Montserrat-Thin.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: local('Montserrat-Light'), url('../fonts/montserrat/Montserrat-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: local('Montserrat-Regular'), url('../fonts/montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Medium';
+    src: local('Montserrat-Medium'), url('../fonts/montserrat/Montserrat-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: local('Montserrat-Bold'), url('../fonts/montserrat/Montserrat-Bold.ttf');
+}
+
+.corp-font-thin {
+    font-family: "Montserrat-Thin", sans-serif;
+}
+
+.corp-font-light {
+    font-family: "Montserrat-Light", sans-serif;
+}
+
+.corp-font-regular {
+    font-family: "Montserrat-Regular", sans-serif;
+}
+
+.corp-font-medium {
+    font-family: "Montserrat-Medium", sans-serif;
+}
+
+.corp-font-bold {
+    font-family: "Montserrat-Bold", sans-serif;
+}
+
+/*THEME*/
+::-webkit-scrollbar {
+    width: 8px;
+    @apply bg-dark-200 dark:bg-dark-500;
+}
+::-webkit-scrollbar-thumb {
+    @apply bg-gold-500 rounded-lg;
+}
+::-webkit-scrollbar:horizontal{
+    height: 4px;
+    @apply bg-dark-200 dark:bg-dark-500;
+}
+::-webkit-scrollbar-thumb:horizontal{
+    height: 4px;
+    @apply bg-gold-500 rounded-lg;
+}
+.bg-active {
+    @apply bg-white dark:bg-dark-500;
+}
+.bg-inactive {
+    @apply bg-gray-100 dark:bg-dark-900;
+}
+.border-active{
+    @apply border-2 border-blue-500;
+}
+.text-active {
+    @apply text-dark-900 dark:text-white;
+}
+
+body {
+    @apply corp-font-regular bg-inactive text-active font-normal;
+}
+a {
+    @apply text-dark-200 dark:text-gold-500 cursor-pointer font-medium;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply corp-font-bold mb-2;
+}
+h1{
+    @apply text-4xl;
+}
+h2{
+    @apply text-3xl;
+}
+h3{
+    @apply text-2xl;
+}
+h4{
+    @apply text-xl;
+}
+h5{
+    @apply text-lg;
+}
+h6{
+    @apply text-base;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+table{
+    @apply w-full overflow-hidden;
+}
+thead{
+    @apply bg-active border-b border-gray-100 dark:border-gray-900;
+}
+tbody{
+    @apply bg-active;
+}
+thead>tr>th{
+    @apply px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+}
+tbody>tr>td{
+    @apply px-4 py-3 text-sm font-medium text-active
+}
+
+button:focus,
+input:focus {
+    @apply outline-none;
+}
+
+.custom-container{
+    @apply container mx-auto px-4;
+}
+.form-group {
+    @apply mb-6;
+}
+.form-group label {
+    @apply text-sm mb-2 block;
+}
+.form-group input {
+    @apply bg-transparent border-active rounded-xl w-full py-3 px-4 text-sm text-active;
+}
+
+.btn {
+    @apply flex items-center rounded-xl py-3 px-4 duration-200 text-white corp-font-medium; 
+}
+.btn-primary{
+    @apply bg-blue-500 hover:bg-blue-700;
+}
+
+.btn-success{
+    @apply bg-green-500 hover:bg-green-700;
+}
+
+.btn-outline-success{
+    @apply border-2 border-green-500 text-green-500 hover:border-green-700 hover:text-green-700 bg-transparent;
+}
+
+.btn-danger{
+    @apply bg-red-500 hover:bg-red-700;
+}
+
+.btn-outline-danger{
+    @apply border-2 border-red-500 text-red-500 hover:border-red-700 hover:text-red-700 bg-transparent
+}
+
+.btn > span {
+    @apply ml-1;
+}
+
+.card {
+    @apply bg-active py-4 px-4 shadow-md rounded-lg max-w-full relative overflow-hidden mb-4;
+}
+.card.card-inactive{
+    @apply bg-inactive;
+}
