@@ -17,7 +17,7 @@ const CreateVideoLessonModal = ({ course_id }) => {
 
     const createVideoLessonSubmit = async (e, course_id) => {
         e.preventDefault();
-        //setLoader(true);
+        setLoader(true);
 
         const form_data = new FormData();
         form_data.append('lesson_name', lesson_name);
