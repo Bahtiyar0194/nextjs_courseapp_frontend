@@ -12,84 +12,181 @@
 }
 
 @font-face {
-    font-family: 'Montserrat-Thin';
-    src: local('Montserrat-Thin'), url('../fonts/montserrat/Montserrat-Thin.ttf');
+    font-family: 'Euclid Circular A';
+    src: url('../fonts/euclid/EuclidCircularA-Bold.eot');
+    src: local('Euclid Circular A Bold'), local('EuclidCircularA-Bold'),
+        url('../fonts/euclid/EuclidCircularA-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-Bold.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-Bold.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: 'Montserrat-Light';
-    src: local('Montserrat-Light'), url('../fonts/montserrat/Montserrat-Light.ttf');
+    font-family: 'Euclid Circular A';
+    src: url('../fonts/euclid/EuclidCircularA-Light.eot');
+    src: local('Euclid Circular A Light'), local('EuclidCircularA-Light'),
+        url('../fonts/euclid/EuclidCircularA-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-Light.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-Light.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
 }
 
 @font-face {
-    font-family: 'Montserrat-Regular';
-    src: local('Montserrat-Regular'), url('../fonts/montserrat/Montserrat-Regular.ttf');
+    font-family: 'Euclid Circular A';
+    src: url('../fonts/euclid/EuclidCircularA-BoldItalic.eot');
+    src: local('Euclid Circular A Bold Italic'), local('EuclidCircularA-BoldItalic'),
+        url('../fonts/euclid/EuclidCircularA-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-BoldItalic.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-BoldItalic.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
 }
 
 @font-face {
-    font-family: 'Montserrat-Medium';
-    src: local('Montserrat-Medium'), url('../fonts/montserrat/Montserrat-Medium.ttf');
+    font-family: 'Euclid Circular A';
+    src: url('../fonts/euclid/EuclidCircularA-LightItalic.eot');
+    src: local('Euclid Circular A Light Italic'), local('EuclidCircularA-LightItalic'),
+        url('../fonts/euclid/EuclidCircularA-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-LightItalic.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-LightItalic.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
 }
 
 @font-face {
-    font-family: 'Montserrat-Bold';
-    src: local('Montserrat-Bold'), url('../fonts/montserrat/Montserrat-Bold.ttf');
+    font-family: 'Euclid Circular A';
+    src: url('../fonts/euclid/EuclidCircularA-Regular.eot');
+    src: local('Euclid Circular A Regular'), local('EuclidCircularA-Regular'),
+        url('../fonts/euclid/EuclidCircularA-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-Regular.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-Regular.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
-.corp-font-thin {
-    font-family: "Montserrat-Thin", sans-serif;
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('../fonts/euclid/EuclidCircularA-SemiBold.eot');
+    src: local('Euclid Circular A SemiBold'), local('EuclidCircularA-SemiBold'),
+        url('../fonts/euclid/EuclidCircularA-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-SemiBold.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-SemiBold.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
 }
 
-.corp-font-light {
-    font-family: "Montserrat-Light", sans-serif;
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('../fonts/euclid/EuclidCircularA-Medium.eot');
+    src: local('Euclid Circular A Medium'), local('EuclidCircularA-Medium'),
+        url('../fonts/euclid/EuclidCircularA-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-Medium.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-Medium.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
 }
 
-.corp-font-regular {
-    font-family: "Montserrat-Regular", sans-serif;
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('../fonts/euclid/EuclidCircularA-Italic.eot');
+    src: local('Euclid Circular A Italic'), local('EuclidCircularA-Italic'),
+        url('../fonts/euclid/EuclidCircularA-Italic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-Italic.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-Italic.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
 }
 
-.corp-font-medium {
-    font-family: "Montserrat-Medium", sans-serif;
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('../fonts/euclid/EuclidCircularA-SemiBoldItalic.eot');
+    src: local('Euclid Circular A SemiBold Italic'), local('EuclidCircularA-SemiBoldItalic'),
+        url('../fonts/euclid/EuclidCircularA-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-SemiBoldItalic.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-SemiBoldItalic.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
 }
 
-.corp-font-bold {
-    font-family: "Montserrat-Bold", sans-serif;
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: url('../fonts/euclid/EuclidCircularA-MediumItalic.eot');
+    src: local('Euclid Circular A Medium Italic'), local('EuclidCircularA-MediumItalic'),
+        url('../fonts/euclid/EuclidCircularA-MediumItalic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-MediumItalic.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-MediumItalic.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
 }
 
 /*THEME*/
-::-webkit-scrollbar {
-    width: 8px;
-    @apply bg-dark-200 dark:bg-dark-500;
-}
-::-webkit-scrollbar-thumb {
-    @apply bg-gold-500 rounded-lg;
-}
-::-webkit-scrollbar:horizontal{
-    height: 4px;
-    @apply bg-dark-200 dark:bg-dark-500;
-}
-::-webkit-scrollbar-thumb:horizontal{
-    height: 4px;
-    @apply bg-gold-500 rounded-lg;
-}
+
 .bg-active {
     @apply bg-white dark:bg-dark-500;
 }
 .bg-inactive {
     @apply bg-gray-100 dark:bg-dark-900;
 }
+
 .border-active{
-    @apply border-2 border-blue-500;
+    @apply border border-gray-300 dark:border-dark-900;
+}
+
+.border-b-active{
+    @apply border-b border-gray-300 dark:border-dark-900;
 }
 .text-active {
     @apply text-dark-900 dark:text-white;
 }
 
+::-webkit-scrollbar {
+    width: 2px;
+    @apply bg-inactive;
+}
+::-webkit-scrollbar-thumb {
+    width: 2px;
+    @apply bg-blue-500;
+}
+::-webkit-scrollbar:horizontal{
+    height: 2px;
+    @apply bg-inactive;
+}
+::-webkit-scrollbar-thumb:horizontal{
+    height: 2px;
+    @apply bg-blue-500;
+}
+
 body {
-    @apply corp-font-regular bg-inactive text-active font-normal;
+    @apply bg-inactive text-active font-normal;
+    font-family: 'Euclid Circular A', sans-serif;
 }
 a {
-    @apply text-dark-200 dark:text-gold-500 cursor-pointer font-medium;
+    @apply cursor-pointer text-blue-500;
+}
+
+h1 > a,
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a {
+    @apply text-active hover:text-blue-500;
+}
+
+p {
+    @apply mb-2
 }
 h1,
 h2,
@@ -97,7 +194,7 @@ h3,
 h4,
 h5,
 h6 {
-    @apply corp-font-bold mb-2;
+    @apply font-medium mb-4;
 }
 h1{
     @apply text-4xl;
@@ -126,45 +223,181 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
 
-table{
+.table{
+    @apply w-full overflow-x-auto rounded-lg shadow-md flex;
+}
+
+.table > table{
     @apply w-full overflow-hidden;
 }
-thead{
-    @apply bg-active border-b border-gray-100 dark:border-gray-900;
+.table > table > thead{
+    @apply border-b-active bg-active;
 }
-tbody{
+.table > table > tbody > tr{
     @apply bg-active;
 }
-thead>tr>th{
-    @apply px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+.table > table > tbody > tr:nth-child(odd){
+    @apply bg-inactive;
 }
-tbody>tr>td{
-    @apply px-4 py-3 text-sm font-medium text-active
+.table > table > thead > tr > th{
+    @apply px-4 py-3 text-left font-medium tracking-wider;
+}
+.table > table > tbody > tr > td{
+    @apply px-4 py-3 text-active
+}
+
+button,
+input,
+select{
+    @apply bg-transparent;
 }
 
 button:focus,
-input:focus {
+input:focus,
+select:focus,
+textarea:focus {
     @apply outline-none;
+}
+
+select{
+    @apply hover:cursor-pointer;
+}
+
+select option {
+    @apply bg-active;
 }
 
 .custom-container{
     @apply container mx-auto px-4;
 }
 .form-group {
-    @apply mb-6;
+    @apply mb-6 relative;
 }
+
+.form-group input, .form-group select, .form-group textarea {
+    @apply border-t-0 border-l-0 border-r-0 border-b-2 border-blue-500 bg-transparent w-full text-active py-3 pl-8;
+}
+
 .form-group label {
-    @apply text-sm mb-2 block;
+    @apply absolute left-8 top-3 pointer-events-none duration-200 z-0 text-gray-500 whitespace-nowrap;
 }
-.form-group input {
-    @apply bg-transparent border-active rounded-xl w-full py-3 px-4 text-sm text-active;
+
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label,
+.form-group select:focus ~ label,
+.form-group select:not(:placeholder-shown) ~ label,
+.form-group textarea:focus ~ label,
+.form-group textarea:not(:placeholder-shown) ~ label
+{
+    @apply -top-2.5 text-xs left-0;
+}
+
+.form-group label.label-error{
+    @apply text-red-500;
+}
+.form-group input:focus ~ label.label-error,
+.form-group select:focus ~ label.label-error,
+.form-group textarea:focus ~ label.label-error{
+    @apply text-gray-500;
+}
+.form-group input:not(:placeholder-shown) ~ label.label-error,
+.form-group select:not(:placeholder-shown) ~ label.label-error,
+.form-group textarea:not(:placeholder-shown) ~ label.label-error{
+    @apply text-red-500;
+}
+
+.form-group svg{
+    @apply absolute text-2xl top-3 text-gray-500;
+}
+
+.form-group-file input{
+    @apply hidden;
+}
+
+.form-group-file label{
+    @apply block border-2 border-blue-500 border-dashed p-4 text-center cursor-pointer hover:bg-blue-500 hover:text-white duration-200;
+}
+
+.form-group-file label.label-error{
+    @apply text-red-500 hover:text-white;
+}
+
+.form-group-file label svg{
+    @apply text-2xl m-auto;
+}
+
+.custom-radio > input, .custom-checkbox > input {
+    @apply absolute -z-10 opacity-0
+}
+  
+.custom-radio > span, .custom-checkbox > span {
+    @apply inline-flex items-center select-none;
+}
+  
+.custom-radio > span::before {
+    content: '';
+    @apply inline-block w-4 h-4 flex-shrink-0 flex-grow-0 border border-blue-500 rounded-full mr-2 bg-no-repeat bg-center cursor-pointer;
+    background-size: 50% 50%;
+}
+
+.custom-checkbox > span::before {
+    content: '';
+    @apply inline-block w-4 h-4 flex-shrink-0 flex-grow-0 border border-blue-500 rounded-sm mr-2 bg-no-repeat bg-center cursor-pointer;
+    background-size: 50% 50%;
+}
+
+.custom-radio > input:not(:disabled):not(:checked) + span:hover::before,
+.custom-checkbox > input:not(:disabled):not(:checked) + span:hover::before {
+    @apply border-blue-200;
+}
+
+.custom-radio > input:not(:disabled):active + span::before,
+.custom-checkbox > input:not(:disabled):active + span::before {
+    @apply bg-blue-200 border-blue-200;
+}
+  
+.custom-radio > input:focus:not(:checked) + span::before,
+.custom-checkbox > input:focus:not(:checked) + span::before {
+    @apply border-blue-200
+}
+  
+.custom-radio > input:checked + span::before {
+    @apply border-blue-500 bg-blue-500;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox > input:checked + span::before {
+    @apply border-blue-500 bg-blue-500;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+  
+.custom-radio > input:disabled + span::before,
+.custom-checkbox > input:disabled + span::before {
+    @apply bg-blue-200;
 }
 
 .btn {
-    @apply flex items-center rounded-xl py-3 px-4 duration-200 text-white corp-font-medium; 
+    @apply w-fit flex items-center rounded-lg py-2 px-3 text-white duration-200; 
 }
+
+.btn-group > .btn{
+    @apply px-2;
+}
+
+.btn.btn-sm{
+    @apply py-1 px-2;
+}
+
+.btn.btn-lg{
+    @apply py-2 px-4;
+}
+
 .btn-primary{
-    @apply bg-blue-500 hover:bg-blue-700;
+    @apply bg-blue-500 border-2 border-blue-500 text-white hover:border-blue-700 hover:bg-blue-700;
+}
+
+.btn-outline-primary{
+    @apply bg-transparent border-2 border-blue-500 text-blue-500 hover:border-blue-700 hover:bg-blue-700 hover:text-white;
 }
 
 .btn-success{
@@ -187,9 +420,178 @@ input:focus {
     @apply ml-1;
 }
 
-.card {
-    @apply bg-active py-4 px-4 shadow-md rounded-lg max-w-full relative overflow-hidden mb-4;
+.btn svg{
+    @apply text-lg;
 }
+
+.badge{
+    @apply py-1 px-2 rounded-lg mb-2 mr-2 text-xs inline-block;
+}
+
+.badge-primary{
+    @apply bg-blue-500 text-white;
+}
+
+.card {
+    @apply bg-active shadow-md rounded-lg max-w-full relative overflow-hidden border-active;
+}
+
 .card.card-inactive{
     @apply bg-inactive;
+}
+
+.card-header{
+    @apply px-6 pt-6;
+}
+
+.card-body{
+    @apply p-6;
+}
+
+.card-bg{
+    @apply bg-cover bg-center bg-no-repeat;
+}
+
+.modal-backdrop{
+    @apply fixed w-full h-full top-0 bottom-0 left-0 right-0 z-50 duration-200 flex justify-center items-center p-4 opacity-0 pointer-events-none;
+    background-color: rgb(0 0 0 / 50%);
+}
+
+.modal-backdrop.show{
+    @apply opacity-100 pointer-events-auto;
+}
+
+.modal{
+    @apply bg-active p-6 lg:p-8 shadow-md rounded-lg duration-200 w-full relative overflow-hidden;
+    transform: translateY(-2rem)
+}
+
+.modal.modal-sm{
+    @apply max-w-sm;
+}
+
+.modal.modal-md{
+    @apply max-w-md;
+}
+
+.modal.modal-lg{
+    @apply max-w-lg;
+}
+
+.modal.modal-xl{
+    @apply max-w-xl;
+}
+
+.modal.modal-2xl{
+    @apply max-w-2xl;
+}
+
+.modal.modal-3xl{
+    @apply max-w-3xl;
+}
+
+.modal.modal-4xl{
+    @apply max-w-4xl;
+}
+
+.modal-backdrop.show > .modal{
+    transform: translateY(0rem)
+}
+
+.modal-body{
+    @apply overflow-y-auto overflow-x-hidden;
+    max-height: 90vh;
+}
+
+.modal-footer{
+    @apply pt-4;
+}
+
+.modal-close-button{
+    @apply absolute right-4 top-4 text-xl cursor-pointer;
+}
+
+.full-overlay {
+    @apply fixed w-full h-full left-0 top-0 bg-inactive opacity-90 z-20 flex justify-center items-center duration-200;
+}
+.overlay {
+    @apply absolute w-full h-full left-0 top-0 bg-active opacity-90 z-20 flex justify-center items-center duration-200;
+}
+.overlay-loding-circle {
+    @apply w-10 h-10 border-4 border-blue-500 rounded-full;
+    border-bottom-color: transparent;
+    animation: 0.75s linear infinite spinner-border;
+}
+
+.db__header{
+    @apply w-full bg-active flex justify-between items-center px-4;
+    height: 70px;
+}
+
+.db__header .logo{
+    @apply w-36;
+}
+
+.db__sidebar__menu{
+    @apply bg-active px-4 fixed z-20;
+    height: calc(100vh - 70px);
+}
+
+.db__sidebar__menu a{
+    @apply py-3 duration-200 text-active hover:text-blue-500 border-b-active flex items-center;
+}
+
+
+.db__sidebar__menu a:last-child{
+    @apply pb-0 border-none;
+}
+
+.db__sidebar__menu svg{
+    @apply text-2xl;
+}
+
+.db__sidebar__menu span{
+    @apply ml-1.5 whitespace-nowrap hidden;
+}
+
+.db__sidebar__menu:hover span{
+    @apply block;
+}
+
+.db__content{
+    @apply py-4 pr-4 w-full relative overflow-auto;
+    padding-left: 70px;
+    height: calc(100vh - 70px);
+}
+
+.dropdown-menu{
+    @apply hidden rounded-lg shadow-md bg-active text-sm border-active z-10 px-3 border my-2;
+}
+
+.dropdown-menu.show{
+    @apply block;
+}
+
+.dropdown-menu li:first-child{
+    @apply pt-2;
+}
+
+.dropdown-menu li{
+    @apply border-b-active py-2;
+}
+
+.dropdown-menu li:last-child{
+    @apply  border-b-0;
+}
+
+.dropdown-menu li a{
+    @apply flex items-center text-active;
+}
+
+.dropdown-menu li a:hover{
+    @apply flex items-center text-blue-500;
+}
+
+.dropdown-menu li a svg{
+    @apply text-lg m-1;
 }

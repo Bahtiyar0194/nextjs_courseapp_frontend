@@ -1,0 +1,63 @@
+{
+    "page.home.title": "Добро пожаловать",
+    "page.home.description": "Вы на главной странице нашего сайта",
+
+    "page.login.title": "Вход в аккаунт",
+    "page.login.description": "Вы на странице входа в аккаунт",
+    "page.login.form.dont_have_an_account": "У меня нет аккаунта.",
+    "page.login.form.forgot_password": "Забыли пароль?",
+    "page.login.form.password_recovery": "Восстановить",
+    "page.login.button": "Войти",
+
+    "page.registration.title": "Регистрация",
+    "page.registration.description": "Вы на странице регистрации",
+    "page.registration.form.first_name": "Имя",
+    "page.registration.form.last_name": "Фамилия",
+    "page.registration.form.email": "Email",
+    "page.registration.form.phone": "Телефон",
+    "page.registration.form.password": "Пароль",
+    "page.registration.form.have_an_account": "У меня есть аккаунт.",
+
+    "page.dashboard.title": "Личный кабинет",
+
+    "page.my_courses.title": "Мои курсы",
+    "page.my_courses.form.course_create": "Создать новый курс",
+    "page.my_courses.form.course_name": "Название курса",
+    "page.my_courses.form.course_description": "Краткое описание курса",
+    "page.my_courses.form.course_category": "Категория курса",
+    "page.my_courses.form.select_course_category": "Выберите категорию курса",
+    "page.my_courses.form.course_language": "Язык курса",
+    "page.my_courses.form.select_course_language": "Выберите язык прохождения курса",
+    "page.my_courses.form.course_poster": "Обложка курса",
+    "page.my_courses.form.course_cost": "Стоимость курса",
+    "page.my_courses.form.free_course": "Курс бесплатный",
+    "page.my_courses.form.dont_have_course": "У вас нет созданных курсов",
+    "page.my_courses.form.add_course": "Добавить курс",
+
+    "lesson_name": "Название урока",
+    "lesson_description": "Краткое описание урока",
+
+    "lesson.add_material": "Добавить",
+    "lesson_type.text_content": "Текстовый контент",
+    "lesson_type.video_lesson": "Видеоурок",
+
+    "videoLessonModal.title": "Создание видеоурока",
+    "videoLessonModal.form.upload_own_video": "Загрузить свое видео",
+    "videoLessonModal.form.upload_video_from_internet": "Видео из Youtube, Vimeo",
+    "videoLessonModal.form.paste_video_link": "Вставьте ссылку от видео",
+    "videoLessonModal.form.upload_video_file": "Нажмите чтобы загрузить видеофайл",
+
+    "logout": "Выйти из аккаунта",
+
+    "done": "Готово",
+
+    "loading": "Идет загрузка...",
+
+    "server_lost": "Потеряно соединение с сервером",
+
+    "more": "Подробнее",
+
+    "file_name": "Название файла",
+    "file_size": "Размер файла",
+    "choose_file": "Выберите файл"
+}

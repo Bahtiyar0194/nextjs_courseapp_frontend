@@ -1,0 +1,65 @@
+{
+    "page.home.title": "Main page",
+    "page.home.description": "You are currently viewing the main page",
+
+    "page.login.title": "Login",
+    "page.login.description": "You are currently viewing the login page",
+    "page.login.form.dont_have_an_account": "I don't have an account.",
+    "page.login.form.forgot_password": "Forgot your password?",
+    "page.login.form.password_recovery": "Recovery",
+    "page.login.button": "Login",
+
+    "page.registration.title": "Registration",
+    "page.registration.description": "You are currently viewing the registration page",
+    "page.registration.form.first_name": "First name",
+    "page.registration.form.last_name": "Last name",
+    "page.registration.form.email": "Email",
+    "page.registration.form.phone": "Phone",
+    "page.registration.form.password": "Password",
+    "page.registration.form.have_an_account": "I have an account.",
+
+    "page.dashboard.title": "Dashboard",
+
+    "page.my_courses.title": "My courses",
+    "page.my_courses.form.course_create": "Create course",
+    "page.my_courses.form.course_name": "Course name",
+    "page.my_courses.form.course_description": "Course description",
+    "page.my_courses.form.course_category": "Course category",
+    "page.my_courses.form.select_course_category": "Select course category",
+    "page.my_courses.form.course_language": "Course language",
+    "page.my_courses.form.select_course_language": "Select course language",
+    "page.my_courses.form.course_poster": "Course poster",
+    "page.my_courses.form.course_cost": "Course cost",
+    "page.my_courses.form.free_course": "Free course",
+    "page.my_courses.form.dont_have_course": "You don't have any courses created",
+    "page.my_courses.form.add_course": "Add course",
+
+    "lesson_name": "Lesson name",
+    "lesson_description": "Lesson description",
+
+    "lesson.add_material": "Add",
+    "lesson_type.text_content": "Text content",
+    "lesson_type.video_lesson": "Video lesson",
+
+
+    "videoLessonModal.title": "Create video lesson",
+    "videoLessonModal.form.upload_your_video": "Upload your video",
+    "videoLessonModal.form.upload_video_from_internet": "Video from Youtube Vimeo",
+    "videoLessonModal.form.paste_video_link": "Insert the link from the video",
+    "videoLessonModal.form.upload_video_file": "Click to upload the video file",
+
+
+    "logout": "Logout",
+
+    "done": "Done",
+
+    "loading": "Loading...",
+
+    "server_lost": "Connection to the server is lost",
+
+    "more": "More",
+
+    "file_name": "File name",
+    "file_size": "File size",
+    "choose_file": "Choose file"
+}

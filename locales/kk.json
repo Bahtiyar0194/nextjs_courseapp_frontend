@@ -1,0 +1,63 @@
+{
+    "page.home.title": "Қош келдіңіз!",
+    "page.home.description": "Сіз біздің басты беттесіз",
+
+    "page.login.title": "Аккаунтқа кіру",
+    "page.login.description": "Сіз аккаунтқа кіру бетіндесіз",
+    "page.login.form.dont_have_an_account": "Менде аккаунт жоқ.",
+    "page.login.form.forgot_password": "Құпия сөзді ұмыттыңыз ба?",
+    "page.login.form.password_recovery": "Қалпына келтіру",
+    "page.login.button": "Кіру",
+
+    "page.registration.title": "Тіркелу",
+    "page.registration.description": "Сіз біздің тіркелу бетіндесіз",
+    "page.registration.form.first_name": "Аты",
+    "page.registration.form.last_name": "Тегі",
+    "page.registration.form.email": "Email",
+    "page.registration.form.phone": "Телефон",
+    "page.registration.form.password": "Құпия сөз",
+    "page.registration.form.have_an_account": "Менде аккаунт бар.",
+
+    "page.dashboard.title": "Жеке кабинет",
+
+    "page.my_courses.title": "Менің курстарым",
+    "page.my_courses.form.course_create": "Жаңа курс құру",
+    "page.my_courses.form.course_name": "Курстың атауы",
+    "page.my_courses.form.course_description": "Курстың қысқаша сипаттамасы",
+    "page.my_courses.form.course_category": "Курстың санаты",
+    "page.my_courses.form.select_course_category": "Курстың санатын таңдаңыз",
+    "page.my_courses.form.course_language": "Курстың тілі",
+    "page.my_courses.form.select_course_language": "Курс қай тілде өтеді?",
+    "page.my_courses.form.course_poster": "Курстың мұқабасы",
+    "page.my_courses.form.course_cost": "Курстың бағасы",
+    "page.my_courses.form.free_course": "Курс тегін",
+    "page.my_courses.form.dont_have_course": "Сізде құрылған курстар жоқ",
+    "page.my_courses.form.add_course": "Курс қосу",
+
+    "lesson_name": "Сабақтың аты",
+    "lesson_description": "Сабақтың қысқаша сипаттамасы",
+
+    "lesson.add_material": "Қосу",
+    "lesson_type.text_content": "Мәтіндік мазмұн",
+    "lesson_type.video_lesson": "Бейне сабақ",
+
+    "videoLessonModal.title": "Бейне сабақ құру",
+    "videoLessonModal.form.upload_own_video": "Өз бейнеңізді жүктеу",
+    "videoLessonModal.form.upload_video_from_internet": "Youtube немесе Vimeo бейнелері",
+    "videoLessonModal.form.paste_video_link": "Бейнеден сілтеме қойыңыз",
+    "videoLessonModal.form.upload_video_file": "Бейнені жүктеу үшін басыңыз",
+
+    "logout": "Аккаунттан шығу",
+
+    "done": "Дайын",
+
+    "loading": "Жүктелуде...",
+
+    "server_lost": "Сервермен байланыс жоғалды",
+
+    "more": "Толығырақ",
+
+    "file_name": "Файлдың аты",
+    "file_size": "Файлдың өлшемі",
+    "choose_file": "Файлды таңдаңыз"
+}
