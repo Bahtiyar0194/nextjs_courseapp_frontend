@@ -43,7 +43,7 @@
 
     "videoLessonModal.title": "Бейне сабақ құру",
     "videoLessonModal.form.upload_own_video": "Өз бейнеңізді жүктеу",
-    "videoLessonModal.form.upload_video_from_internet": "Youtube немесе Vimeo бейнелері",
+    "videoLessonModal.form.upload_video_from_internet": "Youtube немесе Vimeo бейнежазбалары",
     "videoLessonModal.form.paste_video_link": "Бейнеден сілтеме қойыңыз",
     "videoLessonModal.form.upload_video_file": "Бейнені жүктеу үшін басыңыз",
 
@@ -58,6 +58,7 @@
     "more": "Толығырақ",
 
     "file_name": "Файлдың аты",
+    "file_ready_to_upload": "Файл жүктелуге дайын",
     "file_size": "Файлдың өлшемі",
     "choose_file": "Файлды таңдаңыз"
 }

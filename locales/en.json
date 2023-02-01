@@ -60,6 +60,7 @@
     "more": "More",
 
     "file_name": "File name",
+    "file_ready_to_upload": "The file is ready to upload",
     "file_size": "File size",
     "choose_file": "Choose file"
 }

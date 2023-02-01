@@ -19,6 +19,7 @@ export default function Course() {
   const intl = useIntl();
   const [videoModal, setVideoModal] = useState(false);
   const [course, setCourse] = useState([]);
+  const [lessons, setLessons] = useState([]);
 
   let i = 1;
 
@@ -26,12 +27,21 @@ export default function Course() {
     setShowFullLoader(true);
     await axios.get('courses/my-courses/' + course_id)
       .then(response => {
+        setCourse(response.data)
+      }).catch(error => {
+        setShowFullLoader(false);
+      });
+  }
+
+  const getLessons = async (course_id) => {
+    await axios.get('lessons/my-lessons/' + course_id)
+      .then(response => {
         setTimeout(() => {
-          setCourse(response.data)
+          setLessons(response.data)
           setShowFullLoader(false);
         }, 500)
       }).catch(error => {
-        setLoader(false);
+        setShowFullLoader(false);
       });
   }
 
@@ -39,6 +49,7 @@ export default function Course() {
     if (router.isReady) {
       const { course_id } = router.query;
       getCourse(course_id);
+      getLessons(course_id);
     }
   }, [router.isReady]);
 
@@ -72,6 +83,16 @@ export default function Course() {
               </button>
             </div>
           </div>
+
+          {lessons.length > 0 ?
+            <div className="col-span-12">
+              Есть материалы
+            </div>
+            :
+            <div className="col-span-12">
+              У вас нет созданных материалов 
+            </div>
+          }
         </>
         :
         <div className="col-span-12">

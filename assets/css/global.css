@@ -275,7 +275,7 @@ select option {
 }
 
 .form-group input, .form-group select, .form-group textarea {
-    @apply border-t-0 border-l-0 border-r-0 border-b-2 border-blue-500 bg-transparent w-full text-active py-3 pl-8;
+    @apply border-t-0 border-l-0 border-r-0 border-b border-blue-500 bg-transparent w-full text-active py-3 pl-8;
 }
 
 .form-group label {
@@ -315,7 +315,7 @@ select option {
 }
 
 .form-group-file label{
-    @apply block border-2 border-blue-500 border-dashed p-4 text-center cursor-pointer hover:bg-blue-500 hover:text-white duration-200;
+    @apply block border border-blue-500 border-dashed p-4 rounded-md text-center cursor-pointer hover:bg-blue-500 hover:text-white duration-200;
 }
 
 .form-group-file label.label-error{
