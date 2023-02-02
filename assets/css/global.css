@@ -141,11 +141,11 @@
 }
 
 .border-active{
-    @apply border border-gray-300 dark:border-dark-900;
+    @apply border border-gray-200 dark:border-dark-200;
 }
 
 .border-b-active{
-    @apply border-b border-gray-300 dark:border-dark-900;
+    @apply border-b border-gray-200 dark:border-dark-200;
 }
 .text-active {
     @apply text-dark-900 dark:text-white;
@@ -274,7 +274,9 @@ select option {
     @apply mb-6 relative;
 }
 
-.form-group input, .form-group select, .form-group textarea {
+.form-group input, 
+.form-group select, 
+.form-group textarea {
     @apply border-t-0 border-l-0 border-r-0 border-b border-blue-500 bg-transparent w-full text-active py-3 pl-8;
 }
 
@@ -293,7 +295,7 @@ select option {
 }
 
 .form-group label.label-error{
-    @apply text-red-500;
+    @apply text-red-500 -top-2.5 text-xs left-0;
 }
 .form-group input:focus ~ label.label-error,
 .form-group select:focus ~ label.label-error,
@@ -393,11 +395,11 @@ select option {
 }
 
 .btn-primary{
-    @apply bg-blue-500 border-2 border-blue-500 text-white hover:border-blue-700 hover:bg-blue-700;
+    @apply bg-blue-500 border border-blue-500 text-white hover:border-blue-700 hover:bg-blue-700;
 }
 
 .btn-outline-primary{
-    @apply bg-transparent border-2 border-blue-500 text-blue-500 hover:border-blue-700 hover:bg-blue-700 hover:text-white;
+    @apply bg-transparent border border-blue-500 text-blue-500 hover:border-blue-700 hover:bg-blue-700 hover:text-white;
 }
 
 .btn-success{
@@ -405,7 +407,7 @@ select option {
 }
 
 .btn-outline-success{
-    @apply border-2 border-green-500 text-green-500 hover:border-green-700 hover:text-green-700 bg-transparent;
+    @apply border border-green-500 text-green-500 hover:border-green-700 hover:text-green-700 bg-transparent;
 }
 
 .btn-danger{
@@ -413,7 +415,7 @@ select option {
 }
 
 .btn-outline-danger{
-    @apply border-2 border-red-500 text-red-500 hover:border-red-700 hover:text-red-700 bg-transparent
+    @apply border border-red-500 text-red-500 hover:border-red-700 hover:text-red-700 bg-transparent
 }
 
 .btn > span {
@@ -433,7 +435,7 @@ select option {
 }
 
 .card {
-    @apply bg-active shadow-md rounded-lg max-w-full relative overflow-hidden border-active;
+    @apply bg-active rounded-lg max-w-full relative overflow-hidden border-active;
 }
 
 .card.card-inactive{
@@ -450,6 +452,22 @@ select option {
 
 .card-bg{
     @apply bg-cover bg-center bg-no-repeat;
+}
+
+.list-group{
+    @apply bg-active rounded-md border-active px-4;
+}
+
+.list-group > li{
+    @apply border-b-active py-4;
+}
+
+.list-group > li:last-child{
+    @apply border-none;
+}
+
+.list-group > li p{
+    @apply m-0 text-gray-400;
 }
 
 .modal-backdrop{
@@ -573,11 +591,11 @@ select option {
 }
 
 .dropdown-menu li:first-child{
-    @apply pt-2;
+    @apply pt-2.5;
 }
 
 .dropdown-menu li{
-    @apply border-b-active py-2;
+    @apply border-b-active py-2.5;
 }
 
 .dropdown-menu li:last-child{
@@ -593,5 +611,5 @@ select option {
 }
 
 .dropdown-menu li a svg{
-    @apply text-lg m-1;
+    @apply text-lg mr-0.5;
 }

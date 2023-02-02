@@ -85,12 +85,23 @@ export default function Course() {
           </div>
 
           {lessons.length > 0 ?
-            <div className="col-span-12">
-              Есть материалы
-            </div>
+            <>
+              <div className="col-span-12 mt-4">
+                <h3 className="mb-0">Уроки курса</h3>
+                <p className="text-gray-400 mb-3">Материалов - {lessons.length}</p>
+                <ul className="list-group">
+                  {lessons?.map(lesson => (
+                    <li>
+                      <h4 className="mb-1">{i++}. {lesson.lesson_name}</h4>
+                      <p>{lesson.lesson_description}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
             :
             <div className="col-span-12">
-              У вас нет созданных материалов 
+              У вас нет созданных материалов
             </div>
           }
         </>
