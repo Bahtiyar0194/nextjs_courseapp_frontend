@@ -34,18 +34,25 @@
     "page.my_courses.form.dont_have_course": "Сізде құрылған курстар жоқ",
     "page.my_courses.form.add_course": "Курс қосу",
 
+    "lessons": "Сабақтар",
     "lesson_name": "Сабақтың аты",
     "lesson_description": "Сабақтың қысқаша сипаттамасы",
+    "lesson_materials": "Материалдар саны",
 
     "lesson.add_material": "Қосу",
     "lesson_type.text_content": "Мәтіндік мазмұн",
     "lesson_type.video_lesson": "Бейне сабақ",
+    "lesson_type.course_section": "Курстың бөлімі",
 
     "videoLessonModal.title": "Бейне сабақ құру",
     "videoLessonModal.form.upload_own_video": "Өз бейнеңізді жүктеу",
     "videoLessonModal.form.upload_video_from_internet": "Youtube немесе Vimeo бейнежазбалары",
     "videoLessonModal.form.paste_video_link": "Бейнеден сілтеме қойыңыз",
     "videoLessonModal.form.upload_video_file": "Бейнені жүктеу үшін басыңыз",
+
+    "courseSectionModal.title": "Курс бөлімін құру",
+    "section": "бөлім",
+    "section_name": "Бөлімнің атауы",
 
     "logout": "Аккаунттан шығу",
 

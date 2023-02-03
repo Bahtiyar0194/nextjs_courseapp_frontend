@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import axios from "axios";
 
-const CreateVideoLessonModal = ({ course_id }) => {
+const CreateVideoLessonModal = ({ course_id, getLessons }) => {
     const intl = useIntl();
     const [error, setError] = useState([]);
     const [loader, setLoader] = useState(false);
@@ -16,7 +16,7 @@ const CreateVideoLessonModal = ({ course_id }) => {
     const [video_link, setVideoLink] = useState('');
     const [video_file, setVideoFile] = useState('');
 
-    const createVideoLessonSubmit = async (e, course_id) => {
+    const createVideoLessonSubmit = async (e, course_id, getLessons) => {
         e.preventDefault();
         setLoader(true);
 
@@ -30,9 +30,9 @@ const CreateVideoLessonModal = ({ course_id }) => {
         form_data.append('video_file', video_file);
 
 
-        for (let [key, value] of form_data) {
-            console.log(`${key}: ${value}`)
-        }
+        // for (let [key, value] of form_data) {
+        //     console.log(`${key}: ${value}`)
+        // }
 
         await axios.post('lessons/create', form_data)
             .then(response => {
@@ -41,7 +41,7 @@ const CreateVideoLessonModal = ({ course_id }) => {
 
                 setLoader(false);
                 // setCourseModal(false);
-                // getCourse();
+                getLessons(course_id);
             }).catch(error => {
                 setError(error.response.data.data);
                 setLoader(false);
@@ -52,7 +52,7 @@ const CreateVideoLessonModal = ({ course_id }) => {
         <>
             {loader && <Loader className="overlay" />}
             <div className="modal-body">
-                <form onSubmit={e => createVideoLessonSubmit(e, course_id)} encType="multipart/form-data">
+                <form onSubmit={e => createVideoLessonSubmit(e, course_id, getLessons)} encType="multipart/form-data">
                     <div className="form-group mt-4">
                         <AiOutlineRead />
                         <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />

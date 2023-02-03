@@ -147,6 +147,11 @@
 .border-b-active{
     @apply border-b border-gray-200 dark:border-dark-200;
 }
+
+.border-r-active{
+    @apply border-r border-gray-200 dark:border-dark-200;
+}
+
 .text-active {
     @apply text-dark-900 dark:text-white;
 }
@@ -459,7 +464,19 @@ select option {
 }
 
 .list-group > li{
-    @apply border-b-active py-4;
+    @apply py-4;
+}
+
+.list-group > li{
+    @apply border-b-active;
+}
+
+.list-group > li.section{
+    @apply border-dashed border-b-2;
+}
+
+.list-group > li.lesson{
+    @apply pl-2;
 }
 
 .list-group > li:last-child{
@@ -542,7 +559,7 @@ select option {
 }
 
 .db__header{
-    @apply w-full bg-active flex justify-between items-center px-4;
+    @apply w-full bg-active flex justify-between items-center px-4 border-b-active;
     height: 70px;
 }
 
@@ -551,8 +568,9 @@ select option {
 }
 
 .db__sidebar__menu{
-    @apply bg-active px-4 fixed z-20;
-    height: calc(100vh - 70px);
+    @apply bg-active px-4 fixed z-20 border-r-active;
+    height: calc(100vh - 69px);
+    top: 69px;
 }
 
 .db__sidebar__menu a{

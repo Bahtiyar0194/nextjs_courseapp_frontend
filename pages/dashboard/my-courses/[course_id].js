@@ -5,12 +5,13 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineRead, AiOutlineCaretDown, AiOutlineFileText, AiOutlinePlayCircle } from "react-icons/ai";
+import { AiOutlineRead, AiOutlineCaretDown, AiOutlineFileText, AiOutlinePlayCircle, AiOutlinePushpin } from "react-icons/ai";
 import { IoGridOutline, IoList } from "react-icons/io5";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import CreateVideoLessonModal from "../../../components/course/CreateVideoLessonModal";
+import CreateCourseSectionModal from "../../../components/course/CreateCourseSectionModal";
 
 export default function Course() {
   const API_URL = process.env.NODE_ENV === 'development' ? process.env.DEV_API : process.env.PROD_API;
@@ -18,10 +19,12 @@ export default function Course() {
   const [showFullLoader, setShowFullLoader] = useState(true);
   const intl = useIntl();
   const [videoModal, setVideoModal] = useState(false);
+  const [sectionModal, setSectionModal] = useState(false);
   const [course, setCourse] = useState([]);
   const [lessons, setLessons] = useState([]);
 
-  let i = 1;
+  let lesson_count = 1;
+  let section_count = 1;
 
   const getCourse = async (course_id) => {
     setShowFullLoader(true);
@@ -74,6 +77,7 @@ export default function Course() {
                 <CDropdownMenu>
                   <Link href={'#'}><AiOutlineFileText />{intl.formatMessage({ id: "lesson_type.text_content" })}</Link>
                   <Link href={'#'} onClick={() => setVideoModal(true)}><AiOutlinePlayCircle />{intl.formatMessage({ id: "lesson_type.video_lesson" })}</Link>
+                  <Link href={'#'} onClick={() => setSectionModal(true)}><AiOutlinePushpin />{intl.formatMessage({ id: "lesson_type.course_section" })}</Link>
                 </CDropdownMenu>
               </CDropdown>
 
@@ -87,22 +91,27 @@ export default function Course() {
           {lessons.length > 0 ?
             <>
               <div className="col-span-12 mt-4">
-                <h3 className="mb-0">Уроки курса</h3>
-                <p className="text-gray-400 mb-3">Материалов - {lessons.length}</p>
+                <h3 className="mb-0">{intl.formatMessage({ id: "lessons" })}</h3>
+                <p className="text-gray-400 mb-4">{intl.formatMessage({ id: "lesson_materials" })}: {lessons.length}</p>
                 <ul className="list-group">
                   {lessons?.map(lesson => (
-                    <li>
-                      <h4 className="mb-1">{i++}. {lesson.lesson_name}</h4>
-                      <p>{lesson.lesson_description}</p>
-                    </li>
+                    (lesson.lesson_type_id == 3
+                      ?
+                      <li key={lesson.lesson_id} className="section">
+                        <h3 className="mb-0">{section_count++} {intl.formatMessage({ id: "section" })}. {lesson.lesson_name}</h3>
+                      </li>
+                      :
+                      <li key={lesson.lesson_id} className="lesson">
+                        <h4 className="mb-1">{lesson_count++}. {lesson.lesson_name}</h4>
+                        <p>{lesson.lesson_description}</p>
+                      </li>
+                    )
                   ))}
                 </ul>
               </div>
             </>
             :
-            <div className="col-span-12">
-              У вас нет созданных материалов
-            </div>
+            ""
           }
         </>
         :
@@ -112,7 +121,11 @@ export default function Course() {
       }
 
       <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoLessonModal.title" })} modal_size="modal-xl">
-        <CreateVideoLessonModal course_id={course.course_id} />
+        <CreateVideoLessonModal course_id={course.course_id} getLessons={getLessons} />
+      </Modal>
+
+      <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
+        <CreateCourseSectionModal course_id={course.course_id} getLessons={getLessons} />
       </Modal>
 
     </DashboardLayout>

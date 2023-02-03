@@ -34,12 +34,15 @@
     "page.my_courses.form.dont_have_course": "You don't have any courses created",
     "page.my_courses.form.add_course": "Add course",
 
+    "lessons": "Lessons",
     "lesson_name": "Lesson name",
     "lesson_description": "Lesson description",
+    "lesson_materials": "Materials",
 
     "lesson.add_material": "Add",
     "lesson_type.text_content": "Text content",
     "lesson_type.video_lesson": "Video lesson",
+    "lesson_type.course_section": "Course section",
 
 
     "videoLessonModal.title": "Create video lesson",
@@ -48,6 +51,10 @@
     "videoLessonModal.form.paste_video_link": "Insert the link from the video",
     "videoLessonModal.form.upload_video_file": "Click to upload the video file",
 
+
+    "courseSectionModal.title": "Create course section",
+    "section": "section",
+    "section_name": "Section name",
 
     "logout": "Logout",
 

@@ -34,18 +34,25 @@
     "page.my_courses.form.dont_have_course": "У вас нет созданных курсов",
     "page.my_courses.form.add_course": "Добавить курс",
 
+    "lessons": "Уроки",
     "lesson_name": "Название урока",
     "lesson_description": "Краткое описание урока",
+    "lesson_materials": "Количество материалов",
 
     "lesson.add_material": "Добавить",
     "lesson_type.text_content": "Текстовый контент",
     "lesson_type.video_lesson": "Видеоурок",
+    "lesson_type.course_section": "Раздел курса",
 
     "videoLessonModal.title": "Создание видеоурока",
     "videoLessonModal.form.upload_own_video": "Загрузить свое видео",
     "videoLessonModal.form.upload_video_from_internet": "Видео из Youtube, Vimeo",
     "videoLessonModal.form.paste_video_link": "Вставьте ссылку от видео",
     "videoLessonModal.form.upload_video_file": "Нажмите чтобы загрузить видеофайл",
+
+    "courseSectionModal.title": "Создание раздела курса",
+    "section": "раздел",
+    "section_name": "Название раздела",
 
     "logout": "Выйти из аккаунта",
 
