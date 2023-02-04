@@ -20,8 +20,8 @@ export default function AuthLayout(props) {
             <Header title={props.title} />
             <div className="h-screen w-full flex items-center justify-center">
                 <div className="custom-container">
-                    <div className="grid grid-cols-12 w-full">
-                        <div className="col-span-12 lg:col-start-5 lg:col-span-4">
+                    <div className="grid grid-cols-7 w-full">
+                        <div className="col-span-7 lg:col-start-3 lg:col-span-3">
                             <div className="card">
                                 <div className="card-header">
                                     <div className="flex justify-between">

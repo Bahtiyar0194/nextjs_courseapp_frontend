@@ -5,7 +5,7 @@
     "page.login.title": "Login",
     "page.login.description": "You are currently viewing the login page",
     "page.login.form.dont_have_an_account": "I don't have an account.",
-    "page.login.form.forgot_password": "Forgot your password?",
+    "page.login.form.forgot_password": "I forgot my password.",
     "page.login.form.password_recovery": "Recovery",
     "page.login.button": "Login",
 
@@ -15,6 +15,8 @@
     "page.registration.form.last_name": "Last name",
     "page.registration.form.email": "Email",
     "page.registration.form.phone": "Phone",
+    "page.registration.form.school_name": "School name",
+    "page.registration.form.school_domain": "Domain name",
     "page.registration.form.password": "Password",
     "page.registration.form.have_an_account": "I have an account.",
 
@@ -34,12 +36,13 @@
     "page.my_courses.form.dont_have_course": "You don't have any courses created",
     "page.my_courses.form.add_course": "Add course",
 
-    "lessons": "Lessons",
+    "lessons": "Course lessons",
     "lesson_name": "Lesson name",
     "lesson_description": "Lesson description",
     "lesson_materials": "Materials",
+    "lesson_sections": "Sections",
 
-    "lesson.add_material": "Add",
+    "lesson.add": "Add",
     "lesson_type.text_content": "Text content",
     "lesson_type.video_lesson": "Video lesson",
     "lesson_type.course_section": "Course section",
@@ -59,6 +62,7 @@
     "logout": "Logout",
 
     "done": "Done",
+    "example": "Example",
 
     "loading": "Loading...",
 
@@ -69,5 +73,8 @@
     "file_name": "File name",
     "file_ready_to_upload": "The file is ready to upload",
     "file_size": "File size",
-    "choose_file": "Choose file"
+    "choose_file": "Choose file",
+
+    "move_up": "Move up",
+    "move_down": "Move down"
 }

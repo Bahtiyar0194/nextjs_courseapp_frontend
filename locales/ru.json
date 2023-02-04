@@ -15,6 +15,8 @@
     "page.registration.form.last_name": "Фамилия",
     "page.registration.form.email": "Email",
     "page.registration.form.phone": "Телефон",
+    "page.registration.form.school_name": "Название школы",
+    "page.registration.form.school_domain": "Доменное имя",
     "page.registration.form.password": "Пароль",
     "page.registration.form.have_an_account": "У меня есть аккаунт.",
 
@@ -34,12 +36,13 @@
     "page.my_courses.form.dont_have_course": "У вас нет созданных курсов",
     "page.my_courses.form.add_course": "Добавить курс",
 
-    "lessons": "Уроки",
+    "lessons": "Уроки курса",
     "lesson_name": "Название урока",
     "lesson_description": "Краткое описание урока",
-    "lesson_materials": "Количество материалов",
+    "lesson_materials": "Материалы",
+    "lesson_sections": "Разделы",
 
-    "lesson.add_material": "Добавить",
+    "lesson.add": "Добавить",
     "lesson_type.text_content": "Текстовый контент",
     "lesson_type.video_lesson": "Видеоурок",
     "lesson_type.course_section": "Раздел курса",
@@ -57,6 +60,7 @@
     "logout": "Выйти из аккаунта",
 
     "done": "Готово",
+    "example": "Например",
 
     "loading": "Идет загрузка...",
 
@@ -67,5 +71,8 @@
     "file_name": "Название файла",
     "file_ready_to_upload": "Файл готов к загрузке",
     "file_size": "Размер файла",
-    "choose_file": "Выберите файл"
+    "choose_file": "Выберите файл",
+
+    "move_up": "Переместить вверх",
+    "move_down": "Переместить вниз"
 }

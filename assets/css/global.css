@@ -307,11 +307,6 @@ select option {
 .form-group textarea:focus ~ label.label-error{
     @apply text-gray-500;
 }
-.form-group input:not(:placeholder-shown) ~ label.label-error,
-.form-group select:not(:placeholder-shown) ~ label.label-error,
-.form-group textarea:not(:placeholder-shown) ~ label.label-error{
-    @apply text-red-500;
-}
 
 .form-group svg{
     @apply absolute text-2xl top-3 text-gray-500;
@@ -407,6 +402,14 @@ select option {
     @apply bg-transparent border border-blue-500 text-blue-500 hover:border-blue-700 hover:bg-blue-700 hover:text-white;
 }
 
+.btn-secondary{
+    @apply bg-gray-500 hover:bg-gray-700;
+}
+
+.btn-outline-secondary{
+    @apply border border-gray-500 text-gray-500 hover:border-gray-700 hover:text-gray-700 bg-transparent
+}
+
 .btn-success{
     @apply bg-green-500 hover:bg-green-700;
 }
@@ -421,6 +424,16 @@ select option {
 
 .btn-outline-danger{
     @apply border border-red-500 text-red-500 hover:border-red-700 hover:text-red-700 bg-transparent
+}
+
+.btn-up,
+.btn-down{
+    @apply rounded-full p-1.5 border-active bg-inactive;
+}
+
+.btn-up:hover,
+.btn-down:hover{
+    @apply bg-active;
 }
 
 .btn > span {
@@ -440,7 +453,7 @@ select option {
 }
 
 .card {
-    @apply bg-active rounded-lg max-w-full relative overflow-hidden border-active;
+    @apply bg-active rounded-lg max-w-full relative border-active overflow-hidden;
 }
 
 .card.card-inactive{
@@ -452,7 +465,8 @@ select option {
 }
 
 .card-body{
-    @apply p-6;
+    @apply p-6 overflow-y-auto overflow-x-hidden;
+    max-height: 80vh;
 }
 
 .card-bg{
@@ -464,11 +478,7 @@ select option {
 }
 
 .list-group > li{
-    @apply py-4;
-}
-
-.list-group > li{
-    @apply border-b-active;
+    @apply py-4 border-b-active duration-200;
 }
 
 .list-group > li.section{
@@ -476,7 +486,7 @@ select option {
 }
 
 .list-group > li.lesson{
-    @apply pl-2;
+    @apply lg:pl-2;
 }
 
 .list-group > li:last-child{
@@ -485,6 +495,14 @@ select option {
 
 .list-group > li p{
     @apply m-0 text-gray-400;
+}
+
+.list-group > li:first-child .btn-up{
+    @apply hidden;
+}
+
+.list-group > li:last-child .btn-down{
+    @apply hidden;
 }
 
 .modal-backdrop{
@@ -559,7 +577,7 @@ select option {
 }
 
 .db__header{
-    @apply w-full bg-active flex justify-between items-center px-4 border-b-active;
+    @apply w-full bg-active flex justify-between items-center px-3 border-b-active;
     height: 70px;
 }
 
@@ -568,7 +586,7 @@ select option {
 }
 
 .db__sidebar__menu{
-    @apply bg-active px-4 fixed z-20 border-r-active;
+    @apply bg-active px-3 fixed z-20 border-r-active;
     height: calc(100vh - 69px);
     top: 69px;
 }
@@ -595,8 +613,7 @@ select option {
 }
 
 .db__content{
-    @apply py-4 pr-4 w-full relative overflow-auto;
-    padding-left: 70px;
+    @apply py-3 pr-3 w-full relative overflow-auto pl-16;
     height: calc(100vh - 70px);
 }
 

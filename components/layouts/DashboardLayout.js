@@ -63,7 +63,7 @@ export default function DashboardLayout(props) {
                     <Link href={'#'}><AiOutlineSetting /><span>Настройки</span></Link>
                 </div>
                 <div className="db__content">
-                    {props.showLoader && <Loader className="overlay"/>}
+                    {props.showLoader && <Loader className="full-overlay"/>}
                     <div className="grid grid-cols-12 gap-4">
                         {props.children}
                     </div>

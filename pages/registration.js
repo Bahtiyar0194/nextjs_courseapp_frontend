@@ -5,7 +5,8 @@ import Cookies from 'js-cookie';
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import Loader from "../components/ui/Loader";
-import { AiOutlineMail, AiOutlineUser, AiOutlinePhone, AiOutlineKey, AiOutlineEyeInvisible, AiOutlineEye} from "react-icons/ai";
+import { AiOutlineMail, AiOutlineUser, AiOutlinePhone, AiOutlineKey, AiOutlineEyeInvisible, AiOutlineEye, AiOutlineGlobal} from "react-icons/ai";
+import { HiOutlineAcademicCap } from "react-icons/hi2";
 import { FiUserPlus } from "react-icons/fi";
 import Link from "next/link";
 
@@ -17,6 +18,8 @@ export default function Registration() {
     const [last_name, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [school_name, setSchoolName] = useState('');
+    const [school_domain, setSchoolDomain] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState([]);
     const router = useRouter();
@@ -30,6 +33,8 @@ export default function Registration() {
         form_data.append('last_name', last_name);
         form_data.append('email', email);
         form_data.append('phone', phone);
+        form_data.append('school_name', school_name);
+        form_data.append('school_domain', school_domain);
         form_data.append('password', password);
 
         await axios.post('auth/register', form_data)
@@ -58,23 +63,29 @@ export default function Registration() {
                         <label className={(error.last_name && 'label-error')}>{error.last_name ? error.last_name : intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
                     </div>
                     <div className="form-group">
+                        <AiOutlineMail />
+                        <input autoComplete="new-email" onInput={e => setEmail(e.target.value)} type="email" value={email} placeholder=" " />
+                        <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
+                    </div>
+                    <div className="form-group">
                         <AiOutlinePhone />
                         <input onInput={e => setPhone(e.target.value)} type="number" value={phone} placeholder=" " />
                         <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
                     </div>
                     <div className="form-group">
-                        <AiOutlineMail />
-                        <input autoComplete="new-email" onInput={e => setEmail(e.target.value)} type="email" value={email} placeholder=" " />
-                        <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
+                        <HiOutlineAcademicCap />
+                        <input onInput={e => setSchoolName(e.target.value)} type="text" value={school_name} placeholder=" " />
+                        <label className={(error.school_name && 'label-error')}>{error.school_name ? error.school_name : intl.formatMessage({ id: "page.registration.form.school_name" })}</label>
                     </div>
-                    {/* <div className="form-group">
+                    <div className="form-group">
                         <AiOutlineGlobal />
                         <div className="flex justify-between items-center">
-                            <input className="w-10" onInput={e => setDomain(e.target.value)} type="text" value={domain} placeholder=" " />
-                            <label className={(error.domain && 'label-error')}>{error.domain ? error.domain : intl.formatMessage({ id: "page.registration.form.domain" })}</label>
-                            <span className="pl-2 text-gray-500">.{MAIN_DOMAIN}</span>
+                            <input onInput={e => setSchoolDomain(e.target.value)} type="text" value={school_domain} placeholder=" " />
+                            <label className={(error.school_domain && 'label-error')}>{error.school_domain ? error.school_domain : intl.formatMessage({ id: "page.registration.form.school_domain" })}</label>
+                            <span className="pl-2 text-gray-500">.lectoria.com</span>
                         </div>
-                    </div> */}
+                        <span className="text-xs text-gray-500">{intl.formatMessage({ id: "example" })}: <i>school.lectoria.com</i></span>
+                    </div>
                     <div className="form-group">
                         <AiOutlineKey />
                         <input autoComplete="new-password" onInput={e => setPassword(e.target.value)} type={showPassword ? 'text' : 'password'} value={password} placeholder=" " />
