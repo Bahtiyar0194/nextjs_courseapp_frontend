@@ -63,16 +63,6 @@ export default function Registration() {
                         <label className={(error.last_name && 'label-error')}>{error.last_name ? error.last_name : intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
                     </div>
                     <div className="form-group">
-                        <AiOutlineMail />
-                        <input autoComplete="new-email" onInput={e => setEmail(e.target.value)} type="email" value={email} placeholder=" " />
-                        <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
-                    </div>
-                    <div className="form-group">
-                        <AiOutlinePhone />
-                        <input onInput={e => setPhone(e.target.value)} type="number" value={phone} placeholder=" " />
-                        <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
-                    </div>
-                    <div className="form-group">
                         <HiOutlineAcademicCap />
                         <input onInput={e => setSchoolName(e.target.value)} type="text" value={school_name} placeholder=" " />
                         <label className={(error.school_name && 'label-error')}>{error.school_name ? error.school_name : intl.formatMessage({ id: "page.registration.form.school_name" })}</label>
@@ -85,6 +75,16 @@ export default function Registration() {
                             <span className="pl-2 text-gray-500">.lectoria.com</span>
                         </div>
                         <span className="text-xs text-gray-500">{intl.formatMessage({ id: "example" })}: <i>school.lectoria.com</i></span>
+                    </div>
+                    <div className="form-group">
+                        <AiOutlinePhone />
+                        <input onInput={e => setPhone(e.target.value)} type="number" value={phone} placeholder=" " />
+                        <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
+                    </div>
+                    <div className="form-group">
+                        <AiOutlineMail />
+                        <input autoComplete="new-email" onInput={e => setEmail(e.target.value)} type="email" value={email} placeholder=" " />
+                        <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
                     </div>
                     <div className="form-group">
                         <AiOutlineKey />

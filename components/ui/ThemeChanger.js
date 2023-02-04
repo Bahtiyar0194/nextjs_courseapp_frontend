@@ -1,9 +1,16 @@
+import { useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
 
 const ThemeChanger = () => {
 
     const { theme, setTheme } = useTheme();
+
+    useEffect(() => {
+        if(!window.localStorage.getItem('theme')){
+            setTheme('light')
+        }
+    },[]);
     
     return (
         theme === 'dark' ?

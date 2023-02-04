@@ -273,10 +273,10 @@ select option {
 }
 
 .custom-container{
-    @apply container mx-auto px-4;
+    @apply container mx-auto px-3 lg:px-4;
 }
 .form-group {
-    @apply mb-6 relative;
+    @apply mb-5 relative;
 }
 
 .form-group input, 
@@ -466,7 +466,7 @@ select option {
 
 .card-body{
     @apply p-6 overflow-y-auto overflow-x-hidden;
-    max-height: 80vh;
+    max-height: 90vh;
 }
 
 .card-bg{
