@@ -15,7 +15,8 @@ import Loader from "../ui/Loader";
 export default function DashboardLayout(props) {
     const intl = useIntl();
     const router = useRouter();
-    const user = useSelector((state) => state.authUser.authUser);
+    const user = useSelector((state) => state.authUser.user);
+    const roles = useSelector((state) => state.authUser.roles);
 
     const logout = async () => {
         Cookies.remove('token');

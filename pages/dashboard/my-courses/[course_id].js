@@ -2,6 +2,7 @@ import DashboardLayout from "../../../components/layouts/DashboardLayout";
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
@@ -22,6 +23,7 @@ export default function Course() {
   const [sectionModal, setSectionModal] = useState(false);
   const [course, setCourse] = useState([]);
   const [lessons, setLessons] = useState([]);
+  const roles = useSelector((state) => state.authUser.roles);
 
   let lesson_count = 1;
   let section_count = 1;
@@ -121,7 +123,7 @@ export default function Course() {
             <p className="text-justify">{course.course_description}</p>
 
 
-            <div className="flex mt-4">
+            {roles.includes(1) && <div className="flex mt-4">
               <CDropdown>
                 <CDropdownToggle color="primary" href="#" className="mr-2">
                   {intl.formatMessage({ id: "lesson.add" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
@@ -137,6 +139,8 @@ export default function Course() {
                 <span>Редактировать</span>
               </button>
             </div>
+            }
+
           </div>
           {lessons.total_count > 0 ?
             <>
@@ -164,10 +168,12 @@ export default function Course() {
                               </>
                           }
                         </div>
-                        <div className="flex items-center pl-1">
-                          <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
-                          <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down ml-1"><AiOutlineArrowDown /></button>
-                        </div>
+                        {roles.includes(1) &&
+                          <div className="flex items-center pl-1">
+                            <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
+                            <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down ml-1"><AiOutlineArrowDown /></button>
+                          </div>
+                        }
                       </div>
                     </li>
                   ))}
@@ -184,13 +190,17 @@ export default function Course() {
         </div>
       }
 
-      <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoLessonModal.title" })} modal_size="modal-xl">
-        <CreateVideoLessonModal course_id={course.course_id} getLessons={getLessons} />
-      </Modal>
+      {roles.includes(1) &&
+        <>
+          <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoLessonModal.title" })} modal_size="modal-xl">
+            <CreateVideoLessonModal course_id={course.course_id} getLessons={getLessons} />
+          </Modal>
 
-      <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
-        <CreateCourseSectionModal course_id={course.course_id} getLessons={getLessons} />
-      </Modal>
+          <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
+            <CreateCourseSectionModal course_id={course.course_id} getLessons={getLessons} />
+          </Modal>
+        </>
+      }
 
     </DashboardLayout>
   );

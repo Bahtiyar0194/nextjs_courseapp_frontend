@@ -64,7 +64,7 @@ export default function MyCourses() {
                 getCourses();
             }).catch(err => {
                 if (err.response) {
-                    if (err.response == 422) {
+                    if (err.response.status == 422) {
                         setError(err.response.data.data);
                         setLoader(false);
                     }

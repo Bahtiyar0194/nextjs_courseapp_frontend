@@ -31,9 +31,19 @@ export default function Login() {
                 let token = response.data.data.token
                 Cookies.set('token', token);
                 router.push('/dashboard');
-            }).catch(error => {
-                setError(error.response.data.data);
-                setLoader(false);
+            }).catch(err => {
+                if (err.response) {
+                    if (err.response.status == 422 || err.response.status == 401) {
+                        setError(err.response.data.data);
+                        setLoader(false);
+                    }
+                    else {
+                        router.push('/error/' + err.response.status)
+                    }
+                }
+                else {
+                    router.push('/error/')
+                }
             });
     }
 
@@ -41,7 +51,7 @@ export default function Login() {
         <AuthLayout title={title}>
             {loader && <Loader className="overlay" />}
             <form onSubmit={loginSubmit}>
-                {error.auth_failed && <p className="text-red-500 pt-4">{error.auth_failed}</p>}
+                {error.auth_failed && <p className="text-red-500 mb-4">{error.auth_failed}</p>}
                 <div className="form-group">
                     <AiOutlineMail />
                     <input autoComplete="new-email" onInput={e => setEmail(e.target.value)} type="email" value={email} placeholder=" " />
