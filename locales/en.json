@@ -1,6 +1,12 @@
 {
     "page.home.title": "Main page",
+    "page.home.to": "To main page",
     "page.home.description": "You are currently viewing the main page",
+
+    "page.error.403": "Access denied!",
+    "page.error.404": "Page not found!",
+    "page.error.500": "Server error!",
+    "page.error.server_lost": "Connection to the server is lost!",
 
     "page.login.title": "Login",
     "page.login.description": "You are currently viewing the login page",

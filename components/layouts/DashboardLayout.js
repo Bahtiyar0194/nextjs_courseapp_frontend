@@ -18,13 +18,19 @@ export default function DashboardLayout(props) {
     const user = useSelector((state) => state.authUser.authUser);
 
     const logout = async () => {
+        Cookies.remove('token');
         await axios.post('auth/logout')
             .then(response => {
-                Cookies.remove('token');
-                router.push("/");
-            }).catch(error => {
-                router.push("/403");
+                console.log(response)
+            }).catch(err => {
+                if (err.response) {
+                    router.push('/error/' + err.response.status)
+                }
+                else {
+                    router.push('/error')
+                }
             });
+        router.push("/");
     }
 
     return (
@@ -63,7 +69,7 @@ export default function DashboardLayout(props) {
                     <Link href={'#'}><AiOutlineSetting /><span>Настройки</span></Link>
                 </div>
                 <div className="db__content">
-                    {props.showLoader && <Loader className="full-overlay"/>}
+                    {props.showLoader && <Loader className="full-overlay" />}
                     <div className="grid grid-cols-12 gap-4">
                         {props.children}
                     </div>

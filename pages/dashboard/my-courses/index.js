@@ -62,9 +62,19 @@ export default function MyCourses() {
                 setLoader(false);
                 setCourseModal(false);
                 getCourses();
-            }).catch(error => {
-                setError(error.response.data.data);
-                setLoader(false);
+            }).catch(err => {
+                if (err.response) {
+                    if (err.response == 422) {
+                        setError(err.response.data.data);
+                        setLoader(false);
+                    }
+                    else {
+                        router.push('/error/' + err.response.status)
+                    }
+                }
+                else {
+                    router.push('/error/')
+                }
             });
     }
 
@@ -74,8 +84,13 @@ export default function MyCourses() {
             .then(response => {
                 setCourses(response.data)
                 setShowFullLoader(false);
-            }).catch(error => {
-                console.log(error)
+            }).catch(err => {
+                if (err.response) {
+                    router.push('/error/' + err.response.status)
+                }
+                else {
+                    router.push('/error')
+                }
             });
     }
 
@@ -85,9 +100,14 @@ export default function MyCourses() {
             .then(response => {
                 setCourseCategories(response.data)
                 setLoader(false);
-            }).catch(error => {
-                setLoader(false);
-            });
+            }).catch(err => {
+                if (err.response) {
+                  router.push('/error/' + err.response.status)
+                }
+                else {
+                  router.push('/error')
+                }
+              });
     }
 
     const getLanguages = async () => {
@@ -96,9 +116,14 @@ export default function MyCourses() {
             .then(response => {
                 setLanguages(response.data)
                 setLoader(false);
-            }).catch(error => {
-                setLoader(false);
-            });
+            }).catch(err => {
+                if (err.response) {
+                  router.push('/error/' + err.response.status)
+                }
+                else {
+                  router.push('/error')
+                }
+              });
     }
 
     useEffect(() => {

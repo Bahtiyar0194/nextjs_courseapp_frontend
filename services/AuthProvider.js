@@ -18,9 +18,14 @@ export default function AuthProvider(props) {
                 async function getMe() {
                     await axios.get('auth/me')
                         .then(response => {
-                            dispatch(authenticate(response.data))
-                        }).catch(error => {
-                            return [];
+                            dispatch(authenticate(response.data.user))
+                        }).catch(err => {
+                            if (err.response) {
+                                router.push('/error/' + err.response.status)
+                            }
+                            else {
+                                router.push('/error')
+                            }
                         });
                 }
                 getMe();

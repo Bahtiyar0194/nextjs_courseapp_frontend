@@ -58,8 +58,13 @@ export default function Course() {
     await axios.post('lessons/set_order', form_data)
       .then(response => {
         getLessons(course_id)
-      }).catch(error => {
-        console.log(error)
+      }).catch(err => {
+        if (err.response) {
+          router.push('/error/' + err.response.status)
+        }
+        else {
+          router.push('/error')
+        }
       });
   }
 
@@ -68,8 +73,13 @@ export default function Course() {
     await axios.get('courses/my-courses/' + course_id)
       .then(response => {
         setCourse(response.data)
-      }).catch(error => {
-        setShowFullLoader(false);
+      }).catch(err => {
+        if (err.response) {
+          router.push('/error/' + err.response.status)
+        }
+        else {
+          router.push('/error')
+        }
       });
   }
 
@@ -80,8 +90,13 @@ export default function Course() {
           setLessons(response.data);
           setShowFullLoader(false);
         }, 500)
-      }).catch(error => {
-        setShowFullLoader(false);
+      }).catch(err => {
+        if (err.response) {
+          router.push('/error/' + err.response.status)
+        }
+        else {
+          router.push('/error')
+        }
       });
   }
 
@@ -118,7 +133,6 @@ export default function Course() {
                 </CDropdownMenu>
               </CDropdown>
 
-
               <button onClick={() => setLessonModal(true)} className="btn btn-outline-primary"><AiOutlineRead />
                 <span>Редактировать</span>
               </button>
@@ -131,53 +145,53 @@ export default function Course() {
                 <div className="flex">
                   {lessons.materials_count > 0 && <p className="text-gray-400 mb-4 mr-4">{intl.formatMessage({ id: "lesson_materials" })}: {lessons.materials_count}</p>}
                   {lessons.sections_count > 0 && <p className="text-gray-400 mb-4">{intl.formatMessage({ id: "lesson_sections" })}: {lessons.sections_count}</p>}
-                  </div>
-
-
-                  <ul id="lessons_wrap" className="list-group">
-                    {lessons.my_lessons?.map(lesson => (
-                      <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 3 ? 'section' : 'lesson'}>
-                        <div className="flex justify-between items-center">
-                          <div>
-                            {
-                              lesson.lesson_type_id == 3
-                                ?
-                                <h3 className="mb-0">{section_count++} {intl.formatMessage({ id: "section" })}. {lesson.lesson_name}</h3>
-                                :
-                                <>
-                                  <h4 className="mb-1">{lesson.lesson_name}</h4>
-                                  <p>{lesson.lesson_description}</p>
-                                </>
-                            }
-                          </div>
-                          <div className="flex items-center pl-1">
-                            <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
-                            <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down ml-1"><AiOutlineArrowDown /></button>
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
-              </>
-              :
-              ""
-          }
+
+
+                <ul id="lessons_wrap" className="list-group">
+                  {lessons.my_lessons?.map(lesson => (
+                    <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 3 ? 'section' : 'lesson'}>
+                      <div className="flex justify-between items-center">
+                        <div>
+                          {
+                            lesson.lesson_type_id == 3
+                              ?
+                              <h3 className="mb-0">{section_count++} {intl.formatMessage({ id: "section" })}. {lesson.lesson_name}</h3>
+                              :
+                              <>
+                                <h4 className="mb-1">{lesson.lesson_name}</h4>
+                                <p>{lesson.lesson_description}</p>
+                              </>
+                          }
+                        </div>
+                        <div className="flex items-center pl-1">
+                          <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
+                          <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down ml-1"><AiOutlineArrowDown /></button>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </>
             :
-            <div className="col-span-12">
-              {intl.formatMessage({ id: "loading" })}
-            </div>
+            ""
           }
+        </>
+        :
+        <div className="col-span-12">
+          {intl.formatMessage({ id: "loading" })}
+        </div>
+      }
 
-          <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoLessonModal.title" })} modal_size="modal-xl">
-            <CreateVideoLessonModal course_id={course.course_id} getLessons={getLessons} />
-          </Modal>
+      <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoLessonModal.title" })} modal_size="modal-xl">
+        <CreateVideoLessonModal course_id={course.course_id} getLessons={getLessons} />
+      </Modal>
 
-          <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
-            <CreateCourseSectionModal course_id={course.course_id} getLessons={getLessons} />
-          </Modal>
+      <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
+        <CreateCourseSectionModal course_id={course.course_id} getLessons={getLessons} />
+      </Modal>
 
-        </DashboardLayout>
+    </DashboardLayout>
   );
 }
