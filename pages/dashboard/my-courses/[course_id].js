@@ -121,8 +121,6 @@ export default function Course() {
           <div className="col-span-12 md:col-span-8">
             <h2>{course.course_name}</h2>
             <p className="text-justify">{course.course_description}</p>
-
-
             {roles.includes(1) && <div className="flex mt-4">
               <CDropdown>
                 <CDropdownToggle color="primary" href="#" className="mr-2">
@@ -156,15 +154,18 @@ export default function Course() {
                   {lessons.my_lessons?.map(lesson => (
                     <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 3 ? 'section' : 'lesson'}>
                       <div className="flex justify-between items-center">
-                        <div>
+                        <div className="w-full">
                           {
                             lesson.lesson_type_id == 3
                               ?
                               <h3 className="mb-0">{section_count++} {intl.formatMessage({ id: "section" })}. {lesson.lesson_name}</h3>
                               :
                               <>
-                                <h4 className="mb-1">{lesson.lesson_name}</h4>
-                                <p>{lesson.lesson_description}</p>
+                                <Link className="block" href={'/dashboard/lesson/' + lesson.lesson_id}>
+                                  <h4 className="mb-1">{lesson.lesson_name}</h4>
+                                  <p>{lesson.lesson_description}</p>
+                                </Link>
+
                               </>
                           }
                         </div>

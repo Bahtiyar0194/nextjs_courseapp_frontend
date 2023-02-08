@@ -1,6 +1,6 @@
 import AuthLayout from "../components/layouts/AuthLayout";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
@@ -39,9 +39,12 @@ export default function Registration() {
 
         await axios.post('auth/register', form_data)
             .then(response => {
-                let token = response.data.data.token
-                Cookies.set('token', token);
-                router.push('/dashboard');
+                router.push({
+                    pathname: '/login',
+                    query: {
+                        d: school_domain
+                    }
+                })
             }).catch(err => {
                 if (err.response) {
                     if (err.response.status == 422) {

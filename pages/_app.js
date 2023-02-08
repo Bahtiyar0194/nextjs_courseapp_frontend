@@ -40,13 +40,38 @@ export default function MyApp({ Component, pageProps }) {
         axios.defaults.headers.common['Accept-Language'] = defaultLocale;
     }
 
+    async function checkSchool() {
+        await axios.get('school/check')
+            .then(response => {
+                console.log(response);
+            }).catch(err => {
+                if (err.response) {
+                    router.push('/error/' + err.response.status)
+                }
+                else {
+                    router.push('/error')
+                }
+            });
+    }
+
     useEffect(() => {
-        const host = window.location.host;
-        const hostArr = host.split('.').slice(0, host.includes(MAIN_DOMAIN) ? -1 : -2);
-        if (hostArr.length > 0) {
-            Cookies.set('subdomain', hostArr[0])
+        if (typeof window !== undefined) {
+            const host = window.location.host;
+            const hostArr = host.split('.').slice(0, host.includes(MAIN_DOMAIN) ? -1 : -2);
+            if (hostArr.length > 0) {
+                Cookies.set('subdomain', hostArr[0]);
+            }
+            else {
+                Cookies.remove('subdomain');
+            }
+            const subdomain = Cookies.get('subdomain');
+            if (subdomain) {
+                axios.defaults.headers.common['Subdomain'] = subdomain;
+                checkSchool();
+            }
         }
     }, [])
+
 
     return (
         <IntlProvider locale={locale} messages={messages[locale]}>

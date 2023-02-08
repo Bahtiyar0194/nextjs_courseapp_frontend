@@ -505,6 +505,10 @@ select option {
     @apply hidden;
 }
 
+.list-group > li a{
+    @apply duration-200 text-active hover:text-blue-500;
+}
+
 .modal-backdrop{
     @apply fixed w-full h-full top-0 bottom-0 left-0 right-0 z-50 duration-200 flex justify-center items-center p-4 opacity-0 pointer-events-none;
     background-color: rgb(0 0 0 / 50%);
