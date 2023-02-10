@@ -120,7 +120,11 @@ export default function Course() {
           </div>
           <div className="col-span-12 md:col-span-8">
             <h2>{course.course_name}</h2>
-            <p className="text-justify lg:text-lg">{course.course_description}</p>
+            <p className="text-justify">{course.course_description}</p>
+            <hr></hr>
+            <p>{intl.formatMessage({ id: "page.my_courses.form.course_category" })}: <span className="font-medium text-corp">{course.course_category_name}</span></p>
+            <p>{intl.formatMessage({ id: "page.my_courses.form.course_language" })}: <span className="font-medium text-corp">{course.lang_name}</span></p>
+
             {lessons.total_count == 0 && <h5 className="text-corp">Нет добавленных уроков к данному курсу</h5>}
 
             {roles.includes(2) &&

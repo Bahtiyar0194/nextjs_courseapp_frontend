@@ -141,7 +141,7 @@
 }
 
 .bg-corp{
-    @apply bg-cyan-500;
+    @apply bg-emerald-500;
 }
 
 .border-active{
@@ -161,7 +161,7 @@
 }
 
 .border-corp{
-    @apply border-cyan-500;
+    @apply border-emerald-500;
 }
 
 .text-active {
@@ -169,7 +169,7 @@
 }
 
 .text-success{
-    @apply text-cyan-500;
+    @apply text-emerald-500;
 }
 
 .text-danger{
@@ -181,7 +181,7 @@
 }
 
 .text-corp{
-    @apply text-cyan-500;
+    @apply text-emerald-500;
 }
 
 
@@ -256,6 +256,10 @@ h5{
 }
 h6{
     @apply text-base;
+}
+
+hr{
+    @apply border-active my-3;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -454,12 +458,12 @@ select option {
 
 .btn-up,
 .btn-down{
-    @apply rounded-full p-1.5 border-active text-inactive bg-inactive duration-200;
+    @apply rounded-full p-1.5 border-active text-inactive duration-200;
 }
 
 .btn-up:hover,
 .btn-down:hover{
-    @apply bg-active border-corp text-corp;
+    @apply border-corp text-corp;
 }
 
 .btn > span {
