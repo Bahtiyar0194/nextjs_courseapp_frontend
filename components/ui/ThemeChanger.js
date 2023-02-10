@@ -14,11 +14,11 @@ const ThemeChanger = () => {
     
     return (
         theme === 'dark' ?
-            <button className='hover:text-blue-500 text-active text-xl' onClick={() => setTheme('light')}>
+            <button className='text-corp text-xl' onClick={() => setTheme('light')}>
                 <HiOutlineMoon />
             </button>
             :
-            <button className='hover:text-blue-500 text-active text-xl' onClick={() => setTheme('dark')}>
+            <button className='text-corp text-xl' onClick={() => setTheme('dark')}>
                 <HiOutlineSun />
             </button>
     );

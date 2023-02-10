@@ -2,6 +2,7 @@ import DashboardLayout from "../../../components/layouts/DashboardLayout";
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
 import Loader from "../../../components/ui/Loader";
@@ -10,15 +11,16 @@ import { IoGridOutline, IoList } from "react-icons/io5";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
+import API_URL from "../../../config/api";
 
 export default function MyCourses() {
     const [showFullLoader, setShowFullLoader] = useState(true);
     const [loader, setLoader] = useState(false);
     const [contentViewType, setContentViewType] = useState('grid');
-    const API_URL = process.env.NODE_ENV === 'development' ? process.env.DEV_API : process.env.PROD_API;
     const intl = useIntl();
     const [courseModal, setCourseModal] = useState(false);
     const [courses, setCourses] = useState([]);
+    const roles = useSelector((state) => state.authUser.roles);
 
     const [course_categories, setCourseCategories] = useState([]);
     const [languages, setLanguages] = useState([]);
@@ -102,12 +104,12 @@ export default function MyCourses() {
                 setLoader(false);
             }).catch(err => {
                 if (err.response) {
-                  router.push('/error/' + err.response.status)
+                    router.push('/error/' + err.response.status)
                 }
                 else {
-                  router.push('/error')
+                    router.push('/error')
                 }
-              });
+            });
     }
 
     const getLanguages = async () => {
@@ -118,12 +120,12 @@ export default function MyCourses() {
                 setLoader(false);
             }).catch(err => {
                 if (err.response) {
-                  router.push('/error/' + err.response.status)
+                    router.push('/error/' + err.response.status)
                 }
                 else {
-                  router.push('/error')
+                    router.push('/error')
                 }
-              });
+            });
     }
 
     useEffect(() => {
@@ -139,9 +141,11 @@ export default function MyCourses() {
             {courses.length > 0 ?
                 <>
                     <div className="col-span-12 lg:col-span-3 flex lg:justify-end">
-                        <button className="btn btn-primary mr-2" onClick={() => setCourseModal(true)}><AiOutlineRead />
-                            <span>{intl.formatMessage({ id: "page.my_courses.form.course_create" })}</span>
-                        </button>
+                        {roles.includes(2) &&
+                            <button className="btn btn-primary mr-2" onClick={() => setCourseModal(true)}><AiOutlineRead />
+                                <span>{intl.formatMessage({ id: "page.my_courses.form.course_create" })}</span>
+                            </button>
+                        }
                         {
                             contentViewType === 'grid' ? <button onClick={() => setContentViewType('list')} className="btn btn-outline-primary"><IoList /></button> :
                                 contentViewType === 'list' ? <button onClick={() => setContentViewType('grid')} className="btn btn-outline-primary"><IoGridOutline /></button> : ''
@@ -158,12 +162,12 @@ export default function MyCourses() {
                                     <div className="card-bg h-40 p-4" style={{ backgroundImage: `url('${API_URL + '/courses/images/posters/' + course.course_poster_file}')` }}>
                                     </div>
                                     <div className="p-4">
-                                        <h5 className="mb-1">
+                                        <h4 className="mb-1">
                                             <Link href={'/dashboard/my-courses/' + course.course_id}>{course.course_name}</Link>
-                                        </h5>
+                                        </h4>
                                         <div className="text-sm font-medium mb-2">
                                             <span>{intl.formatMessage({ id: "page.my_courses.form.course_category" })}:</span>
-                                            <span className="text-blue-500"> {course.course_category_name}</span>
+                                            <span className="text-corp"> {course.course_category_name}</span>
                                         </div>
                                         <p className="text-sm">{course.course_description.substring(0, 100) + '...'}</p>
                                     </div>

@@ -3,6 +3,7 @@
     "page.home.to": "To main page",
     "page.home.description": "You are currently viewing the main page",
 
+    "page.error.undefined": "Unknown error!",
     "page.error.400": "Unexpected error on server!",
     "page.error.401": "You are not logged in!",
     "page.error.403": "Access denied!",
@@ -21,7 +22,7 @@
     "page.registration.description": "You are currently viewing the registration page",
     "page.registration.form.first_name": "First name",
     "page.registration.form.last_name": "Last name",
-    "page.registration.form.email": "Email",
+    "page.registration.form.email": "E-mail",
     "page.registration.form.phone": "Phone",
     "page.registration.form.school_name": "School name",
     "page.registration.form.school_domain": "Domain name",

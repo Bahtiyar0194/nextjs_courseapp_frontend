@@ -3,6 +3,7 @@
     "page.home.to": "На главную страницу",
     "page.home.description": "Вы на главной странице нашего сайта",
 
+    "page.error.undefined": "Неизвестная ошибка!",
     "page.error.400": "Непредвиденная ошибка на сервере!",
     "page.error.401": "Вы не авторизованы!",
     "page.error.403": "Доступ к данной странице запрещен!",
@@ -21,7 +22,7 @@
     "page.registration.description": "Вы на странице регистрации",
     "page.registration.form.first_name": "Имя",
     "page.registration.form.last_name": "Фамилия",
-    "page.registration.form.email": "Email",
+    "page.registration.form.email": "E-mail адрес",
     "page.registration.form.phone": "Телефон",
     "page.registration.form.school_name": "Название школы",
     "page.registration.form.school_domain": "Доменное имя",

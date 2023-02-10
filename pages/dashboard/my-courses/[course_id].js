@@ -13,9 +13,9 @@ import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import CreateVideoLessonModal from "../../../components/course/CreateVideoLessonModal";
 import CreateCourseSectionModal from "../../../components/course/CreateCourseSectionModal";
+import API_URL from "../../../config/api";
 
 export default function Course() {
-  const API_URL = process.env.NODE_ENV === 'development' ? process.env.DEV_API : process.env.PROD_API;
   const router = useRouter();
   const [showFullLoader, setShowFullLoader] = useState(true);
   const intl = useIntl();
@@ -120,23 +120,26 @@ export default function Course() {
           </div>
           <div className="col-span-12 md:col-span-8">
             <h2>{course.course_name}</h2>
-            <p className="text-justify">{course.course_description}</p>
-            {roles.includes(1) && <div className="flex mt-4">
-              <CDropdown>
-                <CDropdownToggle color="primary" href="#" className="mr-2">
-                  {intl.formatMessage({ id: "lesson.add" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
-                </CDropdownToggle>
-                <CDropdownMenu>
-                  <Link href={'#'}><AiOutlineFileText />{intl.formatMessage({ id: "lesson_type.text_content" })}</Link>
-                  <Link href={'#'} onClick={() => setVideoModal(true)}><AiOutlinePlayCircle />{intl.formatMessage({ id: "lesson_type.video_lesson" })}</Link>
-                  <Link href={'#'} onClick={() => setSectionModal(true)}><AiOutlinePushpin />{intl.formatMessage({ id: "lesson_type.course_section" })}</Link>
-                </CDropdownMenu>
-              </CDropdown>
+            <p className="text-justify lg:text-lg">{course.course_description}</p>
+            {lessons.total_count == 0 && <h5 className="text-corp">Нет добавленных уроков к данному курсу</h5>}
 
-              <button onClick={() => setLessonModal(true)} className="btn btn-outline-primary"><AiOutlineRead />
-                <span>Редактировать</span>
-              </button>
-            </div>
+            {roles.includes(2) &&
+                <div className="flex mt-4">
+                  <CDropdown>
+                    <CDropdownToggle color="primary" href="#" className="mr-2">
+                      {intl.formatMessage({ id: "lesson.add" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
+                    </CDropdownToggle>
+                    <CDropdownMenu>
+                      <Link href={'#'}><AiOutlineFileText />{intl.formatMessage({ id: "lesson_type.text_content" })}</Link>
+                      <Link href={'#'} onClick={() => setVideoModal(true)}><AiOutlinePlayCircle />{intl.formatMessage({ id: "lesson_type.video_lesson" })}</Link>
+                      <Link href={'#'} onClick={() => setSectionModal(true)}><AiOutlinePushpin />{intl.formatMessage({ id: "lesson_type.course_section" })}</Link>
+                    </CDropdownMenu>
+                  </CDropdown>
+
+                  <button onClick={() => setLessonModal(true)} className="btn btn-outline-primary"><AiOutlineRead />
+                    <span>Редактировать</span>
+                  </button>
+                </div>
             }
 
           </div>
@@ -145,8 +148,8 @@ export default function Course() {
               <div className="col-span-12 mt-4">
                 <h3 className="mb-0">{intl.formatMessage({ id: "lessons" })}</h3>
                 <div className="flex">
-                  {lessons.materials_count > 0 && <p className="text-gray-400 mb-4 mr-4">{intl.formatMessage({ id: "lesson_materials" })}: {lessons.materials_count}</p>}
-                  {lessons.sections_count > 0 && <p className="text-gray-400 mb-4">{intl.formatMessage({ id: "lesson_sections" })}: {lessons.sections_count}</p>}
+                  {lessons.materials_count > 0 && <p className="text-inactive mb-4 mr-4">{intl.formatMessage({ id: "lesson_materials" })}: {lessons.materials_count}</p>}
+                  {lessons.sections_count > 0 && <p className="text-inactive mb-4">{intl.formatMessage({ id: "lesson_sections" })}: {lessons.sections_count}</p>}
                 </div>
 
 
@@ -169,7 +172,7 @@ export default function Course() {
                               </>
                           }
                         </div>
-                        {roles.includes(1) &&
+                        {roles.includes(2) &&
                           <div className="flex items-center pl-1">
                             <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
                             <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down ml-1"><AiOutlineArrowDown /></button>
@@ -191,18 +194,17 @@ export default function Course() {
         </div>
       }
 
-      {roles.includes(1) &&
+      {roles.includes(2) &&
         <>
           <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoLessonModal.title" })} modal_size="modal-xl">
-            <CreateVideoLessonModal course_id={course.course_id} getLessons={getLessons} />
+            <CreateVideoLessonModal closeModal={() => setVideoModal(false)} course_id={course.course_id} getLessons={getLessons} />
           </Modal>
 
           <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
-            <CreateCourseSectionModal course_id={course.course_id} getLessons={getLessons} />
+            <CreateCourseSectionModal closeModal={() => setSectionModal(false)} course_id={course.course_id} getLessons={getLessons} />
           </Modal>
         </>
       }
-
     </DashboardLayout>
   );
 }

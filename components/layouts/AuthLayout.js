@@ -31,6 +31,8 @@ export default function AuthLayout(props) {
                                             <Locales />
                                         </div>
                                     </div>
+
+                                    {props.school_name && <h5 className="text-corp mb-0">{props.school_name}</h5>}
                                 </div>
                                 <div className="card-body">
                                     {props.children}

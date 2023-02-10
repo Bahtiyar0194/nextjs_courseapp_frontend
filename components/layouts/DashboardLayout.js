@@ -50,7 +50,7 @@ export default function DashboardLayout(props) {
                     <div>
                         <CDropdown>
                             <CDropdownToggle href="#" color="no-color" className="pl-0">
-                                <div className="rounded-full w-6 h-6 bg-blue-500 flex items-center justify-center text-white">Б</div> <span className="text-active">{user.first_name}</span>
+                                <div className="rounded-full w-6 h-6 bg-corp flex items-center justify-center text-white">Б</div> <span className="text-active">{user.first_name}</span>
                             </CDropdownToggle>
                             <CDropdownMenu>
                                 <Link href={'/dashboard'}><AiOutlineUser />Настройки профиля</Link>

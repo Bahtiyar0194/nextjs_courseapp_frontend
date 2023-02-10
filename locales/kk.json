@@ -3,6 +3,7 @@
     "page.home.to": "Басты бетке",
     "page.home.description": "Сіз біздің басты беттесіз",
 
+    "page.error.undefined": "Белгісіз қате орын алды!",
     "page.error.400": "Серверде белгісіз қате орын алды!",
     "page.error.401": "Сіз жеке кабинетіңізге кіруіңіз керек!",
     "page.error.403": "Бұл бетке кіруге тыйым салынады!",
@@ -21,7 +22,7 @@
     "page.registration.description": "Сіз біздің тіркелу бетіндесіз",
     "page.registration.form.first_name": "Аты",
     "page.registration.form.last_name": "Тегі",
-    "page.registration.form.email": "Email",
+    "page.registration.form.email": "E-mail пошта",
     "page.registration.form.phone": "Телефон",
     "page.registration.form.school_name": "Мектептің атауы",
     "page.registration.form.school_domain": "Домендік атауы",

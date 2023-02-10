@@ -1,14 +1,13 @@
-import { AiOutlineRead, AiOutlineLink, AiOutlinePlayCircle, AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineRead, AiOutlineCheck } from "react-icons/ai";
 import Loader from "../ui/Loader";
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import axios from "axios";
 
-const CreateCourseSectionModal = ({ course_id, getLessons }) => {
+const CreateCourseSectionModal = ({ closeModal, course_id, getLessons }) => {
     const intl = useIntl();
     const [error, setError] = useState([]);
     const [loader, setLoader] = useState(false);
-
     const [section_name, setSectionName] = useState('');
 
     const createCourseSectionSubmit = async (e, course_id, getLessons) => {
@@ -27,9 +26,10 @@ const CreateCourseSectionModal = ({ course_id, getLessons }) => {
 
         await axios.post('lessons/create', form_data)
             .then(response => {
-                setLoader(false);
-                // setCourseModal(false);
                 getLessons(course_id);
+                setLoader(false);
+                closeModal();
+                setSectionName('');
             }).catch(error => {
                 setError(error.response.data.data);
                 setLoader(false);

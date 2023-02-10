@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import axios from "axios";
 
-const CreateVideoLessonModal = ({ course_id, getLessons }) => {
+const CreateVideoLessonModal = ({ closeModal, course_id, getLessons }) => {
     const intl = useIntl();
     const [error, setError] = useState([]);
     const [loader, setLoader] = useState(false);
@@ -29,18 +29,10 @@ const CreateVideoLessonModal = ({ course_id, getLessons }) => {
         form_data.append('video_link', video_link);
         form_data.append('video_file', video_file);
 
-
-        // for (let [key, value] of form_data) {
-        //     console.log(`${key}: ${value}`)
-        // }
-
         await axios.post('lessons/create', form_data)
             .then(response => {
-                // setLessonName('');
-                // setLessonDescription('');
-
                 setLoader(false);
-                // setCourseModal(false);
+                closeModal();
                 getLessons(course_id);
             }).catch(error => {
                 setError(error.response.data.data);

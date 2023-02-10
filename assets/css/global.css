@@ -140,6 +140,10 @@
     @apply bg-gray-50 dark:bg-dark-900;
 }
 
+.bg-corp{
+    @apply bg-cyan-500;
+}
+
 .border-active{
     @apply border border-gray-200 dark:border-dark-200;
 }
@@ -152,9 +156,34 @@
     @apply border-r border-gray-200 dark:border-dark-200;
 }
 
+.border-inactive{
+    @apply border-gray-500;
+}
+
+.border-corp{
+    @apply border-cyan-500;
+}
+
 .text-active {
     @apply text-dark-900 dark:text-white;
 }
+
+.text-success{
+    @apply text-cyan-500;
+}
+
+.text-danger{
+    @apply text-red-500;
+}
+
+.text-inactive {
+    @apply text-gray-500;
+}
+
+.text-corp{
+    @apply text-cyan-500;
+}
+
 
 ::-webkit-scrollbar {
     width: 2px;
@@ -162,7 +191,7 @@
 }
 ::-webkit-scrollbar-thumb {
     width: 2px;
-    @apply bg-blue-500;
+    @apply bg-corp;
 }
 ::-webkit-scrollbar:horizontal{
     height: 2px;
@@ -170,7 +199,7 @@
 }
 ::-webkit-scrollbar-thumb:horizontal{
     height: 2px;
-    @apply bg-blue-500;
+    @apply bg-corp;
 }
 
 body {
@@ -178,7 +207,7 @@ body {
     font-family: 'Euclid Circular A', sans-serif;
 }
 a {
-    @apply cursor-pointer text-blue-500;
+    @apply cursor-pointer text-corp;
 }
 
 h1 > a,
@@ -187,7 +216,16 @@ h3 > a,
 h4 > a,
 h5 > a,
 h6 > a {
-    @apply text-active hover:text-blue-500;
+    @apply text-active;
+}
+
+h1 > a:hover,
+h2 > a:hover,
+h3 > a:hover,
+h4 > a:hover,
+h5 > a:hover,
+h6 > a:hover {
+    @apply text-corp;
 }
 
 p {
@@ -282,11 +320,11 @@ select option {
 .form-group input, 
 .form-group select, 
 .form-group textarea {
-    @apply border-t-0 border-l-0 border-r-0 border-b border-blue-500 bg-transparent w-full text-active py-3 pl-8;
+    @apply border-t-0 border-l-0 border-r-0 border-b border-corp bg-transparent w-full text-active py-3 pl-8;
 }
 
 .form-group label {
-    @apply absolute left-8 top-3 pointer-events-none duration-200 z-0 text-gray-500 whitespace-nowrap;
+    @apply absolute left-8 top-3 pointer-events-none duration-200 z-0 text-inactive whitespace-nowrap;
 }
 
 .form-group input:focus ~ label,
@@ -300,16 +338,16 @@ select option {
 }
 
 .form-group label.label-error{
-    @apply text-red-500 -top-2.5 text-xs left-0;
+    @apply text-danger -top-2.5 text-xs left-0;
 }
 .form-group input:focus ~ label.label-error,
 .form-group select:focus ~ label.label-error,
 .form-group textarea:focus ~ label.label-error{
-    @apply text-gray-500;
+    @apply text-inactive;
 }
 
 .form-group svg{
-    @apply absolute text-2xl top-3 text-gray-500;
+    @apply absolute text-2xl top-3 text-inactive;
 }
 
 .form-group-file input{
@@ -317,11 +355,15 @@ select option {
 }
 
 .form-group-file label{
-    @apply block border border-blue-500 border-dashed p-4 rounded-md text-center cursor-pointer hover:bg-blue-500 hover:text-white duration-200;
+    @apply block border border-corp border-dashed p-4 rounded-md text-center cursor-pointer hover:text-white duration-200;
+}
+
+.form-group-file label:hover{
+    @apply bg-corp;
 }
 
 .form-group-file label.label-error{
-    @apply text-red-500 hover:text-white;
+    @apply text-danger hover:text-white;
 }
 
 .form-group-file label svg{
@@ -338,44 +380,44 @@ select option {
   
 .custom-radio > span::before {
     content: '';
-    @apply inline-block w-4 h-4 flex-shrink-0 flex-grow-0 border border-blue-500 rounded-full mr-2 bg-no-repeat bg-center cursor-pointer;
+    @apply inline-block w-4 h-4 flex-shrink-0 flex-grow-0 border border-inactive rounded-full mr-2 bg-no-repeat bg-center cursor-pointer;
     background-size: 50% 50%;
 }
 
 .custom-checkbox > span::before {
     content: '';
-    @apply inline-block w-4 h-4 flex-shrink-0 flex-grow-0 border border-blue-500 rounded-sm mr-2 bg-no-repeat bg-center cursor-pointer;
+    @apply inline-block w-4 h-4 flex-shrink-0 flex-grow-0 border border-inactive rounded-sm mr-2 bg-no-repeat bg-center cursor-pointer;
     background-size: 50% 50%;
 }
 
 .custom-radio > input:not(:disabled):not(:checked) + span:hover::before,
 .custom-checkbox > input:not(:disabled):not(:checked) + span:hover::before {
-    @apply border-blue-200;
+    @apply border-corp;
 }
 
 .custom-radio > input:not(:disabled):active + span::before,
 .custom-checkbox > input:not(:disabled):active + span::before {
-    @apply bg-blue-200 border-blue-200;
+    @apply bg-inactive border-inactive;
 }
   
 .custom-radio > input:focus:not(:checked) + span::before,
 .custom-checkbox > input:focus:not(:checked) + span::before {
-    @apply border-blue-200
+    @apply border-corp;
 }
   
 .custom-radio > input:checked + span::before {
-    @apply border-blue-500 bg-blue-500;
+    @apply border-corp bg-corp;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
 }
 
 .custom-checkbox > input:checked + span::before {
-    @apply border-blue-500 bg-blue-500;
+    @apply border-corp bg-corp;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
 }
   
 .custom-radio > input:disabled + span::before,
 .custom-checkbox > input:disabled + span::before {
-    @apply bg-blue-200;
+    @apply bg-gray-400;
 }
 
 .btn {
@@ -395,45 +437,29 @@ select option {
 }
 
 .btn-primary{
-    @apply bg-blue-500 border border-blue-500 text-white hover:border-blue-700 hover:bg-blue-700;
+    @apply bg-corp text-white border-corp border;
+}
+
+.btn-primary:hover{
+    @apply bg-transparent text-corp;
 }
 
 .btn-outline-primary{
-    @apply bg-transparent border border-blue-500 text-blue-500 hover:border-blue-700 hover:bg-blue-700 hover:text-white;
+    @apply bg-transparent border border-corp text-corp;
 }
 
-.btn-secondary{
-    @apply bg-gray-500 hover:bg-gray-700;
-}
-
-.btn-outline-secondary{
-    @apply border border-gray-500 text-gray-500 hover:border-gray-700 hover:text-gray-700 bg-transparent
-}
-
-.btn-success{
-    @apply bg-green-500 hover:bg-green-700;
-}
-
-.btn-outline-success{
-    @apply border border-green-500 text-green-500 hover:border-green-700 hover:text-green-700 bg-transparent;
-}
-
-.btn-danger{
-    @apply bg-red-500 hover:bg-red-700;
-}
-
-.btn-outline-danger{
-    @apply border border-red-500 text-red-500 hover:border-red-700 hover:text-red-700 bg-transparent
+.btn-outline-primary:hover{
+    @apply bg-corp border border-corp text-white;
 }
 
 .btn-up,
 .btn-down{
-    @apply rounded-full p-1.5 border-active bg-inactive;
+    @apply rounded-full p-1.5 border-active text-inactive bg-inactive duration-200;
 }
 
 .btn-up:hover,
 .btn-down:hover{
-    @apply bg-active;
+    @apply bg-active border-corp text-corp;
 }
 
 .btn > span {
@@ -449,7 +475,7 @@ select option {
 }
 
 .badge-primary{
-    @apply bg-blue-500 text-white;
+    @apply bg-corp text-white;
 }
 
 .card {
@@ -506,7 +532,11 @@ select option {
 }
 
 .list-group > li a{
-    @apply duration-200 text-active hover:text-blue-500;
+    @apply duration-200 text-active;
+}
+
+.list-group > li a:hover{
+    @apply text-corp;
 }
 
 .modal-backdrop{
@@ -575,7 +605,7 @@ select option {
     @apply absolute w-full h-full left-0 top-0 bg-active opacity-90 z-20 flex justify-center items-center duration-200;
 }
 .overlay-loding-circle {
-    @apply w-10 h-10 border-4 border-blue-500 rounded-full;
+    @apply w-10 h-10 border-4 border-corp rounded-full;
     border-bottom-color: transparent;
     animation: 0.75s linear infinite spinner-border;
 }
@@ -596,9 +626,12 @@ select option {
 }
 
 .db__sidebar__menu a{
-    @apply py-3 duration-200 text-active hover:text-blue-500 border-b-active flex items-center;
+    @apply py-3 duration-200 text-active border-b-active flex items-center;
 }
 
+.db__sidebar__menu a:hover{
+    @apply text-corp;
+}
 
 .db__sidebar__menu a:last-child{
     @apply pb-0 border-none;
@@ -642,11 +675,11 @@ select option {
 }
 
 .dropdown-menu li a{
-    @apply flex items-center text-active;
+    @apply flex items-center text-active duration-200;
 }
 
 .dropdown-menu li a:hover{
-    @apply flex items-center text-blue-500;
+    @apply flex items-center text-corp;
 }
 
 .dropdown-menu li a svg{

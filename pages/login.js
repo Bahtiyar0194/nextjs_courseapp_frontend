@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import Loader from "../components/ui/Loader";
-import { AiOutlineMail, AiOutlineKey, AiOutlineEyeInvisible, AiOutlineEye, AiOutlineGlobal } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineKey, AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { FiUserCheck } from "react-icons/fi";
 import Link from "next/link";
 
@@ -20,11 +20,28 @@ export default function Login() {
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
 
+    const [school, setSchool] = useState([]);
+
+    const getSchool = async () => {
+        setLoader(true)
+        await axios.get('school/get')
+            .then(response => {
+                setSchool(response.data);
+                setSchoolDomain(response.data.school_domain);
+                setLoader(false)
+            }).catch(err => {
+                if (err.response) {
+                    router.push('/error/' + err.response.status)
+                }
+                else {
+                    router.push('/error')
+                }
+            });
+    }
+
     useEffect(() => {
-        if (router.isReady) {
-            setSchoolDomain(router.query.d)
-        }
-    }, [router.isReady]);
+        getSchool();
+    }, []);
 
     const loginSubmit = async (e) => {
         e.preventDefault();
@@ -56,21 +73,10 @@ export default function Login() {
     }
 
     return (
-        <AuthLayout title={title}>
+        <AuthLayout title={title} school_name={school.school_name}>
             {loader && <Loader className="overlay" />}
             <form onSubmit={loginSubmit}>
-                {error.auth_failed && <p className="text-red-500 mb-4">{error.auth_failed}</p>}
-
-                <div className="form-group">
-                    <AiOutlineGlobal />
-                    <div className="flex justify-between items-center">
-                        <input onInput={e => setSchoolDomain(e.target.value)} type="text" value={school_domain} placeholder=" " />
-                        <label className={(error.school_domain && 'label-error')}>{error.school_domain ? error.school_domain : intl.formatMessage({ id: "page.registration.form.school_domain" })}</label>
-                        <span className="pl-2 text-gray-500">.lectoria.com</span>
-                    </div>
-                    <span className="text-xs text-gray-500">{intl.formatMessage({ id: "example" })}: <i>school.lectoria.com</i></span>
-                </div>
-
+                {error.auth_failed && <p className="text-danger mb-4">{error.auth_failed}</p>}
                 <div className="form-group">
                     <AiOutlineMail />
                     <input autoComplete="new-email" onInput={e => setEmail(e.target.value)} type="email" value={email} placeholder=" " />
