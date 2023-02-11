@@ -50,6 +50,7 @@ export default function MyCourses() {
         form_data.append('course_poster', course_poster);
         form_data.append('course_cost', course_cost);
         form_data.append('course_free', course_free);
+        form_data.append('operation_type_id', 2);
 
         await axios.post('courses/create', form_data)
             .then(response => {
@@ -136,11 +137,13 @@ export default function MyCourses() {
 
     return (
         <DashboardLayout showLoader={showFullLoader} title={intl.formatMessage({ id: "page.my_courses.title" })}>
-            <Breadcrumb>{intl.formatMessage({ id: "page.my_courses.title" })}</Breadcrumb>
+            <Breadcrumb>
+                {intl.formatMessage({ id: "page.my_courses.title" })}
+            </Breadcrumb>
 
             {courses.length > 0 ?
                 <>
-                    <div className="col-span-12 lg:col-span-3 flex lg:justify-end">
+                    <div className="col-span-12 flex">
                         {roles.includes(2) &&
                             <button className="btn btn-primary mr-2" onClick={() => setCourseModal(true)}><AiOutlineRead />
                                 <span>{intl.formatMessage({ id: "page.my_courses.form.course_create" })}</span>
@@ -157,7 +160,7 @@ export default function MyCourses() {
                     </div>
                     {
                         contentViewType === 'grid' ? courses?.map(course => (
-                            <div key={course.course_id} className="col-span-12 md:col-span-6 lg:col-span-3">
+                            <div key={course.course_id} className="col-span-12 sm:col-span-6 lg:col-span-3">
                                 <div className="card">
                                     <div className="card-bg h-40 p-4" style={{ backgroundImage: `url('${API_URL + '/courses/images/posters/' + course.course_poster_file}')` }}>
                                     </div>
@@ -215,7 +218,7 @@ export default function MyCourses() {
                 </div>
             }
 
-            <Modal show={courseModal} onClose={() => setCourseModal(false)} modal_title={intl.formatMessage({ id: "page.my_courses.form.course_create" })} modal_size="modal-4xl">
+            <Modal show={courseModal} onClose={() => setCourseModal(false)} modal_title={intl.formatMessage({ id: "page.my_courses.form.course_create" })} modal_size="modal-2xl">
                 {loader && <Loader className="overlay" />}
                 <div className="modal-body">
                     <form onSubmit={createCourseSubmit} encType="multipart/form-data">

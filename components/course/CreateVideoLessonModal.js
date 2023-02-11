@@ -1,10 +1,12 @@
 import { AiOutlineRead, AiOutlineLink, AiOutlinePlayCircle, AiOutlineCheck } from "react-icons/ai";
 import Loader from "../ui/Loader";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import axios from "axios";
 
 const CreateVideoLessonModal = ({ closeModal, course_id, getLessons }) => {
+    const router = useRouter();
     const intl = useIntl();
     const [error, setError] = useState([]);
     const [loader, setLoader] = useState(false);
@@ -28,15 +30,26 @@ const CreateVideoLessonModal = ({ closeModal, course_id, getLessons }) => {
         form_data.append('video_type', video_type);
         form_data.append('video_link', video_link);
         form_data.append('video_file', video_file);
+        form_data.append('operation_type_id', 3);
 
         await axios.post('lessons/create', form_data)
             .then(response => {
                 setLoader(false);
                 closeModal();
                 getLessons(course_id);
-            }).catch(error => {
-                setError(error.response.data.data);
-                setLoader(false);
+            }).catch(err => {
+                if (err.response) {
+                    if (err.response.status == 422) {
+                        setError(err.response.data.data);
+                        setLoader(false);
+                    }
+                    else {
+                        router.push('/error/' + err.response.status)
+                    }
+                }
+                else {
+                    router.push('/error/')
+                }
             });
     }
 

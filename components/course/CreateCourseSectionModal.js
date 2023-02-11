@@ -1,10 +1,12 @@
 import { AiOutlineRead, AiOutlineCheck } from "react-icons/ai";
 import Loader from "../ui/Loader";
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import axios from "axios";
 
 const CreateCourseSectionModal = ({ closeModal, course_id, getLessons }) => {
+    const router = useRouter();
     const intl = useIntl();
     const [error, setError] = useState([]);
     const [loader, setLoader] = useState(false);
@@ -18,11 +20,8 @@ const CreateCourseSectionModal = ({ closeModal, course_id, getLessons }) => {
         form_data.append('lesson_name', section_name);
         form_data.append('lesson_type_id', 3);
         form_data.append('course_id', course_id);
+        form_data.append('operation_type_id', 3);
 
-
-        // for (let [key, value] of form_data) {
-        //     console.log(`${key}: ${value}`)
-        // }
 
         await axios.post('lessons/create', form_data)
             .then(response => {
@@ -30,9 +29,19 @@ const CreateCourseSectionModal = ({ closeModal, course_id, getLessons }) => {
                 setLoader(false);
                 closeModal();
                 setSectionName('');
-            }).catch(error => {
-                setError(error.response.data.data);
-                setLoader(false);
+            }).catch(err => {
+                if (err.response) {
+                    if (err.response.status == 422) {
+                        setError(err.response.data.data);
+                        setLoader(false);
+                    }
+                    else {
+                        router.push('/error/' + err.response.status)
+                    }
+                }
+                else {
+                    router.push('/error/')
+                }
             });
     }
 

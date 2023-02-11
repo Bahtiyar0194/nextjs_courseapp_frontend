@@ -57,6 +57,7 @@ export default function Course() {
     const form_data = new FormData();
     form_data.append('course_id', course_id);
     form_data.append('lessons_id', lessons_id);
+    form_data.append('operation_type_id', 4);
     await axios.post('lessons/set_order', form_data)
       .then(response => {
         getLessons(course_id)
@@ -112,51 +113,49 @@ export default function Course() {
 
   return (
     <DashboardLayout showLoader={showFullLoader} title={course.course_name}>
-      <Breadcrumb><Link href={'/dashboard/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link> / {course.course_name}</Breadcrumb>
+      <Breadcrumb>
+        <Link href={'/dashboard/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+        {course.course_name}
+      </Breadcrumb>
       {course.course_id ?
         <>
-          <div className="col-span-12 md:col-span-4">
-            <img className="w-full rounded-lg" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />
-          </div>
-          <div className="col-span-12 md:col-span-8">
-            <h2>{course.course_name}</h2>
-            <p className="text-justify">{course.course_description}</p>
-            <hr></hr>
-            <p>{intl.formatMessage({ id: "page.my_courses.form.course_category" })}: <span className="font-medium text-corp">{course.course_category_name}</span></p>
-            <p>{intl.formatMessage({ id: "page.my_courses.form.course_language" })}: <span className="font-medium text-corp">{course.lang_name}</span></p>
-
-            {lessons.total_count == 0 && <h5 className="text-corp">Нет добавленных уроков к данному курсу</h5>}
-
-            {roles.includes(2) &&
-                <div className="flex mt-4">
-                  <CDropdown>
-                    <CDropdownToggle color="primary" href="#" className="mr-2">
-                      {intl.formatMessage({ id: "lesson.add" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
-                    </CDropdownToggle>
-                    <CDropdownMenu>
-                      <Link href={'#'}><AiOutlineFileText />{intl.formatMessage({ id: "lesson_type.text_content" })}</Link>
-                      <Link href={'#'} onClick={() => setVideoModal(true)}><AiOutlinePlayCircle />{intl.formatMessage({ id: "lesson_type.video_lesson" })}</Link>
-                      <Link href={'#'} onClick={() => setSectionModal(true)}><AiOutlinePushpin />{intl.formatMessage({ id: "lesson_type.course_section" })}</Link>
-                    </CDropdownMenu>
-                  </CDropdown>
-
-                  <button onClick={() => setLessonModal(true)} className="btn btn-outline-primary"><AiOutlineRead />
-                    <span>Редактировать</span>
-                  </button>
+          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+            <div className="bg-active border-active rounded-md sticky top-0">
+              <div className="card-bg h-60 p-4 rounded-tl-md rounded-tr-md" style={{ backgroundImage: `url('${API_URL + '/courses/images/posters/' + course.course_poster_file}')` }}>
+              </div>
+              <div className="p-4">
+                <h3>{course.course_name}</h3>
+                <p className="text-justify">{course.course_description}</p>
+                <hr></hr>
+                <p className="text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_category" })}: <span className="font-medium text-corp">{course.course_category_name}</span></p>
+                <p className="text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_language" })}: <span className="font-medium text-corp">{course.lang_name}</span></p>
+                <div className="flex">
+                  {lessons.materials_count > 0 && <p className="text-sm mr-2">{intl.formatMessage({ id: "lesson_materials" })}: <span className="font-medium text-corp">{lessons.materials_count}</span></p>}
+                  {lessons.sections_count > 0 && <p className="text-sm">{intl.formatMessage({ id: "lesson_sections" })}: <span className="font-medium text-corp">{lessons.sections_count}</span></p>}
                 </div>
-            }
 
+                {lessons.total_count == 0 && <h5 className="text-corp">Нет добавленных уроков к данному курсу</h5>}
+
+                {roles.includes(2) &&
+                  <div className="flex mt-4">
+                    <CDropdown>
+                      <CDropdownToggle color="primary" href="#" className="mr-2">
+                        {intl.formatMessage({ id: "lesson.add" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
+                      </CDropdownToggle>
+                      <CDropdownMenu>
+                        <Link href={'#'}><AiOutlineFileText />{intl.formatMessage({ id: "lesson_type.text_content" })}</Link>
+                        <Link href={'#'} onClick={() => setVideoModal(true)}><AiOutlinePlayCircle />{intl.formatMessage({ id: "lesson_type.video_lesson" })}</Link>
+                        <Link href={'#'} onClick={() => setSectionModal(true)}><AiOutlinePushpin />{intl.formatMessage({ id: "lesson_type.course_section" })}</Link>
+                      </CDropdownMenu>
+                    </CDropdown>
+                  </div>
+                }
+              </div>
+            </div>
           </div>
           {lessons.total_count > 0 ?
             <>
-              <div className="col-span-12 mt-4">
-                <h3 className="mb-0">{intl.formatMessage({ id: "lessons" })}</h3>
-                <div className="flex">
-                  {lessons.materials_count > 0 && <p className="text-inactive mb-4 mr-4">{intl.formatMessage({ id: "lesson_materials" })}: {lessons.materials_count}</p>}
-                  {lessons.sections_count > 0 && <p className="text-inactive mb-4">{intl.formatMessage({ id: "lesson_sections" })}: {lessons.sections_count}</p>}
-                </div>
-
-
+              <div className="col-span-12 md:col-span-6 lg:col-span-8">
                 <ul id="lessons_wrap" className="list-group">
                   {lessons.my_lessons?.map(lesson => (
                     <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 3 ? 'section' : 'lesson'}>
@@ -165,12 +164,13 @@ export default function Course() {
                           {
                             lesson.lesson_type_id == 3
                               ?
-                              <h3 className="mb-0">{section_count++} {intl.formatMessage({ id: "section" })}. {lesson.lesson_name}</h3>
+                              <h4 className="mb-0">{section_count++} {intl.formatMessage({ id: "section" })}. {lesson.lesson_name}</h4>
                               :
                               <>
                                 <Link className="block" href={'/dashboard/lesson/' + lesson.lesson_id}>
-                                  <h4 className="mb-1">{lesson.lesson_name}</h4>
-                                  <p>{lesson.lesson_description}</p>
+                                  <h5 className="mb-1">{lesson.lesson_name}</h5>
+                                  <p className="text-active mb-1">{lesson.lesson_description}</p>
+                                  <p className="text-xs text-inactive">{lesson.lesson_type_name}</p>
                                 </Link>
 
                               </>

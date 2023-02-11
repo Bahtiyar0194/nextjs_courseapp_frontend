@@ -141,7 +141,7 @@
 }
 
 .bg-corp{
-    @apply bg-emerald-500;
+    @apply bg-indigo-500;
 }
 
 .border-active{
@@ -161,7 +161,7 @@
 }
 
 .border-corp{
-    @apply border-emerald-500;
+    @apply border-indigo-500;
 }
 
 .text-active {
@@ -169,7 +169,7 @@
 }
 
 .text-success{
-    @apply text-emerald-500;
+    @apply text-indigo-500;
 }
 
 .text-danger{
@@ -181,13 +181,14 @@
 }
 
 .text-corp{
-    @apply text-emerald-500;
+    @apply text-indigo-500;
 }
 
 
 ::-webkit-scrollbar {
     width: 2px;
     @apply bg-inactive;
+    height: 90%;
 }
 ::-webkit-scrollbar-thumb {
     width: 2px;
@@ -515,16 +516,8 @@ select option {
     @apply border-dashed border-b-2;
 }
 
-.list-group > li.lesson{
-    @apply lg:pl-2;
-}
-
 .list-group > li:last-child{
     @apply border-none;
-}
-
-.list-group > li p{
-    @apply m-0 text-gray-400;
 }
 
 .list-group > li:first-child .btn-up{
@@ -536,10 +529,6 @@ select option {
 }
 
 .list-group > li a{
-    @apply duration-200 text-active;
-}
-
-.list-group > li a:hover{
     @apply text-corp;
 }
 
@@ -605,13 +594,28 @@ select option {
 .full-overlay {
     @apply fixed w-full h-full left-0 top-0 bg-inactive opacity-90 z-20 flex justify-center items-center duration-200;
 }
+
 .overlay {
     @apply absolute w-full h-full left-0 top-0 bg-active opacity-90 z-20 flex justify-center items-center duration-200;
 }
+
 .overlay-loding-circle {
     @apply w-10 h-10 border-4 border-corp rounded-full;
     border-bottom-color: transparent;
     animation: 0.75s linear infinite spinner-border;
+}
+
+.breadcrumb{
+    @apply text-inactive my-2;
+}
+
+.breadcrumb > a{
+    @apply inline-block mr-4 relative;
+}
+
+.breadcrumb > a:after{
+    content: "\203A";
+    @apply absolute -right-2.5 text-inactive pointer-events-none;
 }
 
 .db__header{
