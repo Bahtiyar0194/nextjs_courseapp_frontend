@@ -52,6 +52,7 @@
     "lesson_sections": "Разделы",
 
     "lesson.add": "Добавить",
+    "lesson.add_task": "Добавить задание",
     "lesson_type.text_content": "Текстовый контент",
     "lesson_type.video_lesson": "Видеоурок",
     "lesson_type.course_section": "Раздел курса",
@@ -61,6 +62,11 @@
     "videoLessonModal.form.upload_video_from_internet": "Видео из Youtube, Vimeo",
     "videoLessonModal.form.paste_video_link": "Вставьте ссылку от видео",
     "videoLessonModal.form.upload_video_file": "Нажмите чтобы загрузить видеофайл",
+
+
+    "task.task_name": "Название задания",
+    "task.task_description": "Краткое описание задания",
+    "task.answerTheQuestionModal.title": "Ответ на вопрос",
 
     "courseSectionModal.title": "Создание раздела курса",
     "section": "раздел",

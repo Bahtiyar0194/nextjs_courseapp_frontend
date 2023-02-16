@@ -52,6 +52,7 @@
     "lesson_sections": "Бөлімдер",
 
     "lesson.add": "Қосу",
+    "lesson.add_task": "Таспсырма қосу",
     "lesson_type.text_content": "Мәтіндік мазмұн",
     "lesson_type.video_lesson": "Бейне сабақ",
     "lesson_type.course_section": "Курстың бөлімі",
@@ -61,6 +62,11 @@
     "videoLessonModal.form.upload_video_from_internet": "Youtube немесе Vimeo бейнежазбалары",
     "videoLessonModal.form.paste_video_link": "Бейнеден сілтеме қойыңыз",
     "videoLessonModal.form.upload_video_file": "Бейнені жүктеу үшін басыңыз",
+
+
+    "task.task_name": "Тапсырманың атауы",
+    "task.task_description": "Тапсырманың қысқаша сипаттамасы",
+    "task.answerTheQuestionModal.title": "Сұраққа жауап беру",
 
     "courseSectionModal.title": "Курс бөлімін құру",
     "section": "бөлім",

@@ -136,12 +136,13 @@
 .bg-active {
     @apply bg-white dark:bg-dark-500;
 }
+
 .bg-inactive {
     @apply bg-gray-50 dark:bg-dark-900;
 }
 
 .bg-corp{
-    @apply bg-indigo-500;
+    @apply bg-blue-500;
 }
 
 .border-active{
@@ -161,15 +162,15 @@
 }
 
 .border-corp{
-    @apply border-indigo-500;
+    @apply border-blue-500;
 }
 
 .text-active {
-    @apply text-dark-900 dark:text-white;
+    @apply text-dark-200 dark:text-white;
 }
 
 .text-success{
-    @apply text-indigo-500;
+    @apply text-green-500;
 }
 
 .text-danger{
@@ -181,9 +182,12 @@
 }
 
 .text-corp{
-    @apply text-indigo-500;
+    @apply text-blue-500;
 }
 
+.corp-font{
+    font-family: 'Euclid Circular A', sans-serif;
+}
 
 ::-webkit-scrollbar {
     width: 2px;
@@ -204,9 +208,9 @@
 }
 
 body {
-    @apply bg-inactive text-active font-normal;
-    font-family: 'Euclid Circular A', sans-serif;
+    @apply bg-inactive text-active font-normal corp-font;
 }
+
 a {
     @apply cursor-pointer text-corp;
 }
@@ -305,6 +309,10 @@ input:focus,
 select:focus,
 textarea:focus {
     @apply outline-none;
+}
+
+.video-react{
+    @apply overflow-hidden rounded-md;
 }
 
 select{
@@ -476,11 +484,23 @@ select option {
 }
 
 .badge{
-    @apply py-1 px-2 rounded-lg mb-2 mr-2 text-xs inline-block;
+    @apply text-xs font-medium px-2 py-1 rounded-xl mr-2 inline-block;
+}
+
+.badge-lg{
+    @apply text-base px-3 py-2 rounded-xl;
+}
+
+.badge-light{
+    @apply border-active bg-inactive text-active;
 }
 
 .badge-primary{
-    @apply bg-corp text-white;
+    @apply bg-blue-200 text-blue-500;
+}
+
+.badge-success{
+    @apply bg-green-200 text-green-500 border border-green-500 dark:bg-transparent;
 }
 
 .card {
@@ -610,12 +630,12 @@ select option {
 }
 
 .breadcrumb > a{
-    @apply inline-block mr-4 relative;
+    @apply inline-block mr-6 relative;
 }
 
 .breadcrumb > a:after{
     content: "\203A";
-    @apply absolute -right-2.5 text-inactive pointer-events-none;
+    @apply absolute -right-3.5 text-inactive pointer-events-none;
 }
 
 .db__header{
@@ -691,5 +711,6 @@ select option {
 }
 
 .dropdown-menu li a svg{
-    @apply text-lg mr-0.5;
+    @apply text-lg mr-1;
 }
+

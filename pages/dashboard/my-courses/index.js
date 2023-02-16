@@ -50,7 +50,7 @@ export default function MyCourses() {
         form_data.append('course_poster', course_poster);
         form_data.append('course_cost', course_cost);
         form_data.append('course_free', course_free);
-        form_data.append('operation_type_id', 2);
+        form_data.append('operation_type_id', 3);
 
         await axios.post('courses/create', form_data)
             .then(response => {
@@ -137,12 +137,11 @@ export default function MyCourses() {
 
     return (
         <DashboardLayout showLoader={showFullLoader} title={intl.formatMessage({ id: "page.my_courses.title" })}>
-            <Breadcrumb>
-                {intl.formatMessage({ id: "page.my_courses.title" })}
-            </Breadcrumb>
-
             {courses.length > 0 ?
                 <>
+                    <Breadcrumb>
+                        {intl.formatMessage({ id: "page.my_courses.title" })}
+                    </Breadcrumb>
                     <div className="col-span-12 flex">
                         {roles.includes(2) &&
                             <button className="btn btn-primary mr-2" onClick={() => setCourseModal(true)}><AiOutlineRead />
@@ -161,20 +160,19 @@ export default function MyCourses() {
                     {
                         contentViewType === 'grid' ? courses?.map(course => (
                             <div key={course.course_id} className="col-span-12 sm:col-span-6 lg:col-span-3">
-                                <div className="card">
-                                    <div className="card-bg h-40 p-4" style={{ backgroundImage: `url('${API_URL + '/courses/images/posters/' + course.course_poster_file}')` }}>
-                                    </div>
-                                    <div className="p-4">
-                                        <h4 className="mb-1">
-                                            <Link href={'/dashboard/my-courses/' + course.course_id}>{course.course_name}</Link>
-                                        </h4>
-                                        <div className="text-sm font-medium mb-2">
-                                            <span>{intl.formatMessage({ id: "page.my_courses.form.course_category" })}:</span>
-                                            <span className="text-corp"> {course.course_category_name}</span>
+                                <Link href={'/dashboard/my-courses/' + course.course_id}>
+                                    <div className="card">
+                                        <div className="card-bg h-40 p-4" style={{ backgroundImage: `url('${API_URL + '/courses/images/posters/' + course.course_poster_file}')` }}>
                                         </div>
-                                        <p className="text-sm">{course.course_description.substring(0, 100) + '...'}</p>
+                                        <div className="p-4">
+                                            <h4 className="mb-2 text-active">
+                                                {course.course_name}
+                                            </h4>
+                                            <p className="text-sm text-inactive">{course.course_description.substring(0, 100) + '...'}</p>
+                                            <span className="badge badge-light"> {course.course_category_name}</span>
+                                        </div>
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         )) :
                             contentViewType === 'list' &&

@@ -12,7 +12,8 @@
         "react-dom": "^18.2.0",
         "react-icons": "^4.7.1",
         "react-intl": "^6.2.5",
-        "react-redux": "^8.0.5"
+        "react-redux": "^8.0.5",
+        "video-react": "^0.16.0"
     },
     "scripts": {
         "dev": "next dev",
