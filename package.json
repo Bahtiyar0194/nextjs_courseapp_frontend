@@ -4,6 +4,7 @@
         "@coreui/react": "^4.5.1",
         "@reduxjs/toolkit": "^1.9.1",
         "axios": "^1.2.1",
+        "html-react-parser": "^3.0.9",
         "js-cookie": "^3.0.1",
         "next": "^13.0.4",
         "next-pwa": "^5.6.0",
@@ -12,6 +13,7 @@
         "react-dom": "^18.2.0",
         "react-icons": "^4.7.1",
         "react-intl": "^6.2.5",
+        "react-quill": "^2.0.0",
         "react-redux": "^8.0.5",
         "video-react": "^0.16.0"
     },

@@ -4,6 +4,7 @@ import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import parse from 'html-react-parser';
 import Modal from "../../../components/ui/Modal";
 import CreateAnswerTheQuestionModal from "../../../components/lesson/CreateAnswerTheQuestionModal";
 import { AiOutlineCaretDown, AiOutlineQuestionCircle, AiOutlineFileSearch, AiOutlineFileDone, AiOutlineFileAdd } from "react-icons/ai";
@@ -15,7 +16,7 @@ import API_URL from "../../../config/api";
 import { Player } from 'video-react';
 import "../../../node_modules/video-react/dist/video-react.css";
 
-export default function Course() {
+export default function Lesson() {
     const router = useRouter();
     const [showFullLoader, setShowFullLoader] = useState(true);
     const intl = useIntl();
@@ -96,13 +97,15 @@ export default function Course() {
                                     </CDropdownMenu>
                                 </CDropdown>
                             </div>
-                            <p className="mt-4 mb-6">{lesson.lesson_description}</p>
+                            <div className="mt-4 mb-6">{parse(lesson.lesson_description)}</div>
 
-                            <div className="w-full lg:w-3/5">
-                                <Player
-                                    playsInline
-                                    src={src}
-                                />
+                            <div className="grid grid-cols-12 gap-4">
+                                <div className="col-span-12 lg:col-span-6">
+                                    <Player
+                                        playsInline
+                                        src={src}
+                                    />
+                                </div>
                             </div>
                         </div>
 

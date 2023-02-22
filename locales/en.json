@@ -46,22 +46,28 @@
     "page.my_courses.form.add_course": "Add course",
 
     "lessons": "Course lessons",
+    "no_added_lessons": "There are no lessons added to this course",
     "lesson_name": "Lesson name",
     "lesson_description": "Lesson description",
     "lesson_materials": "Materials",
     "lesson_sections": "Sections",
 
     "lesson.add": "Add",
+    "lesson.add_lesson": "Add lesson",
+    "lesson.create_lesson": "Create lesson",
     "lesson.add_task": "Add task",
-    "lesson_type.text_content": "Text content",
-    "lesson_type.video_lesson": "Video lesson",
     "lesson_type.course_section": "Course section",
 
-    "videoLessonModal.title": "Create video lesson",
-    "videoLessonModal.form.upload_your_video": "Upload your video",
-    "videoLessonModal.form.upload_video_from_internet": "Video from Youtube Vimeo",
-    "videoLessonModal.form.paste_video_link": "Insert the link from the video",
-    "videoLessonModal.form.upload_video_file": "Click to upload the video file",
+    "text_content": "Text content",
+
+    "videoModal.video": "Video",
+    "videoModal.title": "Add video",
+    "videoModal.video_name": "Name for video",
+    "videoModal.form.upload_own_video": "Upload your video",
+    "videoModal.form.upload_video_from_internet": "Video from Youtube Vimeo",
+    "videoModal.form.upload_video_from_media": "Select from previously uploaded",
+    "videoModal.form.paste_video_link": "Insert the link from the video",
+    "videoModal.form.upload_video_file": "Click to upload the video file",
 
     "courseSectionModal.title": "Create course section",
     "section": "section",
@@ -83,10 +89,13 @@
     "more": "More",
 
     "file_name": "File name",
+    "selected_file": "Selected file",
     "file_ready_to_upload": "The file is ready to upload",
     "file_size": "File size",
+    "megabyte": "MB",
     "choose_file": "Choose file",
 
     "move_up": "Move up",
-    "move_down": "Move down"
+    "move_down": "Move down",
+    "delete": "Delete"
 }

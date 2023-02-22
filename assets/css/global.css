@@ -142,7 +142,7 @@
 }
 
 .bg-corp{
-    @apply bg-blue-500;
+    @apply bg-indigo-500;
 }
 
 .border-active{
@@ -162,11 +162,23 @@
 }
 
 .border-corp{
-    @apply border-blue-500;
+    @apply border-indigo-500;
+}
+
+.border-danger{
+    @apply border-red-500;
 }
 
 .text-active {
     @apply text-dark-200 dark:text-white;
+}
+
+.fill-active{
+    @apply fill-dark-200 dark:fill-white;
+}
+
+.stroke-active{
+    @apply stroke-dark-200 dark:stroke-white;
 }
 
 .text-success{
@@ -182,7 +194,7 @@
 }
 
 .text-corp{
-    @apply text-blue-500;
+    @apply text-indigo-500;
 }
 
 .corp-font{
@@ -263,8 +275,20 @@ h6{
     @apply text-base;
 }
 
+ol{
+    @apply list-decimal pl-4 mb-2;
+}
+
+ul{
+    @apply list-disc pl-4 mb-2;
+}
+
 hr{
     @apply border-active my-3;
+}
+
+blockquote{
+    @apply pl-4 border-corp border-l-2;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -301,7 +325,7 @@ input[type=number]::-webkit-outer-spin-button {
 button,
 input,
 select{
-    @apply bg-transparent;
+    @apply bg-transparent appearance-none;
 }
 
 button:focus,
@@ -347,7 +371,7 @@ select option {
 .form-group textarea:focus ~ label,
 .form-group textarea:not(:placeholder-shown) ~ label
 {
-    @apply -top-2.5 text-xs left-0;
+    @apply -top-2.5 text-xs left-0 text-inactive;
 }
 
 .form-group label.label-error{
@@ -434,7 +458,7 @@ select option {
 }
 
 .btn {
-    @apply w-fit flex items-center rounded-lg py-2 px-3 text-white duration-200; 
+    @apply w-fit flex items-center rounded-lg px-3 py-2 text-white duration-200; 
 }
 
 .btn-group > .btn{
@@ -442,11 +466,11 @@ select option {
 }
 
 .btn.btn-sm{
-    @apply py-1 px-2;
+    @apply px-2 py-1.5;
 }
 
 .btn.btn-lg{
-    @apply py-2 px-4;
+    @apply px-4 py-3;
 }
 
 .btn-primary{
@@ -465,14 +489,27 @@ select option {
     @apply bg-corp border border-corp text-white;
 }
 
+.btn-light{
+    @apply bg-inactive text-active border-active border;
+}
+
+.btn-light:hover{
+    @apply bg-active text-active;
+}
+
 .btn-up,
-.btn-down{
+.btn-down,
+.btn-delete{
     @apply rounded-full p-1.5 border-active text-inactive duration-200;
 }
 
 .btn-up:hover,
 .btn-down:hover{
     @apply border-corp text-corp;
+}
+
+.btn-delete:hover{
+    @apply border-danger text-danger;
 }
 
 .btn > span {
@@ -529,7 +566,7 @@ select option {
 }
 
 .list-group > li{
-    @apply py-4 border-b-active duration-200;
+    @apply py-4 border-b-active duration-200 list-none;
 }
 
 .list-group > li.section{
@@ -690,12 +727,13 @@ select option {
     @apply block;
 }
 
-.dropdown-menu li:first-child{
-    @apply pt-2.5;
-}
 
 .dropdown-menu li{
-    @apply border-b-active py-2.5;
+    @apply border-b-active py-2.5 list-none;
+}
+
+.dropdown-menu li:first-child{
+    @apply pt-2.5;
 }
 
 .dropdown-menu li:last-child{
@@ -714,3 +752,51 @@ select option {
     @apply text-lg mr-1;
 }
 
+.quill{
+    @apply mb-4;
+}
+
+.ql-toolbar.ql-snow{
+    @apply bg-active border-active rounded-bl-none rounded-br-none rounded-md corp-font;
+}
+
+.ql-container.ql-snow{
+    @apply bg-active border-active rounded-tl-none rounded-tr-none rounded-md corp-font;
+}
+
+.ql-snow .ql-stroke {
+    @apply stroke-active;
+}
+
+.ql-snow .ql-fill{
+    @apply fill-active;
+}
+
+.ql-snow .ql-picker{
+    @apply text-active;
+}
+
+.ql-picker-options{
+    @apply text-active bg-active;
+}
+
+.ql-editor{
+    min-height: 150px;
+    max-height: 40vh;
+}
+
+.ql-editor.ql-blank::before{
+    @apply text-inactive;
+}
+
+.lesson-block{
+    @apply mb-4;
+}
+
+.lesson-block.edit{
+    @apply border-active rounded-md p-4;
+}
+
+.lesson-block.edit:hover{
+    @apply bg-inactive;
+}

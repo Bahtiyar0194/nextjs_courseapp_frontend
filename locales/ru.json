@@ -52,16 +52,22 @@
     "lesson_sections": "Разделы",
 
     "lesson.add": "Добавить",
+    "lesson.add_lesson": "Добавить урок",
+    "lesson.create_lesson": "Создание нового урока",
+    "no_added_lessons": "Нет добавленных уроков к данному курсу",
     "lesson.add_task": "Добавить задание",
-    "lesson_type.text_content": "Текстовый контент",
-    "lesson_type.video_lesson": "Видеоурок",
     "lesson_type.course_section": "Раздел курса",
 
-    "videoLessonModal.title": "Создание видеоурока",
-    "videoLessonModal.form.upload_own_video": "Загрузить свое видео",
-    "videoLessonModal.form.upload_video_from_internet": "Видео из Youtube, Vimeo",
-    "videoLessonModal.form.paste_video_link": "Вставьте ссылку от видео",
-    "videoLessonModal.form.upload_video_file": "Нажмите чтобы загрузить видеофайл",
+    "text_content": "Текст",
+
+    "videoModal.video": "Видео",
+    "videoModal.title": "Добавление видео",
+    "videoModal.video_name": "Название для видео",
+    "videoModal.form.upload_own_video": "Загрузить свое видео",
+    "videoModal.form.upload_video_from_internet": "Видео из Youtube, Vimeo",
+    "videoModal.form.upload_video_from_media": "Выбрать из ранее загруженных",
+    "videoModal.form.paste_video_link": "Вставьте ссылку от видео",
+    "videoModal.form.upload_video_file": "Нажмите чтобы загрузить видеофайл",
 
 
     "task.task_name": "Название задания",
@@ -84,10 +90,13 @@
     "more": "Подробнее",
 
     "file_name": "Название файла",
+    "selected_file": "Выбранный Вами файл",
     "file_ready_to_upload": "Файл готов к загрузке",
     "file_size": "Размер файла",
+    "megabyte": "МБ",
     "choose_file": "Выберите файл",
 
     "move_up": "Переместить вверх",
-    "move_down": "Переместить вниз"
+    "move_down": "Переместить вниз",
+    "delete": "Удалить"
 }

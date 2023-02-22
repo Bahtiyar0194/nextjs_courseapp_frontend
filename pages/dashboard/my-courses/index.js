@@ -142,20 +142,22 @@ export default function MyCourses() {
                     <Breadcrumb>
                         {intl.formatMessage({ id: "page.my_courses.title" })}
                     </Breadcrumb>
-                    <div className="col-span-12 flex">
-                        {roles.includes(2) &&
-                            <button className="btn btn-primary mr-2" onClick={() => setCourseModal(true)}><AiOutlineRead />
-                                <span>{intl.formatMessage({ id: "page.my_courses.form.course_create" })}</span>
-                            </button>
-                        }
-                        {
-                            contentViewType === 'grid' ? <button onClick={() => setContentViewType('list')} className="btn btn-outline-primary"><IoList /></button> :
-                                contentViewType === 'list' ? <button onClick={() => setContentViewType('grid')} className="btn btn-outline-primary"><IoGridOutline /></button> : ''
-                        }
-                    </div>
 
                     <div className="col-span-12">
-                        <h2>{intl.formatMessage({ id: "page.my_courses.title" })}</h2>
+                        <div className="flex max-lg:flex-col lg:justify-between lg:items-center">
+                            <h2 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "page.my_courses.title" })}</h2>
+                            <div className="flex">
+                                {roles.includes(2) &&
+                                    <button className="btn btn-primary mr-2" onClick={() => setCourseModal(true)}><AiOutlineRead />
+                                        <span>{intl.formatMessage({ id: "page.my_courses.form.course_create" })}</span>
+                                    </button>
+                                }
+                                {
+                                    contentViewType === 'grid' ? <button onClick={() => setContentViewType('list')} className="btn btn-outline-primary"><IoList /></button> :
+                                        contentViewType === 'list' ? <button onClick={() => setContentViewType('grid')} className="btn btn-outline-primary"><IoGridOutline /></button> : ''
+                                }
+                            </div>
+                        </div>
                     </div>
                     {
                         contentViewType === 'grid' ? courses?.map(course => (
@@ -169,7 +171,8 @@ export default function MyCourses() {
                                                 {course.course_name}
                                             </h4>
                                             <p className="text-sm text-inactive">{course.course_description.substring(0, 100) + '...'}</p>
-                                            <span className="badge badge-light"> {course.course_category_name}</span>
+                                            <span className="badge badge-primary"> {course.course_category_name}</span>
+                                            <span className="badge badge-light"> {course.lang_name}</span>
                                         </div>
                                     </div>
                                 </Link>

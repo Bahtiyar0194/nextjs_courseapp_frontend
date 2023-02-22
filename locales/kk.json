@@ -46,22 +46,28 @@
     "page.my_courses.form.add_course": "Курс қосу",
 
     "lessons": "Курстың сабақтары",
+    "no_added_lessons": "Бұл курсқа қосылған сабақтар жоқ",
     "lesson_name": "Сабақтың аты",
     "lesson_description": "Сабақтың қысқаша сипаттамасы",
     "lesson_materials": "Материалдар",
     "lesson_sections": "Бөлімдер",
 
     "lesson.add": "Қосу",
-    "lesson.add_task": "Таспсырма қосу",
-    "lesson_type.text_content": "Мәтіндік мазмұн",
-    "lesson_type.video_lesson": "Бейне сабақ",
+    "lesson.add_lesson": "Сабақ қосу",
+    "lesson.create_lesson": "Сабақ құру",
+    "lesson.add_task": "Тапсырма қосу",
     "lesson_type.course_section": "Курстың бөлімі",
 
-    "videoLessonModal.title": "Бейне сабақ құру",
-    "videoLessonModal.form.upload_own_video": "Өз бейнеңізді жүктеу",
-    "videoLessonModal.form.upload_video_from_internet": "Youtube немесе Vimeo бейнежазбалары",
-    "videoLessonModal.form.paste_video_link": "Бейнеден сілтеме қойыңыз",
-    "videoLessonModal.form.upload_video_file": "Бейнені жүктеу үшін басыңыз",
+    "text_content": "Мәтін",
+
+    "videoModal.video": "Бейнежазба",
+    "videoModal.title": "Бейнежазба қосу",
+    "videoModal.video_name": "Бейнежазбаның аты",
+    "videoModal.form.upload_own_video": "Өз бейнежазбаңызды жүктеу",
+    "videoModal.form.upload_video_from_internet": "Youtube немесе Vimeo бейнежазбалары",
+    "videoModal.form.upload_video_from_media": "Бұрын жүктелгендердің ішінен таңдау",
+    "videoModal.form.paste_video_link": "Бейнежазбадан сілтеме қойыңыз",
+    "videoModal.form.upload_video_file": "Бейнежазбаны жүктеу үшін басыңыз",
 
 
     "task.task_name": "Тапсырманың атауы",
@@ -84,10 +90,13 @@
     "more": "Толығырақ",
 
     "file_name": "Файлдың аты",
+    "selected_file": "Сіздің таңдаған файл",
     "file_ready_to_upload": "Файл жүктелуге дайын",
     "file_size": "Файлдың өлшемі",
+    "megabyte": "МБ",
     "choose_file": "Файлды таңдаңыз",
 
     "move_up": "Жоғары көтеру",
-    "move_down": "Төменге түсіру"
+    "move_down": "Төменге түсіру",
+    "delete": "Жою"
 }

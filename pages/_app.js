@@ -19,6 +19,7 @@ const messages = {
     en
 };
 
+import 'react-quill/dist/quill.snow.css';
 import '../assets/css/global.css';
 
 export default function MyApp({ Component, pageProps }) {
@@ -30,6 +31,7 @@ export default function MyApp({ Component, pageProps }) {
     const getSchool = async () => {
         await axios.get('school/get')
             .then(response => {
+
             }).catch(err => {
                 if (err.response) {
                     router.push('/error/' + err.response.status)

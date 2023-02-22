@@ -6,20 +6,17 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineRead, AiOutlineCaretDown, AiOutlineFileText, AiOutlinePlayCircle, AiOutlinePushpin, AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
-import { IoGridOutline, IoList } from "react-icons/io5";
+import { AiOutlineCaretDown, AiOutlineFileText, AiOutlinePushpin, AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
-import CreateVideoLessonModal from "../../../components/course/CreateVideoLessonModal";
-import CreateCourseSectionModal from "../../../components/course/CreateCourseSectionModal";
+import CreateCourseSectionModal from "../../../components/lesson/CreateCourseSectionModal";
 import API_URL from "../../../config/api";
 
 export default function Course() {
   const router = useRouter();
   const [showFullLoader, setShowFullLoader] = useState(true);
   const intl = useIntl();
-  const [videoModal, setVideoModal] = useState(false);
   const [sectionModal, setSectionModal] = useState(false);
   const [course, setCourse] = useState([]);
   const [lessons, setLessons] = useState([]);
@@ -119,7 +116,7 @@ export default function Course() {
             <Link href={'/dashboard/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
             {course.course_name}
           </Breadcrumb>
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+          <div className="col-span-12 md:col-span-5 lg:col-span-4">
             <div className="bg-active border-active rounded-md sticky top-0">
               <img className="w-full rounded-md" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />
               <div className="p-4">
@@ -136,7 +133,7 @@ export default function Course() {
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-8">
+          <div className="col-span-12 md:col-span-7 lg:col-span-8">
             <div className="flex max-lg:flex-col lg:justify-between lg:items-center">
               <h2 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "lessons" })}</h2>
               {roles.includes(2) &&
@@ -145,45 +142,45 @@ export default function Course() {
                     {intl.formatMessage({ id: "lesson.add" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
                   </CDropdownToggle>
                   <CDropdownMenu>
-                    <Link href={'#'}><AiOutlineFileText />{intl.formatMessage({ id: "lesson_type.text_content" })}</Link>
-                    <Link href={'#'} onClick={() => setVideoModal(true)}><AiOutlinePlayCircle />{intl.formatMessage({ id: "lesson_type.video_lesson" })}</Link>
+                    <Link href={'/dashboard/lesson/create/' + course.course_id}><AiOutlineFileText />{intl.formatMessage({ id: "lesson.add_lesson" })}</Link>
                     <Link href={'#'} onClick={() => setSectionModal(true)}><AiOutlinePushpin />{intl.formatMessage({ id: "lesson_type.course_section" })}</Link>
                   </CDropdownMenu>
                 </CDropdown>
               }
             </div>
 
-            {lessons.total_count > 0 ?
-              <ul id="lessons_wrap" className="list-group mt-4">
-                {lessons.my_lessons?.map(lesson => (
-                  <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 3 ? 'section' : 'lesson'}>
-                    <div className="flex justify-between items-center">
-                      <div className="w-full">
-                        {
-                          lesson.lesson_type_id == 3
-                            ?
-                            <h4 className="mb-0">{section_count++} {intl.formatMessage({ id: "section" })}. {lesson.lesson_name}</h4>
-                            :
-                            <>
-                              <Link className="block" href={'/dashboard/lesson/' + lesson.lesson_id}>
-                                <h5 className="mb-1">{lesson.lesson_name}</h5>
-                                <p className="text-active mb-1">{lesson.lesson_description.substring(0, 200)}{lesson.lesson_description.length > 200 && '...'}</p>
-                                <span className="badge badge-light">{lesson.lesson_type_name}</span>
-                              </Link>
-                            </>
+            {
+              lessons.total_count > 0 ?
+                <ul id="lessons_wrap" className="list-group mt-4">
+                  {lessons.my_lessons?.map(lesson => (
+                    <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 3 ? 'section' : 'lesson'}>
+                      <div className="flex justify-between items-center">
+                        <div className="w-full">
+                          {
+                            lesson.lesson_type_id == 2
+                              ?
+                              <h4 className="mb-0">{section_count++} {intl.formatMessage({ id: "section" })}. {lesson.lesson_name}</h4>
+                              :
+                              <>
+                                <Link className="block" href={'/dashboard/lesson/' + lesson.lesson_id}>
+                                  <h5 className="mb-1">{lesson.lesson_name}</h5>
+                                  <p className="text-active mb-1">{lesson.lesson_description.substring(0, 200)}{lesson.lesson_description.length > 200 && '...'}</p>
+                                  <span className="badge badge-light">{lesson.lesson_type_name}</span>
+                                </Link>
+                              </>
+                          }
+                        </div>
+                        {roles.includes(2) && lessons.total_count > 0 &&
+                          <div className="flex items-center pl-1">
+                            <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
+                            <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down ml-1"><AiOutlineArrowDown /></button>
+                          </div>
                         }
                       </div>
-                      {roles.includes(2) &&
-                        <div className="flex items-center pl-1">
-                          <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
-                          <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down ml-1"><AiOutlineArrowDown /></button>
-                        </div>
-                      }
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              : <p className="text-inactive">Нет добавленных уроков к данному курсу</p>
+                    </li>
+                  ))}
+                </ul>
+                : <p className="text-inactive">{intl.formatMessage({ id: "no_added_lessons" })}</p>
             }
           </div>
         </>
@@ -195,10 +192,6 @@ export default function Course() {
 
       {roles.includes(2) &&
         <>
-          <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoLessonModal.title" })} modal_size="modal-xl">
-            <CreateVideoLessonModal closeModal={() => setVideoModal(false)} course_id={course.course_id} getLessons={getLessons} />
-          </Modal>
-
           <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
             <CreateCourseSectionModal closeModal={() => setSectionModal(false)} course_id={course.course_id} getLessons={getLessons} />
           </Modal>

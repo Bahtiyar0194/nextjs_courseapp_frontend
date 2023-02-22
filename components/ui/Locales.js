@@ -10,7 +10,7 @@ const Locales = () => {
         Cookies.set('locale', value)
         router.push(router.route, router.asPath, {
             locale: value
-        });
+        })
     };
 
     return (

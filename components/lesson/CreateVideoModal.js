@@ -1,42 +1,47 @@
-import { AiOutlineRead, AiOutlineLink, AiOutlinePlayCircle, AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineLink, AiOutlinePlayCircle, AiOutlineCheck, AiOutlineFile } from "react-icons/ai";
 import Loader from "../ui/Loader";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import axios from "axios";
 
-const CreateVideoLessonModal = ({ closeModal, course_id, getLessons }) => {
+const CreateVideoModal = ({ closeModal, lesson_blocks, setLessonBlocks }) => {
     const router = useRouter();
     const intl = useIntl();
     const [error, setError] = useState([]);
     const [loader, setLoader] = useState(false);
 
-    const [lesson_name, setLessonName] = useState('');
-    const [lesson_description, setLessonDescription] = useState('');
-
+    const [video_name, setVideoName] = useState('');
     const [video_type, setVideoType] = useState('video_file');
     const [video_link, setVideoLink] = useState('');
     const [video_file, setVideoFile] = useState('');
 
-    const createVideoLessonSubmit = async (e, course_id, getLessons) => {
+    const createVideoSubmit = async (e) => {
         e.preventDefault();
         setLoader(true);
 
         const form_data = new FormData();
-        form_data.append('lesson_name', lesson_name);
-        form_data.append('lesson_description', lesson_description);
-        form_data.append('lesson_type_id', 2);
-        form_data.append('course_id', course_id);
+        form_data.append('video_name', video_name);
         form_data.append('video_type', video_type);
         form_data.append('video_link', video_link);
         form_data.append('video_file', video_file);
-        form_data.append('operation_type_id', 3);
+        form_data.append('operation_type_id', 7);
 
-        await axios.post('lessons/create', form_data)
+        await axios.post('lessons/upload_video', form_data)
             .then(response => {
+                const data = response.data.data;
+                setLessonBlocks([...lesson_blocks, {
+                    'block_id': lesson_blocks.length,
+                    'file_type_id': data.file_type_id,
+                    'file_id': data.file_id
+                }])
+
                 setLoader(false);
+                setVideoName('');
+                setVideoType('video_file');
+                setVideoLink('');
+                setVideoFile('');
                 closeModal();
-                getLessons(course_id);
             }).catch(err => {
                 if (err.response) {
                     if (err.response.status == 422) {
@@ -57,32 +62,35 @@ const CreateVideoLessonModal = ({ closeModal, course_id, getLessons }) => {
         <>
             {loader && <Loader className="overlay" />}
             <div className="modal-body">
-                <form onSubmit={e => createVideoLessonSubmit(e, course_id, getLessons)} encType="multipart/form-data">
-                    <div className="form-group mt-4">
-                        <AiOutlineRead />
-                        <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />
-                        <label className={(error.lesson_name && 'label-error')}>{error.lesson_name ? error.lesson_name : intl.formatMessage({ id: "lesson_name" })}</label>
-                    </div>
-
-                    <div className="form-group mt-4">
-                        <AiOutlineRead />
-                        <textarea onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
-                        <label className={(error.lesson_description && 'label-error')}>{error.lesson_description ? error.lesson_description : intl.formatMessage({ id: "lesson_description" })}</label>
-                    </div>
-
-                    <div className="mt-2">
+                <form onSubmit={e => createVideoSubmit(e)} encType="multipart/form-data">
+                    <div className="mt-4">
                         <label className="custom-radio">
                             <input type="radio" onChange={e => setVideoType('video_file')} defaultChecked name="video_type" />
-                            <span>{intl.formatMessage({ id: "videoLessonModal.form.upload_own_video" })}</span>
+                            <span>{intl.formatMessage({ id: "videoModal.form.upload_own_video" })}</span>
                         </label>
                     </div>
 
                     <div className="mt-2">
                         <label className="custom-radio">
                             <input type="radio" onChange={e => setVideoType('video_url')} name="video_type" />
-                            <span>{intl.formatMessage({ id: "videoLessonModal.form.upload_video_from_internet" })}</span>
+                            <span>{intl.formatMessage({ id: "videoModal.form.upload_video_from_internet" })}</span>
                         </label>
                     </div>
+
+                    <div className="mt-2">
+                        <label className="custom-radio">
+                            <input type="radio" onChange={e => setVideoType('video_from_media')} name="video_type" />
+                            <span>{intl.formatMessage({ id: "videoModal.form.upload_video_from_media" })}</span>
+                        </label>
+                    </div>
+
+                    {video_type != 'video_from_media' &&
+                        <div className="form-group mt-4">
+                            <AiOutlineFile />
+                            <input onInput={e => setVideoName(e.target.value)} type="text" value={video_name} placeholder=" " />
+                            <label className={(error.video_name && 'label-error')}>{error.video_name ? error.video_name : intl.formatMessage({ id: "videoModal.video_name" })}</label>
+                        </div>
+                    }
 
                     {video_type === 'video_file'
                         ?
@@ -90,11 +98,11 @@ const CreateVideoLessonModal = ({ closeModal, course_id, getLessons }) => {
                             <input id="video_file" onChange={e => setVideoFile(e.target.files[0])} type="file" accept="video/*" placeholder=" " />
                             <label htmlFor="video_file" className={(error.video_file && 'label-error')}>
                                 <AiOutlinePlayCircle />
-                                <p className="mb-1">{error.video_file ? error.video_file : video_file ? intl.formatMessage({ id: "file_ready_to_upload" }) : intl.formatMessage({ id: "videoLessonModal.form.upload_video_file" })}</p>
+                                <p className="mb-1">{error.video_file ? error.video_file : video_file ? intl.formatMessage({ id: "file_ready_to_upload" }) : intl.formatMessage({ id: "videoModal.form.upload_video_file" })}</p>
                                 {video_file ?
                                     <div>
-                                        {video_file.name && <p className="text-xs mb-0">{intl.formatMessage({ id: "file_name" })}: <b>{video_file.name}</b></p>}
-                                        {video_file.size && <p className="text-xs mb-0">{intl.formatMessage({ id: "file_size" })}: <b>{(video_file.size / 1048576).toFixed(2)} МБ</b></p>}
+                                        {video_file.name && <p className="text-xs mb-0">{intl.formatMessage({ id: "selected_file" })}: <b>{video_file.name}</b></p>}
+                                        {video_file.size && <p className="text-xs mb-0">{intl.formatMessage({ id: "file_size" })}: <b>{(video_file.size / 1048576).toFixed(2)} {intl.formatMessage({ id: "megabyte" })}</b></p>}
                                     </div>
                                     :
                                     <p className="text-xs mb-0">{intl.formatMessage({ id: "choose_file" })}</p>
@@ -107,7 +115,7 @@ const CreateVideoLessonModal = ({ closeModal, course_id, getLessons }) => {
                             <div className="form-group mt-4">
                                 <AiOutlineLink />
                                 <input onInput={e => setVideoLink(e.target.value)} type="text" value={video_link} placeholder=" " />
-                                <label className={(error.video_link && 'label-error')}>{error.video_link ? error.video_link : intl.formatMessage({ id: "videoLessonModal.form.paste_video_link" })}</label>
+                                <label className={(error.video_link && 'label-error')}>{error.video_link ? error.video_link : intl.formatMessage({ id: "videoModal.form.paste_video_link" })}</label>
                             </div>
                             : ""
                     }
@@ -119,4 +127,4 @@ const CreateVideoLessonModal = ({ closeModal, course_id, getLessons }) => {
     );
 };
 
-export default CreateVideoLessonModal;
+export default CreateVideoModal;
