@@ -18,7 +18,7 @@ const CreateCourseSectionModal = ({ closeModal, course_id, getLessons }) => {
 
         const form_data = new FormData();
         form_data.append('lesson_name', section_name);
-        form_data.append('lesson_type_id', 3);
+        form_data.append('lesson_type_id', 2);
         form_data.append('course_id', course_id);
         form_data.append('operation_type_id', 4);
 

@@ -197,6 +197,10 @@
     @apply text-indigo-500;
 }
 
+.stroke-corp{
+    @apply stroke-indigo-500;
+}
+
 .corp-font{
     font-family: 'Euclid Circular A', sans-serif;
 }
@@ -256,6 +260,11 @@ h5,
 h6 {
     @apply font-medium mb-4;
 }
+
+b, strong{
+    @apply font-medium;
+}
+
 h1{
     @apply text-4xl;
 }
@@ -281,6 +290,12 @@ ol{
 
 ul{
     @apply list-disc pl-4 mb-2;
+}
+
+ol > li::marker,
+ul > li::marker
+{
+    @apply text-inactive;
 }
 
 hr{
@@ -364,6 +379,10 @@ select option {
     @apply absolute left-8 top-3 pointer-events-none duration-200 z-0 text-inactive whitespace-nowrap;
 }
 
+.form-group label.label-error{
+    @apply text-danger -top-2.5 text-xs left-0;
+}
+
 .form-group input:focus ~ label,
 .form-group input:not(:placeholder-shown) ~ label,
 .form-group select:focus ~ label,
@@ -374,13 +393,14 @@ select option {
     @apply -top-2.5 text-xs left-0 text-inactive;
 }
 
-.form-group label.label-error{
-    @apply text-danger -top-2.5 text-xs left-0;
-}
 .form-group input:focus ~ label.label-error,
+.form-group input:not(:placeholder-shown) ~ label.label-error,
 .form-group select:focus ~ label.label-error,
-.form-group textarea:focus ~ label.label-error{
-    @apply text-inactive;
+.form-group select:not(:placeholder-shown) ~ label.label-error,
+.form-group textarea:focus ~ label.label-error,
+.form-group textarea:not(:placeholder-shown) ~ label.label-error
+{
+    @apply text-danger -top-2.5 text-xs left-0;
 }
 
 .form-group svg{
@@ -715,7 +735,7 @@ select option {
 }
 
 .db__content{
-    @apply py-3 pr-3 w-full relative overflow-auto pl-16;
+    @apply pt-3 pb-3 pr-3 w-full relative overflow-auto pl-16;
     height: calc(100vh - 70px);
 }
 
@@ -756,6 +776,72 @@ select option {
     @apply mb-4;
 }
 
+.ql-snow .ql-picker.ql-size{
+    @apply mr-1 mt-1.5 w-auto;
+}
+
+.ql-snow .ql-picker-label{
+    @apply pl-0;
+}
+
+.ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg{
+    @apply -right-4;
+}
+
+.ql-snow.ql-toolbar button, 
+.ql-snow .ql-toolbar button{
+    border: 1px solid;
+    @apply mr-1 mt-1.5 border-active border rounded-md;
+}
+
+.quill.kk .ql-picker-label[data-value=small]::before,
+.quill.kk .ql-picker-item[data-value=small]::before
+{
+    content: "Кішкентай" !important;
+}
+
+.quill.ru .ql-picker-label[data-value=small]::before,
+.quill.ru .ql-picker-item[data-value=small]::before
+{
+    content: "Мелкий" !important;
+}
+
+.quill.kk .ql-picker-label::before,
+.quill.kk .ql-picker-item::before
+{
+    content: "Орташа" !important;
+}
+
+.quill.ru .ql-picker-label::before,
+.quill.ru .ql-picker-item::before
+{
+    content: "Средний" !important;
+}
+
+.quill.kk .ql-picker-label[data-value=large]::before,
+.quill.kk .ql-picker-item[data-value=large]::before
+{
+    content: "Үлкен" !important;
+}
+
+.quill.ru .ql-picker-label[data-value=large]::before,
+.quill.ru .ql-picker-item[data-value=large]::before
+{
+    content: "Большой" !important;
+}
+
+.quill.kk .ql-picker-label[data-value=huge]::before,
+.quill.kk .ql-picker-item[data-value=huge]::before
+{
+    content: "Өте үлкен" !important;
+}
+
+.quill.ru .ql-picker-label[data-value=huge]::before,
+.quill.ru .ql-picker-item[data-value=huge]::before
+{
+    content: "Очень большой" !important;
+}
+
 .ql-toolbar.ql-snow{
     @apply bg-active border-active rounded-bl-none rounded-br-none rounded-md corp-font;
 }
@@ -787,6 +873,31 @@ select option {
 
 .ql-editor.ql-blank::before{
     @apply text-inactive;
+}
+
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options,
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label{
+    @apply border-active;
+}
+
+.ql-snow.ql-toolbar button:hover .ql-stroke, .ql-snow .ql-toolbar button:hover .ql-stroke, .ql-snow.ql-toolbar button:focus .ql-stroke, .ql-snow .ql-toolbar button:focus .ql-stroke, .ql-snow.ql-toolbar button.ql-active .ql-stroke, .ql-snow .ql-toolbar button.ql-active .ql-stroke, .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke, .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke, .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke, .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke, .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke, .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke, .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke, .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke, .ql-snow.ql-toolbar button:hover .ql-stroke-miter, .ql-snow .ql-toolbar button:hover .ql-stroke-miter, .ql-snow.ql-toolbar button:focus .ql-stroke-miter, .ql-snow .ql-toolbar button:focus .ql-stroke-miter, .ql-snow.ql-toolbar button.ql-active .ql-stroke-miter, .ql-snow .ql-toolbar button.ql-active .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter{
+    @apply stroke-corp;
+}
+
+.ql-snow.ql-toolbar button:hover, .ql-snow .ql-toolbar button:hover, .ql-snow.ql-toolbar button:focus, .ql-snow .ql-toolbar button:focus, .ql-snow.ql-toolbar button.ql-active, .ql-snow .ql-toolbar button.ql-active, .ql-snow.ql-toolbar .ql-picker-label:hover, .ql-snow .ql-toolbar .ql-picker-label:hover, .ql-snow.ql-toolbar .ql-picker-label.ql-active, .ql-snow .ql-toolbar .ql-picker-label.ql-active, .ql-snow.ql-toolbar .ql-picker-item:hover, .ql-snow .ql-toolbar .ql-picker-item:hover, .ql-snow.ql-toolbar .ql-picker-item.ql-selected, .ql-snow .ql-toolbar .ql-picker-item.ql-selected{
+    @apply text-corp;
+}
+
+.ql-size-small{
+    @apply text-xs;
+}
+
+.ql-size-large{
+    @apply text-2xl;
+}
+
+.ql-size-huge{
+    @apply text-4xl;
 }
 
 .lesson-block{

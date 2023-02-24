@@ -54,11 +54,16 @@
 
     "lesson.add": "Add",
     "lesson.add_lesson": "Add lesson",
+    "lesson.add_material": "Add material",
+    "lesson.please_add_materials": "Add materials to the lesson",
     "lesson.create_lesson": "Create lesson",
     "lesson.add_task": "Add task",
     "lesson_type.course_section": "Course section",
 
     "text_content": "Text content",
+    "textModal.title": "Add text",
+    "textModal.write_here": "Write here",
+    "textModal.write_text": "Write text",
 
     "videoModal.video": "Video",
     "videoModal.title": "Add video",
@@ -68,6 +73,9 @@
     "videoModal.form.upload_video_from_media": "Select from previously uploaded",
     "videoModal.form.paste_video_link": "Insert the link from the video",
     "videoModal.form.upload_video_file": "Click to upload the video file",
+
+    "lesson_blocks.text_block": "Text",
+    "lesson_blocks.video_block": "Video",
 
     "courseSectionModal.title": "Create course section",
     "section": "section",

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import { CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem, CDropdownDivider } from "@coreui/react";
+import { CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem } from "@coreui/react";
 import LocaleItem from "./LocaleItem";
 const Locales = () => {
     const router = useRouter();

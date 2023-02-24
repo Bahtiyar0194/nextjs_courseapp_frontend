@@ -54,11 +54,16 @@
 
     "lesson.add": "Қосу",
     "lesson.add_lesson": "Сабақ қосу",
+    "lesson.add_material": "Материал қосу",
+    "lesson.please_add_materials": "Сабаққа материал қосыңыз",
     "lesson.create_lesson": "Сабақ құру",
     "lesson.add_task": "Тапсырма қосу",
     "lesson_type.course_section": "Курстың бөлімі",
 
     "text_content": "Мәтін",
+    "textModal.title": "Мәтін қосу",
+    "textModal.write_here": "Осы жерге енгзіңіз",
+    "textModal.write_text": "Мәтін енгзіңіз",
 
     "videoModal.video": "Бейнежазба",
     "videoModal.title": "Бейнежазба қосу",
@@ -69,6 +74,8 @@
     "videoModal.form.paste_video_link": "Бейнежазбадан сілтеме қойыңыз",
     "videoModal.form.upload_video_file": "Бейнежазбаны жүктеу үшін басыңыз",
 
+    "lesson_blocks.text_block": "Мәтін",
+    "lesson_blocks.video_block": "Бейнежазба",
 
     "task.task_name": "Тапсырманың атауы",
     "task.task_description": "Тапсырманың қысқаша сипаттамасы",

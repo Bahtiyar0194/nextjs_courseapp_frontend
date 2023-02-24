@@ -116,26 +116,25 @@ export default function Course() {
             <Link href={'/dashboard/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
             {course.course_name}
           </Breadcrumb>
-          <div className="col-span-12 md:col-span-5 lg:col-span-4">
-            <div className="bg-active border-active rounded-md sticky top-0">
+          <div className="col-span-12 lg:col-span-5">
               <img className="w-full rounded-md" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />
-              <div className="p-4">
-                <h3>{course.course_name}</h3>
-                <p className="text-justify">{course.course_description}</p>
-                <hr></hr>
-                <p className="text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_category" })}: <span className="font-medium text-corp">{course.course_category_name}</span></p>
-                <p className="text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_language" })}: <span className="font-medium text-corp">{course.lang_name}</span></p>
-                <div className="flex">
-                  {lessons.materials_count > 0 && <p className="text-sm mr-2">{intl.formatMessage({ id: "lesson_materials" })}: <span className="font-medium text-corp">{lessons.materials_count}</span></p>}
-                  {lessons.sections_count > 0 && <p className="text-sm">{intl.formatMessage({ id: "lesson_sections" })}: <span className="font-medium text-corp">{lessons.sections_count}</span></p>}
-                </div>
-              </div>
+          </div>
+
+          <div className="col-span-12 lg:col-span-7">
+            <h2>{course.course_name}</h2>
+            <p className="text-justify">{course.course_description}</p>
+            <hr></hr>
+            <p className="text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_category" })}: <span className="font-medium text-corp">{course.course_category_name}</span></p>
+            <p className="text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_language" })}: <span className="font-medium text-corp">{course.lang_name}</span></p>
+            <div className="flex">
+              {lessons.materials_count > 0 && <p className="text-sm mr-2">{intl.formatMessage({ id: "lesson_materials" })}: <span className="font-medium text-corp">{lessons.materials_count}</span></p>}
+              {lessons.sections_count > 0 && <p className="text-sm">{intl.formatMessage({ id: "lesson_sections" })}: <span className="font-medium text-corp">{lessons.sections_count}</span></p>}
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-7 lg:col-span-8">
+          <div className="col-span-12">
             <div className="flex max-lg:flex-col lg:justify-between lg:items-center">
-              <h2 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "lessons" })}</h2>
+              <h3 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "lessons" })}</h3>
               {roles.includes(2) &&
                 <CDropdown>
                   <CDropdownToggle color="primary" href="#">

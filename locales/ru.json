@@ -53,12 +53,18 @@
 
     "lesson.add": "Добавить",
     "lesson.add_lesson": "Добавить урок",
+    "lesson.add_material": "Добавить материал",
+    "lesson.please_add_materials": "Добавьте материалы к уроку",
     "lesson.create_lesson": "Создание нового урока",
     "no_added_lessons": "Нет добавленных уроков к данному курсу",
     "lesson.add_task": "Добавить задание",
     "lesson_type.course_section": "Раздел курса",
 
+
     "text_content": "Текст",
+    "textModal.title": "Добавление текста",
+    "textModal.write_here": "Пишите сюда",
+    "textModal.write_text": "Введите текст",
 
     "videoModal.video": "Видео",
     "videoModal.title": "Добавление видео",
@@ -69,6 +75,8 @@
     "videoModal.form.paste_video_link": "Вставьте ссылку от видео",
     "videoModal.form.upload_video_file": "Нажмите чтобы загрузить видеофайл",
 
+    "lesson_blocks.text_block": "Текстовый блок",
+    "lesson_blocks.video_block": "Видеоблок",
 
     "task.task_name": "Название задания",
     "task.task_description": "Краткое описание задания",

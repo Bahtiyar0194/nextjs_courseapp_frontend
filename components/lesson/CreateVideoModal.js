@@ -33,7 +33,9 @@ const CreateVideoModal = ({ closeModal, lesson_blocks, setLessonBlocks }) => {
                 setLessonBlocks([...lesson_blocks, {
                     'block_id': lesson_blocks.length,
                     'file_type_id': data.file_type_id,
-                    'file_id': data.file_id
+                    'file_id': data.file_id,
+                    'file_name': data.file_name,
+                    'file_target': data.file_target
                 }])
 
                 setLoader(false);
