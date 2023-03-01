@@ -171,7 +171,7 @@ export default function MyCourses() {
                                                 {course.course_name}
                                             </h4>
                                             <p className="text-sm text-inactive">{course.course_description.substring(0, 100) + '...'}</p>
-                                            <span className="badge badge-primary"> {course.course_category_name}</span>
+                                            <span className="badge badge-outline-primary"> {course.course_category_name}</span>
                                             <span className="badge badge-light"> {course.lang_name}</span>
                                         </div>
                                     </div>

@@ -1,9 +1,11 @@
 import dynamic from 'next/dynamic';
 import { AiOutlineCheck } from "react-icons/ai";
-import Loader from "../ui/Loader";
+import Loader from '../../ui/Loader';
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
+import { useDispatch, useSelector } from 'react-redux';
+import { setLessonBlocks } from '../../../store/slices/lessonBlocksSlice';
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
@@ -11,7 +13,7 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
 })
 
 
-const TextEditorModal = ({ closeModal, lesson_blocks, setLessonBlocks }) => {
+const TextEditorModal = ({ closeModal }) => {
     const modules = {
         toolbar: [
             [{ size: [] }],
@@ -47,8 +49,9 @@ const TextEditorModal = ({ closeModal, lesson_blocks, setLessonBlocks }) => {
     const router = useRouter();
     const { locale } = router;
     const intl = useIntl();
-    const [error, setError] = useState([]);
     const [loader, setLoader] = useState(false);
+    const dispatch = useDispatch();
+    let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
     const [text, setText] = useState('');
     const [text_error, setTextError] = useState(false);
 
@@ -59,57 +62,16 @@ const TextEditorModal = ({ closeModal, lesson_blocks, setLessonBlocks }) => {
             setTextError(true);
         }
         else {
-            setLessonBlocks([...lesson_blocks, {
+            lesson_blocks = [...lesson_blocks, {
                 'block_id': lesson_blocks.length,
                 'block_type_id': 1,
                 'content': text,
-            }])
-
+            }];
+            dispatch(setLessonBlocks(lesson_blocks));
             closeModal();
             setText('');
         }
         setLoader(false);
-
-
-
-        // const form_data = new FormData();
-        // form_data.append('video_name', video_name);
-        // form_data.append('video_type', video_type);
-        // form_data.append('video_link', video_link);
-        // form_data.append('video_file', video_file);
-        // form_data.append('operation_type_id', 7);
-
-        // await axios.post('lessons/upload_video', form_data)
-        //     .then(response => {
-        //         const data = response.data.data;
-        //         setLessonBlocks([...lesson_blocks, {
-        //             'block_id': lesson_blocks.length,
-        //             'file_type_id': data.file_type_id,
-        //             'file_id': data.file_id,
-        //             'file_name': data.file_name,
-        //             'file_target': data.file_target
-        //         }])
-
-        //         setLoader(false);
-        //         setVideoName('');
-        //         setVideoType('video_file');
-        //         setVideoLink('');
-        //         setVideoFile('');
-        //         closeModal();
-        //     }).catch(err => {
-        //         if (err.response) {
-        //             if (err.response.status == 422) {
-        //                 setError(err.response.data.data);
-        //                 setLoader(false);
-        //             }
-        //             else {
-        //                 router.push('/error/' + err.response.status)
-        //             }
-        //         }
-        //         else {
-        //             router.push('/error/')
-        //         }
-        //     });
     }
 
     return (

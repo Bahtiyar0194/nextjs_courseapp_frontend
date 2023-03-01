@@ -16,7 +16,6 @@ export default function DashboardLayout(props) {
     const intl = useIntl();
     const router = useRouter();
     const user = useSelector((state) => state.authUser.user);
-    const roles = useSelector((state) => state.authUser.roles);
 
     const logout = async () => {
         Cookies.remove('token');
@@ -71,7 +70,7 @@ export default function DashboardLayout(props) {
                 </div>
                 <div className="db__content">
                     {props.showLoader && <Loader className="full-overlay" />}
-                    <div className="grid grid-cols-12 gap-4">
+                    <div className="custom-grid">
                         {props.children}
                     </div>
                 </div>

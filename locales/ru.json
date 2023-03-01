@@ -56,27 +56,37 @@
     "lesson.add_material": "Добавить материал",
     "lesson.please_add_materials": "Добавьте материалы к уроку",
     "lesson.create_lesson": "Создание нового урока",
+    "lesson.edit_lesson": "Редактирование урока",
     "no_added_lessons": "Нет добавленных уроков к данному курсу",
     "lesson.add_task": "Добавить задание",
     "lesson_type.course_section": "Раздел курса",
 
 
-    "text_content": "Текст",
+    "textModal.text": "Текст",
     "textModal.title": "Добавление текста",
     "textModal.write_here": "Пишите сюда",
     "textModal.write_text": "Введите текст",
 
+    "imageModal.image": "Изображение",
+    "imageModal.title": "Добавление изображения",
+    "imageModal.image_name": "Название изображения",
+    "imageModal.form.upload_new_image": "Загрузить новое изображение",
+    "imageModal.image_width": "Ширина изображения",
+    "imageModal.form.upload_image_file": "Нажмите чтобы загрузить файл изображения",
+
     "videoModal.video": "Видео",
     "videoModal.title": "Добавление видео",
-    "videoModal.video_name": "Название для видео",
-    "videoModal.form.upload_own_video": "Загрузить свое видео",
+    "videoModal.video_name": "Название видео",
+    "videoModal.form.upload_new_video": "Загрузить новое видео",
     "videoModal.form.upload_video_from_internet": "Видео из Youtube, Vimeo",
-    "videoModal.form.upload_video_from_media": "Выбрать из ранее загруженных",
     "videoModal.form.paste_video_link": "Вставьте ссылку от видео",
     "videoModal.form.upload_video_file": "Нажмите чтобы загрузить видеофайл",
 
-    "lesson_blocks.text_block": "Текстовый блок",
-    "lesson_blocks.video_block": "Видеоблок",
+    "audioModal.audio": "Аудио",
+    "audioModal.title": "Добавление аудио",
+    "audioModal.audio_name": "Название аудио",
+    "audioModal.form.upload_new_audio": "Загрузить новое аудио",
+    "audioModal.form.upload_audio_file": "Нажмите чтобы загрузить аудиофайл",
 
     "task.task_name": "Название задания",
     "task.task_description": "Краткое описание задания",
@@ -89,6 +99,8 @@
     "logout": "Выйти из аккаунта",
 
     "done": "Готово",
+    "save": "Сохранить",
+    "save_changes": "Сохранить изменения",
     "example": "Пример",
 
     "loading": "Идет загрузка...",
@@ -100,11 +112,14 @@
     "file_name": "Название файла",
     "selected_file": "Выбранный Вами файл",
     "file_ready_to_upload": "Файл готов к загрузке",
+    "uploading_file": "Идет загрузка файла...",
+    "upload_from_media": "Выбрать из ранее загруженных",
     "file_size": "Размер файла",
     "megabyte": "МБ",
     "choose_file": "Выберите файл",
 
     "move_up": "Переместить вверх",
     "move_down": "Переместить вниз",
+    "edit": "Редактировать",
     "delete": "Удалить"
 }

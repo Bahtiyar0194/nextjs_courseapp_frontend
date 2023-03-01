@@ -54,28 +54,38 @@
 
     "lesson.add": "Қосу",
     "lesson.add_lesson": "Сабақ қосу",
+    "lesson.edit_lesson": "Сабақты қайта өңдеу",
     "lesson.add_material": "Материал қосу",
     "lesson.please_add_materials": "Сабаққа материал қосыңыз",
     "lesson.create_lesson": "Сабақ құру",
     "lesson.add_task": "Тапсырма қосу",
     "lesson_type.course_section": "Курстың бөлімі",
 
-    "text_content": "Мәтін",
+    "textModal.text": "Мәтін",
     "textModal.title": "Мәтін қосу",
     "textModal.write_here": "Осы жерге енгзіңіз",
     "textModal.write_text": "Мәтін енгзіңіз",
 
+    "imageModal.image": "Кескін",
+    "imageModal.title": "Кескін қосу",
+    "imageModal.image_name": "Кескіннің аты",
+    "imageModal.form.upload_new_image": "Жаңа кескін жүктеу",
+    "imageModal.image_width": "Кескіннің ені",
+    "imageModal.form.upload_image_file": "Кескінді жүктеу үшін басыңыз",
+
     "videoModal.video": "Бейнежазба",
     "videoModal.title": "Бейнежазба қосу",
     "videoModal.video_name": "Бейнежазбаның аты",
-    "videoModal.form.upload_own_video": "Өз бейнежазбаңызды жүктеу",
+    "videoModal.form.upload_new_video": "Жаңа бейнежазба жүктеу",
     "videoModal.form.upload_video_from_internet": "Youtube немесе Vimeo бейнежазбалары",
-    "videoModal.form.upload_video_from_media": "Бұрын жүктелгендердің ішінен таңдау",
     "videoModal.form.paste_video_link": "Бейнежазбадан сілтеме қойыңыз",
     "videoModal.form.upload_video_file": "Бейнежазбаны жүктеу үшін басыңыз",
 
-    "lesson_blocks.text_block": "Мәтін",
-    "lesson_blocks.video_block": "Бейнежазба",
+    "audioModal.audio": "Аудиожазба",
+    "audioModal.title": "Аудиожазба қосу",
+    "audioModal.audio_name": "Аудиожазбаның аты",
+    "audioModal.form.upload_new_audio": "Жаңа аудиожазба жүктеу",
+    "audioModal.form.upload_audio_file": "Аудиожазбаны жүктеу үшін басыңыз",
 
     "task.task_name": "Тапсырманың атауы",
     "task.task_description": "Тапсырманың қысқаша сипаттамасы",
@@ -88,6 +98,8 @@
     "logout": "Аккаунттан шығу",
 
     "done": "Дайын",
+    "save": "Сақтау",
+    "save_changes": "Өзгерістерді сақтау",
     "example": "Мысал",
 
     "loading": "Жүктелуде...",
@@ -99,11 +111,14 @@
     "file_name": "Файлдың аты",
     "selected_file": "Сіздің таңдаған файл",
     "file_ready_to_upload": "Файл жүктелуге дайын",
+    "uploading_file": "Файл жүктелініп жатыр...",
+    "upload_from_media": "Бұрын жүктелгендердің ішінен таңдау",
     "file_size": "Файлдың өлшемі",
     "megabyte": "МБ",
     "choose_file": "Файлды таңдаңыз",
 
     "move_up": "Жоғары көтеру",
     "move_down": "Төменге түсіру",
+    "edit": "Қайта өңдеу",
     "delete": "Жою"
 }

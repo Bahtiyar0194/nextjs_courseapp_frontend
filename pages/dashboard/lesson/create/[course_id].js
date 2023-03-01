@@ -2,26 +2,21 @@ import DashboardLayout from "../../../../components/layouts/DashboardLayout";
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+import { setLessonBlocks } from "../../../../store/slices/lessonBlocksSlice";
 import { useRouter } from "next/router";
-import Modal from "../../../../components/ui/Modal";
-import { AiOutlineCaretDown, AiOutlinePlayCircle, AiOutlineRead, AiOutlineCheck, AiOutlineFileText } from "react-icons/ai";
-import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
+import { AiOutlineRead, AiOutlineCheck } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../../components/ui/Breadcrumb";
 import Loader from "../../../../components/ui/Loader";
-import TextEditorModal from "../../../../components/lesson/TextEditorModal";
-import CreateVideoModal from "../../../../components/lesson/CreateVideoModal";
+import LessonBlockTypeModals from "../../../../components/lesson/LessonBlockTypeModals";
 import LessonBlock from "../../../../components/lesson/LessonBlock";
 
 export default function CreateLesson() {
     const router = useRouter();
     const [showFullLoader, setShowFullLoader] = useState(true);
     const intl = useIntl();
-
-    const [textModal, setTextModal] = useState(false);
-    const [videoModal, setVideoModal] = useState(false);
 
     const [course, setCourse] = useState([]);
     const roles = useSelector((state) => state.authUser.roles);
@@ -32,13 +27,15 @@ export default function CreateLesson() {
     const [lesson_name, setLessonName] = useState('');
     const [lesson_description, setLessonDescription] = useState('');
 
-    const [lesson_blocks, setLessonBlocks] = useState([]);
+    const dispatch = useDispatch();
+    const lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
 
     const getCourse = async (course_id) => {
         setShowFullLoader(true);
         await axios.get('courses/my-courses/' + course_id)
             .then(response => {
                 setCourse(response.data);
+                dispatch(setLessonBlocks([]));
                 setShowFullLoader(false);
             }).catch(err => {
                 if (err.response) {
@@ -69,7 +66,7 @@ export default function CreateLesson() {
                         setError(err.response.data.data);
                         setLoader(false);
                         if (error.lesson_name || error.lesson_description) {
-                            let card = document.querySelector('.card');
+                            let card = document.querySelector('#create_wrap');
                             setTimeout(() => {
                                 card.scrollIntoView({
                                     behavior: "smooth",
@@ -106,11 +103,9 @@ export default function CreateLesson() {
                         {intl.formatMessage({ id: "lesson.create_lesson" })}
                     </Breadcrumb>
 
-
-
-                    <div className="col-span-12 relative">
-                        {loader && <Loader className="overlay" />}
-                        <div className="card px-4 py-4">
+                    <div id="create_wrap" className="col-span-12 relative">
+                        <div className="card p-4 mb-4">
+                            {loader && <Loader className="overlay" />}
                             <div className="form-group mt-2">
                                 <AiOutlineRead />
                                 <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />
@@ -125,24 +120,15 @@ export default function CreateLesson() {
 
                             {lesson_blocks.length > 0 &&
                                 lesson_blocks.map((lesson_block, i) => (
-                                    <LessonBlock key={i} lesson_block={lesson_block} lesson_blocks={lesson_blocks} setLessonBlocks={setLessonBlocks} index={i} edit={true} />
+                                    <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
                                 ))
                             }
 
                             {error.lesson_blocks && lesson_blocks.length == 0 && <p className="text-danger text-sm mb-4">{intl.formatMessage({ id: "lesson.please_add_materials" })}</p>}
 
-                            <div className="flex">
-                                <CDropdown>
-                                    <CDropdownToggle color="primary" href="#">
-                                        {intl.formatMessage({ id: "lesson.add_material" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
-                                    </CDropdownToggle>
-                                    <CDropdownMenu>
-                                        <Link href={'#'} onClick={() => setTextModal(true)}><AiOutlineFileText />{intl.formatMessage({ id: "text_content" })}</Link>
-                                        <Link href={'#'} onClick={() => setVideoModal(true)}><AiOutlinePlayCircle />{intl.formatMessage({ id: "videoModal.video" })}</Link>
-                                    </CDropdownMenu>
-                                </CDropdown>
-
-                                <button onClick={e => addLesson(course.course_id)} className="ml-2 btn btn-outline-primary" type="submit"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "done" })}</span></button>
+                            <div className="btn-wrap">
+                                <LessonBlockTypeModals />
+                                <button onClick={e => addLesson(course.course_id)} className="btn btn-outline-primary" type="submit"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "done" })}</span></button>
                             </div>
                         </div>
                     </div>
@@ -151,19 +137,6 @@ export default function CreateLesson() {
                 <div className="col-span-12">
                     {intl.formatMessage({ id: "loading" })}
                 </div>
-            }
-
-
-            {roles.includes(2) &&
-                <>
-                    <Modal show={textModal} onClose={() => setTextModal(false)} modal_title={intl.formatMessage({ id: "textModal.title" })} modal_size="modal-4xl">
-                        <TextEditorModal closeModal={() => setTextModal(false)} lesson_blocks={lesson_blocks} setLessonBlocks={setLessonBlocks} />
-                    </Modal>
-
-                    <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoModal.title" })} modal_size="modal-2xl">
-                        <CreateVideoModal closeModal={() => setVideoModal(false)} lesson_blocks={lesson_blocks} setLessonBlocks={setLessonBlocks} />
-                    </Modal>
-                </>
             }
         </DashboardLayout>
     );

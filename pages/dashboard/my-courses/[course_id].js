@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineCaretDown, AiOutlineFileText, AiOutlinePushpin, AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import { AiOutlineCaretDown, AiOutlineFileText, AiOutlinePushpin, AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineEdit } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
@@ -133,7 +133,7 @@ export default function Course() {
           </div>
 
           <div className="col-span-12">
-            <div className="flex max-lg:flex-col lg:justify-between lg:items-center">
+            <div className="flex max-sm:flex-col sm:justify-between sm:items-center">
               <h3 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "lessons" })}</h3>
               {roles.includes(2) &&
                 <CDropdown>
@@ -170,9 +170,10 @@ export default function Course() {
                           }
                         </div>
                         {roles.includes(2) && lessons.total_count > 0 &&
-                          <div className="flex items-center pl-1">
+                          <div className="btn-wrap">
+                            <Link title={intl.formatMessage({ id: "edit" })} href={'/dashboard/lesson/edit/' + lesson.lesson_id} className="btn-edit"><AiOutlineEdit/></Link>
                             <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
-                            <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down ml-1"><AiOutlineArrowDown /></button>
+                            <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down"><AiOutlineArrowDown /></button>
                           </div>
                         }
                       </div>

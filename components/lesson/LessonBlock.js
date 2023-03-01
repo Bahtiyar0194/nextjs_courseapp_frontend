@@ -1,34 +1,39 @@
 import API_URL from '../../config/api';
 import { Player } from 'video-react';
+import ReactAudioPlayer from 'react-audio-player';
+import parse from 'html-react-parser';
 import "../../node_modules/video-react/dist/video-react.css";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
+import { setLessonBlocks } from '../../store/slices/lessonBlocksSlice';
 import { useIntl } from "react-intl";
 import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineDelete } from 'react-icons/ai';
-import parse from 'html-react-parser';
 
-const LessonBlock = ({ lesson_block, lesson_blocks, setLessonBlocks, index, edit }) => {
-
-    const roles = useSelector((state) => state.authUser.roles);
+const LessonBlock = ({ lesson_block, index, edit }) => {
     const intl = useIntl();
+    const dispatch = useDispatch();
+    let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
+    const roles = useSelector((state) => state.authUser.roles);
 
     function deleteLessonBlock(block_id) {
-        setLessonBlocks([
-            ...lesson_blocks.filter(block => block.block_id !== block_id),
-        ]);
+        let newArr = lesson_blocks.filter(item => item.block_id !== block_id);
+        dispatch(setLessonBlocks(newArr));
     }
 
-    function moveLessonBlock(direction, index, block_id) {
+    function moveLessonBlock(index, direction, block_id) {
+        let newArr = JSON.parse(JSON.stringify(lesson_blocks));
+        let element;
         if (direction == 'up') {
-            lesson_blocks.splice(index - 1, 0, lesson_blocks.splice(index, 1)[0]);
+            newArr.splice(index - 1, 0, newArr.splice(index, 1)[0]);
         }
         else if (direction == 'down') {
-            lesson_blocks.splice(index + 1, 0, lesson_blocks.splice(index, 1)[0]);
+            newArr.splice(index + 1, 0, newArr.splice(index, 1)[0]);
         }
-        setLessonBlocks([...lesson_blocks]);
 
-        let element = document.querySelector(
-            "#block_" + block_id
-        );
+        element = document.querySelector("#block_" + block_id);
+        console.log(element)
+
+        dispatch(setLessonBlocks(newArr));
+
         setTimeout(() => {
             element.scrollIntoView({
                 behavior: "smooth",
@@ -44,15 +49,17 @@ const LessonBlock = ({ lesson_block, lesson_blocks, setLessonBlocks, index, edit
                 <div className="flex justify-between items-center border-b-active pb-4 mb-4">
                     <div>
                         {/* Если это текстовый блок */}
-                        {lesson_block.block_type_id == 1 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "lesson_blocks.text_block" })}</p>}
+                        {lesson_block.block_type_id == 1 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "textModal.text" })}</p>}
 
                         {/* Если это видеоблок */}
-                        {lesson_block.file_type_id == 1 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "lesson_blocks.video_block" })}:</span> {lesson_block.file_name}</p>}
-                        {lesson_block.file_type_id == 2 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "lesson_blocks.video_block" })}:</span> {lesson_block.file_name}</p>}
+                        {lesson_block.file_type_id == 1 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
+                        {lesson_block.file_type_id == 2 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
+                        {lesson_block.file_type_id == 3 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "audioModal.audio" })}:</span> {lesson_block.file_name}</p>}
+                        {lesson_block.file_type_id == 4 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "imageModal.image" })}:</span> {lesson_block.file_name}</p>}
                     </div>
-                    <div>
-                        {index > 0 && <button title={intl.formatMessage({ id: "move_up" })} onClick={e => moveLessonBlock('up', index, lesson_block.block_id)} className="btn-up mr-1"><AiOutlineArrowUp /></button>}
-                        {index != lesson_blocks.length - 1 && <button title={intl.formatMessage({ id: "move_down" })} onClick={e => moveLessonBlock('down', index, lesson_block.block_id)} className="btn-down mr-1"><AiOutlineArrowDown /></button>}
+                    <div className='btn-wrap'>
+                        {index > 0 && <button title={intl.formatMessage({ id: "move_up" })} onClick={e => moveLessonBlock(index, 'up', lesson_block.block_id)} className="btn-up"><AiOutlineArrowUp /></button>}
+                        {index != lesson_blocks.length - 1 && <button title={intl.formatMessage({ id: "move_down" })} onClick={e => moveLessonBlock(index, 'down', lesson_block.block_id)} className="btn-down"><AiOutlineArrowDown /></button>}
                         <button title={intl.formatMessage({ id: "delete" })} onClick={e => deleteLessonBlock(lesson_block.block_id)} className="btn-delete"><AiOutlineDelete /></button>
                     </div>
                 </div>
@@ -68,6 +75,13 @@ const LessonBlock = ({ lesson_block, lesson_blocks, setLessonBlocks, index, edit
                 <iframe width="100%" height="100%" src={lesson_block.file_target}></iframe>
             }
 
+            {lesson_block.file_type_id == 3 &&
+                <ReactAudioPlayer width="100%" src={API_URL + '/lessons/audio/' + lesson_block.file_id} controls />
+            }
+
+            {lesson_block.file_type_id == 4 &&
+                <img className={lesson_block.image_width} src={API_URL + '/lessons/image/' + lesson_block.file_id} />
+            }
         </div>
     );
 };
