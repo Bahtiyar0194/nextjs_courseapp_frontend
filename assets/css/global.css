@@ -206,20 +206,20 @@
 }
 
 ::-webkit-scrollbar {
-    width: 2px;
+    width: 3px;
     @apply bg-inactive;
     height: 90%;
 }
 ::-webkit-scrollbar-thumb {
-    width: 2px;
+    width: 3px;
     @apply bg-corp;
 }
 ::-webkit-scrollbar:horizontal{
-    height: 2px;
+    height: 3px;
     @apply bg-inactive;
 }
 ::-webkit-scrollbar-thumb:horizontal{
-    height: 2px;
+    height: 3px;
     @apply bg-corp;
 }
 
@@ -365,6 +365,15 @@ input[type=number]::-webkit-outer-spin-button {
 .table.bordered > table > tbody > tr > th:last-child,
 .table.bordered > table > tbody > tr > td:last-child{
     @apply border-none;
+}
+
+form code{
+    @apply block max-h-40;
+}
+
+pre{
+    @apply rounded-md;
+    padding: 0.75rem !important;
 }
 
 button,
@@ -587,6 +596,10 @@ select option {
 
 .btn svg{
     @apply text-lg;
+}
+
+.btn-loding-circle {
+    animation: 0.75s linear infinite spinner-border;
 }
 
 .badge{

@@ -8,6 +8,10 @@ import { setLessonBlocks } from '../../store/slices/lessonBlocksSlice';
 import { useIntl } from "react-intl";
 import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineDelete } from 'react-icons/ai';
 
+import SyntaxHighlighter from "react-syntax-highlighter";
+import * as themes from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import supportedLanguages from 'react-syntax-highlighter/dist/cjs/languages/hljs/supported-languages';
+
 const LessonBlock = ({ lesson_block, index, edit }) => {
     const intl = useIntl();
     const dispatch = useDispatch();
@@ -51,8 +55,9 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
                         {/* Если это текстовый блок */}
                         {lesson_block.block_type_id == 1 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "textModal.text" })}</p>}
                         {lesson_block.block_type_id == 5 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "tableModal.table" })}</p>}
+                        {lesson_block.block_type_id == 6 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "codeModal.code" })}</p>}
 
-                        {/* Если это видеоблок */}
+                        {/* Если это файлы */}
                         {lesson_block.file_type_id == 1 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
                         {lesson_block.file_type_id == 2 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
                         {lesson_block.file_type_id == 3 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "audioModal.audio" })}:</span> {lesson_block.file_name}</p>}
@@ -85,6 +90,12 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
             }
 
             {lesson_block.block_type_id == 5 && parse(lesson_block.content)}
+
+            {lesson_block.block_type_id == 6 &&
+                <SyntaxHighlighter language={lesson_block.code_language} style={themes[lesson_block.code_theme]}>
+                    {lesson_block.code}
+                </SyntaxHighlighter>
+            }
         </div>
     );
 };

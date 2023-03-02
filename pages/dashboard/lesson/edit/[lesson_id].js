@@ -9,7 +9,7 @@ import { AiOutlineRead, AiOutlineCheck } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../../components/ui/Breadcrumb";
-import Loader from "../../../../components/ui/Loader";
+import ButtonLoader from "../../../../components/ui/ButtonLoader";
 import LessonBlockTypeModals from "../../../../components/lesson/LessonBlockTypeModals";
 import LessonBlock from "../../../../components/lesson/LessonBlock";
 
@@ -24,7 +24,7 @@ export default function EditLesson() {
     const roles = useSelector((state) => state.authUser.roles);
 
     const [error, setError] = useState([]);
-    const [loader, setLoader] = useState(false);
+    const [button_loader, setButtonLoader] = useState(false);
 
     const [lesson_name, setLessonName] = useState('');
     const [lesson_description, setLessonDescription] = useState('');
@@ -49,7 +49,7 @@ export default function EditLesson() {
     }
 
     const editLesson = async (lesson_id) => {
-        setLoader(true);
+        setButtonLoader(true);
 
         let blocks = JSON.parse(JSON.stringify(lesson_blocks));
 
@@ -76,7 +76,7 @@ export default function EditLesson() {
                 if (err.response) {
                     if (err.response.status == 422) {
                         setError(err.response.data.data);
-                        setLoader(false);
+                        setButtonLoader(false);
                         if (error.lesson_name || error.lesson_description) {
                             let card = document.querySelector('#edit_wrap');
                             setTimeout(() => {
@@ -117,31 +117,31 @@ export default function EditLesson() {
                     </Breadcrumb>
 
                     <div id="edit_wrap" className="col-span-12 relative">
-                            {loader && <Loader className="overlay" />}
+                        <div className="form-group mt-2">
+                            <AiOutlineRead />
+                            <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />
+                            <label className={(error.lesson_name && 'label-error')}>{error.lesson_name ? error.lesson_name : intl.formatMessage({ id: "lesson_name" })}</label>
+                        </div>
 
-                            <div className="form-group mt-2">
-                                <AiOutlineRead />
-                                <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />
-                                <label className={(error.lesson_name && 'label-error')}>{error.lesson_name ? error.lesson_name : intl.formatMessage({ id: "lesson_name" })}</label>
-                            </div>
+                        <div className="form-group mt-2">
+                            <AiOutlineRead />
+                            <textarea cols="20" onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
+                            <label className={(error.lesson_description && 'label-error')}>{error.lesson_description ? error.lesson_description : intl.formatMessage({ id: "lesson_description" })}</label>
+                        </div>
 
-                            <div className="form-group mt-2">
-                                <AiOutlineRead />
-                                <textarea cols="20" onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
-                                <label className={(error.lesson_description && 'label-error')}>{error.lesson_description ? error.lesson_description : intl.formatMessage({ id: "lesson_description" })}</label>
-                            </div>
-
-                            {lesson_blocks.length > 0 &&
-                                lesson_blocks.map((lesson_block, i) => (
-                                    <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
-                                ))
-                            }
+                        {lesson_blocks.length > 0 &&
+                            lesson_blocks.map((lesson_block, i) => (
+                                <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
+                            ))
+                        }
 
                         {error.lesson_blocks && lesson_blocks.length == 0 && <p className="text-danger text-sm mb-4">{intl.formatMessage({ id: "lesson.please_add_materials" })}</p>}
 
                         <div className="btn-wrap">
                             <LessonBlockTypeModals />
-                            <button onClick={e => editLesson(lesson.lesson_id)} className="btn btn-outline-primary" type="submit"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "save_changes" })}</span></button>
+                            <button onClick={e => editLesson(lesson.lesson_id)} className="btn btn-outline-primary" type="submit">
+                                {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}  <span>{intl.formatMessage({ id: "save_changes" })}</span>
+                            </button>
                         </div>
                     </div>
                 </>

@@ -1,5 +1,4 @@
 import { AiOutlineCheck, AiOutlineInsertRowAbove, AiOutlineInsertRowLeft } from "react-icons/ai";
-import Loader from "../../ui/Loader";
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +6,6 @@ import { setLessonBlocks } from "../../../store/slices/lessonBlocksSlice";
 
 const TableModal = ({ closeModal }) => {
     const intl = useIntl();
-    const [loader, setLoader] = useState(false);
     const dispatch = useDispatch();
     let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
 
@@ -86,7 +84,6 @@ const TableModal = ({ closeModal }) => {
 
     return (
         <>
-            {loader && <Loader className="overlay" />}
             <div className="modal-body">
                 <form onSubmit={e => createTableSubmit(e)} encType="multipart/form-data">
                     <div className="form-group mt-4">

@@ -9,7 +9,7 @@ import { AiOutlineRead, AiOutlineCheck } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../../components/ui/Breadcrumb";
-import Loader from "../../../../components/ui/Loader";
+import ButtonLoader from "../../../../components/ui/ButtonLoader";
 import LessonBlockTypeModals from "../../../../components/lesson/LessonBlockTypeModals";
 import LessonBlock from "../../../../components/lesson/LessonBlock";
 
@@ -22,7 +22,7 @@ export default function CreateLesson() {
     const roles = useSelector((state) => state.authUser.roles);
 
     const [error, setError] = useState([]);
-    const [loader, setLoader] = useState(false);
+    const [button_loader, setButtonLoader] = useState(false);
 
     const [lesson_name, setLessonName] = useState('');
     const [lesson_description, setLessonDescription] = useState('');
@@ -48,7 +48,7 @@ export default function CreateLesson() {
     }
 
     const addLesson = async (course_id) => {
-        setLoader(true);
+        setButtonLoader(true);
         const form_data = new FormData();
         form_data.append('lesson_name', lesson_name);
         form_data.append('lesson_description', lesson_description);
@@ -57,6 +57,8 @@ export default function CreateLesson() {
         form_data.append('lesson_blocks', JSON.stringify(lesson_blocks));
         form_data.append('operation_type_id', 4);
 
+        console.log( JSON.stringify(lesson_blocks));
+
         await axios.post('lessons/create', form_data)
             .then(response => {
                 router.push('/dashboard/lesson/' + response.data.data.lesson_id)
@@ -64,7 +66,7 @@ export default function CreateLesson() {
                 if (err.response) {
                     if (err.response.status == 422) {
                         setError(err.response.data.data);
-                        setLoader(false);
+                        setButtonLoader(false);
                         if (error.lesson_name || error.lesson_description) {
                             let card = document.querySelector('#create_wrap');
                             setTimeout(() => {
@@ -104,32 +106,32 @@ export default function CreateLesson() {
                     </Breadcrumb>
 
                     <div id="create_wrap" className="col-span-12 relative">
-                        <div className="card p-4 mb-4">
-                            {loader && <Loader className="overlay" />}
-                            <div className="form-group mt-2">
-                                <AiOutlineRead />
-                                <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />
-                                <label className={(error.lesson_name && 'label-error')}>{error.lesson_name ? error.lesson_name : intl.formatMessage({ id: "lesson_name" })}</label>
-                            </div>
+                        <div className="form-group mt-2">
+                            <AiOutlineRead />
+                            <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />
+                            <label className={(error.lesson_name && 'label-error')}>{error.lesson_name ? error.lesson_name : intl.formatMessage({ id: "lesson_name" })}</label>
+                        </div>
 
-                            <div className="form-group mt-2">
-                                <AiOutlineRead />
-                                <textarea onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
-                                <label className={(error.lesson_description && 'label-error')}>{error.lesson_description ? error.lesson_description : intl.formatMessage({ id: "lesson_description" })}</label>
-                            </div>
+                        <div className="form-group mt-2">
+                            <AiOutlineRead />
+                            <textarea onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
+                            <label className={(error.lesson_description && 'label-error')}>{error.lesson_description ? error.lesson_description : intl.formatMessage({ id: "lesson_description" })}</label>
+                        </div>
 
-                            {lesson_blocks.length > 0 &&
-                                lesson_blocks.map((lesson_block, i) => (
-                                    <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
-                                ))
-                            }
+                        {lesson_blocks.length > 0 &&
+                            lesson_blocks.map((lesson_block, i) => (
+                                <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
+                            ))
+                        }
 
-                            {error.lesson_blocks && lesson_blocks.length == 0 && <p className="text-danger text-sm mb-4">{intl.formatMessage({ id: "lesson.please_add_materials" })}</p>}
+                        {error.lesson_blocks && lesson_blocks.length == 0 && <p className="text-danger text-sm mb-4">{intl.formatMessage({ id: "lesson.please_add_materials" })}</p>}
 
-                            <div className="btn-wrap">
-                                <LessonBlockTypeModals />
-                                <button onClick={e => addLesson(course.course_id)} className="btn btn-outline-primary" type="submit"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "done" })}</span></button>
-                            </div>
+                        <div className="btn-wrap">
+                            <LessonBlockTypeModals />
+                            <button onClick={e => addLesson(course.course_id)} className="btn btn-outline-primary" type="submit">
+                                {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
+                                <span>{intl.formatMessage({ id: "done" })}</span>
+                            </button>
                         </div>
                     </div>
                 </>

@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import { AiOutlineCheck } from "react-icons/ai";
-import Loader from '../../ui/Loader';
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
@@ -11,7 +10,6 @@ const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
     loading: () => <p>Loading ...</p>,
 })
-
 
 const TextEditorModal = ({ closeModal }) => {
     const modules = {
@@ -49,15 +47,12 @@ const TextEditorModal = ({ closeModal }) => {
     const router = useRouter();
     const { locale } = router;
     const intl = useIntl();
-    const [loader, setLoader] = useState(false);
     const dispatch = useDispatch();
     let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
     const [text, setText] = useState('');
     const [text_error, setTextError] = useState(false);
 
     const createTextSubmit = async () => {
-        setLoader(true);
-
         if (text.length == 0 || text == '<p><br></p>') {
             setTextError(true);
         }
@@ -71,12 +66,10 @@ const TextEditorModal = ({ closeModal }) => {
             closeModal();
             setText('');
         }
-        setLoader(false);
     }
 
     return (
         <>
-            {loader && <Loader className="overlay" />}
             <div className="modal-body">
                 {text_error === true && <p className='text-sm text-danger mb-0 mt-4'>{intl.formatMessage({ id: "textModal.write_text" })}</p>}
                 <QuillNoSSRWrapper className={'mt-6 ' + locale} value={text} onChange={setText} placeholder={intl.formatMessage({ id: "textModal.write_here" })} modules={modules} formats={formats} theme="snow" />

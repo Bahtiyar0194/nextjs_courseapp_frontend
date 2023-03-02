@@ -61,7 +61,6 @@
     "lesson.add_task": "Добавить задание",
     "lesson_type.course_section": "Раздел курса",
 
-
     "textModal.text": "Текст",
     "textModal.title": "Добавление текста",
     "textModal.write_here": "Пишите сюда",
@@ -95,6 +94,13 @@
     "audioModal.audio_name": "Название аудио",
     "audioModal.form.upload_new_audio": "Загрузить новое аудио",
     "audioModal.form.upload_audio_file": "Нажмите чтобы загрузить аудиофайл",
+
+    "codeModal.code": "Программный код",
+    "codeModal.title": "Добавление кода",
+    "codeModal.code_language": "Язык программирования",
+    "codeModal.code_theme": "Тема оформления",
+    "codeModal.code_text": "Код",
+    "codeModal.enter_the_code": "Введите код",
 
     "task.task_name": "Название задания",
     "task.task_description": "Краткое описание задания",

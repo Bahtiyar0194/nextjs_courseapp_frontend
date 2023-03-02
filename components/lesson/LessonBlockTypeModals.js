@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useIntl } from "react-intl";
 import Link from "next/link";
-import { AiOutlinePlus, AiOutlineCaretDown, AiOutlineFileImage, AiOutlinePlayCircle, AiOutlineFileText, AiOutlineAudio, AiOutlineTable } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineCaretDown, AiOutlineFileImage, AiOutlinePlayCircle, AiOutlineFileText, AiOutlineAudio, AiOutlineTable, AiOutlineCode } from "react-icons/ai";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
 
 import Modal from "../ui/Modal";
@@ -11,6 +11,7 @@ import TableModal from "./lesson_block_modals/TableModal";
 import CreateImageModal from "./lesson_block_modals/CreateImageModal";
 import CreateVideoModal from "./lesson_block_modals/CreateVideoModal";
 import CreateAudioModal from "./lesson_block_modals/CreateAudioModal";
+import CreateCodeModal from "./lesson_block_modals/CreateCodeModal";
 
 export default function LessonBlockTypeModals() {
     const intl = useIntl();
@@ -21,6 +22,7 @@ export default function LessonBlockTypeModals() {
     const [imageModal, setImageModal] = useState(false);
     const [videoModal, setVideoModal] = useState(false);
     const [audioModal, setAudioModal] = useState(false);
+    const [codeModal, setCodeModal] = useState(false);
 
     return (
         roles.includes(2) &&
@@ -35,6 +37,7 @@ export default function LessonBlockTypeModals() {
                     <Link href={'#'} onClick={() => setImageModal(true)}><AiOutlineFileImage />{intl.formatMessage({ id: "imageModal.image" })}</Link>
                     <Link href={'#'} onClick={() => setVideoModal(true)}><AiOutlinePlayCircle />{intl.formatMessage({ id: "videoModal.video" })}</Link>
                     <Link href={'#'} onClick={() => setAudioModal(true)}><AiOutlineAudio />{intl.formatMessage({ id: "audioModal.audio" })}</Link>
+                    <Link href={'#'} onClick={() => setCodeModal(true)}><AiOutlineCode />{intl.formatMessage({ id: "codeModal.code" })}</Link>
                 </CDropdownMenu>
             </CDropdown>
 
@@ -57,6 +60,10 @@ export default function LessonBlockTypeModals() {
 
             <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-xl">
                 <CreateAudioModal closeModal={() => setAudioModal(false)}/>
+            </Modal>
+
+            <Modal show={codeModal} onClose={() => setCodeModal(false)} modal_title={intl.formatMessage({ id: "codeModal.title" })} modal_size="modal-4xl">
+                <CreateCodeModal closeModal={() => setCodeModal(false)}/>
             </Modal>
         </>
 
