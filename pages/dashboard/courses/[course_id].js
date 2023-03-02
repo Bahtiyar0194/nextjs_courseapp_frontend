@@ -113,7 +113,7 @@ export default function Course() {
       {course.course_id ?
         <>
           <Breadcrumb>
-            <Link href={'/dashboard/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+            <Link href={'/dashboard/courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
             {course.course_name}
           </Breadcrumb>
           <div className="col-span-12 lg:col-span-5">

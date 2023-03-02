@@ -1,5 +1,5 @@
 import { AiOutlineCheck, AiOutlineQuestion } from "react-icons/ai";
-import Loader from "../ui/Loader";
+import Loader from "../../ui/Loader";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";

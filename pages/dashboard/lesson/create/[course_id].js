@@ -100,8 +100,8 @@ export default function CreateLesson() {
             {roles.includes(2) ?
                 <>
                     <Breadcrumb>
-                        <Link href={'/dashboard/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
-                        <Link href={'/dashboard/my-courses/' + course.course_id}>{course.course_name}</Link>
+                        <Link href={'/dashboard/courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+                        <Link href={'/dashboard/courses/' + course.course_id}>{course.course_name}</Link>
                         {intl.formatMessage({ id: "lesson.create_lesson" })}
                     </Breadcrumb>
 

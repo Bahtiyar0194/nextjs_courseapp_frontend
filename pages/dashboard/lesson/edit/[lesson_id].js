@@ -110,8 +110,8 @@ export default function EditLesson() {
             {roles.includes(2) ?
                 <>
                     <Breadcrumb>
-                        <Link href={'/dashboard/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
-                        <Link href={'/dashboard/my-courses/' + lesson.course_id}>{lesson.course_name}</Link>
+                        <Link href={'/dashboard/courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+                        <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
                         <Link href={'/dashboard/lesson/' + lesson.lesson_id}>{lesson.lesson_name}</Link>
                         {intl.formatMessage({ id: "lesson.edit_lesson" })}
                     </Breadcrumb>
@@ -140,7 +140,8 @@ export default function EditLesson() {
                         <div className="btn-wrap">
                             <LessonBlockTypeModals />
                             <button onClick={e => editLesson(lesson.lesson_id)} className="btn btn-outline-primary" type="submit">
-                                {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}  <span>{intl.formatMessage({ id: "save_changes" })}</span>
+                                {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
+                                <span>{intl.formatMessage({ id: "save_changes" })}</span>
                             </button>
                         </div>
                     </div>

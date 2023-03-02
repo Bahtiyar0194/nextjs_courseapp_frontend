@@ -162,7 +162,7 @@ export default function MyCourses() {
                     {
                         contentViewType === 'grid' ? courses?.map(course => (
                             <div key={course.course_id} className="col-span-12 sm:col-span-6 lg:col-span-3">
-                                <Link href={'/dashboard/my-courses/' + course.course_id}>
+                                <Link href={'/dashboard/courses/' + course.course_id}>
                                     <div className="card">
                                         <div className="card-bg h-40 p-4" style={{ backgroundImage: `url('${API_URL + '/courses/images/posters/' + course.course_poster_file}')` }}>
                                         </div>

@@ -5,21 +5,18 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLessonBlocks } from "../../../store/slices/lessonBlocksSlice";
 import { useRouter } from "next/router";
-import Modal from "../../../components/ui/Modal";
-import CreateAnswerTheQuestionModal from "../../../components/lesson/CreateAnswerTheQuestionModal";
-import { AiOutlineCaretDown, AiOutlineQuestionCircle, AiOutlineFileSearch, AiOutlineFileDone, AiOutlineFileAdd, AiOutlineEdit } from "react-icons/ai";
-import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import LessonBlock from "../../../components/lesson/LessonBlock";
+import LessonTaskTypeModals from "../../../components/lesson/LessonTaskTypeModals";
+import { AiOutlineEdit } from "react-icons/ai";
 
 export default function Lesson() {
     const dispatch = useDispatch();
     const router = useRouter();
     const [showFullLoader, setShowFullLoader] = useState(true);
     const intl = useIntl();
-    //const [questionModal, setQuestionModal] = useState(false);
     const [lesson, setLesson] = useState([]);
     const lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
     //const [tasks, setTasks] = useState([]);
@@ -73,8 +70,8 @@ export default function Lesson() {
             {lesson.lesson_id ?
                 <>
                     <Breadcrumb>
-                        <Link href={'/dashboard/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
-                        <Link href={'/dashboard/my-courses/' + lesson.course_id}>{lesson.course_name}</Link>
+                        <Link href={'/dashboard/courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+                        <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
                         {lesson.lesson_name}
                     </Breadcrumb>
 
@@ -95,17 +92,7 @@ export default function Lesson() {
                     <div className="col-span-12">
                         {roles.includes(2) &&
                             <div className="btn-wrap">
-                                <CDropdown>
-                                    <CDropdownToggle color="primary" href="#">
-                                        {intl.formatMessage({ id: "lesson.add_task" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
-                                    </CDropdownToggle>
-                                    <CDropdownMenu>
-                                        <Link href={'#'} onClick={() => setQuestionModal(true)}><AiOutlineQuestionCircle /> {intl.formatMessage({ id: "task.answerTheQuestionModal.title" })}</Link>
-                                        <Link href={'#'}><AiOutlineFileSearch /> Вставка пропущенных слов</Link>
-                                        <Link href={'#'}><AiOutlineFileDone /> Тестовое задание</Link>
-                                        <Link href={'#'}><AiOutlineFileAdd /> Приложить файл</Link>
-                                    </CDropdownMenu>
-                                </CDropdown>
+                                <LessonTaskTypeModals lesson_id={lesson.lesson_id} />
                                 <Link className="btn btn-outline-primary" href={'/dashboard/lesson/edit/' + lesson.lesson_id}><AiOutlineEdit /> {intl.formatMessage({ id: "edit" })}</Link>
                             </div>
                         }
@@ -115,14 +102,6 @@ export default function Lesson() {
                 <div className="col-span-12">
                     {intl.formatMessage({ id: "loading" })}
                 </div>
-            }
-
-            {roles.includes(2) &&
-                <>
-                    {/* <Modal show={questionModal} onClose={() => setQuestionModal(false)} modal_title={intl.formatMessage({ id: "task.answerTheQuestionModal.title" })} modal_size="modal-xl">
-                        <CreateAnswerTheQuestionModal closeModal={() => setQuestionModal(false)} lesson_id={lesson.lesson_id} getTasks={getTasks} />
-                    </Modal> */}
-                </>
             }
         </DashboardLayout>
     );
