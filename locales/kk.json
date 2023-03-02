@@ -66,6 +66,14 @@
     "textModal.write_here": "Осы жерге енгзіңіз",
     "textModal.write_text": "Мәтін енгзіңіз",
 
+    "tableModal.table": "Кесте",
+    "tableModal.title": "Кесте қосу",
+    "tableModal.columns_count": "Бағандар саны",
+    "tableModal.rows_count": "Қатар саны",
+    "tableModal.enter_the_number_of_columns": "Бағандар санын енгізіңіз",
+    "tableModal.enter_the_number_of_rows": "Қатар санын енгізіңіз",
+    "tableModal.table_with_header": "Басы бар кесте",
+
     "imageModal.image": "Кескін",
     "imageModal.title": "Кескін қосу",
     "imageModal.image_name": "Кескіннің аты",

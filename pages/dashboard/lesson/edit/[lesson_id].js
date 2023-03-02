@@ -50,11 +50,23 @@ export default function EditLesson() {
 
     const editLesson = async (lesson_id) => {
         setLoader(true);
+
+        let blocks = JSON.parse(JSON.stringify(lesson_blocks));
+
+        for (let index = 0; index < blocks.length; index++) {
+            let lesson_block = blocks[index];
+            if (lesson_block.block_type_id == 5) {
+                let block = document.querySelector('#block_' + lesson_block.block_id);
+                let table = block.querySelector('.table').outerHTML;
+                blocks[index].content = table;
+            }
+        }
+
         const form_data = new FormData();
         form_data.append('lesson_name', lesson_name);
         form_data.append('lesson_description', lesson_description);
         form_data.append('lesson_type_id', 1);
-        form_data.append('lesson_blocks', JSON.stringify(lesson_blocks));
+        form_data.append('lesson_blocks', JSON.stringify(blocks));
         form_data.append('operation_type_id', 10);
 
         await axios.post('lessons/update/' + lesson_id, form_data)
@@ -105,7 +117,6 @@ export default function EditLesson() {
                     </Breadcrumb>
 
                     <div id="edit_wrap" className="col-span-12 relative">
-                        <div className="card p-4 mb-4">
                             {loader && <Loader className="overlay" />}
 
                             <div className="form-group mt-2">
@@ -116,7 +127,7 @@ export default function EditLesson() {
 
                             <div className="form-group mt-2">
                                 <AiOutlineRead />
-                                <textarea onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
+                                <textarea cols="20" onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
                                 <label className={(error.lesson_description && 'label-error')}>{error.lesson_description ? error.lesson_description : intl.formatMessage({ id: "lesson_description" })}</label>
                             </div>
 
@@ -126,12 +137,11 @@ export default function EditLesson() {
                                 ))
                             }
 
-                            {error.lesson_blocks && lesson_blocks.length == 0 && <p className="text-danger text-sm mb-4">{intl.formatMessage({ id: "lesson.please_add_materials" })}</p>}
+                        {error.lesson_blocks && lesson_blocks.length == 0 && <p className="text-danger text-sm mb-4">{intl.formatMessage({ id: "lesson.please_add_materials" })}</p>}
 
-                            <div className="btn-wrap">
-                                <LessonBlockTypeModals />
-                                <button onClick={e => editLesson(lesson.lesson_id)} className="btn btn-outline-primary" type="submit"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "save_changes" })}</span></button>
-                            </div>
+                        <div className="btn-wrap">
+                            <LessonBlockTypeModals />
+                            <button onClick={e => editLesson(lesson.lesson_id)} className="btn btn-outline-primary" type="submit"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "save_changes" })}</span></button>
                         </div>
                     </div>
                 </>

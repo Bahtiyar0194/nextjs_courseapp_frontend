@@ -68,6 +68,11 @@
 
     "tableModal.table": "Table",
     "tableModal.title": "Add table",
+    "tableModal.columns_count": "Columns",
+    "tableModal.rows_count": "Rows",
+    "tableModal.enter_the_number_of_columns": "Enter the number of columns",
+    "tableModal.enter_the_number_of_rows": "Enter the number of rows",
+    "tableModal.table_with_header": "Table with header",
 
     "imageModal.image": "Image",
     "imageModal.title": "Add image",

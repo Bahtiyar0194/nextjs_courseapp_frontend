@@ -223,6 +223,11 @@
     @apply bg-corp;
 }
 
+[contenteditable="true"]:active,
+[contenteditable="true"]:focus{
+    @apply outline-none;
+}
+
 body {
     @apply bg-inactive text-active font-normal corp-font;
 }
@@ -335,6 +340,31 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .table > table > tbody > tr > td{
     @apply px-4 py-3 text-active
+}
+
+.table.bordered{
+    @apply border-active;
+}
+
+.table.bordered > table > tbody > tr{
+    @apply border-b-active;
+}
+
+.table.bordered > table > tbody > tr:last-child{
+    @apply border-none;
+}
+
+.table.bordered > table > thead > tr > th,
+.table.bordered > table > thead > tr > td,
+.table.bordered > table > tbody > tr > th,
+.table.bordered > table > tbody > tr > td{
+    @apply border-r-active;
+}
+.table.bordered > table > thead > tr > th:last-child,
+.table.bordered > table > thead > tr > td:last-child,
+.table.bordered > table > tbody > tr > th:last-child,
+.table.bordered > table > tbody > tr > td:last-child{
+    @apply border-none;
 }
 
 button,
@@ -491,7 +521,7 @@ select option {
 }
 
 .btn-wrap{
-    @apply flex max-md:flex-col gap-1.5;
+    @apply flex gap-2;
 }
 
 .btn-wrap-lg{

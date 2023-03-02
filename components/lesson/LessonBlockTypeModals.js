@@ -7,6 +7,7 @@ import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
 
 import Modal from "../ui/Modal";
 import TextEditorModal from "./lesson_block_modals/TextEditorModal";
+import TableModal from "./lesson_block_modals/TableModal";
 import CreateImageModal from "./lesson_block_modals/CreateImageModal";
 import CreateVideoModal from "./lesson_block_modals/CreateVideoModal";
 import CreateAudioModal from "./lesson_block_modals/CreateAudioModal";
@@ -42,15 +43,19 @@ export default function LessonBlockTypeModals() {
                 <TextEditorModal closeModal={() => setTextModal(false)}/>
             </Modal>
 
-            <Modal show={imageModal} onClose={() => setImageModal(false)} modal_title={intl.formatMessage({ id: "imageModal.title" })} modal_size="modal-2xl">
+            <Modal show={tableModal} onClose={() => setTableModal(false)} modal_title={intl.formatMessage({ id: "tableModal.title" })} modal_size="modal-xl">
+                <TableModal closeModal={() => setTableModal(false)}/>
+            </Modal>
+
+            <Modal show={imageModal} onClose={() => setImageModal(false)} modal_title={intl.formatMessage({ id: "imageModal.title" })} modal_size="modal-xl">
                 <CreateImageModal closeModal={() => setImageModal(false)}/>
             </Modal>
 
-            <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoModal.title" })} modal_size="modal-2xl">
+            <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoModal.title" })} modal_size="modal-xl">
                 <CreateVideoModal closeModal={() => setVideoModal(false)}/>
             </Modal>
 
-            <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-2xl">
+            <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-xl">
                 <CreateAudioModal closeModal={() => setAudioModal(false)}/>
             </Modal>
         </>

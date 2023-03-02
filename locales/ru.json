@@ -67,6 +67,14 @@
     "textModal.write_here": "Пишите сюда",
     "textModal.write_text": "Введите текст",
 
+    "tableModal.table": "Таблица",
+    "tableModal.title": "Добавление таблицы",
+    "tableModal.columns_count": "Количество столбцов",
+    "tableModal.rows_count": "Количество рядов",
+    "tableModal.enter_the_number_of_columns": "Введите количество столбцов",
+    "tableModal.enter_the_number_of_rows": "Введите количество рядов",
+    "tableModal.table_with_header": "Таблица с шапкой",
+
     "imageModal.image": "Изображение",
     "imageModal.title": "Добавление изображения",
     "imageModal.image_name": "Название изображения",

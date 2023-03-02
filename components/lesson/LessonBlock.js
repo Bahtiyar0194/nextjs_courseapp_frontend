@@ -50,6 +50,7 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
                     <div>
                         {/* Если это текстовый блок */}
                         {lesson_block.block_type_id == 1 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "textModal.text" })}</p>}
+                        {lesson_block.block_type_id == 5 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "tableModal.table" })}</p>}
 
                         {/* Если это видеоблок */}
                         {lesson_block.file_type_id == 1 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
@@ -82,6 +83,8 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
             {lesson_block.file_type_id == 4 &&
                 <img className={lesson_block.image_width} src={API_URL + '/lessons/image/' + lesson_block.file_id} />
             }
+
+            {lesson_block.block_type_id == 5 && parse(lesson_block.content)}
         </div>
     );
 };
