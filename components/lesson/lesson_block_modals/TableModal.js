@@ -32,28 +32,28 @@ const TableModal = ({ closeModal }) => {
                 for (let column = 1; column <= columns_count; column++) {
                     let newTd = document.createElement('td');
                     if (cell == 1) {
-                        if(table_header === true){
+                        if (table_header === true) {
                             let newTh = document.createElement('th');
                             newTh.setAttribute('contenteditable', true);
                             newTr.insertAdjacentElement('beforeEnd', newTh);
                         }
-                        else{
+                        else {
                             newTd.setAttribute('contenteditable', true);
                             newTr.insertAdjacentElement('beforeEnd', newTd);
                         }
                     }
-                    else{
+                    else {
                         newTd.setAttribute('contenteditable', true);
                         newTr.insertAdjacentElement('beforeEnd', newTd);
                     }
                 }
 
-                if(cell == 1 && table_header === true){
+                if (cell == 1 && table_header === true) {
                     let thead = document.createElement('thead');
                     thead.insertAdjacentElement('beforeEnd', newTr);
                     table.insertAdjacentElement('beforeEnd', thead);
                 }
-                else{
+                else {
                     tbody.insertAdjacentElement('beforeEnd', newTr);
                 }
             }
@@ -71,12 +71,12 @@ const TableModal = ({ closeModal }) => {
 
             closeModal();
         }
-        else{
-            if(columns_count <= 0){
+        else {
+            if (columns_count <= 0) {
                 setColumnError(intl.formatMessage({ id: "tableModal.enter_the_number_of_columns" }));
             }
 
-            if(rows_count <= 0){
+            if (rows_count <= 0) {
                 setRowError(intl.formatMessage({ id: "tableModal.enter_the_number_of_rows" }));
             }
         }
@@ -98,12 +98,10 @@ const TableModal = ({ closeModal }) => {
                         <label className={(row_error && 'label-error')}>{row_error ? row_error : intl.formatMessage({ id: "tableModal.rows_count" })}</label>
                     </div>
 
-                    
-                        <label className="custom-checkbox">
-                            <input onChange={e => setTableHeader(!table_header)} type="checkbox" />
-                            <span>{intl.formatMessage({ id: "tableModal.table_with_header" })}</span>
-                        </label>
-                
+                    <label className="custom-checkbox">
+                        <input onChange={e => setTableHeader(!table_header)} type="checkbox" />
+                        <span>{intl.formatMessage({ id: "tableModal.table_with_header" })}</span>
+                    </label>
 
                     <button className="btn btn-primary mt-4" type="submit"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "done" })}</span></button>
                 </form>

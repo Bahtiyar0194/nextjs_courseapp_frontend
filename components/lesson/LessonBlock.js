@@ -34,7 +34,6 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
         }
 
         element = document.querySelector("#block_" + block_id);
-        console.log(element)
 
         dispatch(setLessonBlocks(newArr));
 

@@ -182,7 +182,7 @@
 }
 
 .text-success{
-    @apply text-sky-500;
+    @apply text-green-500;
 }
 
 .text-danger{
@@ -417,41 +417,41 @@ select option {
     @apply mb-5 relative;
 }
 
-.form-group input, 
-.form-group select, 
-.form-group textarea {
+.form-group > input, 
+.form-group > select, 
+.form-group > textarea {
     @apply border-t-0 border-l-0 border-r-0 border-b border-corp bg-transparent w-full text-active py-3 pl-8;
 }
 
-.form-group label {
+.form-group > label {
     @apply absolute left-8 top-3 pointer-events-none duration-200 z-0 text-inactive whitespace-nowrap;
 }
 
-.form-group label.label-error{
+.form-group > label.label-error{
     @apply text-danger -top-2.5 text-xs left-0;
 }
 
-.form-group input:focus ~ label,
-.form-group input:not(:placeholder-shown) ~ label,
-.form-group select:focus ~ label,
-.form-group select:not(:placeholder-shown) ~ label,
-.form-group textarea:focus ~ label,
-.form-group textarea:not(:placeholder-shown) ~ label
+.form-group > input:focus ~ label,
+.form-group > input:not(:placeholder-shown) ~ label,
+.form-group > select:focus ~ label,
+.form-group > select:not(:placeholder-shown) ~ label,
+.form-group > textarea:focus ~ label,
+.form-group > textarea:not(:placeholder-shown) ~ label
 {
     @apply -top-2.5 text-xs left-0 text-inactive;
 }
 
-.form-group input:focus ~ label.label-error,
-.form-group input:not(:placeholder-shown) ~ label.label-error,
-.form-group select:focus ~ label.label-error,
-.form-group select:not(:placeholder-shown) ~ label.label-error,
-.form-group textarea:focus ~ label.label-error,
-.form-group textarea:not(:placeholder-shown) ~ label.label-error
+.form-group > input:focus ~ label.label-error,
+.form-group > input:not(:placeholder-shown) ~ label.label-error,
+.form-group > select:focus ~ label.label-error,
+.form-group > select:not(:placeholder-shown) ~ label.label-error,
+.form-group > textarea:focus ~ label.label-error,
+.form-group > textarea:not(:placeholder-shown) ~ label.label-error
 {
     @apply text-danger -top-2.5 text-xs left-0;
 }
 
-.form-group svg{
+.form-group > svg{
     @apply absolute text-2xl top-3 text-inactive;
 }
 
@@ -475,37 +475,52 @@ select option {
     @apply text-2xl m-auto;
 }
 
-.custom-radio > input, .custom-checkbox > input {
+.custom-radio > input, 
+.custom-radio-checkbox > input, 
+.custom-checkbox > input {
     @apply absolute -z-10 opacity-0
 }
   
-.custom-radio > span, .custom-checkbox > span {
-    @apply inline-flex items-center select-none;
+.custom-radio > span, 
+.custom-radio-checkbox > span,
+.custom-checkbox > span {
+    @apply inline-flex items-center select-none cursor-pointer text-inactive;
 }
   
-.custom-radio > span::before {
+.custom-radio > span::before,
+.custom-radio-checkbox > span::before
+ {
     content: '';
-    @apply inline-block w-4 h-4 flex-shrink-0 flex-grow-0 border border-inactive rounded-full mr-2 bg-no-repeat bg-center cursor-pointer;
+    @apply inline-block w-4 h-4 flex-shrink-0 flex-grow-0 border border-inactive rounded-full mr-2 bg-no-repeat bg-center;
     background-size: 50% 50%;
 }
 
 .custom-checkbox > span::before {
     content: '';
-    @apply inline-block w-4 h-4 flex-shrink-0 flex-grow-0 border border-inactive rounded-sm mr-2 bg-no-repeat bg-center cursor-pointer;
+    @apply inline-block w-4 h-4 flex-shrink-0 flex-grow-0 border border-inactive rounded-sm mr-2 bg-no-repeat bg-center;
     background-size: 50% 50%;
 }
 
 .custom-radio > input:not(:disabled):not(:checked) + span:hover::before,
+.custom-radio-checkbox > input:not(:disabled):not(:checked) + span:hover::before,
 .custom-checkbox > input:not(:disabled):not(:checked) + span:hover::before {
     @apply border-corp;
 }
 
+.custom-radio > input:not(:disabled):not(:checked) + span.error::before,
+.custom-radio-checkbox > input:not(:disabled):not(:checked) + span.error::before,
+.custom-checkbox > input:not(:disabled):not(:checked) + span.error::before {
+    @apply border-danger;
+}
+
 .custom-radio > input:not(:disabled):active + span::before,
+.custom-radio-checkbox > input:not(:disabled):active + span::before,
 .custom-checkbox > input:not(:disabled):active + span::before {
     @apply bg-inactive border-inactive;
 }
   
 .custom-radio > input:focus:not(:checked) + span::before,
+.custom-radio-checkbox > input:focus:not(:checked) + span::before,
 .custom-checkbox > input:focus:not(:checked) + span::before {
     @apply border-corp;
 }
@@ -515,6 +530,13 @@ select option {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
 }
 
+.custom-radio > input:checked + span,
+.custom-radio-checkbox > input:checked + span,
+.custom-checkbox > input:checked + span{
+    @apply text-corp;
+}
+
+.custom-radio-checkbox > input:checked + span::before,
 .custom-checkbox > input:checked + span::before {
     @apply border-corp bg-corp;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");

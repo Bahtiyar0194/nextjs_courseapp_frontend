@@ -197,7 +197,7 @@ export default function MyCourses() {
                                                 <tr>
                                                     <td>{i++}</td>
                                                     <td><img className="h-8" src={API_URL + '/courses/images/posters/' + course.course_poster_file} /></td>
-                                                    <td><Link href={'/dashboard/my-courses/' + course.course_id}>{course.course_name}</Link></td>
+                                                    <td><Link href={'/dashboard/courses/' + course.course_id}>{course.course_name}</Link></td>
                                                     <td>{course.course_category_name}</td>
                                                     <td>{course.course_cost}</td>
                                                 </tr>

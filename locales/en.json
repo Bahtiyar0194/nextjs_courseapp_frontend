@@ -95,6 +95,13 @@
     "audioModal.form.upload_new_audio": "Upload new audio",
     "audioModal.form.upload_audio_file": "Click to upload the audio file",
 
+    "codeModal.code": "Program code",
+    "codeModal.title": "Add code",
+    "codeModal.code_language": "Program language",
+    "codeModal.code_theme": "Theme",
+    "codeModal.code_text": "Code",
+    "codeModal.enter_the_code": "Enter the code",
+
     "courseSectionModal.title": "Create course section",
     "section": "section",
     "section_name": "Section name",
@@ -102,6 +109,8 @@
     "task.task_name": "Task name",
     "task.task_description": "Task description",
     "task.answerTheQuestionModal.title": "Answer the question",
+
+    "task.add_test": "Add test",
 
     "logout": "Logout",
 

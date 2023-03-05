@@ -49,16 +49,26 @@ export default function CreateLesson() {
 
     const addLesson = async (course_id) => {
         setButtonLoader(true);
+
+        let blocks = JSON.parse(JSON.stringify(lesson_blocks));
+
+        for (let index = 0; index < blocks.length; index++) {
+            let lesson_block = blocks[index];
+            if (lesson_block.block_type_id == 5) {
+                let block = document.querySelector('#block_' + lesson_block.block_id);
+                let table = block.querySelector('.table').outerHTML;
+                blocks[index].content = table;
+            }
+        }
+
         const form_data = new FormData();
         form_data.append('lesson_name', lesson_name);
         form_data.append('lesson_description', lesson_description);
         form_data.append('lesson_type_id', 1);
         form_data.append('course_id', course_id);
-        form_data.append('lesson_blocks', JSON.stringify(lesson_blocks));
+        form_data.append('lesson_blocks', JSON.stringify(blocks));
         form_data.append('operation_type_id', 4);
-
-        console.log( JSON.stringify(lesson_blocks));
-
+        
         await axios.post('lessons/create', form_data)
             .then(response => {
                 router.push('/dashboard/lesson/' + response.data.data.lesson_id)
