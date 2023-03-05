@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { setLessonBlocks } from "../../../../store/slices/lessonBlocksSlice";
+import { setLessonBlocks, setLessonBlocksCount } from "../../../../store/slices/lessonBlocksSlice";
 import { useRouter } from "next/router";
 import { AiOutlineRead, AiOutlineCheck } from "react-icons/ai";
 import axios from "axios";
@@ -36,6 +36,7 @@ export default function CreateLesson() {
             .then(response => {
                 setCourse(response.data);
                 dispatch(setLessonBlocks([]));
+                dispatch(setLessonBlocksCount(0));
                 setShowFullLoader(false);
             }).catch(err => {
                 if (err.response) {
@@ -68,7 +69,7 @@ export default function CreateLesson() {
         form_data.append('course_id', course_id);
         form_data.append('lesson_blocks', JSON.stringify(blocks));
         form_data.append('operation_type_id', 4);
-        
+
         await axios.post('lessons/create', form_data)
             .then(response => {
                 router.push('/dashboard/lesson/' + response.data.data.lesson_id)

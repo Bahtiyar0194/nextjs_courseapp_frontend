@@ -2,12 +2,13 @@ import { AiOutlineCheck, AiOutlineInsertRowAbove, AiOutlineInsertRowLeft } from 
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from 'react-redux';
-import { setLessonBlocks } from "../../../store/slices/lessonBlocksSlice";
+import { setLessonBlocks, setLessonBlocksCount } from "../../../store/slices/lessonBlocksSlice";
 
 const TableModal = ({ closeModal }) => {
     const intl = useIntl();
     const dispatch = useDispatch();
     let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
+    const lesson_blocks_count = useSelector((state) => state.lessonBlocks.lesson_blocks_count);
 
     const [columns_count, setColumnsCount] = useState('');
     const [rows_count, setRowsCount] = useState('');
@@ -60,13 +61,13 @@ const TableModal = ({ closeModal }) => {
 
             table.insertAdjacentElement('beforeEnd', tbody);
             tableWrap.insertAdjacentElement('afterbegin', table);
-
+            
+            dispatch(setLessonBlocksCount(lesson_blocks_count + 1));
             lesson_blocks = [...lesson_blocks, {
-                'block_id': lesson_blocks.length,
+                'block_id': lesson_blocks_count + 1,
                 'block_type_id': 5,
                 'content': tableWrap.outerHTML,
             }];
-
             dispatch(setLessonBlocks(lesson_blocks));
 
             closeModal();

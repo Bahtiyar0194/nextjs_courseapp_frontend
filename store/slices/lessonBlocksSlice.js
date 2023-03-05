@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    lesson_blocks: []
+    lesson_blocks: [],
+    lesson_blocks_count: 0
 }
 
 export const lessonBlocksSlice = createSlice({
@@ -10,9 +11,12 @@ export const lessonBlocksSlice = createSlice({
     reducers: {
         setLessonBlocks: (state, action) => {
             state.lesson_blocks = action.payload
+        },
+        setLessonBlocksCount: (state, action) => {
+            state.lesson_blocks_count = action.payload
         }
     }
 });
 
-export const { setLessonBlocks } = lessonBlocksSlice.actions
+export const { setLessonBlocks, setLessonBlocksCount } = lessonBlocksSlice.actions
 export default lessonBlocksSlice.reducer

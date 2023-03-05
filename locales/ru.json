@@ -55,6 +55,8 @@
     "lesson.add_lesson": "Добавить урок",
     "lesson.add_material": "Добавить материал",
     "lesson.please_add_materials": "Добавьте материалы к уроку",
+    "lesson.delete_lesson_block_title": "Удаление материала из урока",
+    "lesson.delete_lesson_block_confirm": "Вы действительно хотите удалить данный материал?",
     "lesson.create_lesson": "Создание нового урока",
     "lesson.edit_lesson": "Редактирование урока",
     "no_added_lessons": "Нет добавленных уроков к данному курсу",
@@ -121,12 +123,17 @@
     "task.test.addTestQuestionsModal.correct_answer": "Правильный ответ",
     "task.test.addTestQuestionsModal.correct_answer_error": "Выберите правильный ответ",
 
+    "task.test.deleteTestQuestionsModal.title": "Удаление вопроса",
+    "task.test.deleteTestQuestionsModal.confirm": "Вы действительно хотите удалить данный вопрос?",
+
     "courseSectionModal.title": "Создание раздела курса",
     "section": "раздел",
     "section_name": "Название раздела",
 
     "logout": "Выйти из аккаунта",
 
+    "yes": "Да",
+    "no": "Нет",
     "done": "Готово",
     "save": "Сохранить",
     "save_changes": "Сохранить изменения",

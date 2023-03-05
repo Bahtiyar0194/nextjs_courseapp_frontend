@@ -9,8 +9,9 @@ import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../../components/ui/Breadcrumb";
 import ButtonLoader from "../../../../components/ui/ButtonLoader";
-import AddTestQuestionsModal from "../../../../components/lesson/lesson_task_modals/AddTestQuestionsModal";
 import Modal from "../../../../components/ui/Modal";
+import AddTestQuestionModal from "../../../../components/lesson/lesson_task_modals/AddTestQuestionModal";
+import DeleteTestQuestionModal from "../../../../components/lesson/lesson_task_modals/DeleteTestQuestionModal";
 import TestQuestionBlock from "../../../../components/lesson/lesson_task_modals/test_components/TestQuestionBlock";
 
 export default function CreateTest() {
@@ -24,7 +25,9 @@ export default function CreateTest() {
     const [error, setError] = useState([]);
     const [button_loader, setButtonLoader] = useState(false);
 
-    const [add_test_questions_modal, setAddTestQuestionsModal] = useState(false);
+    const [add_test_question_modal, setAddTestQuestionModal] = useState(false);
+    const [delete_test_question_modal, setDeleteTestQuestionModal] = useState(false);
+    const [delete_question_id, setDeleteQuestionId] = useState('');
 
     const [task_name, setTaskName] = useState('');
     const [task_description, setTaskDescription] = useState('');
@@ -46,6 +49,22 @@ export default function CreateTest() {
                     router.push('/error')
                 }
             });
+    }
+
+    const deleteTestQuestionBlock = (question_id) => {
+        setDeleteQuestionId(question_id);
+        setDeleteTestQuestionModal(true);
+    }
+
+    const moveTestQuestionBlock = (index, direction) => {
+        let newArr = JSON.parse(JSON.stringify(test_questions));
+        if (direction == 'up') {
+            newArr.splice(index - 1, 0, newArr.splice(index, 1)[0]);
+        }
+        else if (direction == 'down') {
+            newArr.splice(index + 1, 0, newArr.splice(index, 1)[0]);
+        }
+        setTestQuestions(newArr);
     }
 
     const createTestSubmit = async (lesson_id) => {
@@ -128,7 +147,8 @@ export default function CreateTest() {
                                     roles={roles}
                                     intl={intl}
                                     test_questions={test_questions}
-                                    setTestquestions={setTestQuestions}
+                                    moveTestQuestionBlock={moveTestQuestionBlock}
+                                    deleteTestQuestionBlock={deleteTestQuestionBlock}
                                     test_question={test_question}
                                     edit={true}
                                 />
@@ -138,7 +158,7 @@ export default function CreateTest() {
                         <p className="mb-4">{intl.formatMessage({ id: "task.test.addTestQuestionsModal.count_of_questions" })}: <span className="text-corp">{test_questions.length}</span></p>
 
                         <div className="btn-wrap">
-                            <button onClick={e => setAddTestQuestionsModal(true)} className="btn btn-primary">
+                            <button onClick={e => setAddTestQuestionModal(true)} className="btn btn-primary">
                                 {intl.formatMessage({ id: "task.test.addTestQuestionsModal.add_questions" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
                             </button>
                             <button onClick={e => createTestSubmit(lesson.lesson_id)} className="btn btn-outline-primary">
@@ -148,14 +168,22 @@ export default function CreateTest() {
                         </div>
                     </div>
 
-
-                    <Modal show={add_test_questions_modal} onClose={() => setAddTestQuestionsModal(false)} modal_title={intl.formatMessage({ id: "task.test.addTestQuestionsModal.title" })} modal_size="modal-2xl">
-                        <AddTestQuestionsModal
+                    <Modal show={add_test_question_modal} onClose={() => setAddTestQuestionModal(false)} modal_title={intl.formatMessage({ id: "task.test.addTestQuestionsModal.title" })} modal_size="modal-2xl">
+                        <AddTestQuestionModal
                             test_questions={test_questions}
                             setTestQuestions={setTestQuestions}
                             test_questions_count={test_questions_count}
                             setTestQuestionsCount={setTestQuestionsCount}
-                            closeModal={() => setAddTestQuestionsModal(false)} />
+                            closeModal={() => setAddTestQuestionModal(false)} />
+                    </Modal>
+
+                    <Modal
+                        show={delete_test_question_modal}
+                        onClose={() => setDeleteTestQuestionModal(false)}
+                        modal_title={intl.formatMessage({ id: "task.test.deleteTestQuestionsModal.title" })}
+                        modal_size="modal-xl"
+                    >
+                        <DeleteTestQuestionModal test_questions={test_questions} setTestQuestions={setTestQuestions} delete_question_id={delete_question_id} closeModal={() => setDeleteTestQuestionModal(false)} />
                     </Modal>
                 </>
                 :

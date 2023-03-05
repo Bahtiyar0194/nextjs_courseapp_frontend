@@ -1,21 +1,10 @@
-import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineDelete } from "react-icons/ai";
-const TestQuestionBlock = ({ index, roles, intl, test_questions, setTestquestions, test_question, edit }) => {
+import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import Modal from "../../../ui/Modal";
+import EditTestQuestionModal from "../EditTestQuestionModal";
+import { useState } from "react";
+const TestQuestionBlock = ({ index, roles, intl, test_questions, moveTestQuestionBlock, editTestQuestionBlock, deleteTestQuestionBlock, test_question, edit }) => {
 
-    function deleteTestQuestionBlock(question_id) {
-        let newArr = test_questions.filter(item => item.question_id !== question_id);
-        setTestquestions(newArr);
-    }
-
-    function moveTestQuestionBlock(index, direction) {
-        let newArr = JSON.parse(JSON.stringify(test_questions));
-        if (direction == 'up') {
-            newArr.splice(index - 1, 0, newArr.splice(index, 1)[0]);
-        }
-        else if (direction == 'down') {
-            newArr.splice(index + 1, 0, newArr.splice(index, 1)[0]);
-        }
-        setTestquestions(newArr);
-    }
+    const [edit_test_question_modal, setEditTestQuestionModal] = useState(false);
 
     return (
         <div className={"lesson-block " + (edit === true && "edit")}>
@@ -27,6 +16,7 @@ const TestQuestionBlock = ({ index, roles, intl, test_questions, setTestquestion
                     <div className='btn-wrap'>
                         {index > 0 && <button title={intl.formatMessage({ id: "move_up" })} onClick={e => moveTestQuestionBlock(index, 'up')} className="btn-up"><AiOutlineArrowUp /></button>}
                         {index != test_questions.length - 1 && <button title={intl.formatMessage({ id: "move_down" })} onClick={e => moveTestQuestionBlock(index, 'down')} className="btn-down"><AiOutlineArrowDown /></button>}
+                        <button title={intl.formatMessage({ id: "edit" })} onClick={e => setEditTestQuestionModal(true)} className="btn-edit"><AiOutlineEdit /></button>
                         <button title={intl.formatMessage({ id: "delete" })} onClick={e => deleteTestQuestionBlock(test_question.question_id)} className="btn-delete"><AiOutlineDelete /></button>
                     </div>
                 </div>
@@ -38,12 +28,24 @@ const TestQuestionBlock = ({ index, roles, intl, test_questions, setTestquestion
                     <p key={i}>
                         <label className="custom-radio-checkbox">
                             <input type="radio" disabled checked={answer.checked} />
-                            <span className="text-sm">{i + 1}. {answer.answer}</span>
+                            <span className="text-sm">{i + 1}. {answer.answer_value}</span>
                         </label>
                     </p>
                 ))
             }
+
+            <Modal
+                show={edit_test_question_modal}
+                onClose={() => setEditTestQuestionModal(false)}
+                modal_title={intl.formatMessage({ id: "task.test.editTestQuestionsModal.title" })}
+                modal_size="modal-xl"
+            >
+                <EditTestQuestionModal test_questions={test_questions} edit_question_id={test_question.question_id} closeModal={() => setEditTestQuestionModal(false)} />
+            </Modal>
+
         </div>
+
+
     )
 }
 

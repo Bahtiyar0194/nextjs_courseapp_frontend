@@ -3,10 +3,13 @@ import { Player } from 'video-react';
 import ReactAudioPlayer from 'react-audio-player';
 import parse from 'html-react-parser';
 import "../../node_modules/video-react/dist/video-react.css";
+import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setLessonBlocks } from '../../store/slices/lessonBlocksSlice';
 import { useIntl } from "react-intl";
 import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineDelete } from 'react-icons/ai';
+import Modal from '../ui/Modal';
+import DeleteLessonBlockModal from './lesson_block_modals/DeleteLessonBlockModal';
 
 import SyntaxHighlighter from "react-syntax-highlighter";
 import * as themes from "react-syntax-highlighter/dist/cjs/styles/hljs";
@@ -17,10 +20,12 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
     const dispatch = useDispatch();
     let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
     const roles = useSelector((state) => state.authUser.roles);
+    const [delete_lesson_block_modal, setDeleteLessonBlockModal] = useState(false);
+    const [delete_lesson_block_id, setDeleteLessonBlockId] = useState('');
 
     function deleteLessonBlock(block_id) {
-        let newArr = lesson_blocks.filter(item => item.block_id !== block_id);
-        dispatch(setLessonBlocks(newArr));
+        setDeleteLessonBlockId(block_id);
+        setDeleteLessonBlockModal(true);
     }
 
     function moveLessonBlock(index, direction, block_id) {
@@ -95,7 +100,17 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
                     {lesson_block.code}
                 </SyntaxHighlighter>
             }
+
+            <Modal
+                show={delete_lesson_block_modal}
+                onClose={() => setDeleteLessonBlockModal(false)}
+                modal_title={intl.formatMessage({ id: "lesson.delete_lesson_block_title" })}
+                modal_size="modal-xl"
+            >
+                <DeleteLessonBlockModal delete_lesson_block_id={delete_lesson_block_id} closeModal={() => setDeleteLessonBlockModal(false)} />
+            </Modal>
         </div>
+
     );
 };
 

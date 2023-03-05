@@ -4,7 +4,7 @@ import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { setLessonBlocks } from "../../../../store/slices/lessonBlocksSlice";
+import { setLessonBlocks, setLessonBlocksCount } from "../../../../store/slices/lessonBlocksSlice";
 import { AiOutlineRead, AiOutlineCheck } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
@@ -35,6 +35,7 @@ export default function EditLesson() {
             .then(response => {
                 setLesson(response.data.lesson);
                 dispatch(setLessonBlocks(response.data.lesson_blocks));
+                dispatch(setLessonBlocksCount(response.data.lesson_blocks.length));
                 setLessonName(response.data.lesson.lesson_name);
                 setLessonDescription(response.data.lesson.lesson_description);
                 setShowFullLoader(false);

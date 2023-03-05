@@ -5,15 +5,19 @@ import AnswerElemInput from "./test_components/AnswerElemInput";
 
 const AddTestQuestionsModal = ({ test_questions, setTestQuestions, test_questions_count, setTestQuestionsCount, closeModal }) => {
     const intl = useIntl();
-    const [question, setQuestion] = useState('');
+    const [question_input, setQuestionInput] = useState('');
     const [question_error, setQuestionError] = useState('');
 
     const initialAnswers = [
         {
-            answer_id: 1
+            answer_id: 1,
+            answer_value: '',
+            checked: false
         },
         {
-            answer_id: 2
+            answer_id: 2,
+            answer_value: '',
+            checked: false
         }
     ];
 
@@ -24,7 +28,9 @@ const AddTestQuestionsModal = ({ test_questions, setTestQuestions, test_question
     const addAnswerElem = () => {
         setAnswersCount(answers_count + 1);
         setAnswers([...answers, {
-            answer_id: answers_count + 1
+            answer_id: answers_count + 1,
+            answer_value: '',
+            checked: false
         }]);
     }
 
@@ -54,7 +60,8 @@ const AddTestQuestionsModal = ({ test_questions, setTestQuestions, test_question
             }
 
             question_answers.push({
-                answer: input.value,
+                answer_id: i,
+                answer_value: input.value,
                 checked: radio.checked
             })
         }
@@ -74,22 +81,22 @@ const AddTestQuestionsModal = ({ test_questions, setTestQuestions, test_question
             }
         }
 
-        if (question == '') {
+        if (question_input == '') {
             setQuestionError(intl.formatMessage({ id: "task.test.addTestQuestionsModal.question_error" }));
         }
         else {
             setQuestionError('')
         }
 
-        if(question != '' && empty_answers === 0 && correct_answers > 0){
+        if(question_input != '' && empty_answers === 0 && correct_answers > 0){
             setTestQuestionsCount(test_questions_count + 1);
             setTestQuestions([...test_questions, {
                 question_id: test_questions_count + 1,
-                question: question,
+                question: question_input,
                 answers: question_answers
             }]);
 
-            setQuestion('');
+            setQuestionInput('');
             setAnswers(initialAnswers);
             e.target.reset();
             closeModal();
@@ -101,7 +108,7 @@ const AddTestQuestionsModal = ({ test_questions, setTestQuestions, test_question
             <form onSubmit={e => createQuestionSubmit(e)}  encType="multipart/form-data">
                 <div className="form-group mt-4">
                     <AiOutlineQuestion />
-                    <input onInput={e => setQuestion(e.target.value)} type="text" value={question} placeholder=" " />
+                    <input onInput={e => setQuestionInput(e.target.value)} type="text" value={question_input} placeholder=" " />
                     <label className={(question_error && 'label-error')}>{question_error ? question_error : intl.formatMessage({ id: "task.test.addTestQuestionsModal.question" })}</label>
                 </div>
 

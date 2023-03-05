@@ -595,6 +595,22 @@ select option {
     @apply bg-active text-active;
 }
 
+.btn-danger{
+    @apply bg-red-500 text-white border-red-500 border;
+}
+
+.btn-danger:hover{
+    @apply bg-transparent text-red-500;
+}
+
+.btn-outline-danger{
+    @apply bg-transparent border border-red-500 text-red-500;
+}
+
+.btn-outline-danger:hover{
+    @apply bg-red-500 border border-red-500 text-white;
+}
+
 .btn-up,
 .btn-down,
 .btn-delete,

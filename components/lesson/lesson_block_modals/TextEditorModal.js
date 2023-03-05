@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from 'react-redux';
-import { setLessonBlocks } from '../../../store/slices/lessonBlocksSlice';
+import { setLessonBlocks, setLessonBlocksCount } from '../../../store/slices/lessonBlocksSlice';
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
@@ -49,6 +49,7 @@ const TextEditorModal = ({ closeModal }) => {
     const intl = useIntl();
     const dispatch = useDispatch();
     let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
+    const lesson_blocks_count = useSelector((state) => state.lessonBlocks.lesson_blocks_count);
     const [text, setText] = useState('');
     const [text_error, setTextError] = useState(false);
 
@@ -57,8 +58,9 @@ const TextEditorModal = ({ closeModal }) => {
             setTextError(true);
         }
         else {
+            dispatch(setLessonBlocksCount(lesson_blocks_count + 1));
             lesson_blocks = [...lesson_blocks, {
-                'block_id': lesson_blocks.length,
+                'block_id': lesson_blocks_count + 1,
                 'block_type_id': 1,
                 'content': text,
             }];

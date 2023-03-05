@@ -57,6 +57,8 @@
     "lesson.edit_lesson": "Сабақты қайта өңдеу",
     "lesson.add_material": "Материал қосу",
     "lesson.please_add_materials": "Сабаққа материал қосыңыз",
+    "lesson.delete_lesson_block_title": "Сабақтағы материалды жою",
+    "lesson.delete_lesson_block_confirm": "Сіз расыменде осы материалды жойғыңыз келеді ме?",
     "lesson.create_lesson": "Сабақ құру",
     "lesson.add_task": "Тапсырма қосу",
     "lesson_type.course_section": "Курстың бөлімі",
@@ -121,12 +123,17 @@
     "task.test.addTestQuestionsModal.correct_answer": "Дұрыс жауап",
     "task.test.addTestQuestionsModal.correct_answer_error": "Дұрыс жауапты көрсетіңіз",
 
+    "task.test.deleteTestQuestionsModal.title": "Сұрақты жою",
+    "task.test.deleteTestQuestionsModal.confirm": "Сіз расыменде осы сұрақты жойғыңыз келеді ме?",
+
     "courseSectionModal.title": "Курс бөлімін құру",
     "section": "бөлім",
     "section_name": "Бөлімнің атауы",
 
     "logout": "Аккаунттан шығу",
 
+    "yes": "Иә",
+    "no": "Жоқ",
     "done": "Дайын",
     "save": "Сақтау",
     "save_changes": "Өзгерістерді сақтау",

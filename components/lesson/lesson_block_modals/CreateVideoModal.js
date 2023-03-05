@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from 'react-redux';
-import { setLessonBlocks } from "../../../store/slices/lessonBlocksSlice";
+import { setLessonBlocks, setLessonBlocksCount } from "../../../store/slices/lessonBlocksSlice";
 import axios from "axios";
 
 const CreateVideoModal = ({ closeModal }) => {
@@ -15,6 +15,7 @@ const CreateVideoModal = ({ closeModal }) => {
     const [progress, setProgress] = useState(0);
     const dispatch = useDispatch();
     let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
+    const lesson_blocks_count = useSelector((state) => state.lessonBlocks.lesson_blocks_count);
 
     const [video_name, setVideoName] = useState('');
     const [video_type, setVideoType] = useState('video_file');
@@ -42,8 +43,10 @@ const CreateVideoModal = ({ closeModal }) => {
         await axios.post('lessons/upload_video', form_data, config)
             .then(response => {
                 const data = response.data.data;
+
+                dispatch(setLessonBlocksCount(lesson_blocks_count + 1));
                 lesson_blocks = [...lesson_blocks, {
-                    'block_id': lesson_blocks.length,
+                    'block_id': lesson_blocks_count + 1,
                     'file_type_id': data.file_type_id,
                     'file_id': data.file_id,
                     'file_name': data.file_name,

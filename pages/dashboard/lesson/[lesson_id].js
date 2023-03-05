@@ -19,8 +19,6 @@ export default function Lesson() {
     const intl = useIntl();
     const [lesson, setLesson] = useState([]);
     const lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
-    //const [tasks, setTasks] = useState([]);
-
     const roles = useSelector((state) => state.authUser.roles);
 
     const getLesson = async (lesson_id) => {
@@ -40,28 +38,10 @@ export default function Lesson() {
             });
     }
 
-    // const getTasks = async (lesson_id) => {
-    //     await axios.get('tasks/my_tasks/' + lesson_id)
-    //         .then(response => {
-    //             setTimeout(() => {
-    //                 setTasks(response.data);
-    //                 setShowFullLoader(false);
-    //             }, 500)
-    //         }).catch(err => {
-    //             if (err.response) {
-    //                 router.push('/error/' + err.response.status)
-    //             }
-    //             else {
-    //                 router.push('/error')
-    //             }
-    //         });
-    // }
-
     useEffect(() => {
         if (router.isReady) {
             const { lesson_id } = router.query;
             getLesson(lesson_id);
-            // getTasks(lesson_id);
         }
     }, [router.isReady]);
 
