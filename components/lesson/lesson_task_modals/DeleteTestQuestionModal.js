@@ -1,13 +1,18 @@
 import { AiOutlineDelete, AiOutlineStop } from "react-icons/ai";
 import { useIntl } from "react-intl";
+import { useDispatch, useSelector } from "react-redux";
+import { setTestQuestionBlocks } from "../../../store/slices/testQuestionBlocksSlice";
 
-const DeleteTestQuestionModal = ({ test_questions, setTestQuestions, delete_question_id, closeModal }) => {
+const DeleteTestQuestionModal = ({ delete_question_id, closeModal }) => {
     const intl = useIntl();
+
+    const dispatch = useDispatch();
+    let test_question_blocks = useSelector((state) => state.testQuestionBlocks.test_question_blocks);
 
     const deleteQuestionSubmit = async (e) => {
         e.preventDefault();
-        let newArr = test_questions.filter(item => item.question_id !== delete_question_id);
-        setTestQuestions(newArr);
+        let newArr = test_question_blocks.filter(item => item.question_id !== delete_question_id);
+        dispatch(setTestQuestionBlocks(newArr));
         closeModal();
     };
 

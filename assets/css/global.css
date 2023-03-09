@@ -424,7 +424,7 @@ select option {
 }
 
 .form-group > label {
-    @apply absolute left-8 top-3 pointer-events-none duration-200 z-0 text-inactive whitespace-nowrap;
+    @apply absolute left-8 top-3 pointer-events-none duration-200 z-0 text-inactive;
 }
 
 .form-group > label.label-error{
@@ -505,6 +505,12 @@ select option {
 .custom-radio-checkbox > input:not(:disabled):not(:checked) + span:hover::before,
 .custom-checkbox > input:not(:disabled):not(:checked) + span:hover::before {
     @apply border-corp;
+}
+
+.custom-radio > input:not(:disabled):not(:checked) + span.error,
+.custom-radio-checkbox > input:not(:disabled):not(:checked) + span.error,
+.custom-checkbox > input:not(:disabled):not(:checked) + span.error {
+    @apply text-danger;
 }
 
 .custom-radio > input:not(:disabled):not(:checked) + span.error::before,
@@ -1004,18 +1010,32 @@ select option {
     @apply text-4xl;
 }
 
-.lesson-block{
+.lesson-block,
+.test-question-block{
     @apply mb-4;
 }
 
-.lesson-block:last-child{
+.lesson-block:last-child,
+.test-question-block:last-child{
     @apply mb-0;
 }
 
-.lesson-block.edit{
+.lesson-block.edit,
+.test-question-block.edit{
     @apply bg-active border-active rounded-md p-4;
 }
 
-.lesson-block.edit:hover{
+.lesson-block.edit:hover,
+.test-question-block.edit:hover{
     @apply border-corp;
+}
+
+.lesson-block:first-child .btn-up,
+.test-question-block:first-child .btn-up{
+    @apply hidden;
+}
+
+.lesson-block:last-child .btn-down,
+.test-question-block:last-child .btn-down{
+    @apply hidden;
 }

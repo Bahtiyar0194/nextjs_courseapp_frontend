@@ -140,7 +140,7 @@ export default function EditLesson() {
 
                         <div className="btn-wrap">
                             <LessonBlockTypeModals />
-                            <button onClick={e => editLesson(lesson.lesson_id)} className="btn btn-outline-primary" type="submit">
+                            <button disabled={button_loader} onClick={e => editLesson(lesson.lesson_id)} className="btn btn-outline-primary" type="submit">
                                 {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
                                 <span>{intl.formatMessage({ id: "save_changes" })}</span>
                             </button>

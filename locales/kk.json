@@ -118,10 +118,11 @@
     "task.test.addTestQuestionsModal.question": "Сұрақ",
     "task.test.addTestQuestionsModal.question_error": "Сұрақты енгізіңіз",
     "task.test.addTestQuestionsModal.answer_variant": "Жауап нұсқасы",
-    "task.test.addTestQuestionsModal.answer_error": "толықтыру қажет",
+    "task.test.addTestQuestionsModal.answer_error": "толық болуы керек",
     "task.test.addTestQuestionsModal.add_variant": "Жауап нұсқасын қосу",
     "task.test.addTestQuestionsModal.correct_answer": "Дұрыс жауап",
     "task.test.addTestQuestionsModal.correct_answer_error": "Дұрыс жауапты көрсетіңіз",
+    "task.test.editTestQuestionsModal.title": "Тесттің сұрағын қайта өңдеу",
 
     "task.test.deleteTestQuestionsModal.title": "Сұрақты жою",
     "task.test.deleteTestQuestionsModal.confirm": "Сіз расыменде осы сұрақты жойғыңыз келеді ме?",

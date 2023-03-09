@@ -22,9 +22,7 @@ export default function Course() {
   const [lessons, setLessons] = useState([]);
   const roles = useSelector((state) => state.authUser.roles);
 
-  let lesson_count = 1;
   let section_count = 1;
-
 
   function move(element, direction, course_id) {
     let parent = element.closest('li');
