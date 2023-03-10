@@ -13,6 +13,9 @@ import ButtonLoader from "../../../../components/ui/ButtonLoader";
 import Modal from "../../../../components/ui/Modal";
 import DeleteTestQuestionModal from "../../../../components/lesson/lesson_task_modals/DeleteTestQuestionModal";
 import TestQuestionBlock from "../../../../components/lesson/lesson_task_modals/test_components/TestQuestionBlock";
+import CreateQuestionImageModal from "../../../../components/lesson/lesson_task_modals/test_components/CreateQuestionImageModal";
+import CreateQuestionAudioModal from "../../../../components/lesson/lesson_task_modals/test_components/CreateQuestionAudioModal";
+import { scrollIntoView } from "seamless-scroll-polyfill";
 
 export default function CreateTest() {
     const router = useRouter();
@@ -30,6 +33,12 @@ export default function CreateTest() {
 
     const [task_name, setTaskName] = useState('');
     const [task_description, setTaskDescription] = useState('');
+
+    const [imageModal, setImageModal] = useState(false);
+    const [audioModal, setAudioModal] = useState(false);
+    const [codeModal, setCodeModal] = useState(false);
+
+    const [question_index, setQuestionIndex] = useState(0);
 
     const dispatch = useDispatch();
     let test_question_blocks = useSelector((state) => state.testQuestionBlocks.test_question_blocks);
@@ -58,6 +67,7 @@ export default function CreateTest() {
         dispatch(setTestQuestionBlocks([...test_question_blocks, {
             question_id: test_question_blocks_count,
             question: '',
+            question_materials: [],
             answers: [
                 {
                     answer_id: 1,
@@ -71,6 +81,27 @@ export default function CreateTest() {
                 }
             ]
         }]));
+
+        setTimeout(() => {
+            let someElementsItems = document.querySelectorAll(".test-question-block");
+            let elem = someElementsItems[someElementsItems.length - 1]
+
+            elem.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+                inline: "center",
+            });
+        }, 200);
+    }
+
+    const createQuestionImage = (question_index) => {
+        setImageModal(true);
+        setQuestionIndex(question_index);
+    }
+
+    const createQuestionAudio = (question_index) => {
+        setAudioModal(true);
+        setQuestionIndex(question_index);
     }
 
     function moveTestQuestionBlock(element, direction) {
@@ -174,11 +205,7 @@ export default function CreateTest() {
 
                 if (question_input.value == '' || empty_answers > 0 || correct_answers === 0) {
                     if (task_name != '' || task_description != '') {
-                        block.scrollIntoView({
-                            behavior: "smooth",
-                            block: "center",
-                            inline: "center",
-                        });
+                        scrollIntoView(block, { behavior: "smooth", block: "center", inline: "center" });
                     }
                     blocks_error = true;
                     break;
@@ -205,11 +232,7 @@ export default function CreateTest() {
                         if (error.task_name || error.task_description) {
                             let card = document.querySelector('#create_wrap');
                             setTimeout(() => {
-                                card.scrollIntoView({
-                                    behavior: "smooth",
-                                    block: "center",
-                                    inline: "center",
-                                });
+                                scrollIntoView(card, { behavior: "smooth", block: "center", inline: "center" });
                             }, 200);
                         }
                     }
@@ -264,13 +287,15 @@ export default function CreateTest() {
                                         moveTestQuestionBlock={moveTestQuestionBlock}
                                         deleteTestQuestionBlock={deleteTestQuestionBlock}
                                         test_question={test_question}
+                                        createQuestionImage={createQuestionImage}
+                                        createQuestionAudio={createQuestionAudio}
                                         edit={true}
                                     />
                                 ))
                             }
                         </div>
 
-                        <p className="my-2">{intl.formatMessage({ id: "task.test.addTestQuestionsModal.count_of_questions" })}: <span className="text-corp">{test_question_blocks.length}</span></p>
+                        <p className="my-4">{intl.formatMessage({ id: "task.test.addTestQuestionsModal.count_of_questions" })}: <span className="text-corp">{test_question_blocks.length}</span></p>
                         {error.test_question_blocks && test_question_blocks.length == 0 && <p className="text-danger mb-4">{intl.formatMessage({ id: "task.test.addTestQuestionsModal.please_add_questions" })}</p>}
 
                         <div className="btn-wrap">
@@ -291,6 +316,14 @@ export default function CreateTest() {
                         modal_size="modal-xl"
                     >
                         <DeleteTestQuestionModal delete_question_id={delete_question_id} closeModal={() => setDeleteTestQuestionModal(false)} />
+                    </Modal>
+
+                    <Modal show={imageModal} onClose={() => setImageModal(false)} modal_title={intl.formatMessage({ id: "imageModal.title" })} modal_size="modal-xl">
+                        <CreateQuestionImageModal question_index={question_index} closeModal={() => setImageModal(false)} />
+                    </Modal>
+
+                    <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-xl">
+                        <CreateQuestionAudioModal question_index={question_index} closeModal={() => setAudioModal(false)} />
                     </Modal>
                 </>
                 :

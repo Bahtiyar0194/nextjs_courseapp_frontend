@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTestQuestionBlocks } from "../../../../store/slices/testQuestionBlocksSlice";
-import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineDelete, AiOutlineQuestion, AiOutlinePlusCircle } from "react-icons/ai";
+import Link from "next/link";
+import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineDelete, AiOutlineQuestion, AiOutlinePlusCircle, AiOutlinePlus, AiOutlineCaretDown, AiOutlineFileImage, AiOutlineAudio, AiOutlineCode} from "react-icons/ai";
 import AnswerElemInput from "./AnswerElemInput";
+import QuestionMaterialBlock from "../../QuestionMaterialBlock";
+import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
 
-const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuestionBlock, test_question, edit }) => {
+const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuestionBlock, test_question, createQuestionImage, createQuestionAudio, edit}) => {
 
     const dispatch = useDispatch();
     let test_question_blocks = useSelector((state) => state.testQuestionBlocks.test_question_blocks);
@@ -41,6 +44,29 @@ const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuest
                 <AiOutlineQuestion />
                 <input className="question-input" defaultValue={test_question.question} type="text" placeholder=" " />
                 <label className="question-label">{intl.formatMessage({ id: "task.test.addTestQuestionsModal.question" })}</label>
+            </div>
+
+            {test_question_blocks[index].question_materials.length > 0 &&
+                <div className="custom-grid mb-4">
+                    {test_question_blocks[index].question_materials.map((question_material_block, i) => (
+                        <div key={i} className="col-span-12 md:col-span-6 lg:col-span-4">
+                            <QuestionMaterialBlock question_material_block={question_material_block} question_index={index} edit={true} />
+                        </div>
+                    ))}
+                </div>
+            }
+
+            <div className="btn-wrap mb-6">
+                <CDropdown>
+                    <CDropdownToggle color="light" href="#">
+                        <AiOutlinePlus /> {intl.formatMessage({ id: "lesson.add_material" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
+                    </CDropdownToggle>
+                    <CDropdownMenu>
+                        <Link href={'#'} onClick={() => createQuestionImage(index)}><AiOutlineFileImage />{intl.formatMessage({ id: "imageModal.image" })}</Link>
+                        <Link href={'#'} onClick={() => createQuestionAudio(index)}><AiOutlineAudio />{intl.formatMessage({ id: "audioModal.audio" })}</Link>
+                        <Link href={'#'} onClick={() => setCodeModal(true)}><AiOutlineCode />{intl.formatMessage({ id: "codeModal.code" })}</Link>
+                    </CDropdownMenu>
+                </CDropdown>
             </div>
 
             {test_question.answers.map((answer, i) => (

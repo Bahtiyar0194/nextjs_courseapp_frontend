@@ -14,6 +14,7 @@ import DeleteLessonBlockModal from './lesson_block_modals/DeleteLessonBlockModal
 import SyntaxHighlighter from "react-syntax-highlighter";
 import * as themes from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import supportedLanguages from 'react-syntax-highlighter/dist/cjs/languages/hljs/supported-languages';
+import { scrollIntoView } from "seamless-scroll-polyfill";
 
 const LessonBlock = ({ lesson_block, index, edit }) => {
     const intl = useIntl();
@@ -43,12 +44,8 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
         dispatch(setLessonBlocks(newArr));
 
         setTimeout(() => {
-            element.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-                inline: "start",
-            });
-        }, 500);
+            scrollIntoView(element, { behavior: "smooth", block: "center", inline: "center" });
+        }, 200);
     }
 
     return (

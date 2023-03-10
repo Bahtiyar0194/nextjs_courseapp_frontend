@@ -17,6 +17,7 @@
         "react-quill": "^2.0.0",
         "react-redux": "^8.0.5",
         "react-syntax-highlighter": "^15.5.0",
+        "seamless-scroll-polyfill": "^2.3.3",
         "video-react": "^0.16.0"
     },
     "scripts": {

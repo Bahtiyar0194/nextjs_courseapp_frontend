@@ -130,6 +130,9 @@
     "task.test.deleteTestQuestionsModal.title": "Deleting a question",
     "task.test.deleteTestQuestionsModal.confirm": "Do you really want to delete this question?",
 
+    "task.test.deleteTestQuestionMaterialModal.title": "Deleting material",
+    "task.test.deleteTestQuestionMaterialModal.confirm": "Do you really want to delete this material?",
+
     "logout": "Logout",
 
     "yes": "Yes",

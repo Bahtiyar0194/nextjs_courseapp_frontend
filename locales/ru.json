@@ -127,6 +127,9 @@
     "task.test.deleteTestQuestionsModal.title": "Удаление вопроса",
     "task.test.deleteTestQuestionsModal.confirm": "Вы действительно хотите удалить данный вопрос?",
 
+    "task.test.deleteTestQuestionMaterialModal.title": "Удаление материала",
+    "task.test.deleteTestQuestionMaterialModal.confirm": "Вы действительно хотите удалить данный материал?",
+
     "courseSectionModal.title": "Создание раздела курса",
     "section": "раздел",
     "section_name": "Название раздела",

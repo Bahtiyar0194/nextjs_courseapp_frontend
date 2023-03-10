@@ -12,6 +12,7 @@ import Breadcrumb from "../../../../components/ui/Breadcrumb";
 import ButtonLoader from "../../../../components/ui/ButtonLoader";
 import LessonBlockTypeModals from "../../../../components/lesson/LessonBlockTypeModals";
 import LessonBlock from "../../../../components/lesson/LessonBlock";
+import { scrollIntoView } from "seamless-scroll-polyfill";
 
 export default function EditLesson() {
     const dispatch = useDispatch();
@@ -81,11 +82,7 @@ export default function EditLesson() {
                         if (error.lesson_name || error.lesson_description) {
                             let card = document.querySelector('#edit_wrap');
                             setTimeout(() => {
-                                card.scrollIntoView({
-                                    behavior: "smooth",
-                                    block: "start",
-                                    inline: "start",
-                                });
+                                scrollIntoView(card, { behavior: "smooth", block: "center", inline: "center" });
                             }, 200);
                         }
                     }
@@ -117,8 +114,8 @@ export default function EditLesson() {
                         {intl.formatMessage({ id: "lesson.edit_lesson" })}
                     </Breadcrumb>
 
-                    <div id="edit_wrap" className="col-span-12 relative">
-                        <div className="form-group mt-2">
+                    <div className="col-span-12 relative">
+                        <div id="edit_wrap" className="form-group mt-2">
                             <AiOutlineRead />
                             <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />
                             <label className={(error.lesson_name && 'label-error')}>{error.lesson_name ? error.lesson_name : intl.formatMessage({ id: "lesson_name" })}</label>

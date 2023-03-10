@@ -13,13 +13,6 @@ const AnswerElemInput = ({ index, question_id, question_index, answer, intl }) =
         dispatch(setTestQuestionBlocks(newArr));
     }
 
-    // const changeInput = (value) => {
-    //     let newArr = JSON.parse(JSON.stringify(test_question_blocks));
-    //     newArr[question_index].answers[index].answer_value = value;
-    //     dispatch(setTestQuestionBlocks(newArr));
-    //     console.log(newArr)
-    // }
-
     return (
         <div className="form-group mt-4">
             <AiOutlineFileDone />

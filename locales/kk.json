@@ -127,6 +127,9 @@
     "task.test.deleteTestQuestionsModal.title": "Сұрақты жою",
     "task.test.deleteTestQuestionsModal.confirm": "Сіз расыменде осы сұрақты жойғыңыз келеді ме?",
 
+    "task.test.deleteTestQuestionMaterialModal.title": "Материалды жою",
+    "task.test.deleteTestQuestionMaterialModal.confirm": "Сіз расыменде осы материалды жойғыңыз келеді ме?",
+
     "courseSectionModal.title": "Курс бөлімін құру",
     "section": "бөлім",
     "section_name": "Бөлімнің атауы",
