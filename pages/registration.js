@@ -136,14 +136,14 @@ export default function Registration() {
                 </div>
                 <div className="form-group">
                     <AiOutlineMail />
-                    <input autoComplete="new-email" onInput={e => setEmail(e.target.value)} type="email" value={email} placeholder=" " />
+                    <input autoComplete="new-email" onInput={e => setEmail(e.target.value)} type="text" value={email} placeholder=" " />
                     <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
                 </div>
                 <div className="form-group">
                     <AiOutlineKey />
                     <input autoComplete="new-password" onInput={e => setPassword(e.target.value)} type={showPassword ? 'text' : 'password'} value={password} placeholder=" " />
                     <label className={(error.password && 'label-error')}>{error.password ? error.password : intl.formatMessage({ id: "page.registration.form.password" })}</label>
-                    <div onClick={() => setShowPassword(!showPassword)}>{showPassword ? <AiOutlineEye className="right-0" /> : <AiOutlineEyeInvisible className="right-0" />}</div>
+                    <div onClick={() => setShowPassword(!showPassword)}>{showPassword ? <AiOutlineEye className="show-password" /> : <AiOutlineEyeInvisible className="show-password" />}</div>
                 </div>
                 <p className="text-sm">{intl.formatMessage({ id: "page.registration.form.have_an_account" })} <Link href={'/login'}>{intl.formatMessage({ id: "page.login.title" })}</Link></p>
 

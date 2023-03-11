@@ -14,6 +14,7 @@ import Modal from "../../../../components/ui/Modal";
 import DeleteTestQuestionModal from "../../../../components/lesson/lesson_task_modals/DeleteTestQuestionModal";
 import TestQuestionBlock from "../../../../components/lesson/lesson_task_modals/test_components/TestQuestionBlock";
 import CreateQuestionImageModal from "../../../../components/lesson/lesson_task_modals/test_components/CreateQuestionImageModal";
+import CreateQuestionCodeModal from "../../../../components/lesson/lesson_task_modals/test_components/CreateQuestionCodeModal";
 import CreateQuestionAudioModal from "../../../../components/lesson/lesson_task_modals/test_components/CreateQuestionAudioModal";
 import { scrollIntoView } from "seamless-scroll-polyfill";
 
@@ -85,12 +86,7 @@ export default function CreateTest() {
         setTimeout(() => {
             let someElementsItems = document.querySelectorAll(".test-question-block");
             let elem = someElementsItems[someElementsItems.length - 1]
-
-            elem.scrollIntoView({
-                behavior: "smooth",
-                block: "center",
-                inline: "center",
-            });
+            scrollIntoView(elem, { behavior: "smooth", block: "center", inline: "center" });
         }, 200);
     }
 
@@ -101,6 +97,11 @@ export default function CreateTest() {
 
     const createQuestionAudio = (question_index) => {
         setAudioModal(true);
+        setQuestionIndex(question_index);
+    }
+
+    const createQuestionCode = (question_index) => {
+        setCodeModal(true);
         setQuestionIndex(question_index);
     }
 
@@ -120,11 +121,7 @@ export default function CreateTest() {
         }
 
         setTimeout(() => {
-            parent.scrollIntoView({
-                behavior: "smooth",
-                block: "center",
-                inline: "center",
-            });
+            scrollIntoView(parent, { behavior: "smooth", block: "center", inline: "center" });
         }, 200);
     }
 
@@ -200,6 +197,7 @@ export default function CreateTest() {
 
                 all_questions.push({
                     question: question_input.value,
+                    question_materials: test_question_blocks[index].question_materials,
                     answers: answers
                 });
 
@@ -213,6 +211,7 @@ export default function CreateTest() {
             }
         }
 
+
         const form_data = new FormData();
         form_data.append('task_name', task_name);
         form_data.append('task_description', task_description);
@@ -223,6 +222,7 @@ export default function CreateTest() {
 
         await axios.post('tasks/create/' + lesson_id, form_data)
             .then(response => {
+                console.log(all_questions)
                 //router.push('/dashboard/lesson/' + lesson_id)
             }).catch(err => {
                 if (err.response) {
@@ -289,6 +289,7 @@ export default function CreateTest() {
                                         test_question={test_question}
                                         createQuestionImage={createQuestionImage}
                                         createQuestionAudio={createQuestionAudio}
+                                        createQuestionCode={createQuestionCode}
                                         edit={true}
                                     />
                                 ))
@@ -324,6 +325,10 @@ export default function CreateTest() {
 
                     <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-xl">
                         <CreateQuestionAudioModal question_index={question_index} closeModal={() => setAudioModal(false)} />
+                    </Modal>
+
+                    <Modal show={codeModal} onClose={() => setCodeModal(false)} modal_title={intl.formatMessage({ id: "codeModal.title" })} modal_size="modal-4xl">
+                        <CreateQuestionCodeModal question_index={question_index} closeModal={() => setCodeModal(false)} />
                     </Modal>
                 </>
                 :

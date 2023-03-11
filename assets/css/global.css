@@ -455,6 +455,10 @@ select option {
     @apply absolute text-2xl top-3 text-inactive;
 }
 
+.form-group .show-password{
+    @apply absolute right-0 text-2xl top-3 text-inactive;
+}
+
 .form-group-file input{
     @apply hidden;
 }

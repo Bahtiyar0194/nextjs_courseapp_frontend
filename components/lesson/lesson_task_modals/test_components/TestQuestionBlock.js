@@ -7,7 +7,7 @@ import AnswerElemInput from "./AnswerElemInput";
 import QuestionMaterialBlock from "../../QuestionMaterialBlock";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
 
-const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuestionBlock, test_question, createQuestionImage, createQuestionAudio, edit}) => {
+const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuestionBlock, test_question, createQuestionImage, createQuestionAudio, createQuestionCode, edit}) => {
 
     const dispatch = useDispatch();
     let test_question_blocks = useSelector((state) => state.testQuestionBlocks.test_question_blocks);
@@ -64,7 +64,7 @@ const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuest
                     <CDropdownMenu>
                         <Link href={'#'} onClick={() => createQuestionImage(index)}><AiOutlineFileImage />{intl.formatMessage({ id: "imageModal.image" })}</Link>
                         <Link href={'#'} onClick={() => createQuestionAudio(index)}><AiOutlineAudio />{intl.formatMessage({ id: "audioModal.audio" })}</Link>
-                        <Link href={'#'} onClick={() => setCodeModal(true)}><AiOutlineCode />{intl.formatMessage({ id: "codeModal.code" })}</Link>
+                        <Link href={'#'} onClick={() => createQuestionCode(index)}><AiOutlineCode />{intl.formatMessage({ id: "codeModal.code" })}</Link>
                     </CDropdownMenu>
                 </CDropdown>
             </div>

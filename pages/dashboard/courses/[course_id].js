@@ -12,6 +12,7 @@ import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import CreateCourseSectionModal from "../../../components/lesson/CreateCourseSectionModal";
 import API_URL from "../../../config/api";
+import { scrollIntoView } from "seamless-scroll-polyfill";
 
 export default function Course() {
   const router = useRouter();
@@ -38,6 +39,8 @@ export default function Course() {
         wrap.insertBefore(parent.nextElementSibling, parent);
       }
     }
+
+    scrollIntoView(parent, { behavior: "smooth", block: "center", inline: "center" });
 
     let childs = wrap.querySelectorAll("li");
     let newArr = [];
