@@ -45,6 +45,8 @@
     "page.my_courses.form.dont_have_course": "You don't have any courses created",
     "page.my_courses.form.add_course": "Add course",
 
+    "page.users.title": "Users",
+
     "lessons": "Course lessons",
     "no_added_lessons": "There are no lessons added to this course",
     "lesson_name": "Lesson name",
@@ -174,5 +176,6 @@
     "move_down": "Move down",
     "edit": "Edit",
     "delete": "Delete",
-    "continue": "Continue"
+    "continue": "Continue",
+    "created_at": "Created at"
 }

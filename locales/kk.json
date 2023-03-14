@@ -45,6 +45,8 @@
     "page.my_courses.form.dont_have_course": "Сізде құрылған курстар жоқ",
     "page.my_courses.form.add_course": "Курс қосу",
 
+    "page.users.title": "Қолданушылар",
+
     "lessons": "Курстың сабақтары",
     "no_added_lessons": "Бұл курсқа қосылған сабақтар жоқ",
     "lesson_name": "Сабақтың аты",
@@ -173,5 +175,6 @@
     "move_down": "Төменге түсіру",
     "edit": "Қайта өңдеу",
     "delete": "Жою",
-    "continue": "Жалғастыру"
+    "continue": "Жалғастыру",
+    "created_at": "Тіркелген уақыты"
 }

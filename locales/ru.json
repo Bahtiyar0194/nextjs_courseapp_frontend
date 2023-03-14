@@ -45,6 +45,8 @@
     "page.my_courses.form.dont_have_course": "У вас нет созданных курсов",
     "page.my_courses.form.add_course": "Добавить курс",
 
+    "page.users.title": "Пользователи",
+
     "lessons": "Уроки курса",
     "lesson_name": "Название урока",
     "lesson_description": "Краткое описание урока",
@@ -174,5 +176,6 @@
     "move_down": "Переместить вниз",
     "edit": "Редактировать",
     "delete": "Удалить",
-    "continue": "Продолжить"
+    "continue": "Продолжить",
+    "created_at": "Дата регистрации"
 }
