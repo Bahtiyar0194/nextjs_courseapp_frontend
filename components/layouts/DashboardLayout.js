@@ -63,7 +63,7 @@ export default function DashboardLayout(props) {
                 <div className="db__sidebar__menu">
                     <Link href={'/dashboard'}><AiOutlineDashboard /><span>{intl.formatMessage({ id: "page.dashboard.title" })}</span></Link>
                     <Link href={'#'}><AiOutlineBarChart /><span>Аналитика</span></Link>
-                    <Link href={'/dashboard/my-courses'}><AiOutlinePlaySquare /><span>{intl.formatMessage({ id: "page.my_courses.title" })}</span></Link>
+                    <Link href={'/dashboard/courses'}><AiOutlinePlaySquare /><span>{intl.formatMessage({ id: "page.my_courses.title" })}</span></Link>
                     <Link href={'#'}><AiOutlineClockCircle /><span>Расписание</span></Link>
                     <Link href={'#'}><AiOutlineTeam /><span>Пользователи</span></Link>
                     <Link href={'#'}><AiOutlineSetting /><span>Настройки</span></Link>

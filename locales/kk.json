@@ -58,10 +58,16 @@
     "lesson.add_material": "Материал қосу",
     "lesson.please_add_materials": "Сабаққа материал қосыңыз",
     "lesson.delete_lesson_block_title": "Сабақтағы материалды жою",
-    "lesson.delete_lesson_block_confirm": "Сіз расыменде осы материалды жойғыңыз келеді ме?",
+    "lesson.delete_lesson_block_confirm": "Сіз расыменде бұл материалды жойғыңыз келе ме?",
     "lesson.create_lesson": "Сабақ құру",
     "lesson.add_task": "Тапсырма қосу",
     "lesson_type.course_section": "Курстың бөлімі",
+    "lesson.deleteLessonModal.title": "Сабақты жою",
+    "lesson.deleteLessonModal.confirm": "Сіз расыменде бұл сабақты жойғыңыз келе ме? Осы сабаққа байланысты барлық нәрсе де жойылады.",
+
+    "courseSectionModal.title": "Курс бөлімін құру",
+    "section": "бөлім",
+    "section_name": "Бөлімнің атауы",
 
     "textModal.text": "Мәтін",
     "textModal.title": "Мәтін қосу",
@@ -106,11 +112,21 @@
 
     "task.task_name": "Тапсырманың атауы",
     "task.task_description": "Тапсырманың қысқаша сипаттамасы",
-    "task.answerTheQuestionModal.title": "Сұраққа жауап беру",
+    "task.tasks_for_this_lesson": "Осы сабақтың тапсырмалары",
+    "task.number_of_tasks": "Тапсырмалардың саны",
 
     "task.add_test": "Тест қосу",
     "task.test_name": "Тесттің атауы",
     "task.test_description": "Тесттің қысқаша сипаттамасы",
+    "task.start_the_test": "Тестілеуді бастау",
+    "task.continue_the_test": "Тестілеуді жалғастыру",
+    "task.test.select_your_answer": "Жауапты таңдаңыз",
+    "task.test.your_answer": "Сіздің жауап",
+    "task.test.correct_answer": "Дұрыс жауап",
+    "task.test.you_have_chosen_the_correct_answer": "Сіз дұрыс жауапты таңдадыңыз",
+    "task.test.correct_answers_count": "Дұрыс жауаптар саны",
+    "task.test.all_questions_count": "Сұрақтардың жалпы саны",
+
     "task.test.addTestQuestionsModal.title": "Тестке сұрақ қосу",
     "task.test.addTestQuestionsModal.add_questions": "Тестке сұрақ қосу",
     "task.test.addTestQuestionsModal.please_add_questions": "Тестке сұрақ қосыңыз",
@@ -122,17 +138,12 @@
     "task.test.addTestQuestionsModal.add_variant": "Жауап нұсқасын қосу",
     "task.test.addTestQuestionsModal.correct_answer": "Дұрыс жауап",
     "task.test.addTestQuestionsModal.correct_answer_error": "Дұрыс жауапты көрсетіңіз",
-    "task.test.editTestQuestionsModal.title": "Тесттің сұрағын қайта өңдеу",
 
     "task.test.deleteTestQuestionsModal.title": "Сұрақты жою",
-    "task.test.deleteTestQuestionsModal.confirm": "Сіз расыменде осы сұрақты жойғыңыз келеді ме?",
+    "task.test.deleteTestQuestionsModal.confirm": "Сіз расыменде осы сұрақты жойғыңыз келе ме?",
 
     "task.test.deleteTestQuestionMaterialModal.title": "Материалды жою",
-    "task.test.deleteTestQuestionMaterialModal.confirm": "Сіз расыменде осы материалды жойғыңыз келеді ме?",
-
-    "courseSectionModal.title": "Курс бөлімін құру",
-    "section": "бөлім",
-    "section_name": "Бөлімнің атауы",
+    "task.test.deleteTestQuestionMaterialModal.confirm": "Сіз расыменде осы материалды жойғыңыз келе ме?",
 
     "logout": "Аккаунттан шығу",
 
@@ -161,5 +172,6 @@
     "move_up": "Жоғары көтеру",
     "move_down": "Төменге түсіру",
     "edit": "Қайта өңдеу",
-    "delete": "Жою"
+    "delete": "Жою",
+    "continue": "Жалғастыру"
 }

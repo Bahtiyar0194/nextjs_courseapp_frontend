@@ -43,7 +43,6 @@ const CreateVideoModal = ({ closeModal }) => {
         await axios.post('lessons/upload_video', form_data, config)
             .then(response => {
                 const data = response.data.data;
-
                 dispatch(setLessonBlocksCount(lesson_blocks_count + 1));
                 lesson_blocks = [...lesson_blocks, {
                     'block_id': lesson_blocks_count + 1,

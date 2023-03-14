@@ -1,7 +1,7 @@
 import { AiOutlineDelete, AiOutlineStop } from "react-icons/ai";
 import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
-import { setTestQuestionBlocks } from "../../../store/slices/testQuestionBlocksSlice";
+import { setTestQuestionBlocks } from "../../../../store/slices/testQuestionBlocksSlice";
 
 const DeleteTestQuestionModal = ({ delete_question_id, closeModal }) => {
     const intl = useIntl();

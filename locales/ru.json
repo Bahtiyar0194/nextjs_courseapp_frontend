@@ -62,6 +62,12 @@
     "no_added_lessons": "Нет добавленных уроков к данному курсу",
     "lesson.add_task": "Добавить задание",
     "lesson_type.course_section": "Раздел курса",
+    "lesson.deleteLessonModal.title": "Удаление урока",
+    "lesson.deleteLessonModal.confirm": "Вы действительно хотите удалить данный урок? Все связанное с ним будет также удалено.",
+
+    "courseSectionModal.title": "Создание раздела курса",
+    "section": "раздел",
+    "section_name": "Название раздела",
 
     "textModal.text": "Текст",
     "textModal.title": "Добавление текста",
@@ -106,11 +112,21 @@
 
     "task.task_name": "Название задания",
     "task.task_description": "Краткое описание задания",
-    "task.answerTheQuestionModal.title": "Ответ на вопрос",
+    "task.tasks_for_this_lesson": "Задания к этому уроку",
+    "task.number_of_tasks": "Количество задании",
 
     "task.add_test": "Добавление теста",
     "task.test_name": "Название теста",
     "task.test_description": "Описание теста",
+    "task.start_the_test": "Начать тестирование",
+    "task.continue_the_test": "Продолжить тестирование",
+    "task.test.select_your_answer": "Укажите ваш ответ",
+    "task.test.your_answer": "Ваш ответ",
+    "task.test.correct_answer": "Правильный ответ",
+    "task.test.you_have_chosen_the_correct_answer": "Вы выбрали правильный ответ",
+    "task.test.correct_answers_count": "Правильных ответов",
+    "task.test.all_questions_count": "Всего вопросов",
+
     "task.test.addTestQuestionsModal.title": "Добавление вопроса к тесту",
     "task.test.addTestQuestionsModal.add_questions": "Добавить вопрос к тесту",
     "task.test.addTestQuestionsModal.please_add_questions": "Добавьте вопросы к тесту",
@@ -121,18 +137,14 @@
     "task.test.addTestQuestionsModal.answer_error": "нужно заполнить",
     "task.test.addTestQuestionsModal.add_variant": "Добавить вариант ответа",
     "task.test.addTestQuestionsModal.correct_answer": "Правильный ответ",
-    "task.test.addTestQuestionsModal.correct_answer_error": "Выберите правильный ответ",
-    "task.test.editTestQuestionsModal.title": "Редактирование тестового вопроса",
+    "task.test.addTestQuestionsModal.correct_answer_error": "Укажите правильный ответ",
+
 
     "task.test.deleteTestQuestionsModal.title": "Удаление вопроса",
     "task.test.deleteTestQuestionsModal.confirm": "Вы действительно хотите удалить данный вопрос?",
 
     "task.test.deleteTestQuestionMaterialModal.title": "Удаление материала",
     "task.test.deleteTestQuestionMaterialModal.confirm": "Вы действительно хотите удалить данный материал?",
-
-    "courseSectionModal.title": "Создание раздела курса",
-    "section": "раздел",
-    "section_name": "Название раздела",
 
     "logout": "Выйти из аккаунта",
 
@@ -161,5 +173,6 @@
     "move_up": "Переместить вверх",
     "move_down": "Переместить вниз",
     "edit": "Редактировать",
-    "delete": "Удалить"
+    "delete": "Удалить",
+    "continue": "Продолжить"
 }

@@ -4,7 +4,7 @@ import { setTestQuestionBlocks } from "../../../../store/slices/testQuestionBloc
 import Link from "next/link";
 import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineDelete, AiOutlineQuestion, AiOutlinePlusCircle, AiOutlinePlus, AiOutlineCaretDown, AiOutlineFileImage, AiOutlineAudio, AiOutlineCode} from "react-icons/ai";
 import AnswerElemInput from "./AnswerElemInput";
-import QuestionMaterialBlock from "../../QuestionMaterialBlock";
+import TestQuestionMaterialBlock from "./TestQuestionMaterialBlock";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
 
 const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuestionBlock, test_question, createQuestionImage, createQuestionAudio, createQuestionCode, edit}) => {
@@ -50,7 +50,7 @@ const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuest
                 <div className="custom-grid mb-4">
                     {test_question_blocks[index].question_materials.map((question_material_block, i) => (
                         <div key={i} className="col-span-12 md:col-span-6 lg:col-span-4">
-                            <QuestionMaterialBlock question_material_block={question_material_block} question_index={index} edit={true} />
+                            <TestQuestionMaterialBlock question_material_block={question_material_block} question_index={index} edit={true} />
                         </div>
                     ))}
                 </div>

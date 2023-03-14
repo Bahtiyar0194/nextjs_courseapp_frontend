@@ -114,7 +114,7 @@ export default function EditLesson() {
                         {intl.formatMessage({ id: "lesson.edit_lesson" })}
                     </Breadcrumb>
 
-                    <div className="col-span-12 relative">
+                    <div className="col-span-12">
                         <div id="edit_wrap" className="form-group mt-2">
                             <AiOutlineRead />
                             <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />

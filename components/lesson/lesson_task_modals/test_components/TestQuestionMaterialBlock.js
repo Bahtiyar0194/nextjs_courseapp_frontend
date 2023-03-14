@@ -1,18 +1,18 @@
-import API_URL from '../../config/api';
+import API_URL from '../../../../config/api';
 import ReactAudioPlayer from 'react-audio-player';
-import "../../node_modules/video-react/dist/video-react.css";
+import "../../../../node_modules/video-react/dist/video-react.css";
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import { useIntl } from "react-intl";
 import { AiOutlineDelete } from 'react-icons/ai';
-import Modal from '../ui/Modal';
-import DeleteTestQuestionMaterialBlockModal from './lesson_task_modals/DeleteTestQuestionMaterialBlockModal';
+import Modal from '../../../ui/Modal';
+import DeleteTestQuestionMaterialBlockModal from './DeleteTestQuestionMaterialBlockModal';
 
 import SyntaxHighlighter from "react-syntax-highlighter";
 import * as themes from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
-const QuestionMaterialBlock = ({ question_material_block, question_index, edit }) => {
+const TestQuestionMaterialBlock = ({ question_material_block, question_index, edit }) => {
     const intl = useIntl();
     const dispatch = useDispatch();
 
@@ -69,4 +69,4 @@ const QuestionMaterialBlock = ({ question_material_block, question_index, edit }
     );
 };
 
-export default QuestionMaterialBlock;
+export default TestQuestionMaterialBlock;

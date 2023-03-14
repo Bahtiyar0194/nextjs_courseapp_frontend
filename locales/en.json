@@ -62,6 +62,12 @@
     "lesson.create_lesson": "Create lesson",
     "lesson.add_task": "Add task",
     "lesson_type.course_section": "Course section",
+    "lesson.deleteLessonModal.title": "Delete lesson",
+    "lesson.deleteLessonModal.confirm": "Do you really want to delete this lesson? Everything related to it will also be deleted.",
+
+    "courseSectionModal.title": "Create course section",
+    "section": "section",
+    "section_name": "Section name",
 
     "textModal.text": "Text",
     "textModal.title": "Add text",
@@ -104,17 +110,24 @@
     "codeModal.code_text": "Code",
     "codeModal.enter_the_code": "Enter the code",
 
-    "courseSectionModal.title": "Create course section",
-    "section": "section",
-    "section_name": "Section name",
 
     "task.task_name": "Task name",
     "task.task_description": "Task description",
-    "task.answerTheQuestionModal.title": "Answer the question",
+    "task.tasks_for_this_lesson": "Tasks for this lesson",
+    "task.number_of_tasks": "Number of tasks",
 
     "task.add_test": "Add test",
     "task.test_name": "Test name",
     "task.test_description": "Test description",
+    "task.start_the_test": "Start the test",
+    "task.continue_the_test": "Continue the test",
+    "task.test.select_your_answer": "Select your answer",
+    "task.test.your_answer": "Your answer",
+    "task.test.correct_answer": "Correct answer",
+    "task.test.you_have_chosen_the_correct_answer": "You have chosen the correct answer",
+    "task.test.correct_answers_count": "Correct answers",
+    "task.test.all_questions_count": "All questions",
+
     "task.test.addTestQuestionsModal.title": "Adding a question to a test",
     "task.test.addTestQuestionsModal.add_questions": "Add a question to the test",
     "task.test.addTestQuestionsModal.please_add_questions": "Add questions to the test",
@@ -160,5 +173,6 @@
     "move_up": "Move up",
     "move_down": "Move down",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "continue": "Continue"
 }

@@ -11,7 +11,7 @@ import Link from "next/link";
 import Breadcrumb from "../../../../components/ui/Breadcrumb";
 import ButtonLoader from "../../../../components/ui/ButtonLoader";
 import Modal from "../../../../components/ui/Modal";
-import DeleteTestQuestionModal from "../../../../components/lesson/lesson_task_modals/DeleteTestQuestionModal";
+import DeleteTestQuestionModal from "../../../../components/lesson/lesson_task_modals/test_components/DeleteTestQuestionModal";
 import TestQuestionBlock from "../../../../components/lesson/lesson_task_modals/test_components/TestQuestionBlock";
 import CreateQuestionImageModal from "../../../../components/lesson/lesson_task_modals/test_components/CreateQuestionImageModal";
 import CreateQuestionCodeModal from "../../../../components/lesson/lesson_task_modals/test_components/CreateQuestionCodeModal";
@@ -218,11 +218,11 @@ export default function CreateTest() {
         form_data.append('task_type_id', 1);
         form_data.append('test_question_blocks', JSON.stringify(all_questions));
         form_data.append('test_question_blocks_error', blocks_error);
-        form_data.append('operation_type_id', 10);
+        form_data.append('operation_type_id', 6);
 
         await axios.post('tasks/create/' + lesson_id, form_data)
             .then(response => {
-                console.log(all_questions)
+                //console.log(all_questions)
                 //router.push('/dashboard/lesson/' + lesson_id)
             }).catch(err => {
                 if (err.response) {
@@ -264,7 +264,7 @@ export default function CreateTest() {
                         {intl.formatMessage({ id: "task.add_test" })}
                     </Breadcrumb>
 
-                    <div className="col-span-12 relative">
+                    <div className="col-span-12">
                         <div id="create_wrap" className="form-group mt-2">
                             <AiOutlineFileDone />
                             <input onInput={e => setTaskName(e.target.value)} type="text" value={task_name} placeholder=" " />
