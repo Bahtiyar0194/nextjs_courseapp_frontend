@@ -19,7 +19,7 @@ const CreateImageModal = ({ closeModal }) => {
 
     const [image_name, setImageName] = useState('');
     const [image_type, setImageType] = useState('image_file');
-    const [image_width, setImageWidth] = useState('w-full');
+    const [image_width, setImageWidth] = useState('col-span-12');
     const [image_file, setImageFile] = useState('');
 
     const createImageSubmit = async (e) => {
@@ -102,19 +102,23 @@ const CreateImageModal = ({ closeModal }) => {
 
                     <div className="btn-wrap-lg mb-4">
                         <label className="custom-radio">
-                            <input type="radio" onChange={e => setImageWidth('w-full')} defaultChecked name="image_width" />
+                            <input type="radio" onChange={e => setImageWidth('col-span-12')} defaultChecked name="image_width" />
                             <span>100%</span>
                         </label>
 
 
                         <label className="custom-radio">
-                            <input type="radio" onChange={e => setImageWidth('w-1/2')} name="image_width" />
+                            <input type="radio" onChange={e => setImageWidth('col-span-12 md:col-span-6')} name="image_width" />
                             <span>50%</span>
                         </label>
 
+                        <label className="custom-radio">
+                            <input type="radio" onChange={e => setImageWidth('col-span-12 lg:col-span-4')} name="image_width" />
+                            <span>33%</span>
+                        </label>
 
                         <label className="custom-radio">
-                            <input type="radio" onChange={e => setImageWidth('w-1/4')} name="image_width" />
+                            <input type="radio" onChange={e => setImageWidth('col-span-12 md:col-span-6 lg:col-span-3')} name="image_width" />
                             <span>25%</span>
                         </label>
                     </div>

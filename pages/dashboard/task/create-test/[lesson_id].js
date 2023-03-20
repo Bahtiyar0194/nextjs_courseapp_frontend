@@ -222,8 +222,7 @@ export default function CreateTest() {
 
         await axios.post('tasks/create/' + lesson_id, form_data)
             .then(response => {
-                //console.log(all_questions)
-                //router.push('/dashboard/lesson/' + lesson_id)
+                router.push('/dashboard/lesson/' + lesson_id);
             }).catch(err => {
                 if (err.response) {
                     if (err.response.status == 422) {
@@ -258,7 +257,7 @@ export default function CreateTest() {
             {roles.includes(2) ?
                 <>
                     <Breadcrumb>
-                        <Link href={'/dashboard/courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+                        <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
                         <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
                         <Link href={'/dashboard/lesson/' + lesson.lesson_id}>{lesson.lesson_name}</Link>
                         {intl.formatMessage({ id: "task.add_test" })}

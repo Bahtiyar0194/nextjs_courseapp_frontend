@@ -108,7 +108,7 @@ export default function CreateLesson() {
             {roles.includes(2) ?
                 <>
                     <Breadcrumb>
-                        <Link href={'/dashboard/courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+                        <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
                         <Link href={'/dashboard/courses/' + course.course_id}>{course.course_name}</Link>
                         {intl.formatMessage({ id: "lesson.create_lesson" })}
                     </Breadcrumb>
@@ -127,14 +127,16 @@ export default function CreateLesson() {
                         </div>
 
                         {lesson_blocks.length > 0 &&
-                            lesson_blocks.map((lesson_block, i) => (
-                                <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
-                            ))
+                            <div className="custom-grid">
+                                {lesson_blocks.map((lesson_block, i) => (
+                                    <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
+                                ))}
+                            </div>
                         }
 
                         {error.lesson_blocks && lesson_blocks.length == 0 && <p className="text-danger text-sm mb-4">{intl.formatMessage({ id: "lesson.please_add_materials" })}</p>}
 
-                        <div className="btn-wrap">
+                        <div className="btn-wrap mt-4">
                             <LessonBlockTypeModals />
                             <button disabled={button_loader} onClick={e => addLesson(course.course_id)} className="btn btn-outline-primary" type="submit">
                                 {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}

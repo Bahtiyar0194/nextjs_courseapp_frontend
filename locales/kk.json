@@ -31,6 +31,9 @@
 
     "page.dashboard.title": "Жеке кабинет",
 
+    "page.courses_catalogue.title": "Курстар каталогы",
+    "page.courses_catalogue.go_to_catalogue": "Курстар каталогына көшу",
+
     "page.my_courses.title": "Менің курстарым",
     "page.my_courses.form.course_create": "Жаңа курс құру",
     "page.my_courses.form.course_name": "Курстың атауы",
@@ -42,10 +45,16 @@
     "page.my_courses.form.course_poster": "Курстың мұқабасы",
     "page.my_courses.form.course_cost": "Курстың бағасы",
     "page.my_courses.form.free_course": "Курс тегін",
-    "page.my_courses.form.dont_have_course": "Сізде құрылған курстар жоқ",
+    "page.my_courses.buy_a_course": "Сатып алу",
+    "page.my_courses.get_the_course_for_free": "Курсқа тегін жазылу",
+    "page.my_courses.you_are_subscribed_to_this_course": "Сіз осы курсқа жазулысыз",
+    "page.my_courses.you_are_not_subscribed_to_this_course": "Сіз бұл курсқа жазылмағансыз",
+    "page.my_courses.form.dont_have_created_courses": "Сізде құрылған курстар жоқ",
+    "page.my_courses.form.dont_have_purchased_courses": "Сізде сатып алынған курстар жоқ",
     "page.my_courses.form.add_course": "Курс қосу",
 
     "page.users.title": "Қолданушылар",
+    "page.users.edit_user_title": "Қолданушының деректерін қайта өңдеу",
 
     "lessons": "Курстың сабақтары",
     "no_added_lessons": "Бұл курсқа қосылған сабақтар жоқ",
@@ -176,5 +185,7 @@
     "edit": "Қайта өңдеу",
     "delete": "Жою",
     "continue": "Жалғастыру",
-    "created_at": "Тіркелген уақыты"
+    "created_at": "Тіркелген уақыты",
+    "views": "Қараулар",
+    "tasks": "Тапсырмалар"
 }

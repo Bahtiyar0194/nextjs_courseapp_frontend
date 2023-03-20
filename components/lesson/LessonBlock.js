@@ -49,7 +49,7 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
     }
 
     return (
-        <div id={'block_' + lesson_block.block_id} className={"lesson-block " + (edit === true && "edit")}>
+        <div id={'block_' + lesson_block.block_id} className={"lesson-block " + (edit === true ? "edit " : " ") + (lesson_block.file_type_id == 4 ? lesson_block.image_width : "col-span-12")}>
             {roles.includes(2) && edit === true &&
                 <div className="flex justify-between items-center border-b-active pb-4 mb-4">
                     <div>
@@ -87,7 +87,7 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
             }
 
             {lesson_block.file_type_id == 4 &&
-                <img className={lesson_block.image_width} src={API_URL + '/lessons/image/' + lesson_block.file_id} />
+                <img src={API_URL + '/lessons/image/' + lesson_block.file_id} />
             }
 
             {lesson_block.block_type_id == 5 && parse(lesson_block.content)}

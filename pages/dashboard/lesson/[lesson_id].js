@@ -67,10 +67,16 @@ export default function Lesson() {
 
     return (
         <DashboardLayout showLoader={showFullLoader} title={lesson.lesson_name}>
-            {lesson.lesson_id ?
+            {lesson.lesson_id
+                ?
                 <>
                     <Breadcrumb>
-                        <Link href={'/dashboard/courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+                        {lesson.subscribed == true
+                            ?
+                            <Link href={'/dashboard/courses/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+                            :
+                            <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
+                        }
                         <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
                         {lesson.lesson_name}
                     </Breadcrumb>
@@ -86,44 +92,54 @@ export default function Lesson() {
                             </div>
 
                             <Modal show={delete_lesson_modal} onClose={() => setDeleteLessonModal(false)} modal_title={intl.formatMessage({ id: "lesson.deleteLessonModal.title" })} modal_size="modal-xl">
-                                <DeleteLessonModal course_id={lesson.course_id} delete_lesson_id={lesson.lesson_id} closeModal={() => setDeleteLessonModal(false)} />
+                                <DeleteLessonModal course_id={lesson.course_id} delete_lesson_id={lesson.lesson_id} redirect={true} getLessons={false} closeModal={() => setDeleteLessonModal(false)} />
                             </Modal>
                         </>
                     }
 
-                    <div className={'col-span-12 ' + (lesson_tasks.length > 0 && 'lg:col-span-8')}>
-                        <div className="card p-3 lg:p-6">
-                            <h1>{lesson.lesson_name}</h1>
-                            <p className="text-lg mb-6">{lesson.lesson_description}</p>
-
-                            {lesson_blocks.length > 0 && <hr className="mb-6"></hr>}
-
-                            {lesson_blocks.map((lesson_block, i) => (
-                                <LessonBlock key={i} lesson_block={lesson_block} index={i} />
-                            ))}
-                        </div>
-                    </div>
-
-                    {lesson_tasks.length > 0 &&
-                        <div className="col-span-12 lg:col-span-4">
-                            <StickyBox offsetTop={6} offsetBottom={6}>
+                    {lesson.subscribed == true
+                        ?
+                        <>
+                            <div className={'col-span-12 ' + (lesson_tasks.length > 0 && 'lg:col-span-8')}>
                                 <div className="card p-3 lg:p-6">
-                                    <h3 className="mb-1">{intl.formatMessage({ id: "task.tasks_for_this_lesson" })}</h3>
-                                    <p className="text-inactive">{intl.formatMessage({ id: "task.number_of_tasks" })}: <span className="font-medium text-corp">{lesson_tasks.length}</span></p>
-                                    <hr className="mb-0"></hr>
-                                    <ul className="tasks-list-group">
-                                        {lesson_tasks.map((lesson_task, i) => (
-                                            <li key={i}>
-                                                <Link href={"/dashboard/task/" + lesson_task.task_id} className="block">
-                                                    <h5 className="mb-1">{lesson_task.task_name}</h5>
-                                                    <p className="text-active mb-2">{lesson_task.task_description.substring(0, 200)}{lesson_task.task_description.length > 200 && '...'}</p>
-                                                    <span className="badge badge-light">{lesson_task.task_type_name}</span>
-                                                </Link>
-                                            </li>
+                                    <h1>{lesson.lesson_name}</h1>
+                                    <p className="text-lg mb-6">{lesson.lesson_description}</p>
+
+                                    {lesson_blocks.length > 0 && <hr className="mb-6"></hr>}
+                                    <div className="custom-grid">
+                                        {lesson_blocks.map((lesson_block, i) => (
+                                            <LessonBlock key={i} lesson_block={lesson_block} index={i} />
                                         ))}
-                                    </ul>
+                                    </div>
                                 </div>
-                            </StickyBox>
+                            </div>
+
+                            {lesson_tasks.length > 0 &&
+                                <div className="col-span-12 lg:col-span-4">
+                                    <StickyBox offsetTop={6} offsetBottom={6}>
+                                        <div className="card p-3 lg:p-6">
+                                            <h3 className="mb-1">{intl.formatMessage({ id: "task.tasks_for_this_lesson" })}</h3>
+                                            <p className="text-inactive">{intl.formatMessage({ id: "task.number_of_tasks" })}: <span className="font-medium text-corp">{lesson_tasks.length}</span></p>
+                                            <hr className="mb-0"></hr>
+                                            <ul className="tasks-list-group">
+                                                {lesson_tasks.map((lesson_task, i) => (
+                                                    <li key={i}>
+                                                        <Link href={"/dashboard/task/" + lesson_task.task_id} className="block">
+                                                            <h5 className="mb-1">{lesson_task.task_name}</h5>
+                                                            <p className="text-active mb-2">{lesson_task.task_description.substring(0, 200)}{lesson_task.task_description.length > 200 && '...'}</p>
+                                                            <span className="badge badge-light">{lesson_task.task_type_name}</span>
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </StickyBox>
+                                </div>
+                            }
+                        </>
+                        :
+                        <div className="col-span-12">
+                            {intl.formatMessage({ id: "page.my_courses.you_are_not_subscribed_to_this_course" })}
                         </div>
                     }
                 </>

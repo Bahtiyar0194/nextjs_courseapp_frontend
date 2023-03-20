@@ -108,7 +108,7 @@ export default function EditLesson() {
             {roles.includes(2) ?
                 <>
                     <Breadcrumb>
-                        <Link href={'/dashboard/courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+                        <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
                         <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
                         <Link href={'/dashboard/lesson/' + lesson.lesson_id}>{lesson.lesson_name}</Link>
                         {intl.formatMessage({ id: "lesson.edit_lesson" })}
@@ -126,16 +126,17 @@ export default function EditLesson() {
                             <textarea cols="20" onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
                             <label className={(error.lesson_description && 'label-error')}>{error.lesson_description ? error.lesson_description : intl.formatMessage({ id: "lesson_description" })}</label>
                         </div>
-
-                        {lesson_blocks.length > 0 &&
-                            lesson_blocks.map((lesson_block, i) => (
-                                <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
-                            ))
-                        }
+                        <div className="custom-grid">
+                            {lesson_blocks.length > 0 &&
+                                lesson_blocks.map((lesson_block, i) => (
+                                    <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
+                                ))
+                            }
+                        </div>
 
                         {error.lesson_blocks && lesson_blocks.length == 0 && <p className="text-danger text-sm mb-4">{intl.formatMessage({ id: "lesson.please_add_materials" })}</p>}
 
-                        <div className="btn-wrap">
+                        <div className="btn-wrap mt-4">
                             <LessonBlockTypeModals />
                             <button disabled={button_loader} onClick={e => editLesson(lesson.lesson_id)} className="btn btn-outline-primary" type="submit">
                                 {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}

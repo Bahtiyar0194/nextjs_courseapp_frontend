@@ -138,7 +138,7 @@
 }
 
 .bg-inactive {
-    @apply bg-gray-100 dark:bg-dark-900;
+    @apply bg-gray-50 dark:bg-dark-900;
 }
 
 .bg-corp{
@@ -257,6 +257,7 @@ h6 > a:hover {
 p {
     @apply mb-2
 }
+
 h1,
 h2,
 h3,
@@ -320,7 +321,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .table{
-    @apply w-full overflow-x-auto rounded-lg shadow-md flex;
+    @apply w-full overflow-x-auto rounded-lg shadow-md flex border-active;
 }
 
 .table > table{
@@ -562,7 +563,11 @@ select option {
 }
 
 .btn:disabled{
-    @apply opacity-50;
+    @apply opacity-50 pointer-events-none;
+}
+
+.btn.disabled{
+    @apply pointer-events-none;
 }
 
 .btn-wrap{
@@ -671,7 +676,11 @@ select option {
 }
 
 .badge{
-    @apply text-xs font-medium px-2 py-1 rounded-md mr-2 inline-block;
+    @apply text-xs font-medium px-2 py-1 rounded-md mr-2 inline-block ;
+}
+
+.badge > svg{
+    @apply inline text-lg;
 }
 
 .badge-lg{
@@ -1046,9 +1055,17 @@ select option {
     @apply text-4xl;
 }
 
-.lesson-block,
-.test-question-block{
-    @apply mb-4;
+.course-image{
+    @apply w-full bg-center bg-cover bg-no-repeat rounded-xl border-active overflow-hidden;
+}
+
+.course-image > div {
+    @apply p-4 pt-20 lg:p-6 lg:pt-40;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 40%, rgba(255,255,255,0) 100%);
+}
+
+.dark .course-image > div {
+    background: linear-gradient(0deg, rgba(31,41,53,1) 40%, rgba(255,255,255,0) 100%);
 }
 
 .lesson-block:last-child,

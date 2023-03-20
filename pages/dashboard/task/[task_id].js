@@ -109,7 +109,7 @@ export default function LessonTask() {
                     ?
                     <>
                         <Breadcrumb>
-                            <Link href={'/dashboard/courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+                            <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
                             <Link href={'/dashboard/courses/' + task.course_id}>{task.course_name}</Link>
                             <Link href={'/dashboard/lesson/' + task.lesson_id}>{task.lesson_name}</Link>
                             {task.task_name}

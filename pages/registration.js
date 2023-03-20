@@ -7,6 +7,7 @@ import Loader from "../components/ui/Loader";
 import { AiOutlineMail, AiOutlineUser, AiOutlinePhone, AiOutlineKey, AiOutlineEyeInvisible, AiOutlineEye, AiOutlineGlobal } from "react-icons/ai";
 import { HiOutlineAcademicCap } from "react-icons/hi2";
 import { FiUserPlus } from "react-icons/fi";
+import InputMask from "react-input-mask";
 import Link from "next/link";
 import MAIN_DOMAIN from "../config/main_domain";
 
@@ -131,7 +132,7 @@ export default function Registration() {
 
                 <div className="form-group">
                     <AiOutlinePhone />
-                    <input onInput={e => setPhone(e.target.value)} type="number" value={phone} placeholder=" " />
+                    <InputMask mask="+7 (799) 999-9999" onChange={e => setPhone(e.target.value)} value={phone} />
                     <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
                 </div>
                 <div className="form-group">

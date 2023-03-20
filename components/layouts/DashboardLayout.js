@@ -3,7 +3,7 @@ import ThemeChanger from "../ui/ThemeChanger";
 import Locales from "../ui/Locales";
 import Link from "next/link";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineLogout, AiOutlineUser, AiOutlineDashboard, AiOutlineBarChart, AiOutlinePlaySquare, AiOutlineSetting, AiOutlineTeam, AiOutlineClockCircle } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineUser, AiOutlineDashboard, AiOutlineBarChart, AiOutlinePlaySquare, AiOutlineSetting, AiOutlineTeam, AiOutlineClockCircle, AiOutlineRead } from "react-icons/ai";
 import AuthProvider from "../../services/AuthProvider";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -62,11 +62,9 @@ export default function DashboardLayout(props) {
             <div className="flex">
                 <div className="db__sidebar__menu">
                     <Link href={'/dashboard'}><AiOutlineDashboard /><span>{intl.formatMessage({ id: "page.dashboard.title" })}</span></Link>
-                    <Link href={'#'}><AiOutlineBarChart /><span>Аналитика</span></Link>
-                    <Link href={'/dashboard/courses'}><AiOutlinePlaySquare /><span>{intl.formatMessage({ id: "page.my_courses.title" })}</span></Link>
-                    <Link href={'#'}><AiOutlineClockCircle /><span>Расписание</span></Link>
+                    <Link href={'/dashboard/courses/catalogue'}><AiOutlineRead /><span>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</span></Link>
+                    <Link href={'/dashboard/courses/my-courses'}><AiOutlinePlaySquare /><span>{intl.formatMessage({ id: "page.my_courses.title" })}</span></Link>
                     <Link href={'/dashboard/users'}><AiOutlineTeam /><span>{intl.formatMessage({ id: "page.users.title" })}</span></Link>
-                    <Link href={'#'}><AiOutlineSetting /><span>Настройки</span></Link>
                 </div>
                 <div className="db__content">
                     {props.showLoader && <Loader className="full-overlay" />}

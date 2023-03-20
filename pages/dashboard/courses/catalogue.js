@@ -13,7 +13,7 @@ import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import API_URL from "../../../config/api";
 
-export default function MyCourses() {
+export default function CourseCatalogue() {
     const [showFullLoader, setShowFullLoader] = useState(true);
     const [loader, setLoader] = useState(false);
     const [contentViewType, setContentViewType] = useState('grid');
@@ -83,7 +83,7 @@ export default function MyCourses() {
 
     const getCourses = async () => {
         setShowFullLoader(true);
-        await axios.get('courses/my-courses')
+        await axios.get('courses/get-courses')
             .then(response => {
                 setCourses(response.data)
                 setShowFullLoader(false);
@@ -136,16 +136,16 @@ export default function MyCourses() {
     }, []);
 
     return (
-        <DashboardLayout showLoader={showFullLoader} title={intl.formatMessage({ id: "page.my_courses.title" })}>
+        <DashboardLayout showLoader={showFullLoader} title={intl.formatMessage({ id: "page.courses_catalogue.title" })}>
             {courses.length > 0 ?
                 <>
                     <Breadcrumb>
-                        {intl.formatMessage({ id: "page.my_courses.title" })}
+                        {intl.formatMessage({ id: "page.courses_catalogue.title" })}
                     </Breadcrumb>
 
                     <div className="col-span-12">
                         <div className="flex max-lg:flex-col lg:justify-between lg:items-center">
-                            <h2 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "page.my_courses.title" })}</h2>
+                            <h2 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "page.courses_catalogue.title" })}</h2>
                             <div className="flex">
                                 {roles.includes(2) &&
                                     <button className="btn btn-primary mr-2" onClick={() => setCourseModal(true)}><AiOutlineRead />
@@ -194,7 +194,7 @@ export default function MyCourses() {
 
                                         <tbody>
                                             {courses?.map(course => (
-                                                <tr>
+                                                <tr key={course.course_id}>
                                                     <td>{i++}</td>
                                                     <td><img className="h-8" src={API_URL + '/courses/images/posters/' + course.course_poster_file} /></td>
                                                     <td><Link href={'/dashboard/courses/' + course.course_id}>{course.course_name}</Link></td>
@@ -211,7 +211,7 @@ export default function MyCourses() {
                 :
                 <div className="col-span-12">
                     <div>
-                        <h3>{intl.formatMessage({ id: "page.my_courses.form.dont_have_course" })}</h3>
+                        <h3>{intl.formatMessage({ id: "page.my_courses.form.dont_have_created_courses" })}</h3>
                         <button onClick={() => setCourseModal(true)} className="btn btn-outline-primary"><AiOutlineRead />
                             <span>{intl.formatMessage({ id: "page.my_courses.form.course_create" })}</span>
                         </button>

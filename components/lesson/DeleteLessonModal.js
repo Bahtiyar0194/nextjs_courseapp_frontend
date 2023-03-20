@@ -5,7 +5,7 @@ import { useIntl } from "react-intl";
 import axios from "axios";
 import Loader from "../ui/Loader";
 
-const DeleteLessonModal = ({ course_id, delete_lesson_id, closeModal }) => {
+const DeleteLessonModal = ({ course_id, delete_lesson_id, redirect, getLessons, closeModal }) => {
     const intl = useIntl();
     const [loader, setLoader] = useState(false);
     const router = useRouter();
@@ -18,7 +18,14 @@ const DeleteLessonModal = ({ course_id, delete_lesson_id, closeModal }) => {
 
         await axios.post('lessons/delete/' + delete_lesson_id, form_data)
             .then(response => {
-                router.push('/dashboard/courses/' + course_id);
+                if(redirect === true){
+                    router.push('/dashboard/courses/' + course_id);
+                }
+                else{
+                    getLessons(course_id);
+                    setLoader(false);
+                    closeModal();
+                }
             }).catch(err => {
                 if (err.response) {
                     router.push('/error/' + err.response.status)

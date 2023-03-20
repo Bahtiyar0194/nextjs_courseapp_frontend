@@ -31,6 +31,9 @@
 
     "page.dashboard.title": "Личный кабинет",
 
+    "page.courses_catalogue.title": "Каталог курсов",
+    "page.courses_catalogue.go_to_catalogue": "Перейти в каталог курсов",
+
     "page.my_courses.title": "Мои курсы",
     "page.my_courses.form.course_create": "Создать новый курс",
     "page.my_courses.form.course_name": "Название курса",
@@ -42,10 +45,16 @@
     "page.my_courses.form.course_poster": "Обложка курса",
     "page.my_courses.form.course_cost": "Стоимость курса",
     "page.my_courses.form.free_course": "Курс бесплатный",
-    "page.my_courses.form.dont_have_course": "У вас нет созданных курсов",
+    "page.my_courses.buy_a_course": "Купить курс",
+    "page.my_courses.get_the_course_for_free": "Подписаться на курс бесплатно",
+    "page.my_courses.you_are_subscribed_to_this_course": "Вы подписаны на этот курс",
+    "page.my_courses.you_are_not_subscribed_to_this_course": "Вы не подписаны на этот курс",
+    "page.my_courses.form.dont_have_created_courses": "У вас нет опубликованных курсов",
+    "page.my_courses.form.dont_have_purchased_courses": "У вас нет купленных курсов",
     "page.my_courses.form.add_course": "Добавить курс",
 
     "page.users.title": "Пользователи",
+    "page.users.edit_user_title": "Редактирование данных пользователя",
 
     "lessons": "Уроки курса",
     "lesson_name": "Название урока",
@@ -177,5 +186,7 @@
     "edit": "Редактировать",
     "delete": "Удалить",
     "continue": "Продолжить",
-    "created_at": "Дата регистрации"
+    "created_at": "Дата регистрации",
+    "views": "Просмотров",
+    "tasks": "Задании"
 }

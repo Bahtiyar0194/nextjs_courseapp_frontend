@@ -31,6 +31,9 @@
 
     "page.dashboard.title": "Dashboard",
 
+    "page.courses_catalogue.title": "Courses",
+    "page.courses_catalogue.go_to_catalogue": "Go to the course catalogue",
+
     "page.my_courses.title": "My courses",
     "page.my_courses.form.course_create": "Create course",
     "page.my_courses.form.course_name": "Course name",
@@ -42,10 +45,16 @@
     "page.my_courses.form.course_poster": "Course poster",
     "page.my_courses.form.course_cost": "Course cost",
     "page.my_courses.form.free_course": "Free course",
-    "page.my_courses.form.dont_have_course": "You don't have any courses created",
+    "page.my_courses.buy_a_course": "Buy a course",
+    "page.my_courses.get_the_course_for_free": "Get the course for free",
+    "page.my_courses.you_are_subscribed_to_this_course": "You are subscribed to this course",
+    "page.my_courses.you_are_not_subscribed_to_this_course": "You are not subscribed to this course",
+    "page.my_courses.form.dont_have_created_courses": "You don't have any published courses",
+    "page.my_courses.form.dont_have_purchased_courses": "You don't have any courses purchased",
     "page.my_courses.form.add_course": "Add course",
 
     "page.users.title": "Users",
+    "page.users.edit_user_title": "Editing user data",
 
     "lessons": "Course lessons",
     "no_added_lessons": "There are no lessons added to this course",
@@ -177,5 +186,7 @@
     "edit": "Edit",
     "delete": "Delete",
     "continue": "Continue",
-    "created_at": "Created at"
+    "created_at": "Created at",
+    "views": "Views",
+    "tasks": "Tasks"
 }
