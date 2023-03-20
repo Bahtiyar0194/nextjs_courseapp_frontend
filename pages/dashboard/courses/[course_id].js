@@ -12,6 +12,7 @@ import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import CreateCourseSectionModal from "../../../components/lesson/CreateCourseSectionModal";
+import EditSectionModal from "../../../components/lesson/EditSectionModal";
 import BuyCourseModal from "../../../components/lesson/BuyCourseModal";
 import ButtonLoader from "../../../components/ui/ButtonLoader";
 import API_URL from "../../../config/api";
@@ -24,6 +25,9 @@ export default function Course() {
   const intl = useIntl();
   const [sectionModal, setSectionModal] = useState(false);
   const [buyCourseModal, setBuyCourseModal] = useState(false);
+  const [edit_section_id, setEditSectionId] = useState('');
+  const [section_name, setSectionName] = useState('');
+  const [edit_section_modal, setEditSectionModal] = useState(false);
   const [delete_lesson_modal, setDeleteLessonModal] = useState(false);
   const [delete_lesson_id, setDeleteLessonId] = useState('');
   const [button_loader, setButtonLoader] = useState(false);
@@ -69,10 +73,17 @@ export default function Course() {
         getLessons(course_id)
       }).catch(err => {
         if (err.response) {
-          router.push('/error/' + err.response.status)
+          router.push({
+            pathname: '/error',
+            query: {
+              status: err.response.status,
+              message: err.response.data.message,
+              url: err.request.responseURL,
+            }
+          });
         }
         else {
-          router.push('/error')
+          router.push('/error');
         }
       });
   }
@@ -83,10 +94,17 @@ export default function Course() {
         setCourse(response.data);
       }).catch(err => {
         if (err.response) {
-          router.push('/error/' + err.response.status)
+          router.push({
+            pathname: '/error',
+            query: {
+              status: err.response.status,
+              message: err.response.data.message,
+              url: err.request.responseURL,
+            }
+          });
         }
         else {
-          router.push('/error')
+          router.push('/error');
         }
       });
   }
@@ -100,10 +118,17 @@ export default function Course() {
         }, 500)
       }).catch(err => {
         if (err.response) {
-          router.push('/error/' + err.response.status)
+          router.push({
+            pathname: '/error',
+            query: {
+              status: err.response.status,
+              message: err.response.data.message,
+              url: err.request.responseURL,
+            }
+          });
         }
         else {
-          router.push('/error')
+          router.push('/error');
         }
       });
   }
@@ -118,12 +143,30 @@ export default function Course() {
         }, 500);
       }).catch(err => {
         if (err.response) {
-          router.push('/error/' + err.response.status)
+          router.push({
+            pathname: '/error',
+            query: {
+              status: err.response.status,
+              message: err.response.data.message,
+              url: err.request.responseURL,
+            }
+          });
         }
         else {
-          router.push('/error')
+          router.push('/error');
         }
       });
+  }
+
+  const editLesson = (lesson_id, lesson_type_id, lesson_name) => {
+    if (lesson_type_id == 2) {
+      setEditSectionId(lesson_id);
+      setSectionName(lesson_name);
+      setEditSectionModal(true);
+    }
+    else {
+      router.push('/dashboard/lesson/edit/' + lesson_id)
+    }
   }
 
   const deleteLesson = (lesson_id) => {
@@ -214,7 +257,7 @@ export default function Course() {
                 lessons.total_count > 0 ?
                   <ul id="lessons_wrap" className="list-group mt-4">
                     {lessons.my_lessons?.map(lesson => (
-                      <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 3 ? 'section' : 'lesson'}>
+                      <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 2 ? 'section' : 'lesson'}>
                         {
                           lesson.lesson_type_id == 2
                             ?
@@ -230,12 +273,10 @@ export default function Course() {
                         }
                         {roles.includes(2) && lessons.total_count > 0 &&
                           <div className="btn-wrap mt-4">
-                            {
-                              lesson.lesson_type_id == 1 && <Link title={intl.formatMessage({ id: "edit" })} href={'/dashboard/lesson/edit/' + lesson.lesson_id} className="btn-edit"><AiOutlineEdit /></Link>
-                            }
+                            <button title={intl.formatMessage({ id: "edit" })} onClick={e => editLesson(lesson.lesson_id, lesson.lesson_type_id, lesson.lesson_name)} className="btn-edit"><AiOutlineEdit /></button>
+                            <button title={intl.formatMessage({ id: "delete" })} onClick={e => deleteLesson(lesson.lesson_id)} className="btn-delete"><AiOutlineDelete /></button>
                             <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
                             <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down"><AiOutlineArrowDown /></button>
-                            <button title={intl.formatMessage({ id: "delete" })} onClick={e => deleteLesson(lesson.lesson_id)} className="btn-delete"><AiOutlineDelete /></button>
                           </div>
                         }
                       </li>
@@ -263,6 +304,10 @@ export default function Course() {
 
       <Modal show={buyCourseModal} onClose={() => setBuyCourseModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
         <BuyCourseModal closeModal={() => setBuyCourseModal(false)} course_id={course.course_id} getLessons={getLessons} />
+      </Modal>
+
+      <Modal show={edit_section_modal} onClose={() => setEditSectionModal(false)} modal_title={intl.formatMessage({ id: "edit.courseSectionModal.title" })} modal_size="modal-xl">
+        <EditSectionModal course_id={course.course_id} edit_section_id={edit_section_id} setSectionName={setSectionName} section_name={section_name} getLessons={getLessons} closeModal={() => setEditSectionModal(false)} />
       </Modal>
 
       <Modal show={delete_lesson_modal} onClose={() => setDeleteLessonModal(false)} modal_title={intl.formatMessage({ id: "lesson.deleteLessonModal.title" })} modal_size="modal-xl">

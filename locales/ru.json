@@ -77,6 +77,8 @@
     "lesson.deleteLessonModal.confirm": "Вы действительно хотите удалить данный урок? Все связанное с ним будет также удалено.",
 
     "courseSectionModal.title": "Создание раздела курса",
+    "edit.courseSectionModal.title": "Редактирование раздела курса",
+
     "section": "раздел",
     "section_name": "Название раздела",
 

@@ -18,20 +18,27 @@ const DeleteLessonModal = ({ course_id, delete_lesson_id, redirect, getLessons, 
 
         await axios.post('lessons/delete/' + delete_lesson_id, form_data)
             .then(response => {
-                if(redirect === true){
+                if (redirect === true) {
                     router.push('/dashboard/courses/' + course_id);
                 }
-                else{
+                else {
                     getLessons(course_id);
                     setLoader(false);
                     closeModal();
                 }
             }).catch(err => {
                 if (err.response) {
-                    router.push('/error/' + err.response.status)
+                    router.push({
+                        pathname: '/error',
+                        query: {
+                            status: err.response.status,
+                            message: err.response.data.message,
+                            url: err.request.responseURL,
+                        }
+                    });
                 }
                 else {
-                    router.push('/error/')
+                    router.push('/error');
                 }
             });
     };

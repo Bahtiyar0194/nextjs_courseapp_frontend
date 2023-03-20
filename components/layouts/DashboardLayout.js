@@ -21,16 +21,22 @@ export default function DashboardLayout(props) {
         Cookies.remove('token');
         await axios.post('auth/logout')
             .then(response => {
-                console.log(response)
+                router.push("/");
             }).catch(err => {
-                if (err.response) {
-                    router.push('/error/' + err.response.status)
+                if(err.response){
+                    router.push({
+                        pathname: '/error',
+                        query: {
+                            status: err.response.status,
+                            message: err.response.data.message,
+                            url: err.request.responseURL,
+                        }
+                    });
                 }
-                else {
-                    router.push('/error')
+                else{
+                    router.push('/error');
                 }
             });
-        router.push("/");
     }
 
     return (

@@ -67,18 +67,24 @@ const CreateQuestionImageModal = ({ question_index, closeModal }) => {
                 setImageFile('');
                 closeModal();
             }).catch(err => {
-                console.log(err)
                 if (err.response) {
                     if (err.response.status == 422) {
                         setError(err.response.data.data);
                         setLoader(false);
                     }
                     else {
-                        router.push('/error/' + err.response.status)
+                        router.push({
+                            pathname: '/error',
+                            query: {
+                                status: err.response.status,
+                                message: err.response.data.message,
+                                url: err.request.responseURL,
+                            }
+                        });
                     }
                 }
                 else {
-                    router.push('/error/')
+                    router.push('/error');
                 }
             });
     }

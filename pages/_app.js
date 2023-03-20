@@ -34,10 +34,12 @@ export default function MyApp({ Component, pageProps }) {
 
             }).catch(err => {
                 if (err.response) {
-                    router.push('/error/' + err.response.status)
+                    router.push({
+                        pathname: '/error'
+                    });
                 }
                 else {
-                    router.push('/error')
+                    router.push('/error');
                 }
             });
     }

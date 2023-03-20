@@ -45,10 +45,17 @@ export default function Registration() {
                 setLoader(false);
             }).catch(err => {
                 if (err.response) {
-                    router.push('/error/' + err.response.status)
+                    router.push({
+                        pathname: '/error',
+                        query: {
+                            status: err.response.status,
+                            message: err.response.data.message,
+                            url: err.request.responseURL,
+                        }
+                    });
                 }
                 else {
-                    router.push('/error')
+                    router.push('/error');
                 }
             });
     }
@@ -72,10 +79,10 @@ export default function Registration() {
 
         await axios.post('auth/register', form_data)
             .then(response => {
-                if(first_registration === true){
+                if (first_registration === true) {
                     redirectToLoginPage();
                 }
-                else if(first_registration === false){
+                else if (first_registration === false) {
                     router.push('/login');
                 }
             }).catch(err => {
@@ -85,11 +92,18 @@ export default function Registration() {
                         setLoader(false);
                     }
                     else {
-                        router.push('/error/' + err.response.status)
+                        router.push({
+                            pathname: '/error',
+                            query: {
+                                status: err.response.status,
+                                message: err.response.data.message,
+                                url: err.request.responseURL,
+                            }
+                        });
                     }
                 }
                 else {
-                    router.push('/error/')
+                    router.push('/error');
                 }
             });
     }
