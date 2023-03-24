@@ -10,7 +10,7 @@ import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import LessonBlock from "../../../components/lesson/LessonBlock";
 import LessonTaskTypeModals from "../../../components/lesson/LessonTaskTypeModals";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEdit, AiOutlineLeftCircle, AiOutlineRightCircle } from "react-icons/ai";
 import Modal from "../../../components/ui/Modal";
 import DeleteLessonModal from "../../../components/lesson/DeleteLessonModal";
 import StickyBox from "react-sticky-box";
@@ -48,6 +48,11 @@ export default function Lesson() {
                     router.push('/error');
                 }
             });
+    }
+
+    const getNextLesson = (lesson_id) => {
+        getLesson(lesson_id);
+        router.push('/dashboard/lesson/' + lesson_id);
     }
 
     const getLessonTasks = async (lesson_id) => {
@@ -150,6 +155,13 @@ export default function Lesson() {
                                     </StickyBox>
                                 </div>
                             }
+
+                            <div className="col-span-12">
+                                <div className="btn-wrap">
+                                    {lesson.previous_lesson && <button className="btn btn-light" onClick={e => getNextLesson(lesson.previous_lesson.lesson_id)}><AiOutlineLeftCircle className="mr-1"/> {intl.formatMessage({ id: "lesson.previous_lesson" })} - <b>{lesson.previous_lesson.lesson_name}</b></button>}
+                                    {lesson.next_lesson && <button className="btn btn-outline-primary" onClick={e => getNextLesson(lesson.next_lesson.lesson_id)}><AiOutlineRightCircle className="mr-1"/> {intl.formatMessage({ id: "lesson.next_lesson" })} - <b>{lesson.next_lesson.lesson_name}</b></button>}
+                                </div>
+                            </div>
                         </>
                         :
                         <div className="col-span-12">

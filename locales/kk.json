@@ -71,12 +71,16 @@
     "lesson.delete_lesson_block_title": "Сабақтағы материалды жою",
     "lesson.delete_lesson_block_confirm": "Сіз расыменде бұл материалды жойғыңыз келе ме?",
     "lesson.create_lesson": "Сабақ құру",
+    "lesson.previous_lesson": "Алдыңғы сабақ",
+    "lesson.next_lesson": "Келесі сабақ",
     "lesson.add_task": "Тапсырма қосу",
     "lesson_type.course_section": "Курстың бөлімі",
     "lesson.deleteLessonModal.title": "Сабақты жою",
     "lesson.deleteLessonModal.confirm": "Сіз расыменде бұл сабақты жойғыңыз келе ме? Осы сабаққа байланысты барлық нәрсе де жойылады.",
 
     "courseSectionModal.title": "Курс бөлімін құру",
+    "edit.courseSectionModal.title": "Курс бөлімін қайта өңдеу",
+
     "section": "бөлім",
     "section_name": "Бөлімнің атауы",
 

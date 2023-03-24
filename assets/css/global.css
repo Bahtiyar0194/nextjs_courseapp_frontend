@@ -373,7 +373,7 @@ form code{
 }
 
 pre{
-    @apply rounded-md;
+    @apply rounded-lg;
     padding: 0.75rem !important;
 }
 
@@ -391,7 +391,7 @@ textarea:focus {
 }
 
 .video-react{
-    @apply overflow-hidden rounded-md;
+    @apply overflow-hidden rounded-lg;
 }
 
 .react-audio-player{
@@ -465,7 +465,7 @@ select option {
 }
 
 .form-group-file label{
-    @apply block border border-corp border-dashed p-4 rounded-md text-center cursor-pointer hover:text-white duration-200;
+    @apply block border border-corp border-dashed p-4 rounded-lg text-center cursor-pointer hover:text-white duration-200;
 }
 
 .form-group-file label:hover{
@@ -607,11 +607,11 @@ select option {
 }
 
 .btn-light{
-    @apply bg-inactive text-active border-active border;
+    @apply bg-active text-active border-active border;
 }
 
 .btn-light:hover{
-    @apply bg-active text-active;
+    @apply bg-inactive;
 }
 
 .btn-danger{
@@ -676,7 +676,7 @@ select option {
 }
 
 .badge{
-    @apply text-xs font-medium px-2 py-1 rounded-md mr-2 inline-block ;
+    @apply text-xs font-medium px-2 py-1 rounded-lg mr-2 inline-block ;
 }
 
 .badge > svg{
@@ -684,7 +684,7 @@ select option {
 }
 
 .badge-lg{
-    @apply text-base px-3 py-2 rounded-xl;
+    @apply text-base px-3 py-2 rounded-lg;
 }
 
 .badge-light{
@@ -725,7 +725,7 @@ select option {
 }
 
 .list-group{
-    @apply bg-active rounded-md border-active px-4;
+    @apply bg-active rounded-lg border-active px-4;
 }
 
 .list-group > li{
@@ -946,7 +946,7 @@ select option {
 .ql-snow.ql-toolbar button, 
 .ql-snow .ql-toolbar button{
     border: 1px solid;
-    @apply mr-1 mt-1.5 border-active border rounded-md;
+    @apply mr-1 mt-1.5 border-active border rounded-lg;
 }
 
 .quill.kk .ql-picker-label[data-value=small]::before,
@@ -998,11 +998,11 @@ select option {
 }
 
 .ql-toolbar.ql-snow{
-    @apply bg-active border-active rounded-bl-none rounded-br-none rounded-md corp-font;
+    @apply bg-active border-active rounded-bl-none rounded-br-none rounded-lg corp-font;
 }
 
 .ql-container.ql-snow{
-    @apply bg-active border-active rounded-tl-none rounded-tr-none rounded-md corp-font;
+    @apply bg-active border-active rounded-tl-none rounded-tr-none rounded-lg corp-font;
 }
 
 .ql-snow .ql-stroke {
@@ -1056,7 +1056,7 @@ select option {
 }
 
 .course-image{
-    @apply w-full bg-center bg-cover bg-no-repeat rounded-xl border-active overflow-hidden;
+    @apply w-full bg-center bg-cover bg-no-repeat rounded-lg border-active overflow-hidden;
 }
 
 .course-image > div {
@@ -1075,7 +1075,7 @@ select option {
 
 .lesson-block.edit,
 .test-question-block.edit{
-    @apply bg-active border-active rounded-md p-4 duration-200;
+    @apply bg-active border-active rounded-lg p-4 duration-200;
 }
 
 .lesson-block.edit:hover,
@@ -1094,7 +1094,7 @@ select option {
 }
 
 .progress{
-    @apply w-full bg-inactive rounded-md h-2 my-4;
+    @apply w-full bg-inactive rounded-lg h-2 my-4;
 }
 
 .progress.active{
@@ -1102,5 +1102,5 @@ select option {
 }
 
 .progress-bar{
-    @apply h-full bg-corp rounded-md duration-200;
+    @apply h-full bg-corp rounded-lg duration-200;
 }

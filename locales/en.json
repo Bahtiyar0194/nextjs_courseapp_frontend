@@ -71,12 +71,16 @@
     "lesson.delete_lesson_block_title": "Deleting material from a lesson",
     "lesson.delete_lesson_block_confirm": "Do you really want to delete this material?",
     "lesson.create_lesson": "Create lesson",
+    "lesson.previous_lesson": "Previous lesson",
+    "lesson.next_lesson": "Next lesson",
     "lesson.add_task": "Add task",
     "lesson_type.course_section": "Course section",
     "lesson.deleteLessonModal.title": "Delete lesson",
     "lesson.deleteLessonModal.confirm": "Do you really want to delete this lesson? Everything related to it will also be deleted.",
 
     "courseSectionModal.title": "Create course section",
+    "edit.courseSectionModal.title": "Edit course section",
+
     "section": "section",
     "section_name": "Section name",
 
