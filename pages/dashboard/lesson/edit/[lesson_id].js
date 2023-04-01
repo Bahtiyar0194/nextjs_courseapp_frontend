@@ -13,6 +13,7 @@ import ButtonLoader from "../../../../components/ui/ButtonLoader";
 import LessonBlockTypeModals from "../../../../components/lesson/LessonBlockTypeModals";
 import LessonBlock from "../../../../components/lesson/LessonBlock";
 import { scrollIntoView } from "seamless-scroll-polyfill";
+import RoleProvider from "../../../../services/RoleProvider";
 
 export default function EditLesson() {
     const dispatch = useDispatch();
@@ -22,7 +23,6 @@ export default function EditLesson() {
 
     const [lesson, setLesson] = useState([]);
     const lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
-    const roles = useSelector((state) => state.authUser.roles);
 
     const [error, setError] = useState([]);
     const [button_loader, setButtonLoader] = useState(false);
@@ -119,51 +119,45 @@ export default function EditLesson() {
 
     return (
         <DashboardLayout showLoader={showFullLoader} title={intl.formatMessage({ id: "lesson.edit_lesson" })}>
-            {roles.includes(2) ?
-                <>
-                    <Breadcrumb>
-                        <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
-                        <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
-                        <Link href={'/dashboard/lesson/' + lesson.lesson_id}>{lesson.lesson_name}</Link>
-                        {intl.formatMessage({ id: "lesson.edit_lesson" })}
-                    </Breadcrumb>
+            <RoleProvider roles={[2]} redirect={true}>
+                <Breadcrumb>
+                    <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
+                    <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
+                    <Link href={'/dashboard/lesson/' + lesson.lesson_id}>{lesson.lesson_name}</Link>
+                    {intl.formatMessage({ id: "lesson.edit_lesson" })}
+                </Breadcrumb>
 
-                    <div className="col-span-12">
-                        <div id="edit_wrap" className="form-group mt-2">
-                            <AiOutlineRead />
-                            <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />
-                            <label className={(error.lesson_name && 'label-error')}>{error.lesson_name ? error.lesson_name : intl.formatMessage({ id: "lesson_name" })}</label>
-                        </div>
-
-                        <div className="form-group mt-2">
-                            <AiOutlineRead />
-                            <textarea cols="20" onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
-                            <label className={(error.lesson_description && 'label-error')}>{error.lesson_description ? error.lesson_description : intl.formatMessage({ id: "lesson_description" })}</label>
-                        </div>
-                        <div className="custom-grid">
-                            {lesson_blocks.length > 0 &&
-                                lesson_blocks.map((lesson_block, i) => (
-                                    <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
-                                ))
-                            }
-                        </div>
-
-                        {error.lesson_blocks && lesson_blocks.length == 0 && <p className="text-danger text-sm mb-4">{intl.formatMessage({ id: "lesson.please_add_materials" })}</p>}
-
-                        <div className="btn-wrap mt-4">
-                            <LessonBlockTypeModals />
-                            <button disabled={button_loader} onClick={e => editLesson(lesson.lesson_id)} className="btn btn-outline-primary" type="submit">
-                                {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
-                                <span>{intl.formatMessage({ id: "save_changes" })}</span>
-                            </button>
-                        </div>
-                    </div>
-                </>
-                :
                 <div className="col-span-12">
-                    {intl.formatMessage({ id: "loading" })}
+                    <div id="edit_wrap" className="form-group mt-2">
+                        <AiOutlineRead />
+                        <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />
+                        <label className={(error.lesson_name && 'label-error')}>{error.lesson_name ? error.lesson_name : intl.formatMessage({ id: "lesson_name" })}</label>
+                    </div>
+
+                    <div className="form-group mt-2">
+                        <AiOutlineRead />
+                        <textarea cols="20" onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
+                        <label className={(error.lesson_description && 'label-error')}>{error.lesson_description ? error.lesson_description : intl.formatMessage({ id: "lesson_description" })}</label>
+                    </div>
+                    <div className="custom-grid">
+                        {lesson_blocks.length > 0 &&
+                            lesson_blocks.map((lesson_block, i) => (
+                                <LessonBlock key={i} lesson_block={lesson_block} index={i} edit={true} />
+                            ))
+                        }
+                    </div>
+
+                    {error.lesson_blocks && lesson_blocks.length == 0 && <p className="text-danger text-sm mb-4">{intl.formatMessage({ id: "lesson.please_add_materials" })}</p>}
+
+                    <div className="btn-wrap mt-4">
+                        <LessonBlockTypeModals />
+                        <button disabled={button_loader} onClick={e => editLesson(lesson.lesson_id)} className="btn btn-outline-primary" type="submit">
+                            {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
+                            <span>{intl.formatMessage({ id: "save_changes" })}</span>
+                        </button>
+                    </div>
                 </div>
-            }
+            </RoleProvider>
         </DashboardLayout>
     );
 }

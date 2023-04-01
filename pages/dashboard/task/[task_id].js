@@ -2,7 +2,6 @@ import DashboardLayout from "../../../components/layouts/DashboardLayout";
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { AiOutlineCheckCircle, AiOutlineRight } from "react-icons/ai";
 import axios from "axios";
@@ -17,7 +16,6 @@ export default function LessonTask() {
     const intl = useIntl();
 
     const [task, setTask] = useState([]);
-    const roles = useSelector((state) => state.authUser.roles);
 
     const [welcome, setWelcome] = useState(true);
     const [button_loader, setButtonLoader] = useState(false);
@@ -159,11 +157,11 @@ export default function LessonTask() {
                                                 </button>
                                                 :
                                                 <>
-                                                    <h4 className="text-corp">Тестирование завершено!</h4>
+                                                    <h4 className="text-corp">{intl.formatMessage({ id: "task.testing_completed" })}</h4>
 
                                                     <button onClick={e => setWelcome(false)} className="btn btn-outline-primary">
                                                         <AiOutlineCheckCircle />
-                                                        <span>Посмотреть результаты</span>
+                                                        <span>{intl.formatMessage({ id: "task.view_test_results" })}</span>
                                                     </button>
                                                 </>
                                         }
@@ -186,16 +184,14 @@ export default function LessonTask() {
                                                     {
                                                         test_question.question.question_materials.length > 0 &&
                                                         test_question.question.question_materials.map((question_material_block, i) => (
-                                                            <div key={i} className="col-span-12 lg:col-span-4">
-                                                                <TestQuestionMaterialBlock question_material_block={question_material_block} question_index={i} edit={false} />
-                                                            </div>
+                                                            <TestQuestionMaterialBlock key={i} question_material_block={question_material_block} question_index={i} edit={false} />
                                                         ))
                                                     }
                                                     <div className="col-span-12">
                                                         <form onSubmit={e => saveUserAnswer(e, task.task_id)} encType="multipart/form-data">
                                                             {test_question.question.question_answers.length > 0 &&
                                                                 test_question.question.question_answers.map((answer, i) => (
-                                                                    <div key={answer.answer_id} className="mt-4">
+                                                                    <div key={answer.answer_id} className="mb-4">
                                                                         <label className="custom-radio-checkbox">
                                                                             <input type="radio" defaultValue={answer.answer_id} defaultChecked={false} name="answer-radio" />
                                                                             <span>{answer.answer}</span>
@@ -217,16 +213,15 @@ export default function LessonTask() {
                                             :
                                             <>
                                                 <div className="flex gap-4 flex-wrap">
-                                                    <p className="mb-0">{intl.formatMessage({ id: "task.test.all_questions_count" })}: <span className="text-corp">{test_question.all_questions_count}</span></p>
-                                                    <p className="mb-0">{intl.formatMessage({ id: "task.test.correct_answers_count" })}: <span className="text-corp">{test_question.correct_answers_count}</span></p>
+                                                    <p>{intl.formatMessage({ id: "task.test.all_questions_count" })}: <span className="text-corp">{test_question.all_questions_count}</span></p>
+                                                    <p>{intl.formatMessage({ id: "task.test.correct_answers_count" })}: <span className="text-corp">{test_question.correct_answers_count}</span></p>
                                                 </div>
 
                                                 {test_question.all_questions.length > 0 &&
                                                     test_question.all_questions.map((question, q) => (
                                                         <div key={question.question_id} className={test_question.all_questions.length != (q + 1) ? 'my-4 border-b-active' : undefined}>
                                                             <h3>{question.question}</h3>
-                                                            {
-                                                                question.question_materials.length > 0 &&
+                                                            {question.question_materials.length > 0 &&
                                                                 <div className="custom-grid">
                                                                     {question.question_materials.map((question_material_block, i) => (
                                                                         <div key={i} className="col-span-12 lg:col-span-3">
@@ -247,8 +242,7 @@ export default function LessonTask() {
                                                                             ))
                                                                         }
                                                                     </div>
-                                                                </div>
-                                                            }
+                                                                </div>}
                                                         </div>
                                                     ))
                                                 }

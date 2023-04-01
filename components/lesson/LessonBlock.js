@@ -15,12 +15,12 @@ import SyntaxHighlighter from "react-syntax-highlighter";
 import * as themes from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import supportedLanguages from 'react-syntax-highlighter/dist/cjs/languages/hljs/supported-languages';
 import { scrollIntoView } from "seamless-scroll-polyfill";
+import RoleProvider from '../../services/RoleProvider';
 
 const LessonBlock = ({ lesson_block, index, edit }) => {
     const intl = useIntl();
     const dispatch = useDispatch();
     let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
-    const roles = useSelector((state) => state.authUser.roles);
     const [delete_lesson_block_modal, setDeleteLessonBlockModal] = useState(false);
     const [delete_lesson_block_id, setDeleteLessonBlockId] = useState('');
 
@@ -50,26 +50,28 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
 
     return (
         <div id={'block_' + lesson_block.block_id} className={"lesson-block " + (edit === true ? "edit " : " ") + (lesson_block.file_type_id == 4 ? lesson_block.image_width : "col-span-12")}>
-            {roles.includes(2) && edit === true &&
-                <div className="flex justify-between items-center border-b-active pb-4 mb-4">
-                    <div>
-                        {/* Если это текстовый блок */}
-                        {lesson_block.block_type_id == 1 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "textModal.text" })}</p>}
-                        {lesson_block.block_type_id == 5 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "tableModal.table" })}</p>}
-                        {lesson_block.block_type_id == 6 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "codeModal.code" })}</p>}
+            {edit === true &&
+                <RoleProvider roles={[2]}>
+                    <div className="flex justify-between items-center border-b-active pb-4 mb-4">
+                        <div>
+                            {/* Если это текстовый блок */}
+                            {lesson_block.block_type_id == 1 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "textModal.text" })}</p>}
+                            {lesson_block.block_type_id == 5 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "tableModal.table" })}</p>}
+                            {lesson_block.block_type_id == 6 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "codeModal.code" })}</p>}
 
-                        {/* Если это файлы */}
-                        {lesson_block.file_type_id == 1 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
-                        {lesson_block.file_type_id == 2 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
-                        {lesson_block.file_type_id == 3 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "audioModal.audio" })}:</span> {lesson_block.file_name}</p>}
-                        {lesson_block.file_type_id == 4 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "imageModal.image" })}:</span> {lesson_block.file_name}</p>}
+                            {/* Если это файлы */}
+                            {lesson_block.file_type_id == 1 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
+                            {lesson_block.file_type_id == 2 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
+                            {lesson_block.file_type_id == 3 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "audioModal.audio" })}:</span> {lesson_block.file_name}</p>}
+                            {lesson_block.file_type_id == 4 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "imageModal.image" })}:</span> {lesson_block.file_name}</p>}
+                        </div>
+                        <div className='btn-wrap'>
+                            {index > 0 && <button title={intl.formatMessage({ id: "move_up" })} onClick={e => moveLessonBlock(index, 'up', lesson_block.block_id)} className="btn-up"><AiOutlineArrowUp /></button>}
+                            {index != lesson_blocks.length - 1 && <button title={intl.formatMessage({ id: "move_down" })} onClick={e => moveLessonBlock(index, 'down', lesson_block.block_id)} className="btn-down"><AiOutlineArrowDown /></button>}
+                            <button title={intl.formatMessage({ id: "delete" })} onClick={e => deleteLessonBlock(lesson_block.block_id)} className="btn-delete"><AiOutlineDelete /></button>
+                        </div>
                     </div>
-                    <div className='btn-wrap'>
-                        {index > 0 && <button title={intl.formatMessage({ id: "move_up" })} onClick={e => moveLessonBlock(index, 'up', lesson_block.block_id)} className="btn-up"><AiOutlineArrowUp /></button>}
-                        {index != lesson_blocks.length - 1 && <button title={intl.formatMessage({ id: "move_down" })} onClick={e => moveLessonBlock(index, 'down', lesson_block.block_id)} className="btn-down"><AiOutlineArrowDown /></button>}
-                        <button title={intl.formatMessage({ id: "delete" })} onClick={e => deleteLessonBlock(lesson_block.block_id)} className="btn-delete"><AiOutlineDelete /></button>
-                    </div>
-                </div>
+                </RoleProvider>
             }
 
             {lesson_block.block_type_id == 1 && parse(lesson_block.content)}

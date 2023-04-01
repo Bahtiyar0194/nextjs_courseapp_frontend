@@ -55,6 +55,9 @@
 
     "page.users.title": "Пользователи",
     "page.users.edit_user_title": "Редактирование данных пользователя",
+    "page.users.user_roles": "Роли пользователя",
+    "page.users.user_mode": "Режим пользователя",
+    "page.users.profile_settings": "Настройки профиля",
 
     "lessons": "Уроки курса",
     "no_added_lessons": "Нет добавленных уроков к данному курсу",
@@ -62,7 +65,6 @@
     "lesson_description": "Краткое описание урока",
     "lesson_materials": "Материалы",
     "lesson_sections": "Разделы",
-
     "lesson.add": "Добавить",
     "lesson.add_lesson": "Добавить урок",
     "lesson.edit_lesson": "Редактирование урока",
@@ -130,11 +132,14 @@
     "task.tasks_for_this_lesson": "Задания к этому уроку",
     "task.number_of_tasks": "Количество задании",
 
+    "task.test.title": "Тестовое задание",
     "task.add_test": "Добавление теста",
     "task.test_name": "Название теста",
     "task.test_description": "Описание теста",
     "task.start_the_test": "Начать тестирование",
     "task.continue_the_test": "Продолжить тестирование",
+    "task.testing_completed": "Тестирование завершено!",
+    "task.view_test_results": "Просмотреть результаты теста",
     "task.test.select_your_answer": "Укажите ваш ответ",
     "task.test.your_answer": "Ваш ответ",
     "task.test.correct_answer": "Правильный ответ",
@@ -160,6 +165,8 @@
 
     "task.test.deleteTestQuestionMaterialModal.title": "Удаление материала",
     "task.test.deleteTestQuestionMaterialModal.confirm": "Вы действительно хотите удалить данный материал?",
+
+    "task.answer_the_question.title": "Ответ на вопрос",
 
     "logout": "Выйти из аккаунта",
 

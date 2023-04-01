@@ -55,6 +55,9 @@
 
     "page.users.title": "Users",
     "page.users.edit_user_title": "Editing user data",
+    "page.users.user_roles": "User roles",
+    "page.users.user_mode": "User mode",
+    "page.users.profile_settings": "Profile settings",
 
     "lessons": "Course lessons",
     "no_added_lessons": "There are no lessons added to this course",
@@ -131,11 +134,14 @@
     "task.tasks_for_this_lesson": "Tasks for this lesson",
     "task.number_of_tasks": "Number of tasks",
 
+    "task.test.title": "Test",
     "task.add_test": "Add test",
     "task.test_name": "Test name",
     "task.test_description": "Test description",
     "task.start_the_test": "Start the test",
     "task.continue_the_test": "Continue the test",
+    "task.testing_completed": "Testing completed!",
+    "task.view_test_results": "View test results",
     "task.test.select_your_answer": "Select your answer",
     "task.test.your_answer": "Your answer",
     "task.test.correct_answer": "Correct answer",
@@ -160,6 +166,8 @@
 
     "task.test.deleteTestQuestionMaterialModal.title": "Deleting material",
     "task.test.deleteTestQuestionMaterialModal.confirm": "Do you really want to delete this material?",
+
+    "task.answer_the_question.title": "Answer the question",
 
     "logout": "Logout",
 

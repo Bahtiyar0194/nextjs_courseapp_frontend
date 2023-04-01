@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useIntl } from "react-intl";
 import Link from "next/link";
 import { AiOutlinePlus, AiOutlineCaretDown, AiOutlineFileImage, AiOutlinePlayCircle, AiOutlineFileText, AiOutlineAudio, AiOutlineTable, AiOutlineCode } from "react-icons/ai";
@@ -15,7 +14,6 @@ import CreateCodeModal from "./lesson_block_modals/CreateCodeModal";
 
 export default function LessonBlockTypeModals() {
     const intl = useIntl();
-    const roles = useSelector((state) => state.authUser.roles);
 
     const [textModal, setTextModal] = useState(false);
     const [tableModal, setTableModal] = useState(false);
@@ -25,11 +23,10 @@ export default function LessonBlockTypeModals() {
     const [codeModal, setCodeModal] = useState(false);
 
     return (
-        roles.includes(2) &&
         <>
             <CDropdown>
                 <CDropdownToggle color="primary" href="#">
-                    <AiOutlinePlus/> {intl.formatMessage({ id: "lesson.add_material" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
+                    <AiOutlinePlus /> {intl.formatMessage({ id: "lesson.add_material" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
                 </CDropdownToggle>
                 <CDropdownMenu>
                     <Link href={'#'} onClick={() => setTextModal(true)}><AiOutlineFileText />{intl.formatMessage({ id: "textModal.text" })}</Link>
@@ -43,27 +40,27 @@ export default function LessonBlockTypeModals() {
 
 
             <Modal show={textModal} onClose={() => setTextModal(false)} modal_title={intl.formatMessage({ id: "textModal.title" })} modal_size="modal-4xl">
-                <TextEditorModal closeModal={() => setTextModal(false)}/>
+                <TextEditorModal closeModal={() => setTextModal(false)} />
             </Modal>
 
             <Modal show={tableModal} onClose={() => setTableModal(false)} modal_title={intl.formatMessage({ id: "tableModal.title" })} modal_size="modal-xl">
-                <TableModal closeModal={() => setTableModal(false)}/>
+                <TableModal closeModal={() => setTableModal(false)} />
             </Modal>
 
             <Modal show={imageModal} onClose={() => setImageModal(false)} modal_title={intl.formatMessage({ id: "imageModal.title" })} modal_size="modal-xl">
-                <CreateImageModal closeModal={() => setImageModal(false)}/>
+                <CreateImageModal closeModal={() => setImageModal(false)} />
             </Modal>
 
             <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoModal.title" })} modal_size="modal-xl">
-                <CreateVideoModal closeModal={() => setVideoModal(false)}/>
+                <CreateVideoModal closeModal={() => setVideoModal(false)} />
             </Modal>
 
             <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-xl">
-                <CreateAudioModal closeModal={() => setAudioModal(false)}/>
+                <CreateAudioModal closeModal={() => setAudioModal(false)} />
             </Modal>
 
             <Modal show={codeModal} onClose={() => setCodeModal(false)} modal_title={intl.formatMessage({ id: "codeModal.title" })} modal_size="modal-4xl">
-                <CreateCodeModal closeModal={() => setCodeModal(false)}/>
+                <CreateCodeModal closeModal={() => setCodeModal(false)} />
             </Modal>
         </>
 

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
-import { authenticate, setRoles } from "../store/slices/userSlice";
+import { authenticate } from "../store/slices/userSlice";
 import axios from "axios";
 
 export default function AuthProvider(props) {
@@ -19,17 +19,12 @@ export default function AuthProvider(props) {
                     await axios.get('auth/me')
                         .then(response => {
                             dispatch(authenticate(response.data.user));
-                            dispatch(setRoles(response.data.roles));
                         }).catch(err => {
                             if (err.response) {
-                                router.push({
-                                    pathname: '/error',
-                                    query: {
-                                        status: err.response.status,
-                                        message: err.response.data.message,
-                                        url: err.request.responseURL,
-                                    }
-                                });
+                                if(err.response.status == 401){
+                                    Cookies.remove('token');
+                                    router.push('/login');
+                                }
                             }
                             else {
                                 router.push('/error');

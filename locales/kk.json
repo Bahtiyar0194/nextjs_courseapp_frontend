@@ -55,6 +55,9 @@
 
     "page.users.title": "Қолданушылар",
     "page.users.edit_user_title": "Қолданушының деректерін қайта өңдеу",
+    "page.users.user_roles": "Қолданушының рөлдері",
+    "page.users.user_mode": "Қолданушының режимі",
+    "page.users.profile_settings": "Профильдің баптамалары",
 
     "lessons": "Курстың сабақтары",
     "no_added_lessons": "Бұл курсқа қосылған сабақтар жоқ",
@@ -130,11 +133,14 @@
     "task.tasks_for_this_lesson": "Осы сабақтың тапсырмалары",
     "task.number_of_tasks": "Тапсырмалардың саны",
 
+    "task.test.title": "Тесттік тапсырма",
     "task.add_test": "Тест қосу",
     "task.test_name": "Тесттің атауы",
     "task.test_description": "Тесттің қысқаша сипаттамасы",
     "task.start_the_test": "Тестілеуді бастау",
     "task.continue_the_test": "Тестілеуді жалғастыру",
+    "task.testing_completed": "Тестілеу аяқталды!",
+    "task.view_test_results": "Тест нәтижелерін қарау",
     "task.test.select_your_answer": "Жауапты таңдаңыз",
     "task.test.your_answer": "Сіздің жауап",
     "task.test.correct_answer": "Дұрыс жауап",
@@ -159,6 +165,8 @@
 
     "task.test.deleteTestQuestionMaterialModal.title": "Материалды жою",
     "task.test.deleteTestQuestionMaterialModal.confirm": "Сіз расыменде осы материалды жойғыңыз келе ме?",
+
+    "task.answer_the_question.title": "Сұраққа жауап беру",
 
     "logout": "Аккаунттан шығу",
 

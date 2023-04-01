@@ -14,6 +14,7 @@ import { AiOutlineDelete, AiOutlineEdit, AiOutlineLeftCircle, AiOutlineRightCirc
 import Modal from "../../../components/ui/Modal";
 import DeleteLessonModal from "../../../components/lesson/DeleteLessonModal";
 import StickyBox from "react-sticky-box";
+import RoleProvider from "../../../services/RoleProvider";
 
 export default function Lesson() {
     const dispatch = useDispatch();
@@ -24,7 +25,6 @@ export default function Lesson() {
     const lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
     const [lesson_tasks, setLessonTasks] = useState([]);
     const [delete_lesson_modal, setDeleteLessonModal] = useState(false);
-    const roles = useSelector((state) => state.authUser.roles);
 
     const getLesson = async (lesson_id) => {
         setShowFullLoader(true);
@@ -100,36 +100,32 @@ export default function Lesson() {
                         {lesson.lesson_name}
                     </Breadcrumb>
 
-                    {roles.includes(2) &&
-                        <>
-                            <div className="col-span-12">
-                                <div className="btn-wrap">
-                                    <LessonTaskTypeModals lesson_id={lesson.lesson_id} />
-                                    <Link className="btn btn-outline-primary" href={'/dashboard/lesson/edit/' + lesson.lesson_id}><AiOutlineEdit /> {intl.formatMessage({ id: "edit" })}</Link>
-                                    <button onClick={e => setDeleteLessonModal(true)} className="btn btn-outline-danger"><AiOutlineDelete /> {intl.formatMessage({ id: "delete" })}</button>
-                                </div>
+                    <RoleProvider roles={[2]}>
+                        <div className="col-span-12">
+                            <div className="btn-wrap">
+                                <LessonTaskTypeModals lesson_id={lesson.lesson_id} />
+                                <Link className="btn btn-outline-primary" href={'/dashboard/lesson/edit/' + lesson.lesson_id}><AiOutlineEdit /> {intl.formatMessage({ id: "edit" })}</Link>
+                                <button onClick={e => setDeleteLessonModal(true)} className="btn btn-outline-danger"><AiOutlineDelete /> {intl.formatMessage({ id: "delete" })}</button>
                             </div>
+                        </div>
 
-                            <Modal show={delete_lesson_modal} onClose={() => setDeleteLessonModal(false)} modal_title={intl.formatMessage({ id: "lesson.deleteLessonModal.title" })} modal_size="modal-xl">
-                                <DeleteLessonModal course_id={lesson.course_id} delete_lesson_id={lesson.lesson_id} redirect={true} getLessons={false} closeModal={() => setDeleteLessonModal(false)} />
-                            </Modal>
-                        </>
-                    }
+                        <Modal show={delete_lesson_modal} onClose={() => setDeleteLessonModal(false)} modal_title={intl.formatMessage({ id: "lesson.deleteLessonModal.title" })} modal_size="modal-xl">
+                            <DeleteLessonModal course_id={lesson.course_id} delete_lesson_id={lesson.lesson_id} redirect={true} getLessons={false} closeModal={() => setDeleteLessonModal(false)} />
+                        </Modal>
+                    </RoleProvider>
 
                     {lesson.subscribed == true
                         ?
                         <>
                             <div className={'col-span-12 ' + (lesson_tasks.length > 0 && 'lg:col-span-8')}>
-                                <div className="card p-3 lg:p-6">
-                                    <h1>{lesson.lesson_name}</h1>
-                                    <p className="text-lg mb-6">{lesson.lesson_description}</p>
+                                <h1>{lesson.lesson_name}</h1>
+                                <p className="text-lg mb-6">{lesson.lesson_description}</p>
 
-                                    {lesson_blocks.length > 0 && <hr className="mb-6"></hr>}
-                                    <div className="custom-grid">
-                                        {lesson_blocks.map((lesson_block, i) => (
-                                            <LessonBlock key={i} lesson_block={lesson_block} index={i} />
-                                        ))}
-                                    </div>
+                                {lesson_blocks.length > 0 && <hr className="mb-6"></hr>}
+                                <div className="custom-grid">
+                                    {lesson_blocks.map((lesson_block, i) => (
+                                        <LessonBlock key={i} lesson_block={lesson_block} index={i} />
+                                    ))}
                                 </div>
                             </div>
 
@@ -158,8 +154,8 @@ export default function Lesson() {
 
                             <div className="col-span-12">
                                 <div className="btn-wrap">
-                                    {lesson.previous_lesson && <button className="btn btn-light" onClick={e => getNextLesson(lesson.previous_lesson.lesson_id)}><AiOutlineLeftCircle className="mr-1"/> {intl.formatMessage({ id: "lesson.previous_lesson" })} - <b>{lesson.previous_lesson.lesson_name}</b></button>}
-                                    {lesson.next_lesson && <button className="btn btn-outline-primary" onClick={e => getNextLesson(lesson.next_lesson.lesson_id)}><AiOutlineRightCircle className="mr-1"/> {intl.formatMessage({ id: "lesson.next_lesson" })} - <b>{lesson.next_lesson.lesson_name}</b></button>}
+                                    {lesson.previous_lesson && <button className="btn btn-light" onClick={e => getNextLesson(lesson.previous_lesson.lesson_id)}><AiOutlineLeftCircle className="mr-1" /> {intl.formatMessage({ id: "lesson.previous_lesson" })} - <b>{lesson.previous_lesson.lesson_name}</b></button>}
+                                    {lesson.next_lesson && <button className="btn btn-outline-primary" onClick={e => getNextLesson(lesson.next_lesson.lesson_id)}><AiOutlineRightCircle className="mr-1" /> {intl.formatMessage({ id: "lesson.next_lesson" })} - <b>{lesson.next_lesson.lesson_name}</b></button>}
                                 </div>
                             </div>
                         </>

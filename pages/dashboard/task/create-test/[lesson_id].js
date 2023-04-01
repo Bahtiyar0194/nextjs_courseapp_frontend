@@ -17,6 +17,7 @@ import CreateQuestionImageModal from "../../../../components/lesson/lesson_task_
 import CreateQuestionCodeModal from "../../../../components/lesson/lesson_task_modals/test_components/CreateQuestionCodeModal";
 import CreateQuestionAudioModal from "../../../../components/lesson/lesson_task_modals/test_components/CreateQuestionAudioModal";
 import { scrollIntoView } from "seamless-scroll-polyfill";
+import RoleProvider from "../../../../services/RoleProvider";
 
 export default function CreateTest() {
     const router = useRouter();
@@ -24,7 +25,6 @@ export default function CreateTest() {
     const intl = useIntl();
 
     const [lesson, setLesson] = useState([]);
-    const roles = useSelector((state) => state.authUser.roles);
 
     const [error, setError] = useState([]);
     const [button_loader, setButtonLoader] = useState(false);
@@ -268,87 +268,81 @@ export default function CreateTest() {
 
     return (
         <DashboardLayout showLoader={showFullLoader} title={intl.formatMessage({ id: "task.add_test" })}>
-            {roles.includes(2) ?
-                <>
-                    <Breadcrumb>
-                        <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
-                        <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
-                        <Link href={'/dashboard/lesson/' + lesson.lesson_id}>{lesson.lesson_name}</Link>
-                        {intl.formatMessage({ id: "task.add_test" })}
-                    </Breadcrumb>
+            <RoleProvider roles={[2]} redirect={true}>
+                <Breadcrumb>
+                    <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
+                    <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
+                    <Link href={'/dashboard/lesson/' + lesson.lesson_id}>{lesson.lesson_name}</Link>
+                    {intl.formatMessage({ id: "task.add_test" })}
+                </Breadcrumb>
 
-                    <div className="col-span-12">
-                        <div id="create_wrap" className="form-group mt-2">
-                            <AiOutlineFileDone />
-                            <input onInput={e => setTaskName(e.target.value)} type="text" value={task_name} placeholder=" " />
-                            <label className={error.task_name && 'label-error'}>{error.task_name ? error.task_name : intl.formatMessage({ id: "task.test_name" })}</label>
-                        </div>
-
-                        <div className="form-group mt-2">
-                            <AiOutlineFileDone />
-                            <textarea cols="20" onInput={e => setTaskDescription(e.target.value)} value={task_description} placeholder=" "></textarea>
-                            <label className={error.task_description && 'label-error'}>{error.task_description ? error.task_description : intl.formatMessage({ id: "task.test_description" })}</label>
-                        </div>
-
-                        <div id="test_questions_block">
-                            {test_question_blocks.length > 0 &&
-                                test_question_blocks.map((test_question, i) => (
-                                    <TestQuestionBlock
-                                        key={i}
-                                        index={i}
-                                        intl={intl}
-                                        moveTestQuestionBlock={moveTestQuestionBlock}
-                                        deleteTestQuestionBlock={deleteTestQuestionBlock}
-                                        test_question={test_question}
-                                        createQuestionImage={createQuestionImage}
-                                        createQuestionAudio={createQuestionAudio}
-                                        createQuestionCode={createQuestionCode}
-                                        edit={true}
-                                    />
-                                ))
-                            }
-                        </div>
-
-                        <p className="my-4">{intl.formatMessage({ id: "task.test.addTestQuestionsModal.count_of_questions" })}: <span className="text-corp">{test_question_blocks.length}</span></p>
-                        {error.test_question_blocks && test_question_blocks.length == 0 && <p className="text-danger mb-4">{intl.formatMessage({ id: "task.test.addTestQuestionsModal.please_add_questions" })}</p>}
-
-                        <div className="btn-wrap">
-                            <button onClick={e => addTestQuestion()} className="btn btn-primary">
-                                {intl.formatMessage({ id: "task.test.addTestQuestionsModal.add_questions" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
-                            </button>
-                            <button disabled={button_loader} onClick={e => createTestSubmit(lesson.lesson_id)} className="btn btn-outline-primary">
-                                {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
-                                <span>{intl.formatMessage({ id: "done" })}</span>
-                            </button>
-                        </div>
+                <div className="col-span-12">
+                    <div id="create_wrap" className="form-group mt-2">
+                        <AiOutlineFileDone />
+                        <input onInput={e => setTaskName(e.target.value)} type="text" value={task_name} placeholder=" " />
+                        <label className={error.task_name && 'label-error'}>{error.task_name ? error.task_name : intl.formatMessage({ id: "task.test_name" })}</label>
                     </div>
 
-                    <Modal
-                        show={delete_test_question_modal}
-                        onClose={() => setDeleteTestQuestionModal(false)}
-                        modal_title={intl.formatMessage({ id: "task.test.deleteTestQuestionsModal.title" })}
-                        modal_size="modal-xl"
-                    >
-                        <DeleteTestQuestionModal delete_question_id={delete_question_id} closeModal={() => setDeleteTestQuestionModal(false)} />
-                    </Modal>
+                    <div className="form-group mt-2">
+                        <AiOutlineFileDone />
+                        <textarea cols="20" onInput={e => setTaskDescription(e.target.value)} value={task_description} placeholder=" "></textarea>
+                        <label className={error.task_description && 'label-error'}>{error.task_description ? error.task_description : intl.formatMessage({ id: "task.test_description" })}</label>
+                    </div>
 
-                    <Modal show={imageModal} onClose={() => setImageModal(false)} modal_title={intl.formatMessage({ id: "imageModal.title" })} modal_size="modal-xl">
-                        <CreateQuestionImageModal question_index={question_index} closeModal={() => setImageModal(false)} />
-                    </Modal>
+                    <div id="test_questions_block">
+                        {test_question_blocks.length > 0 &&
+                            test_question_blocks.map((test_question, i) => (
+                                <TestQuestionBlock
+                                    key={i}
+                                    index={i}
+                                    intl={intl}
+                                    moveTestQuestionBlock={moveTestQuestionBlock}
+                                    deleteTestQuestionBlock={deleteTestQuestionBlock}
+                                    test_question={test_question}
+                                    createQuestionImage={createQuestionImage}
+                                    createQuestionAudio={createQuestionAudio}
+                                    createQuestionCode={createQuestionCode}
+                                    edit={true}
+                                />
+                            ))
+                        }
+                    </div>
 
-                    <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-xl">
-                        <CreateQuestionAudioModal question_index={question_index} closeModal={() => setAudioModal(false)} />
-                    </Modal>
+                    <p className="my-4">{intl.formatMessage({ id: "task.test.addTestQuestionsModal.count_of_questions" })}: <span className="text-corp">{test_question_blocks.length}</span></p>
+                    {error.test_question_blocks && test_question_blocks.length == 0 && <p className="text-danger mb-4">{intl.formatMessage({ id: "task.test.addTestQuestionsModal.please_add_questions" })}</p>}
 
-                    <Modal show={codeModal} onClose={() => setCodeModal(false)} modal_title={intl.formatMessage({ id: "codeModal.title" })} modal_size="modal-4xl">
-                        <CreateQuestionCodeModal question_index={question_index} closeModal={() => setCodeModal(false)} />
-                    </Modal>
-                </>
-                :
-                <div className="col-span-12">
-                    {intl.formatMessage({ id: "loading" })}
+                    <div className="btn-wrap">
+                        <button onClick={e => addTestQuestion()} className="btn btn-primary">
+                            {intl.formatMessage({ id: "task.test.addTestQuestionsModal.add_questions" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
+                        </button>
+                        <button disabled={button_loader} onClick={e => createTestSubmit(lesson.lesson_id)} className="btn btn-outline-primary">
+                            {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
+                            <span>{intl.formatMessage({ id: "done" })}</span>
+                        </button>
+                    </div>
                 </div>
-            }
+
+                <Modal
+                    show={delete_test_question_modal}
+                    onClose={() => setDeleteTestQuestionModal(false)}
+                    modal_title={intl.formatMessage({ id: "task.test.deleteTestQuestionsModal.title" })}
+                    modal_size="modal-xl"
+                >
+                    <DeleteTestQuestionModal delete_question_id={delete_question_id} closeModal={() => setDeleteTestQuestionModal(false)} />
+                </Modal>
+
+                <Modal show={imageModal} onClose={() => setImageModal(false)} modal_title={intl.formatMessage({ id: "imageModal.title" })} modal_size="modal-xl">
+                    <CreateQuestionImageModal question_index={question_index} closeModal={() => setImageModal(false)} />
+                </Modal>
+
+                <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-xl">
+                    <CreateQuestionAudioModal question_index={question_index} closeModal={() => setAudioModal(false)} />
+                </Modal>
+
+                <Modal show={codeModal} onClose={() => setCodeModal(false)} modal_title={intl.formatMessage({ id: "codeModal.title" })} modal_size="modal-4xl">
+                    <CreateQuestionCodeModal question_index={question_index} closeModal={() => setCodeModal(false)} />
+                </Modal>
+            </RoleProvider>
         </DashboardLayout>
     );
 }

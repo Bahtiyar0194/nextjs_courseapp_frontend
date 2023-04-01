@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { AiOutlineRead, AiOutlineRight } from "react-icons/ai";
+import { AiOutlineRight } from "react-icons/ai";
 import { IoGridOutline, IoList } from "react-icons/io5";
 import axios from "axios";
 import Link from "next/link";

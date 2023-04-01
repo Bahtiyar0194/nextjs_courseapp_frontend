@@ -142,7 +142,7 @@
 }
 
 .bg-corp{
-    @apply bg-sky-500;
+    @apply bg-accent-300;
 }
 
 .border-active{
@@ -162,7 +162,7 @@
 }
 
 .border-corp{
-    @apply border-sky-500;
+    @apply border-accent-300;
 }
 
 .border-danger{
@@ -190,15 +190,15 @@
 }
 
 .text-inactive {
-    @apply text-gray-500;
+    @apply text-current-500;
 }
 
 .text-corp{
-    @apply text-sky-500;
+    @apply text-accent-300;
 }
 
 .stroke-corp{
-    @apply stroke-sky-500;
+    @apply stroke-accent-300;
 }
 
 .corp-font{
@@ -452,6 +452,14 @@ select option {
     @apply text-danger -top-2.5 text-xs left-0;
 }
 
+.label-focus{
+    @apply text-xs text-inactive;
+}
+
+.label-focus.danger{
+    @apply text-danger;
+}
+
 .form-group > svg{
     @apply absolute text-2xl top-3 text-inactive;
 }
@@ -571,7 +579,7 @@ select option {
 }
 
 .btn-wrap{
-    @apply flex gap-2 flex-wrap;
+    @apply flex gap-2 flex-wrap duration-200;
 }
 
 .btn-wrap-lg{
@@ -700,7 +708,7 @@ select option {
 }
 
 .badge-success{
-    @apply bg-sky-200 text-sky-500 border border-sky-500 dark:bg-transparent;
+    @apply bg-blue-200 text-accent-300 border border-accent-300 dark:bg-transparent;
 }
 
 .card {
@@ -820,11 +828,11 @@ select option {
 }
 
 .modal-close-button{
-    @apply absolute right-4 top-4 text-xl cursor-pointer;
+    @apply absolute right-4 top-4 text-xl cursor-pointer text-inactive;
 }
 
 .full-overlay {
-    @apply fixed w-full h-full left-0 top-0 bg-inactive opacity-90 z-20 flex flex-col justify-center items-center duration-200;
+    @apply fixed w-full h-full left-0 top-0 bg-inactive z-20 flex flex-col justify-center items-center duration-200;
 }
 
 .overlay {
@@ -894,6 +902,11 @@ select option {
     height: calc(100vh - 70px);
 }
 
+.content-center{
+    @apply flex justify-center items-center flex-col;
+    height: calc(100vh - 100px);
+}
+
 .dropdown-menu{
     @apply hidden rounded-lg shadow-md bg-active text-sm border-active z-10 px-3 border my-2;
 }
@@ -902,13 +915,12 @@ select option {
     @apply block;
 }
 
-
 .dropdown-menu li{
-    @apply border-b-active py-2.5 list-none;
+    @apply border-b-active py-3 list-none;
 }
 
 .dropdown-menu li:first-child{
-    @apply pt-2.5;
+    @apply pt-3;
 }
 
 .dropdown-menu li:last-child{
@@ -1061,11 +1073,11 @@ select option {
 
 .course-image > div {
     @apply p-4 pt-20 lg:p-6 lg:pt-40;
-    background: linear-gradient(0deg, rgba(255,255,255,1) 40%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(0deg, #FFFFFF 40%, rgba(255,255,255,0) 100%);
 }
 
 .dark .course-image > div {
-    background: linear-gradient(0deg, rgba(31,41,53,1) 40%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(0deg, #212121 40%, rgba(255,255,255,0) 100%);
 }
 
 .lesson-block:last-child,

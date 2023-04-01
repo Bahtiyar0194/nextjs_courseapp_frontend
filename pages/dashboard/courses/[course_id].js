@@ -2,7 +2,6 @@ import DashboardLayout from "../../../components/layouts/DashboardLayout";
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
 import DeleteLessonModal from "../../../components/lesson/DeleteLessonModal";
@@ -18,6 +17,8 @@ import ButtonLoader from "../../../components/ui/ButtonLoader";
 import API_URL from "../../../config/api";
 import { scrollIntoView } from "seamless-scroll-polyfill";
 import StickyBox from "react-sticky-box";
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import RoleProvider from "../../../services/RoleProvider";
 
 export default function Course() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function Course() {
   const [button_loader, setButtonLoader] = useState(false);
   const [course, setCourse] = useState([]);
   const [lessons, setLessons] = useState([]);
-  const roles = useSelector((state) => state.authUser.roles);
+  const [animateParent, enableAnimations] = useAutoAnimate();
 
   let section_count = 1;
 
@@ -238,7 +239,7 @@ export default function Course() {
             <div className={"col-span-12 lg:col-span-7"}>
               <div className="flex justify-between">
                 <h3 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "lessons" })}</h3>
-                {roles.includes(2) &&
+                <RoleProvider roles={[2]}>
                   <div className="btn-wrap">
                     <CDropdown>
                       <CDropdownToggle color="primary" href="#">
@@ -250,12 +251,12 @@ export default function Course() {
                       </CDropdownMenu>
                     </CDropdown>
                   </div>
-                }
+                </RoleProvider>
               </div>
 
               {
                 lessons.total_count > 0 ?
-                  <ul id="lessons_wrap" className="list-group mt-4">
+                  <ul id="lessons_wrap" className="list-group mt-4" ref={animateParent}>
                     {lessons.my_lessons?.map(lesson => (
                       <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 2 ? 'section' : 'lesson'}>
                         {
@@ -271,14 +272,16 @@ export default function Course() {
                               {lesson.views_count > 0 && <span className="badge badge-light">{intl.formatMessage({ id: "views" })}: {lesson.views_count}</span>}
                             </Link>
                         }
-                        {roles.includes(2) && lessons.total_count > 0 &&
+
+                        <RoleProvider roles={[2]}>
                           <div className="btn-wrap mt-4">
                             <button title={intl.formatMessage({ id: "edit" })} onClick={e => editLesson(lesson.lesson_id, lesson.lesson_type_id, lesson.lesson_name)} className="btn-edit"><AiOutlineEdit /></button>
                             <button title={intl.formatMessage({ id: "delete" })} onClick={e => deleteLesson(lesson.lesson_id)} className="btn-delete"><AiOutlineDelete /></button>
                             <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
                             <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down"><AiOutlineArrowDown /></button>
                           </div>
-                        }
+                        </RoleProvider>
+
                       </li>
                     ))}
                   </ul>
@@ -293,13 +296,14 @@ export default function Course() {
         </div>
       }
 
-      {roles.includes(2) &&
-        <>
-          <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
-            <CreateCourseSectionModal closeModal={() => setSectionModal(false)} course_id={course.course_id} getLessons={getLessons} />
-          </Modal>
-        </>
-      }
+
+      <RoleProvider roles={[2]}>
+        <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
+          <CreateCourseSectionModal closeModal={() => setSectionModal(false)} course_id={course.course_id} getLessons={getLessons} />
+        </Modal>
+      </RoleProvider>
+
+
 
 
       <Modal show={buyCourseModal} onClose={() => setBuyCourseModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">

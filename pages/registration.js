@@ -132,14 +132,14 @@ export default function Registration() {
                             <input onInput={e => setSchoolName(e.target.value)} type="text" value={school_name} placeholder=" " />
                             <label className={(error.school_name && 'label-error')}>{error.school_name ? error.school_name : intl.formatMessage({ id: "page.registration.form.school_name" })}</label>
                         </div>
-                        <div className="form-group">
-                            <AiOutlineGlobal />
-                            <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center">
+                            <div className="form-group">
+                                <AiOutlineGlobal />
                                 <input onInput={e => setSchoolDomain(e.target.value)} type="text" value={school_domain} placeholder=" " />
                                 <label className={(error.school_domain && 'label-error')}>{error.school_domain ? error.school_domain : intl.formatMessage({ id: "page.registration.form.school_domain" })}</label>
-                                <span className="pl-2 text-inactive">.{MAIN_DOMAIN}</span>
+                                <span className="text-xs text-inactive">{intl.formatMessage({ id: "example" })}: <i>school.{MAIN_DOMAIN}</i></span>
                             </div>
-                            <span className="text-xs text-inactive">{intl.formatMessage({ id: "example" })}: <i>school.{MAIN_DOMAIN}</i></span>
+                            <span className="-mt-10 pl-2 text-inactive">.{MAIN_DOMAIN}</span>
                         </div>
                     </>
                 }
