@@ -549,6 +549,10 @@ select option {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
 }
 
+.dark .custom-radio > input:checked + span::before {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23222'/%3e%3c/svg%3e");
+}
+
 .custom-radio > input:checked + span,
 .custom-radio-checkbox > input:checked + span,
 .custom-checkbox > input:checked + span{
@@ -559,6 +563,11 @@ select option {
 .custom-checkbox > input:checked + span::before {
     @apply border-corp bg-corp;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+.dark .custom-radio-checkbox > input:checked + span::before,
+.dark .custom-checkbox > input:checked + span::before {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23222' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
 }
   
 .custom-radio > input:disabled + span::before,
@@ -1080,6 +1089,11 @@ select option {
     background: linear-gradient(0deg, #212121 40%, rgba(255,255,255,0) 100%);
 }
 
+.lesson-block,
+.test-question-block{
+    @apply mb-4;
+}
+
 .lesson-block:last-child,
 .test-question-block:last-child{
     @apply mb-0;
@@ -1106,7 +1120,7 @@ select option {
 }
 
 .progress{
-    @apply w-full bg-inactive rounded-lg h-2 my-4;
+    @apply w-full bg-inactive rounded-lg h-2.5 my-4 border-active;
 }
 
 .progress.active{

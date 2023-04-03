@@ -10,6 +10,7 @@
     "page.error.404": "Бет табылмады!",
     "page.error.500": "Сервер жағынан қателік орын алды!",
     "page.error.server_lost": "Сервермен байланыс орнатылмады!",
+    "page.error.page_is_not_available": "Бұл бет осы режимде қол жетімді емес",
 
     "page.login.title": "Аккаунтқа кіру",
     "page.login.description": "Сіз аккаунтқа кіру бетіндесіз",
@@ -30,6 +31,7 @@
     "page.registration.form.have_an_account": "Менде аккаунт бар.",
 
     "page.dashboard.title": "Жеке кабинет",
+    "page.dashboard.go_to_dashboard": "Жеке кабинетке өту",
 
     "page.courses_catalogue.title": "Курстар каталогы",
     "page.courses_catalogue.go_to_catalogue": "Курстар каталогына көшу",
@@ -128,6 +130,8 @@
     "codeModal.code_text": "Код",
     "codeModal.enter_the_code": "Кодты енгізіңіз",
 
+    "task": "Тапсырма",
+    "task.title": "Тапсырма қосу",
     "task.task_name": "Тапсырманың атауы",
     "task.task_description": "Тапсырманың қысқаша сипаттамасы",
     "task.tasks_for_this_lesson": "Осы сабақтың тапсырмалары",

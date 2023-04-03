@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { AiOutlineLock } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { useIntl } from "react-intl";
 
 export default function RoleProvider({ children, roles, redirect }) {
     const user = useSelector((state) => state.authUser.user);
+    const intl = useIntl();
     let role_found = false;
 
     if (roles.length > 0) {
@@ -21,8 +23,8 @@ export default function RoleProvider({ children, roles, redirect }) {
                         <div className="content-center">
                         <AiOutlineLock className="text-6xl mb-2 text-corp"></AiOutlineLock>
                             <div className="text-center">
-                                <h4>Эта страница не доступна в данном режиме</h4>
-                                <Link href={'/dashboard'}>В личный кабинет</Link>
+                                <h4 className="mb-2">{intl.formatMessage({ id: "page.error.page_is_not_available" })}</h4>
+                                <Link href={'/dashboard'}>{intl.formatMessage({ id: "page.dashboard.go_to_dashboard" })}</Link>
                             </div>
                         </div>
                     </div>

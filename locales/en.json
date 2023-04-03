@@ -10,6 +10,7 @@
     "page.error.404": "Page not found!",
     "page.error.500": "Server error!",
     "page.error.server_lost": "Connection to the server is lost!",
+    "page.error.page_is_not_available": "This page is not available in this mode",
 
     "page.login.title": "Login",
     "page.login.description": "You are currently viewing the login page",
@@ -30,6 +31,7 @@
     "page.registration.form.have_an_account": "I have an account.",
 
     "page.dashboard.title": "Dashboard",
+    "page.dashboard.go_to_dashboard": "Go to dashboard",
 
     "page.courses_catalogue.title": "Courses",
     "page.courses_catalogue.go_to_catalogue": "Go to the course catalogue",
@@ -128,7 +130,8 @@
     "codeModal.code_text": "Code",
     "codeModal.enter_the_code": "Enter the code",
 
-
+    "task": "Task",
+    "task.title": "Adding a task",
     "task.task_name": "Task name",
     "task.task_description": "Task description",
     "task.tasks_for_this_lesson": "Tasks for this lesson",

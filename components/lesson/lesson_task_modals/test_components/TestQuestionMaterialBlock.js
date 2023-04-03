@@ -2,6 +2,7 @@ import API_URL from '../../../../config/api';
 import ReactAudioPlayer from 'react-audio-player';
 import "../../../../node_modules/video-react/dist/video-react.css";
 import { useState } from 'react';
+import RoleProvider from '../../../../services/RoleProvider';
 
 import { useIntl } from "react-intl";
 import { AiOutlineDelete } from 'react-icons/ai';
@@ -23,7 +24,7 @@ const TestQuestionMaterialBlock = ({ question_material_block, question_index, ed
 
     return (
         <div id={'block_' + question_material_block.block_id} className={"lesson-block " + (edit === true ? "edit " : " ") + (question_material_block.file_type_id == 4 ? "col-span-12 md:col-span-6 lg:col-span-4" : "col-span-12")}>
-            <RoleProvider roles={[2]}>
+            {edit === true && <RoleProvider roles={[2]}>
                 <div className="flex justify-between items-center border-b-active pb-4 mb-4">
                     <div>
                         {question_material_block.block_type_id == 6 && <p className='mb-0 text-corp'>{intl.formatMessage({ id: "codeModal.code" })}</p>}
@@ -35,7 +36,7 @@ const TestQuestionMaterialBlock = ({ question_material_block, question_index, ed
                         <button title={intl.formatMessage({ id: "delete" })} onClick={e => deleteTestQuestionMaterialBlock(question_material_block.block_id)} className="btn-delete"><AiOutlineDelete /></button>
                     </div>
                 </div>
-            </RoleProvider>
+            </RoleProvider>}
 
             {question_material_block.file_type_id == 3 &&
                 <ReactAudioPlayer width="100%" src={API_URL + '/lessons/audio/' + question_material_block.file_id} controls />

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useIntl } from "react-intl";
-import { AiOutlineCaretDown, AiOutlineQuestionCircle, AiOutlineFileDone, AiOutlineRead } from "react-icons/ai";
+import { AiOutlineCaretDown, AiOutlineQuestionCircle, AiOutlineFileDone, AiOutlineRead, AiOutlineFileText } from "react-icons/ai";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
 import Link from "next/link";
 import RoleProvider from "../../services/RoleProvider";
@@ -14,8 +14,8 @@ export default function LessonTaskTypeModals({ lesson_id }) {
                     <AiOutlineRead className="mr-0.5" />{intl.formatMessage({ id: "lesson.add_task" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
                 </CDropdownToggle>
                 <CDropdownMenu>
+                    <Link href={'/dashboard/task/create-task/' + lesson_id}><AiOutlineFileText /> {intl.formatMessage({ id: "task" })}</Link>
                     <Link href={'/dashboard/task/create-test/' + lesson_id}><AiOutlineFileDone /> {intl.formatMessage({ id: "task.test.title" })}</Link>
-                    <Link href={'#'}><AiOutlineQuestionCircle /> {intl.formatMessage({ id: "task.answer_the_question.title" })}</Link>
                 </CDropdownMenu>
             </CDropdown>
         </RoleProvider>

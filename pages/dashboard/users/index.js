@@ -200,7 +200,7 @@ export default function Users() {
                                 <div className="-mt-2">
                                     <label className={"label-focus " + (error.roles_count && "danger")}>{error.roles_count ? error.roles_count : intl.formatMessage({ id: "page.users.user_roles" })}</label>
 
-                                    <div className="btn-wrap mt-2">
+                                    <div className="btn-wrap-lg mt-2">
                                         {edit_user.roles?.map(role => (
                                             <label key={role.role_type_id} className="custom-radio-checkbox">
                                                 <input className="role_input" type="checkbox" defaultValue={role.role_type_id} defaultChecked={role.selected} />

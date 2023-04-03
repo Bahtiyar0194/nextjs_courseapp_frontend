@@ -183,7 +183,7 @@ export default function LessonTask() {
                                                 <div className="custom-grid">
                                                     {
                                                         test_question.question.question_materials.length > 0 &&
-                                                        test_question.question.question_materials.map((question_material_block, i) => (
+                                                        test_question.question.question_materials?.map((question_material_block, i) => (
                                                             <TestQuestionMaterialBlock key={i} question_material_block={question_material_block} question_index={i} edit={false} />
                                                         ))
                                                     }
@@ -224,9 +224,7 @@ export default function LessonTask() {
                                                             {question.question_materials.length > 0 &&
                                                                 <div className="custom-grid">
                                                                     {question.question_materials.map((question_material_block, i) => (
-                                                                        <div key={i} className="col-span-12 lg:col-span-3">
-                                                                            <TestQuestionMaterialBlock question_material_block={question_material_block} question_index={i} edit={false} />
-                                                                        </div>
+                                                                            <TestQuestionMaterialBlock key={i} question_material_block={question_material_block} question_index={i} edit={false} />
                                                                     ))}
 
                                                                     <div className="col-span-12">
