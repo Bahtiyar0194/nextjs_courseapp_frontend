@@ -4,15 +4,15 @@ import Link from "next/link";
 import { AiOutlinePlus, AiOutlineCaretDown, AiOutlineFileImage, AiOutlinePlayCircle, AiOutlineFileText, AiOutlineAudio, AiOutlineTable, AiOutlineCode } from "react-icons/ai";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
 
-import Modal from "../ui/Modal";
-import TextEditorModal from "./lesson_block_modals/TextEditorModal";
-import TableModal from "./lesson_block_modals/TableModal";
-import CreateImageModal from "./lesson_block_modals/CreateImageModal";
-import CreateVideoModal from "./lesson_block_modals/CreateVideoModal";
-import CreateAudioModal from "./lesson_block_modals/CreateAudioModal";
-import CreateCodeModal from "./lesson_block_modals/CreateCodeModal";
+import Modal from "../../ui/Modal";
+import TextEditorModal from "../lesson_block_modals/TextEditorModal";
+import TableModal from "../lesson_block_modals/TableModal";
+import CreateImageModal from "../lesson_block_modals/CreateImageModal";
+import CreateVideoModal from "../lesson_block_modals/CreateVideoModal";
+import CreateAudioModal from "../lesson_block_modals/CreateAudioModal";
+import CreateCodeModal from "../lesson_block_modals/CreateCodeModal";
 
-export default function LessonBlockTypeModals() {
+export default function TaskBlockTypeModals() {
     const intl = useIntl();
 
     const [textModal, setTextModal] = useState(false);
@@ -40,29 +40,28 @@ export default function LessonBlockTypeModals() {
 
 
             <Modal show={textModal} onClose={() => setTextModal(false)} modal_title={intl.formatMessage({ id: "textModal.title" })} modal_size="modal-4xl">
-                <TextEditorModal create_lesson={true} closeModal={() => setTextModal(false)} />
+                <TextEditorModal create_task={true} closeModal={() => setTextModal(false)} />
             </Modal>
 
             <Modal show={tableModal} onClose={() => setTableModal(false)} modal_title={intl.formatMessage({ id: "tableModal.title" })} modal_size="modal-xl">
-                <TableModal create_lesson={true} closeModal={() => setTableModal(false)} />
+                <TableModal create_task={true} closeModal={() => setTableModal(false)} />
             </Modal>
 
             <Modal show={imageModal} onClose={() => setImageModal(false)} modal_title={intl.formatMessage({ id: "imageModal.title" })} modal_size="modal-xl">
-                <CreateImageModal create_lesson={true} closeModal={() => setImageModal(false)} />
+                <CreateImageModal create_task={true} closeModal={() => setImageModal(false)} />
             </Modal>
 
             <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoModal.title" })} modal_size="modal-xl">
-                <CreateVideoModal create_lesson={true} closeModal={() => setVideoModal(false)} />
+                <CreateVideoModal create_task={true} closeModal={() => setVideoModal(false)} />
             </Modal>
 
             <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-xl">
-                <CreateAudioModal create_lesson={true} closeModal={() => setAudioModal(false)} />
+                <CreateAudioModal create_task={true} closeModal={() => setAudioModal(false)} />
             </Modal>
 
             <Modal show={codeModal} onClose={() => setCodeModal(false)} modal_title={intl.formatMessage({ id: "codeModal.title" })} modal_size="modal-4xl">
-                <CreateCodeModal create_lesson={true} closeModal={() => setCodeModal(false)} />
+                <CreateCodeModal create_task={true} closeModal={() => setCodeModal(false)} />
             </Modal>
         </>
-
     )
 }

@@ -35,6 +35,8 @@
 
     "page.courses_catalogue.title": "Courses",
     "page.courses_catalogue.go_to_catalogue": "Go to the course catalogue",
+    "page.courses.subscribersModal.title": "Subscribers of this course",
+    "page.courses.subscribersModal.subscribe_type": "Subscribe type",
 
     "page.my_courses.title": "My courses",
     "page.my_courses.form.course_create": "Create course",
@@ -51,6 +53,7 @@
     "page.my_courses.get_the_course_for_free": "Get the course for free",
     "page.my_courses.you_are_subscribed_to_this_course": "You are subscribed to this course",
     "page.my_courses.you_are_not_subscribed_to_this_course": "You are not subscribed to this course",
+    "page.my_courses.subscribers": "Subscribers",
     "page.my_courses.form.dont_have_created_courses": "You don't have any published courses",
     "page.my_courses.form.dont_have_purchased_courses": "You don't have any courses purchased",
     "page.my_courses.form.add_course": "Add course",
@@ -167,7 +170,7 @@
     "task.test.deleteTestQuestionsModal.title": "Deleting a question",
     "task.test.deleteTestQuestionsModal.confirm": "Do you really want to delete this question?",
 
-    "task.test.deleteTestQuestionMaterialModal.title": "Deleting material",
+    "task.test.deleteTestQuestionMaterialModal.title": "Deleting task material",
     "task.test.deleteTestQuestionMaterialModal.confirm": "Do you really want to delete this material?",
 
     "task.answer_the_question.title": "Answer the question",
@@ -203,5 +206,9 @@
     "continue": "Continue",
     "created_at": "Created at",
     "views": "Views",
-    "tasks": "Tasks"
+    "tasks": "Tasks",
+    "operator": "Operator",
+    "recipient": "Recipient",
+    "cost": "Cost",
+    "status": "Status"
 }

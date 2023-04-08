@@ -105,7 +105,7 @@ export default function DashboardLayout(props) {
                             <CDropdownMenu>
                                 {user.roles?.length > 1 &&
                                     <div>
-                                        <p className="text-inactive mb-2.5">{intl.formatMessage({ id: "page.users.user_mode" })}</p>
+                                        <p className="mb-2.5 font-medium">{intl.formatMessage({ id: "page.users.user_mode" })}</p>
                                         {user.roles?.map(role =>
                                             <div key={role.role_type_id} className="mt-1.5">
                                                 <label className="custom-radio">

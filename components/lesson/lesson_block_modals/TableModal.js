@@ -3,12 +3,17 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from 'react-redux';
 import { setLessonBlocks, setLessonBlocksCount } from "../../../store/slices/lessonBlocksSlice";
+import { setTaskBlocks, setTaskBlocksCount } from '../../../store/slices/taskBlocksSlice';
 
-const TableModal = ({ closeModal }) => {
+const TableModal = ({ create_lesson, create_task, closeModal }) => {
     const intl = useIntl();
     const dispatch = useDispatch();
+
     let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
     const lesson_blocks_count = useSelector((state) => state.lessonBlocks.lesson_blocks_count);
+
+    let task_blocks = useSelector((state) => state.taskBlocks.task_blocks);
+    const task_blocks_count = useSelector((state) => state.taskBlocks.task_blocks_count);
 
     const [columns_count, setColumnsCount] = useState('');
     const [rows_count, setRowsCount] = useState('');
@@ -61,14 +66,26 @@ const TableModal = ({ closeModal }) => {
 
             table.insertAdjacentElement('beforeEnd', tbody);
             tableWrap.insertAdjacentElement('afterbegin', table);
-            
-            dispatch(setLessonBlocksCount(lesson_blocks_count + 1));
-            lesson_blocks = [...lesson_blocks, {
-                'block_id': lesson_blocks_count + 1,
-                'block_type_id': 5,
-                'content': tableWrap.outerHTML,
-            }];
-            dispatch(setLessonBlocks(lesson_blocks));
+
+            if (create_lesson === true) {
+                dispatch(setLessonBlocksCount(lesson_blocks_count + 1));
+                lesson_blocks = [...lesson_blocks, {
+                    'block_id': lesson_blocks_count + 1,
+                    'block_type_id': 5,
+                    'content': tableWrap.outerHTML,
+                }];
+                dispatch(setLessonBlocks(lesson_blocks));
+            }
+
+            if (create_task === true) {
+                dispatch(setTaskBlocksCount(task_blocks_count + 1));
+                task_blocks = [...task_blocks, {
+                    'block_id': task_blocks_count + 1,
+                    'block_type_id': 5,
+                    'content': tableWrap.outerHTML,
+                }];
+                dispatch(setTaskBlocks(task_blocks));
+            }
 
             closeModal();
         }

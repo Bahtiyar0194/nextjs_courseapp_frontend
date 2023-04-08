@@ -57,7 +57,7 @@ export default function MyCourses() {
                 <>
                     <div className="col-span-12">
                         <div className="flex max-lg:flex-col lg:justify-between lg:items-center">
-                            <h2 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "page.my_courses.title" })}</h2>
+                            <h2 className="max-lg:mb-4">{intl.formatMessage({ id: "page.my_courses.title" })}</h2>
                             <div className="flex">
                                 {
                                     contentViewType === 'grid' ? <button onClick={() => setContentViewType('list')} className="btn btn-outline-primary"><IoList /></button> :

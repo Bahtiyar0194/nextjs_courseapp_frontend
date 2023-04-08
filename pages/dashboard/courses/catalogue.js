@@ -173,7 +173,7 @@ export default function CourseCatalogue() {
                 <>
                     <div className="col-span-12">
                         <div className="flex max-lg:flex-col lg:justify-between lg:items-center">
-                            <h2 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "page.courses_catalogue.title" })}</h2>
+                            <h2>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</h2>
                             <div className="flex">
                                 <RoleProvider roles={[2]}>
                                     <button className="btn btn-outline-primary mr-2" onClick={() => setCourseModal(true)}><AiOutlineRead />

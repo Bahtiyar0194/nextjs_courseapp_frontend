@@ -89,34 +89,34 @@ export default function Lesson() {
             {lesson.lesson_id
                 ?
                 <>
-                    <Breadcrumb>
-                        {lesson.subscribed == true
-                            ?
-                            <Link href={'/dashboard/courses/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
-                            :
-                            <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
-                        }
-                        <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
-                        {lesson.lesson_name}
-                    </Breadcrumb>
-
-                    <RoleProvider roles={[2]}>
-                        <div className="col-span-12">
-                            <div className="btn-wrap">
-                                <LessonTaskTypeModals lesson_id={lesson.lesson_id} />
-                                <Link className="btn btn-outline-primary" href={'/dashboard/lesson/edit/' + lesson.lesson_id}><AiOutlineEdit /> {intl.formatMessage({ id: "edit" })}</Link>
-                                <button onClick={e => setDeleteLessonModal(true)} className="btn btn-outline-danger"><AiOutlineDelete /> {intl.formatMessage({ id: "delete" })}</button>
-                            </div>
-                        </div>
-
-                        <Modal show={delete_lesson_modal} onClose={() => setDeleteLessonModal(false)} modal_title={intl.formatMessage({ id: "lesson.deleteLessonModal.title" })} modal_size="modal-xl">
-                            <DeleteLessonModal course_id={lesson.course_id} delete_lesson_id={lesson.lesson_id} redirect={true} getLessons={false} closeModal={() => setDeleteLessonModal(false)} />
-                        </Modal>
-                    </RoleProvider>
-
                     {lesson.subscribed == true
                         ?
                         <>
+                            <Breadcrumb>
+                                {lesson.subscribed == true
+                                    ?
+                                    <Link href={'/dashboard/courses/my-courses'}>{intl.formatMessage({ id: "page.my_courses.title" })}</Link>
+                                    :
+                                    <Link href={'/dashboard/courses/catalogue'}>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</Link>
+                                }
+                                <Link href={'/dashboard/courses/' + lesson.course_id}>{lesson.course_name}</Link>
+                                {lesson.lesson_name}
+                            </Breadcrumb>
+
+                            <RoleProvider roles={[2]}>
+                                <div className="col-span-12">
+                                    <div className="btn-wrap">
+                                        <LessonTaskTypeModals lesson_id={lesson.lesson_id} />
+                                        <Link className="btn btn-outline-primary" href={'/dashboard/lesson/edit/' + lesson.lesson_id}><AiOutlineEdit /> {intl.formatMessage({ id: "edit" })}</Link>
+                                        <button onClick={e => setDeleteLessonModal(true)} className="btn btn-outline-danger"><AiOutlineDelete /> {intl.formatMessage({ id: "delete" })}</button>
+                                    </div>
+                                </div>
+
+                                <Modal show={delete_lesson_modal} onClose={() => setDeleteLessonModal(false)} modal_title={intl.formatMessage({ id: "lesson.deleteLessonModal.title" })} modal_size="modal-xl">
+                                    <DeleteLessonModal course_id={lesson.course_id} delete_lesson_id={lesson.lesson_id} redirect={true} getLessons={false} closeModal={() => setDeleteLessonModal(false)} />
+                                </Modal>
+                            </RoleProvider>
+
                             <div className={'col-span-12 ' + (lesson_tasks.length > 0 && 'lg:col-span-8')}>
                                 <h1>{lesson.lesson_name}</h1>
                                 <p className="text-lg mb-6">{lesson.lesson_description}</p>
@@ -139,7 +139,13 @@ export default function Lesson() {
                                             <ul className="tasks-list-group">
                                                 {lesson_tasks.map((lesson_task, i) => (
                                                     <li key={i}>
-                                                        <Link href={"/dashboard/task/" + lesson_task.task_id} className="block">
+                                                        <Link href={
+                                                            lesson_task.task_type_id == 1
+                                                                ?
+                                                                "/dashboard/test/" + lesson_task.task_id
+                                                                :
+                                                                "/dashboard/task/" + lesson_task.task_id
+                                                        } className="block">
                                                             <h5 className="mb-1">{lesson_task.task_name}</h5>
                                                             <p className="text-active mb-2">{lesson_task.task_description.substring(0, 200)}{lesson_task.task_description.length > 200 && '...'}</p>
                                                             <span className="badge badge-light">{lesson_task.task_type_name}</span>

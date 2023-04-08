@@ -6,13 +6,14 @@ import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
 import DeleteLessonModal from "../../../components/lesson/DeleteLessonModal";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineCaretDown, AiOutlineFileText, AiOutlinePushpin, AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineEdit, AiOutlineRead, AiOutlineCheckCircle, AiOutlineEye, AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineCaretDown, AiOutlineFileText, AiOutlinePushpin, AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineEdit, AiOutlineRead, AiOutlineCheckCircle, AiOutlineEye, AiOutlineDelete, AiOutlineUserSwitch, AiOutlineTeam } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import CreateCourseSectionModal from "../../../components/lesson/CreateCourseSectionModal";
 import EditSectionModal from "../../../components/lesson/EditSectionModal";
 import BuyCourseModal from "../../../components/lesson/BuyCourseModal";
+import SubscribersModal from "../../../components/lesson/SubscribersModal";
 import ButtonLoader from "../../../components/ui/ButtonLoader";
 import API_URL from "../../../config/api";
 import { scrollIntoView } from "seamless-scroll-polyfill";
@@ -26,6 +27,7 @@ export default function Course() {
   const intl = useIntl();
   const [sectionModal, setSectionModal] = useState(false);
   const [buyCourseModal, setBuyCourseModal] = useState(false);
+  const [subscribersModal, setSubscribersModal] = useState(false);
   const [edit_section_id, setEditSectionId] = useState('');
   const [section_name, setSectionName] = useState('');
   const [edit_section_modal, setEditSectionModal] = useState(false);
@@ -213,21 +215,27 @@ export default function Course() {
                         {lessons.sections_count > 0 && <p className="text-sm">{intl.formatMessage({ id: "lesson_sections" })}: <span className="font-medium text-corp">{lessons.sections_count}</span></p>}
                       </div>
 
-                      {course.subscribed == false
-                        ?
-                        <>
-                          <p className="text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_cost" })}: <span className="font-medium text-corp">{course.course_cost > 0 ? course.course_cost.toLocaleString() : intl.formatMessage({ id: "page.my_courses.form.free_course" })}</span></p>
-                          {
-                            course.course_cost > 0
-                              ?
-                              <button onClick={() => setBuyCourseModal(true)} className="btn btn-outline-primary mt-4"><AiOutlineRead /> {intl.formatMessage({ id: "page.my_courses.buy_a_course" })}</button>
-                              :
-                              <button onClick={() => getFreeCourse(course.course_id)} className="btn btn-outline-primary mt-4">{button_loader === true ? <ButtonLoader /> : <AiOutlineRead />} <span>{intl.formatMessage({ id: "page.my_courses.get_the_course_for_free" })}</span></button>
-                          }
-                        </>
-                        :
-                        <button className="btn btn-outline-primary disabled mt-4"><AiOutlineCheckCircle /> <span>{intl.formatMessage({ id: "page.my_courses.you_are_subscribed_to_this_course" })}</span></button>
-                      }
+                      <div className="btn-wrap mt-2">
+                        {course.subscribed == false
+                          ?
+                          <>
+                            <p className="text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_cost" })}: <span className="font-medium text-corp">{course.course_cost > 0 ? course.course_cost.toLocaleString() : intl.formatMessage({ id: "page.my_courses.form.free_course" })}</span></p>
+                            {
+                              course.course_cost > 0
+                                ?
+                                <button onClick={() => setBuyCourseModal(true)} className="btn btn-outline-primary mt-4"><AiOutlineRead /> {intl.formatMessage({ id: "page.my_courses.buy_a_course" })}</button>
+                                :
+                                <button onClick={() => getFreeCourse(course.course_id)} className="btn btn-outline-primary mt-4">{button_loader === true ? <ButtonLoader /> : <AiOutlineRead />} <span>{intl.formatMessage({ id: "page.my_courses.get_the_course_for_free" })}</span></button>
+                            }
+                          </>
+                          :
+                          <button className="btn btn-outline-primary disabled"><AiOutlineCheckCircle /> <span>{intl.formatMessage({ id: "page.my_courses.you_are_subscribed_to_this_course" })}</span></button>
+                        }
+
+                        <RoleProvider roles={[2]}>
+                          <button onClick={() => setSubscribersModal(true)} className="btn btn-light"><AiOutlineTeam /> <span>{intl.formatMessage({ id: "page.my_courses.subscribers" })}: {course.subscribers?.length}</span></button>
+                        </RoleProvider>
+                      </div>
                     </>
                   }
                 </div>
@@ -301,21 +309,23 @@ export default function Course() {
         <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
           <CreateCourseSectionModal closeModal={() => setSectionModal(false)} course_id={course.course_id} getLessons={getLessons} />
         </Modal>
+
+        <Modal show={edit_section_modal} onClose={() => setEditSectionModal(false)} modal_title={intl.formatMessage({ id: "edit.courseSectionModal.title" })} modal_size="modal-xl">
+          <EditSectionModal course_id={course.course_id} edit_section_id={edit_section_id} setSectionName={setSectionName} section_name={section_name} getLessons={getLessons} closeModal={() => setEditSectionModal(false)} />
+        </Modal>
+
+        <Modal show={delete_lesson_modal} onClose={() => setDeleteLessonModal(false)} modal_title={intl.formatMessage({ id: "lesson.deleteLessonModal.title" })} modal_size="modal-xl">
+          <DeleteLessonModal course_id={course.course_id} delete_lesson_id={delete_lesson_id} redirect={false} getLessons={getLessons} closeModal={() => setDeleteLessonModal(false)} />
+        </Modal>
+
+        <Modal show={subscribersModal} onClose={() => setSubscribersModal(false)} modal_title={intl.formatMessage({ id: "page.courses.subscribersModal.title" })} modal_size="modal-6xl">
+          <SubscribersModal subscribers={course.subscribers} closeModal={() => setSubscribersModal(false)} />
+        </Modal>
       </RoleProvider>
-
-
 
 
       <Modal show={buyCourseModal} onClose={() => setBuyCourseModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
         <BuyCourseModal closeModal={() => setBuyCourseModal(false)} course_id={course.course_id} getLessons={getLessons} />
-      </Modal>
-
-      <Modal show={edit_section_modal} onClose={() => setEditSectionModal(false)} modal_title={intl.formatMessage({ id: "edit.courseSectionModal.title" })} modal_size="modal-xl">
-        <EditSectionModal course_id={course.course_id} edit_section_id={edit_section_id} setSectionName={setSectionName} section_name={section_name} getLessons={getLessons} closeModal={() => setEditSectionModal(false)} />
-      </Modal>
-
-      <Modal show={delete_lesson_modal} onClose={() => setDeleteLessonModal(false)} modal_title={intl.formatMessage({ id: "lesson.deleteLessonModal.title" })} modal_size="modal-xl">
-        <DeleteLessonModal course_id={course.course_id} delete_lesson_id={delete_lesson_id} redirect={false} getLessons={getLessons} closeModal={() => setDeleteLessonModal(false)} />
       </Modal>
 
     </DashboardLayout>

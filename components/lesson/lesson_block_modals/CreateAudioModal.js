@@ -5,17 +5,22 @@ import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from 'react-redux';
 import { setLessonBlocks, setLessonBlocksCount } from "../../../store/slices/lessonBlocksSlice";
+import { setTaskBlocks, setTaskBlocksCount } from '../../../store/slices/taskBlocksSlice';
 import axios from "axios";
 
-const CreateAudioModal = ({ closeModal }) => {
+const CreateAudioModal = ({ create_lesson, create_task, closeModal }) => {
     const router = useRouter();
     const intl = useIntl();
     const [error, setError] = useState([]);
     const [loader, setLoader] = useState(false);
     const [progress, setProgress] = useState(0);
     const dispatch = useDispatch();
+
     let lesson_blocks = useSelector((state) => state.lessonBlocks.lesson_blocks);
     const lesson_blocks_count = useSelector((state) => state.lessonBlocks.lesson_blocks_count);
+
+    let task_blocks = useSelector((state) => state.taskBlocks.task_blocks);
+    const task_blocks_count = useSelector((state) => state.taskBlocks.task_blocks_count);
 
     const [audio_name, setAudioName] = useState('');
     const [audio_type, setAudioType] = useState('audio_file');
@@ -41,15 +46,29 @@ const CreateAudioModal = ({ closeModal }) => {
             .then(response => {
                 const data = response.data.data;
 
-                dispatch(setLessonBlocksCount(lesson_blocks_count + 1));
-                lesson_blocks = [...lesson_blocks, {
-                    'block_id': lesson_blocks_count + 1,
-                    'file_type_id': data.file_type_id,
-                    'file_id': data.file_id,
-                    'file_name': data.file_name,
-                    'file_target': data.file_target
-                }];
-                dispatch(setLessonBlocks(lesson_blocks));
+                if (create_lesson === true) {
+                    dispatch(setLessonBlocksCount(lesson_blocks_count + 1));
+                    lesson_blocks = [...lesson_blocks, {
+                        'block_id': lesson_blocks_count + 1,
+                        'file_type_id': data.file_type_id,
+                        'file_id': data.file_id,
+                        'file_name': data.file_name,
+                        'file_target': data.file_target
+                    }];
+                    dispatch(setLessonBlocks(lesson_blocks));
+                }
+
+                if (create_task === true) {
+                    dispatch(setTaskBlocksCount(task_blocks_count + 1));
+                    task_blocks = [...task_blocks, {
+                        'block_id': task_blocks_count + 1,
+                        'file_type_id': data.file_type_id,
+                        'file_id': data.file_id,
+                        'file_name': data.file_name,
+                        'file_target': data.file_target
+                    }];
+                    dispatch(setTaskBlocks(task_blocks));
+                }
 
                 setLoader(false);
                 setAudioName('');

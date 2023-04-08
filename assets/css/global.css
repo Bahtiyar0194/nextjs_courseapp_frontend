@@ -823,6 +823,14 @@ select option {
     @apply max-w-4xl;
 }
 
+.modal.modal-5xl{
+    @apply max-w-5xl;
+}
+
+.modal.modal-6xl{
+    @apply max-w-6xl;
+}
+
 .modal-backdrop.show > .modal{
     transform: translateY(0rem)
 }
@@ -1087,16 +1095,6 @@ select option {
 
 .dark .course-image > div {
     background: linear-gradient(0deg, #212121 40%, rgba(255,255,255,0) 100%);
-}
-
-.lesson-block,
-.test-question-block{
-    @apply mb-4;
-}
-
-.lesson-block:last-child,
-.test-question-block:last-child{
-    @apply mb-0;
 }
 
 .lesson-block.edit,
