@@ -59,6 +59,7 @@
     "page.my_courses.form.add_course": "Добавить курс",
 
     "page.users.title": "Пользователи",
+    "page.users.invite_user_title": "Приглашение нового пользователя",
     "page.users.edit_user_title": "Редактирование данных пользователя",
     "page.users.user_roles": "Роли пользователя",
     "page.users.user_mode": "Режим пользователя",
@@ -210,5 +211,12 @@
     "operator": "Оператор",
     "recipient": "Получатель",
     "cost": "Цена",
-    "status": "Статус"
+    "status": "Статус",
+    "invite": "Пригласить",
+    "search": "Искать",
+
+    "pagination.first_page_title": "Перейти на первую страницу",
+    "pagination.previous_page_title": "Перейти на предыдущую страницу",
+    "pagination.next_page_title": "Перейти на следующую страницу",
+    "pagination.last_page_title": "Перейти на последнюю страницу"
 }

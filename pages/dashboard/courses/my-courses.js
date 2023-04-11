@@ -56,9 +56,9 @@ export default function MyCourses() {
             {courses.length > 0 ?
                 <>
                     <div className="col-span-12">
-                        <div className="flex max-lg:flex-col lg:justify-between lg:items-center">
-                            <h2 className="max-lg:mb-4">{intl.formatMessage({ id: "page.my_courses.title" })}</h2>
-                            <div className="flex">
+                        <div className="title-wrap">
+                            <h2>{intl.formatMessage({ id: "page.my_courses.title" })}</h2>
+                            <div className="btn-wrap">
                                 {
                                     contentViewType === 'grid' ? <button onClick={() => setContentViewType('list')} className="btn btn-outline-primary"><IoList /></button> :
                                         contentViewType === 'list' ? <button onClick={() => setContentViewType('grid')} className="btn btn-outline-primary"><IoGridOutline /></button> : ''

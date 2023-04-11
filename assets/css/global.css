@@ -327,20 +327,33 @@ input[type=number]::-webkit-outer-spin-button {
 .table > table{
     @apply w-full overflow-hidden;
 }
+
 .table > table > thead{
     @apply border-b-active bg-active;
 }
+
 .table > table > tbody > tr{
     @apply bg-active;
 }
+
 .table > table > tbody > tr:nth-child(odd){
     @apply bg-inactive;
 }
+
 .table > table > thead > tr > th{
     @apply px-4 py-3 text-left font-medium tracking-wider;
 }
+
 .table > table > tbody > tr > td{
     @apply px-4 py-3 text-active
+}
+
+.table.table-sm > table > thead > tr > th{
+    @apply px-3 py-2 text-sm;
+}
+
+.table.table-sm > table > tbody > tr > td{
+    @apply px-3 py-2 text-sm;
 }
 
 .table.bordered{
@@ -575,8 +588,41 @@ select option {
     @apply bg-gray-400;
 }
 
+.title-wrap{
+    @apply flex max-md:flex-col justify-between gap-4 mb-2;
+}
+
+.title-wrap > h1,
+.title-wrap > h2,
+.title-wrap > h3,
+.title-wrap > h4,
+.title-wrap > h5,
+.title-wrap > h6{
+    @apply mb-0;
+}
+
 .btn {
     @apply w-fit flex items-center rounded-lg px-2 py-1.5 text-white duration-200; 
+}
+
+.btn.btn-square{
+    @apply px-3;
+}
+
+.btn.btn-sm{
+    @apply px-1.5 py-1 text-sm;
+}
+
+.btn.btn-sm.btn-square{
+    @apply px-2.5;
+}
+
+.btn.btn-lg{
+    @apply px-3 py-2;
+}
+
+.btn.btn-lg.btn-square{
+    @apply px-4;
 }
 
 .btn:disabled{
@@ -597,14 +643,6 @@ select option {
 
 .btn-group > .btn{
     @apply px-2;
-}
-
-.btn.btn-sm{
-    @apply px-1.5 py-1 text-sm;
-}
-
-.btn.btn-lg{
-    @apply px-3 py-2;
 }
 
 .btn-primary{
@@ -690,6 +728,10 @@ select option {
 
 .btn-loding-circle {
     animation: 0.75s linear infinite spinner-border;
+}
+
+.pagination{
+    @apply flex flex-wrap gap-2;
 }
 
 .badge{

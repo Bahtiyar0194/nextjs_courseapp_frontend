@@ -146,7 +146,7 @@ export default function Registration() {
 
                 <div className="form-group">
                     <AiOutlinePhone />
-                    <InputMask mask="+7 (799) 999-9999" onChange={e => setPhone(e.target.value)} value={phone} />
+                    <InputMask mask="+7 (799) 999-9999" onChange={e => setPhone(e.target.value)} value={phone} placeholder=" " />
                     <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
                 </div>
                 <div className="form-group">

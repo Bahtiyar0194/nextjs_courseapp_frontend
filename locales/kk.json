@@ -59,6 +59,7 @@
     "page.my_courses.form.add_course": "Курс қосу",
 
     "page.users.title": "Қолданушылар",
+    "page.users.invite_user_title": "Жаңа қолданушыны шақыру",
     "page.users.edit_user_title": "Қолданушының деректерін қайта өңдеу",
     "page.users.user_roles": "Қолданушының рөлдері",
     "page.users.user_mode": "Қолданушының режимі",
@@ -210,5 +211,12 @@
     "operator": "Оператор",
     "recipient": "Алушы",
     "cost": "Бағасы",
-    "status": "Мәртебе"
+    "status": "Мәртебе",
+    "invite": "Шақыру",
+    "search": "Іздеу",
+
+    "pagination.first_page_title": "Бірінші бетке өту",
+    "pagination.previous_page_title": "Алдыңғы бетке өту",
+    "pagination.next_page_title": "Келесі бетке өту",
+    "pagination.last_page_title": "Соңғы бетке өту"
 }
