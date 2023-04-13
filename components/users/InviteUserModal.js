@@ -98,12 +98,13 @@ const InviteUserModal = ({ getUsers, setInviteUserPhone, invite_user_phone, load
                 <form onSubmit={inviteUserSubmit} encType="multipart/form-data">
                     <div className="form-group mt-6">
                         <AiOutlineUser />
-                        <input type="text" defaultValue={''} name="first_name" placeholder=" " />
+                        <input autoComplete="new-first-name" type="text" defaultValue={''} name="first_name" placeholder=" " />
                         <label className={(error.first_name && 'label-error')}>{error.first_name ? error.first_name : intl.formatMessage({ id: "page.registration.form.first_name" })}</label>
                     </div>
+
                     <div className="form-group mt-4">
                         <AiOutlineUser />
-                        <input type="text" defaultValue={''} name="last_name" placeholder=" " />
+                        <input autoComplete="new-last-name" type="text" defaultValue={''} name="last_name" placeholder=" " />
                         <label className={(error.last_name && 'label-error')}>{error.last_name ? error.last_name : intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
                     </div>
 
@@ -115,7 +116,7 @@ const InviteUserModal = ({ getUsers, setInviteUserPhone, invite_user_phone, load
 
                     <div className="form-group mt-4">
                         <AiOutlinePhone />
-                        <InputMask mask="+7 (799) 999-9999" onInput={e => setInviteUserPhone(e.target.value)} value={invite_user_phone} name="phone" placeholder=" " />
+                        <InputMask autoComplete="new-phone" mask="+7 (799) 999-9999" onInput={e => setInviteUserPhone(e.target.value)} value={invite_user_phone} name="phone" placeholder=" " />
                         <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
                     </div>
 

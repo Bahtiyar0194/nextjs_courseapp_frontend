@@ -64,6 +64,7 @@
     "page.users.user_roles": "Роли пользователя",
     "page.users.user_mode": "Режим пользователя",
     "page.users.profile_settings": "Настройки профиля",
+    "page.users.search_filter": "Фильтр поиска пользователей",
 
     "lessons": "Уроки курса",
     "no_added_lessons": "Нет добавленных уроков к данному курсу",
@@ -205,7 +206,9 @@
     "edit": "Редактировать",
     "delete": "Удалить",
     "continue": "Продолжить",
-    "created_at": "Дата создания",
+    "created_at": "Дата регистрации",
+    "created_at_from": "Дата регистрации (с)",
+    "created_at_to": "Дата регистрации (по)",
     "views": "Просмотров",
     "tasks": "Задании",
     "operator": "Оператор",
@@ -214,9 +217,14 @@
     "status": "Статус",
     "invite": "Пригласить",
     "search": "Искать",
+    "reset_search_filter": "Сбросить фильтр",
+    "show_search_filter": "Показать фильтр поиска",
+    "hide_search_filter": "Скрыть фильтр поиска",
 
     "pagination.first_page_title": "Перейти на первую страницу",
     "pagination.previous_page_title": "Перейти на предыдущую страницу",
     "pagination.next_page_title": "Перейти на следующую страницу",
-    "pagination.last_page_title": "Перейти на последнюю страницу"
+    "pagination.last_page_title": "Перейти на последнюю страницу",
+
+    "nothing_was_found_for_your_query": "По вашему запросу ничего не найдено"
 }

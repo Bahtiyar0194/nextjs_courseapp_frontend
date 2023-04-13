@@ -64,6 +64,7 @@
     "page.users.user_roles": "Қолданушының рөлдері",
     "page.users.user_mode": "Қолданушының режимі",
     "page.users.profile_settings": "Профильдің баптамалары",
+    "page.users.search_filter": "Қолданушыларды іздеу сүзгісі",
 
     "lessons": "Курстың сабақтары",
     "no_added_lessons": "Бұл курсқа қосылған сабақтар жоқ",
@@ -206,6 +207,8 @@
     "delete": "Жою",
     "continue": "Жалғастыру",
     "created_at": "Тіркелген уақыты",
+    "created_at_from": "Тіркелген уақыты (бастап)",
+    "created_at_to": "Тіркелген уақыты (дейін)",
     "views": "Қараулар",
     "tasks": "Тапсырмалар",
     "operator": "Оператор",
@@ -214,9 +217,14 @@
     "status": "Мәртебе",
     "invite": "Шақыру",
     "search": "Іздеу",
+    "reset_search_filter": "Cүзгіні қалпына келтіру",
+    "show_search_filter": "Іздеу сүзгісін көрсету",
+    "hide_search_filter": "Іздеу сүзгісін жасыру",
 
     "pagination.first_page_title": "Бірінші бетке өту",
     "pagination.previous_page_title": "Алдыңғы бетке өту",
     "pagination.next_page_title": "Келесі бетке өту",
-    "pagination.last_page_title": "Соңғы бетке өту"
+    "pagination.last_page_title": "Соңғы бетке өту",
+
+    "nothing_was_found_for_your_query": "Сіздің сұранысыңыз бойынша ештеңе табылған жоқ"
 }

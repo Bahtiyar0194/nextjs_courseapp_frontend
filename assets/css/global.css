@@ -434,7 +434,7 @@ select option {
 .form-group > input, 
 .form-group > select, 
 .form-group > textarea {
-    @apply border-t-0 border-l-0 border-r-0 border-b border-corp bg-transparent w-full text-active py-3 pl-8;
+    @apply border-t-0 border-l-0 border-r-0 border-b border-corp bg-transparent w-full text-active py-3 pl-8 pr-2; 
 }
 
 .form-group > label {
@@ -465,6 +465,48 @@ select option {
     @apply text-danger -top-2.5 text-xs left-0;
 }
 
+.form-group-border {
+    @apply relative;
+}
+
+.form-group-border > input, 
+.form-group-border > select, 
+.form-group-border > textarea {
+    @apply border border-corp rounded-lg bg-transparent w-full text-active py-2 pl-8 pr-2.5;
+}
+
+.form-group-border.active > input{
+    @apply border-active;
+}
+
+.form-group-border > label {
+    @apply absolute left-8 top-2 pointer-events-none duration-200 z-0 bg-inherit text-inactive;
+}
+
+.form-group-border > label.label-error{
+    @apply text-danger -top-2 text-xs left-2 bg-active px-1;
+}
+
+.form-group-border > input:focus ~ label,
+.form-group-border > input:not(:placeholder-shown) ~ label,
+.form-group-border > select:focus ~ label,
+.form-group-border > select:not(:placeholder-shown) ~ label,
+.form-group-border > textarea:focus ~ label,
+.form-group-border > textarea:not(:placeholder-shown) ~ label
+{
+    @apply -top-2.5 text-xs left-2 text-inactive bg-active px-1;
+}
+
+.form-group-border > input:focus ~ label.label-error,
+.form-group-border > input:not(:placeholder-shown) ~ label.label-error,
+.form-group-border > select:focus ~ label.label-error,
+.form-group-border > select:not(:placeholder-shown) ~ label.label-error,
+.form-group-border > textarea:focus ~ label.label-error,
+.form-group-border > textarea:not(:placeholder-shown) ~ label.label-error
+{
+    @apply text-danger;
+}
+
 .label-focus{
     @apply text-xs text-inactive;
 }
@@ -475,6 +517,10 @@ select option {
 
 .form-group > svg{
     @apply absolute text-2xl top-3 text-inactive;
+}
+
+.form-group-border > svg{
+    @apply absolute text-xl top-2.5 left-2 text-inactive;
 }
 
 .form-group .show-password{
@@ -731,7 +777,7 @@ select option {
 }
 
 .pagination{
-    @apply flex flex-wrap gap-2;
+    @apply flex flex-wrap gap-2 mt-4;
 }
 
 .badge{
@@ -760,6 +806,22 @@ select option {
 
 .badge-success{
     @apply bg-blue-200 text-accent-300 border border-accent-300 dark:bg-transparent;
+}
+
+.alert{
+    @apply p-4 text-center border-active text-inactive rounded-lg; 
+}
+
+.alert.light{
+    @apply bg-active text-active;
+}
+
+.alert.danger{
+    @apply bg-red-500 text-white;
+}
+
+.alert.outline-danger{
+    @apply border-danger text-danger;
 }
 
 .card {

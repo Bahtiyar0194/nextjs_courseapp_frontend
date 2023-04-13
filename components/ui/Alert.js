@@ -1,6 +1,6 @@
-const Alert = (props) => {
+const Alert = ({className, text}) => {
     return (
-        <div className={'alert ' + props.className}>{props.text}</div>
+        <div className={'alert ' + className}>{text}</div>
     );
 };
 
