@@ -1,5 +1,5 @@
 {
-    "page.home.title": "Main page",
+    "page.home.title": "WebTeach | Welcome",
     "page.home.to": "To main page",
     "page.home.description": "You are currently viewing the main page",
 
@@ -225,6 +225,11 @@
     "pagination.previous_page_title": "Go to the previous page",
     "pagination.next_page_title": "Go to the next page",
     "pagination.last_page_title": "Go to the last page",
+    "pagination.limit_per_page": "Limit per page",
+    "pagination.unlimit": "Unlimit",
+
+    "theme.switch_to_a_light_theme": "Switch to a light theme",
+    "theme.switch_to_a_dark_theme": "Switch to a dark theme",
 
     "nothing_was_found_for_your_query": "Nothing was found for your query"
 }

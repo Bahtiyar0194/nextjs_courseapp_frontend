@@ -22,6 +22,7 @@ export default function AuthProvider(props) {
                         }).catch(err => {
                             if (err.response) {
                                 if(err.response.status == 401){
+                                    dispatch(authenticate([]));
                                     Cookies.remove('token');
                                     router.push('/login');
                                 }

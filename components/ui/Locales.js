@@ -10,12 +10,12 @@ const Locales = () => {
         Cookies.set('locale', value)
         router.push(router.route, router.asPath, {
             locale: value
-        })
+        });
     };
 
     return (
         <CDropdown>
-            <CDropdownToggle href="#" color="no-color">
+            <CDropdownToggle href="#" color="transparent no-px">
                 {
                     locale === 'kk' ? <LocaleItem flag='/flags/kz.svg'/> :
                         locale === 'ru' ? <LocaleItem flag='/flags/ru.svg'/> :

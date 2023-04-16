@@ -4,9 +4,9 @@ const Pagination = ({ items, setItems }) => {
     const intl = useIntl();
 
     return (
-        <div className="pagination">
+        <div className="pagination-wrap">
             {items.last_page > 1 &&
-                <>
+                <div className="pagination">
                     {
                         items.current_page > 1 && <button
                             onClick={() => setItems(items.first_page_url)}
@@ -40,8 +40,18 @@ const Pagination = ({ items, setItems }) => {
                             className={'btn btn-square btn-sm btn-light'}
                             title={intl.formatMessage({ id: "pagination.last_page_title" })}>&#187;</button>
                     }
-                </>
+                </div>
             }
+            <div className="per-page-select active">
+                <select id="per-page-select" defaultValue={10} onChange={e => setItems()}>
+                    <option value={10}>10</option>
+                    <option value={100}>100</option>
+                    <option value={1000}>1000</option>
+                    <option value={10000}>10 000</option>
+                    <option value={1000000000}>{intl.formatMessage({ id: "pagination.unlimit" })}</option>
+                </select>
+                <label>{intl.formatMessage({ id: "pagination.limit_per_page" })}</label>
+            </div>
         </div>
     );
 };

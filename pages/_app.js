@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from 'next-themes';
 import { useRouter } from 'next/router';
 import { IntlProvider } from "react-intl";
 import { store } from '../store/store';
@@ -8,7 +7,7 @@ import axios from "axios";
 import Cookies from 'js-cookie';
 
 import API_URL from '../config/api';
-
+import { ThemeProvider } from 'next-themes';
 import kk from "../locales/kk.json";
 import ru from "../locales/ru.json";
 import en from "../locales/en.json";
@@ -31,7 +30,11 @@ export default function MyApp({ Component, pageProps }) {
     const getSchool = async () => {
         await axios.get('school/get')
             .then(response => {
-
+                if (response.data.school_name) {
+                    if (router.asPath === '/') {
+                        router.push('/login');
+                    }
+                }
             }).catch(err => {
                 if (err.response) {
                     router.push({
@@ -54,6 +57,7 @@ export default function MyApp({ Component, pageProps }) {
     }, []);
 
     const token = Cookies.get('token');
+
     if (token) {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     }

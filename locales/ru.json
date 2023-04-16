@@ -1,5 +1,5 @@
 {
-    "page.home.title": "Добро пожаловать",
+    "page.home.title": "WebTeach | Добро пожаловать",
     "page.home.to": "На главную страницу",
     "page.home.description": "Вы на главной странице нашего сайта",
 
@@ -225,6 +225,11 @@
     "pagination.previous_page_title": "Перейти на предыдущую страницу",
     "pagination.next_page_title": "Перейти на следующую страницу",
     "pagination.last_page_title": "Перейти на последнюю страницу",
+    "pagination.limit_per_page": "Лимит на страницу",
+    "pagination.unlimit": "Без ограничении",
+
+    "theme.switch_to_a_light_theme": "Переключиться к светлой теме",
+    "theme.switch_to_a_dark_theme": "Переключиться к тёмной теме",
 
     "nothing_was_found_for_your_query": "По вашему запросу ничего не найдено"
 }

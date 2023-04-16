@@ -4,7 +4,7 @@ import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
-import { AiOutlineCalendar, AiOutlineEdit, AiOutlineEyeInvisible, AiOutlineMail, AiOutlinePhone, AiOutlineSearch, AiOutlineUndo, AiOutlineUser, AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineCalendar, AiOutlineEdit, AiOutlineMail, AiOutlinePhone, AiOutlineSearch, AiOutlineUndo, AiOutlineUser, AiOutlineUserAdd } from "react-icons/ai";
 import axios from "axios";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import RoleProvider from "../../../services/RoleProvider";
@@ -64,6 +64,9 @@ export default function Users() {
         setUsersLoader(true);
         const search_form = document.querySelector('#user_search_form');
         const form_body = serialize(search_form, { hash: true, empty: true });
+
+        form_body.per_page = document.querySelector('#per-page-select')?.value;
+
         if (!url) {
             url = 'users/get';
         }
@@ -91,11 +94,11 @@ export default function Users() {
     }
 
     const showHideUserSearchFilter = () => {
-        if(search_user_filter === true){
+        if (search_user_filter === true) {
             setSearchUserFilter(false);
             resetUserSearchFilter();
         }
-        else{
+        else {
             setSearchUserFilter(true);
         }
     }
@@ -195,44 +198,45 @@ export default function Users() {
                 </div>}
 
 
-                <div className={"col-span-12 relative " + (search_user_filter === true ? 'lg:col-span-9' : '')}>
-                    {users_loader && <Loader className="overlay" />}
+                <div className={"col-span-12 " + (search_user_filter === true ? 'lg:col-span-9' : '')}>
                     {users.data?.length > 0 ?
                         <>
-                            <div className="table table-sm">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>{intl.formatMessage({ id: "page.registration.form.last_name" })}</th>
-                                            <th>{intl.formatMessage({ id: "page.registration.form.first_name" })}</th>
-                                            <th>{intl.formatMessage({ id: "page.registration.form.email" })}</th>
-                                            <th>{intl.formatMessage({ id: "page.registration.form.phone" })}</th>
-                                            <th>{intl.formatMessage({ id: "created_at" })}</th>
-                                            <th>{intl.formatMessage({ id: "status" })}</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        {users.data?.map(user => (
-                                            <tr key={user.user_id}>
-                                                <td>{user.last_name}</td>
-                                                <td>{user.first_name}</td>
-                                                <td>{user.email}</td>
-                                                <td>{user.phone}</td>
-                                                <td>{new Date(user.created_at).toLocaleString()}</td>
-                                                <td>{user.status_type_name}</td>
-                                                <td>
-                                                    <div className="btn-wrap">
-                                                        <button onClick={() => getEditUser(user.user_id)} title={intl.formatMessage({ id: "edit" })} className="btn btn-edit"><AiOutlineEdit /></button>
-                                                    </div>
-                                                </td>
+                            <div className="relative">
+                                {users_loader && <Loader className="overlay" />}
+                                <div className="table table-sm">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>{intl.formatMessage({ id: "page.registration.form.last_name" })}</th>
+                                                <th>{intl.formatMessage({ id: "page.registration.form.first_name" })}</th>
+                                                <th>{intl.formatMessage({ id: "page.registration.form.email" })}</th>
+                                                <th>{intl.formatMessage({ id: "page.registration.form.phone" })}</th>
+                                                <th>{intl.formatMessage({ id: "created_at" })}</th>
+                                                <th>{intl.formatMessage({ id: "status" })}</th>
+                                                <th></th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </thead>
 
+                                        <tbody>
+                                            {users.data?.map(user => (
+                                                <tr key={user.user_id}>
+                                                    <td>{user.last_name}</td>
+                                                    <td>{user.first_name}</td>
+                                                    <td>{user.email}</td>
+                                                    <td>{user.phone}</td>
+                                                    <td>{new Date(user.created_at).toLocaleString()}</td>
+                                                    <td>{user.status_type_name}</td>
+                                                    <td>
+                                                        <div className="btn-wrap">
+                                                            <button onClick={() => getEditUser(user.user_id)} title={intl.formatMessage({ id: "edit" })} className="btn btn-edit"><AiOutlineEdit /></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <Pagination items={users} setItems={getUsers} />
                         </>
                         :

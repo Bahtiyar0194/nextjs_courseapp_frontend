@@ -1,5 +1,5 @@
 {
-    "page.home.title": "Қош келдіңіз!",
+    "page.home.title": "WebTeach | Қош келдіңіз!",
     "page.home.to": "Басты бетке",
     "page.home.description": "Сіз біздің басты беттесіз",
 
@@ -225,6 +225,11 @@
     "pagination.previous_page_title": "Алдыңғы бетке өту",
     "pagination.next_page_title": "Келесі бетке өту",
     "pagination.last_page_title": "Соңғы бетке өту",
+    "pagination.limit_per_page": "Әр беттің шегі",
+    "pagination.unlimit": "Шектеу жоқ",
+
+    "theme.switch_to_a_light_theme": "Ашық тақырыпқа ауысу",
+    "theme.switch_to_a_dark_theme": "Қараңғы тақырыпқа ауысу",
 
     "nothing_was_found_for_your_query": "Сіздің сұранысыңыз бойынша ештеңе табылған жоқ"
 }

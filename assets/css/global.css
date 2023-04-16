@@ -149,16 +149,40 @@
     @apply border border-gray-200 dark:border-dark-200;
 }
 
-.border-b-active{
-    @apply border-b border-gray-200 dark:border-dark-200;
+.border-t-active{
+    @apply border-t border-gray-200 dark:border-dark-200;
 }
 
 .border-r-active{
     @apply border-r border-gray-200 dark:border-dark-200;
 }
 
+.border-b-active{
+    @apply border-b border-gray-200 dark:border-dark-200;
+}
+
+.border-l-active{
+    @apply border-l border-gray-200 dark:border-dark-200;
+}
+
 .border-inactive{
-    @apply border-gray-500;
+    @apply border border-gray-400 dark:border-dark-200;
+}
+
+.border-t-inactive{
+    @apply border-t border-gray-400 dark:border-dark-200;
+}
+
+.border-r-inactive{
+    @apply border-r border-gray-400 dark:border-dark-200;
+}
+
+.border-b-inactive{
+    @apply border-b border-gray-400 dark:border-dark-200;
+}
+
+.border-l-inactive{
+    @apply border-l border-gray-400 dark:border-dark-200;
 }
 
 .border-corp{
@@ -420,7 +444,7 @@ select option {
 }
 
 .custom-container{
-    @apply container mx-auto px-3 lg:px-4;
+    @apply container mx-auto px-4 md:px-0;
 }
 
 .custom-grid{
@@ -475,7 +499,9 @@ select option {
     @apply border border-corp rounded-lg bg-transparent w-full text-active py-2 pl-8 pr-2.5;
 }
 
-.form-group-border.active > input{
+.form-group-border.active > input,
+.form-group-border.active > select, 
+.form-group-border.active > textarea{
     @apply border-active;
 }
 
@@ -648,7 +674,15 @@ select option {
 }
 
 .btn {
-    @apply w-fit flex items-center rounded-lg px-2 py-1.5 text-white duration-200; 
+    @apply w-fit flex items-center rounded-lg px-2 py-1.5 duration-200; 
+}
+
+.no-px{
+    @apply px-0;
+}
+
+.btn.long{
+    @apply px-4;
 }
 
 .btn.btn-square{
@@ -680,15 +714,19 @@ select option {
 }
 
 .btn-wrap{
-    @apply flex gap-2 flex-wrap duration-200;
+    @apply flex gap-2 flex-wrap;
 }
 
 .btn-wrap-lg{
     @apply flex max-md:flex-col gap-4;
 }
 
-.btn-group > .btn{
-    @apply px-2;
+.btn-transparent{
+    @apply text-active;
+}
+
+.btn-active{
+    @apply border-active text-active;
 }
 
 .btn-primary{
@@ -776,8 +814,34 @@ select option {
     animation: 0.75s linear infinite spinner-border;
 }
 
+.pagination-wrap{
+    @apply flex flex-wrap gap-x-2 gap-y-4 mt-6;
+}
+
 .pagination{
-    @apply flex flex-wrap gap-2 mt-4;
+    @apply flex flex-wrap gap-2 items-start;
+}
+
+.per-page-select{
+    @apply relative w-60;
+}
+
+.per-page-select > select {
+    @apply border border-corp rounded-lg bg-transparent w-full text-active px-3 py-0.5;
+}
+
+.per-page-select.active > select {
+    @apply border-active;
+}
+
+.per-page-select > label {
+    @apply absolute left-8 top-2 pointer-events-none duration-200 z-0 bg-inherit text-inactive;
+}
+
+.per-page-select > select:focus ~ label,
+.per-page-select > select:not(:placeholder-shown) ~ label
+{
+    @apply -top-2.5 text-xs left-2 text-inactive bg-inactive px-1.5;
 }
 
 .badge{
@@ -825,7 +889,7 @@ select option {
 }
 
 .card {
-    @apply bg-active rounded-lg max-w-full relative border-active overflow-hidden;
+    @apply bg-active rounded-lg max-w-full relative border-active overflow-hidden shadow-lg;
 }
 
 .card.card-inactive{
@@ -982,10 +1046,6 @@ select option {
 .db__header{
     @apply w-full bg-active flex justify-between items-center px-3 border-b-active;
     height: 70px;
-}
-
-.db__header .logo{
-    @apply w-36;
 }
 
 .db__sidebar__menu{
@@ -1231,4 +1291,48 @@ select option {
 
 .progress-bar{
     @apply h-full bg-corp rounded-lg duration-200;
+}
+
+.logo{
+    @apply w-36;
+}
+
+.logo-dark{
+    @apply hidden;
+}
+
+.dark .logo-light{
+    @apply hidden;
+}
+
+.dark .logo-dark{
+    @apply block;
+}
+
+.theme-switcher{
+    @apply flex items-center text-lg text-active;
+}
+
+.theme-dark-button{
+    @apply hidden;
+}
+
+.dark .theme-light-button{
+    @apply hidden;
+}
+
+.dark .theme-dark-button{
+    @apply block;
+}
+
+.main-fade-slider-dark{
+    @apply hidden;
+}
+
+.dark .main-fade-slider-light{
+    @apply hidden;
+}
+
+.dark .main-fade-slider-dark{
+    @apply block;
 }

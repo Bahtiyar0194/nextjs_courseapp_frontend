@@ -14,6 +14,7 @@ import { useIntl } from "react-intl";
 import Loader from "../ui/Loader";
 import RoleProvider from "../../services/RoleProvider";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import DefaultLogo from "../ui/Logo";
 
 export default function DashboardLayout(props) {
     const intl = useIntl();
@@ -66,7 +67,7 @@ export default function DashboardLayout(props) {
         Cookies.remove('token');
         await axios.post('auth/logout')
             .then(response => {
-                router.push("/");
+                router.push("/login");
             }).catch(err => {
                 if (err.response) {
                     router.push({
@@ -88,39 +89,33 @@ export default function DashboardLayout(props) {
         <AuthProvider>
             <Header title={props.title} />
             <div className="db__header">
-                <div className="logo">
-                    <img src="/img/logo.svg" />
-                </div>
+                <DefaultLogo />
 
-                <div className="flex items-center">
-                    <div className="flex items-center">
-                        <ThemeChanger />
-                        <Locales />
-                    </div>
-                    <div>
-                        <CDropdown>
-                            <CDropdownToggle href="#" color="no-color" className="pl-0">
-                                <div className="rounded-full w-6 h-6 bg-corp flex items-center justify-center text-white">{user.first_name?.substring(0, 1)}</div> <span className="text-active">{user.first_name}</span>
-                            </CDropdownToggle>
-                            <CDropdownMenu>
-                                {user.roles?.length > 1 &&
-                                    <div>
-                                        <p className="mb-2.5 font-medium">{intl.formatMessage({ id: "page.users.user_mode" })}</p>
-                                        {user.roles?.map(role =>
-                                            <div key={role.role_type_id} className="mt-1.5">
-                                                <label className="custom-radio">
-                                                    <input type="radio" onChange={e => changeUserMode(role.role_type_id)} checked={user.current_role_id == role.role_type_id} name="user_mode" />
-                                                    <span>{role.user_role_type_name}</span>
-                                                </label>
-                                            </div>
-                                        )}
-                                    </div>
-                                }
-                                <Link href={'/dashboard'}><AiOutlineSetting />{intl.formatMessage({ id: "page.users.profile_settings" })}</Link>
-                                <Link href={'#'} onClick={logout}><AiOutlineLogout />{intl.formatMessage({ id: "logout" })}</Link>
-                            </CDropdownMenu>
-                        </CDropdown>
-                    </div>
+                <div className="btn-wrap items-center">
+                    <Locales />
+                    <ThemeChanger />
+                    <CDropdown>
+                        <CDropdownToggle href="#" color="transparent no-px" className="pl-0">
+                            <div className="rounded-full w-6 h-6 bg-corp flex items-center justify-center text-white">{user.first_name?.substring(0, 1)}</div> <span className="text-active">{user.first_name}</span>
+                        </CDropdownToggle>
+                        <CDropdownMenu>
+                            {user.roles?.length > 1 &&
+                                <div>
+                                    <p className="mb-2.5 font-medium">{intl.formatMessage({ id: "page.users.user_mode" })}</p>
+                                    {user.roles?.map(role =>
+                                        <div key={role.role_type_id} className="mt-1.5">
+                                            <label className="custom-radio">
+                                                <input type="radio" onChange={e => changeUserMode(role.role_type_id)} checked={user.current_role_id == role.role_type_id} name="user_mode" />
+                                                <span>{role.user_role_type_name}</span>
+                                            </label>
+                                        </div>
+                                    )}
+                                </div>
+                            }
+                            <Link href={'/dashboard'}><AiOutlineSetting />{intl.formatMessage({ id: "page.users.profile_settings" })}</Link>
+                            <Link href={'#'} onClick={logout}><AiOutlineLogout />{intl.formatMessage({ id: "logout" })}</Link>
+                        </CDropdownMenu>
+                    </CDropdown>
                 </div>
             </div>
             <div className="flex">
