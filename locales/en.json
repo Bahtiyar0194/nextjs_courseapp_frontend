@@ -228,6 +228,7 @@
     "pagination.limit_per_page": "Limit per page",
     "pagination.unlimit": "Unlimit",
 
+    "change_site_language": "Change site language",
     "theme.switch_to_a_light_theme": "Switch to a light theme",
     "theme.switch_to_a_dark_theme": "Switch to a dark theme",
 

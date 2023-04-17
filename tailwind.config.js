@@ -14,7 +14,7 @@ module.exports = {
         },
 
         accent: {
-          300: '#71aaeb'
+          300: '#56a4ff'
         },
 
         current: {

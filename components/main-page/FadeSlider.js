@@ -6,23 +6,25 @@ const fadeImages = [
     'my-courses.png',
     'users.png',
     'materials.png',
-    'add-video.png'
+    'add-video.png',
+    'code.png'
 ];
 
 const fadeProperties = {
-    duration: 7000,
+    duration: 5000,
     transitionDuration: 500,
     infinite: true,
-    indicators: false,
-    arrows: false
+    indicators: true,
+    arrows: false,
+    pauseOnHover: false
 }
 
 const FadeSlider = () => {
     return (
-        <div className="relative">
+        <div className="main-fade-slider">
             <div className="px-4 lg:px-8">
                 <div className="h-1 lg:h-2 w-1 lg:w-2 bg-inactive border-inactive rounded-full mx-auto absolute z-10 left-1/2 top-1.5 lg:top-2.5"></div>
-                <div className="bg-active border-t-inactive border-l-inactive border-r-inactive border-b-0 w-full rounded-t-xl relative px-1.5 lg:px-3 pb-1.5 lg:pb-3 pt-3 lg:pt-6">
+                <div className="bg-active border-t-inactive border-l-inactive border-r-inactive border-b-0 w-full rounded-t-xl relative px-1.5 lg:px-3 pt-3 lg:pt-6">
                     <div className='main-fade-slider-light'>
                         <Fade {...fadeProperties}>
                             {fadeImages.map((image, index) => (
