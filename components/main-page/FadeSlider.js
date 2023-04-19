@@ -1,7 +1,7 @@
 import React from 'react';
 import { Fade } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
-import IPhoneScreen from '../misc/IphoneScreen';
+import IPhoneScreen from '../misc/IPhoneScreen';
 import MacBookScreen from '../misc/MacBookScreen';
 
 const fadeImages = [
