@@ -304,13 +304,13 @@ b, strong{
 }
 
 h1{
-    @apply text-4xl;
+    @apply text-5xl;
 }
 h2{
-    @apply text-3xl;
+    @apply text-4xl;
 }
 h3{
-    @apply text-2xl;
+    @apply text-3xl;
 }
 h4{
     @apply text-xl;
@@ -1390,4 +1390,45 @@ select option {
 
 .hamburger.active .bottom{
     transform: rotate(45deg);
+}
+
+.horizontal-accordeon-item{
+    @apply relative pl-4 mb-8 cursor-pointer;
+}
+
+.horizontal-accordeon-item::before{
+    content: "";
+    @apply absolute top-0 -left-0 h-0 w-1 bg-corp duration-200;
+}
+
+.horizontal-accordeon-item.active::before{
+    @apply h-full;
+}
+
+.horizontal-accordeon-item > h5{
+    @apply mb-2 text-inactive;
+}
+
+.horizontal-accordeon-item.active > h5{
+    @apply mb-2 text-corp;
+}
+
+.horizontal-accordeon-item > p{
+    @apply hidden;
+}
+
+.horizontal-accordeon-item.active > p{
+    @apply block;
+}
+
+.accordeon-img{
+    @apply opacity-0 absolute left-0 top-0 duration-200;
+}
+
+.accordeon-img:first-child{
+    @apply relative;
+}
+
+.accordeon-img.active{
+    @apply opacity-100;
 }

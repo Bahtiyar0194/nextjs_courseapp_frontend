@@ -70,14 +70,19 @@ export default function DashboardLayout(props) {
                 router.push("/login");
             }).catch(err => {
                 if (err.response) {
-                    router.push({
-                        pathname: '/error',
-                        query: {
-                            status: err.response.status,
-                            message: err.response.data.message,
-                            url: err.request.responseURL,
-                        }
-                    });
+                    if (err.response.status == 401) {
+                        router.push("/login");
+                    }
+                    else {
+                        router.push({
+                            pathname: '/error',
+                            query: {
+                                status: err.response.status,
+                                message: err.response.data.message,
+                                url: err.request.responseURL,
+                            }
+                        });
+                    }
                 }
                 else {
                     router.push('/error');

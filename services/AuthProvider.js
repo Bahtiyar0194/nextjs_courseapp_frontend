@@ -12,7 +12,7 @@ export default function AuthProvider(props) {
         if (typeof window !== undefined) {
             const token = Cookies.get('token');
             if (!token) {
-                router.push("/");
+                router.push("/login");
             }
             else {
                 async function getMe() {

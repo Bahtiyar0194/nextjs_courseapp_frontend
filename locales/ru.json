@@ -26,7 +26,7 @@
     "page.registration.form.email": "E-mail адрес",
     "page.registration.form.phone": "Телефон",
     "page.registration.form.school_name": "Название школы",
-    "page.registration.form.school_domain": "Доменное имя",
+    "page.registration.form.school_domain": "Доменный адрес",
     "page.registration.form.password": "Пароль",
     "page.registration.form.have_an_account": "У меня есть аккаунт.",
 

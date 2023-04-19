@@ -5,9 +5,10 @@ import Cookies from 'js-cookie';
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import Loader from "../components/ui/Loader";
-import { AiOutlineMail, AiOutlineKey, AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineKey, AiOutlineEyeInvisible, AiOutlineEye, AiOutlineGlobal } from "react-icons/ai";
 import { FiUserCheck } from "react-icons/fi";
 import Link from "next/link";
+import MAIN_DOMAIN from "../config/main_domain";
 
 export default function Login() {
     const intl = useIntl();
@@ -27,7 +28,11 @@ export default function Login() {
         await axios.get('school/get')
             .then(response => {
                 setSchool(response.data);
-                setSchoolDomain(response.data.school_domain);
+
+                if (response.data.school_id) {
+                    setSchoolDomain(response.data.school_domain);
+                }
+
                 setLoader(false)
             }).catch(err => {
                 if (err.response) {
@@ -48,7 +53,14 @@ export default function Login() {
 
     useEffect(() => {
         getSchool();
-    }, []);
+        if (router.isReady) {
+            const { t } = router?.query;
+            if (t) {
+                Cookies.set('token', t);
+                router.push('/dashboard');
+            }
+        }
+    }, [router.isReady]);
 
     const loginSubmit = async (e) => {
         e.preventDefault();
@@ -60,9 +72,15 @@ export default function Login() {
 
         await axios.post('auth/login', form_data)
             .then(response => {
-                let token = response.data.data.token
-                Cookies.set('token', token);
-                router.push('/dashboard');
+                let token = response.data.data.token;
+
+                if (school === 'main') {
+                    window.location.replace('http://' + school_domain + '.' + MAIN_DOMAIN + '/login?t=' + token);
+                }
+                else {
+                    Cookies.set('token', token);
+                    router.push('/dashboard');
+                }
             }).catch(err => {
                 if (err.response) {
                     if (err.response.status == 422 || err.response.status == 401) {
@@ -86,11 +104,27 @@ export default function Login() {
             });
     }
 
+    const goToSchool = async (e) => {
+        e.preventDefault();
+    }
+
     return (
         <AuthLayout title={title} school_name={school.school_name}>
             {loader && <Loader className="overlay" />}
             <form onSubmit={loginSubmit}>
                 {error.auth_failed && <p className="text-danger mb-4">{error.auth_failed}</p>}
+
+                {school === 'main' &&
+                    <div className="flex justify-between items-center">
+                        <div className="form-group">
+                            <AiOutlineGlobal />
+                            <input onInput={e => setSchoolDomain(e.target.value)} type="text" value={school_domain} placeholder=" " />
+                            <label className={(error.school_domain && 'label-error')}>{error.school_domain ? error.school_domain : intl.formatMessage({ id: "page.registration.form.school_domain" })}</label>
+                            <span className="text-xs text-inactive">{intl.formatMessage({ id: "example" })}: <i>school.{MAIN_DOMAIN}</i></span>
+                        </div>
+                        <span className="-mt-11 pl-2 text-inactive">.{MAIN_DOMAIN}</span>
+                    </div>
+                }
                 <div className="form-group">
                     <AiOutlineMail />
                     <input autoComplete="new-email" onInput={e => setEmail(e.target.value)} type="text" value={email} placeholder=" " />

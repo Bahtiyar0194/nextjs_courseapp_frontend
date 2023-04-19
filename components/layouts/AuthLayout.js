@@ -21,11 +21,11 @@ export default function AuthLayout(props) {
             <div className="h-screen w-full flex items-center justify-center">
                 <div className="custom-container">
                     <div className="custom-grid">
-                        <div className="col-span-12 lg:col-span-4 lg:col-start-5">
+                        <div className="col-span-12 lg:col-span-6 lg:col-start-4">
                             <div className="card">
                                 <div className="card-header">
                                     <div className="flex justify-between">
-                                        <h2 className="mb-2">{props.title}</h2>
+                                        <h3 className="mb-2">{props.title}</h3>
                                         <div className="btn-wrap items-center">
                                             <ThemeChanger />
                                             <Locales />
