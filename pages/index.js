@@ -4,6 +4,7 @@ import { useIntl } from "react-intl";
 import Link from "next/link";
 import FadeSlider from "../components/main-page/FadeSlider";
 import HorizontalAccordeon from "../components/main-page/HorizontalAccordeon";
+import SubscriptionPlans from "../components/main-page/SubscriptionPlans";
 
 export default function Index() {
     const intl = useIntl();
@@ -87,6 +88,18 @@ export default function Index() {
                                 <p className="text-center text-active text-xl max-lg:text-base mb-10">WebTeach - это инструмент, который позволяет пользователям создавать собственные онлайн-курсы, используя готовые элементы и инструменты. Преимущества конструктора курсов включают в себя:</p>
                             </div>
                             <HorizontalAccordeon />
+                        </div>
+                    </div>
+                </section>
+                <section className="bg-inactive border-t-active py-20">
+                    <div className="custom-container">
+                        <div className="custom-grid">
+                            <div className="col-span-12">
+                                <h2 className="max-lg:text-2xl text-center text-active">Тарифы WebTeach</h2>
+                                <p className="text-center text-active text-xl max-lg:text-base mb-10">Вы можете начать использовать WebTeach уже сейчас и оценить её преимущества в демоверсии, а также перейти на тариф для профессионального использования!</p>
+                            </div>
+
+                            <SubscriptionPlans/>
                         </div>
                     </div>
                 </section>

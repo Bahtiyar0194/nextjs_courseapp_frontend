@@ -48,8 +48,8 @@ const HorizontalAccordeon = () => {
                 <div className="horizontal-accordeon">
                     {accordeonItems.map((item, index) => (
                         <div key={index} onClick={() => setActiveItem(index)} className={"horizontal-accordeon-item " + (active_item_index === index && 'active')}>
-                            <h5 className="text-corp">{item.title}:</h5>
-                            <p>{item.description}</p>
+                            <div className="horizontal-accordeon-title">{item.title}:</div>
+                            <div className="horizontal-accordeon-description">{item.description}</div>
                         </div>
                     ))}
                 </div>

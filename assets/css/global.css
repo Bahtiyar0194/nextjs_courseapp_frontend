@@ -153,6 +153,10 @@
     @apply bg-accent-300;
 }
 
+.bg-success{
+    @apply bg-green-300;
+}
+
 .border-active{
     @apply border border-gray-200 dark:border-dark-200;
 }
@@ -197,6 +201,10 @@
     @apply border-accent-300;
 }
 
+.border-success{
+    @apply border-green-500;
+}
+
 .border-danger{
     @apply border-red-500;
 }
@@ -227,6 +235,10 @@
 
 .text-corp{
     @apply text-accent-300;
+}
+
+.text-success{
+    @apply text-green-500;
 }
 
 .stroke-corp{
@@ -1393,31 +1405,26 @@ select option {
 }
 
 .horizontal-accordeon-item{
-    @apply relative pl-4 mb-8 cursor-pointer;
+    @apply card px-4 py-2 mb-4 cursor-pointer;
 }
 
-.horizontal-accordeon-item::before{
-    content: "";
-    @apply absolute top-0 -left-0 h-0 w-1 bg-corp duration-200;
+.horizontal-accordeon-item.active{
+    @apply border-corp;
 }
 
-.horizontal-accordeon-item.active::before{
-    @apply h-full;
+.horizontal-accordeon-item > .horizontal-accordeon-title{
+    @apply text-lg font-medium;
 }
 
-.horizontal-accordeon-item > h5{
-    @apply mb-2 text-inactive;
+.horizontal-accordeon-item.active > .horizontal-accordeon-title{
+    @apply text-corp;
 }
 
-.horizontal-accordeon-item.active > h5{
-    @apply mb-2 text-corp;
+.horizontal-accordeon-item > .horizontal-accordeon-description{
+    @apply hidden mt-2;
 }
 
-.horizontal-accordeon-item > p{
-    @apply hidden;
-}
-
-.horizontal-accordeon-item.active > p{
+.horizontal-accordeon-item.active > .horizontal-accordeon-description{
     @apply block;
 }
 
