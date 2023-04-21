@@ -1421,7 +1421,7 @@ select option {
 }
 
 .horizontal-accordeon-item > .horizontal-accordeon-description{
-    @apply hidden mt-2;
+    @apply hidden mt-2 mb-2;
 }
 
 .horizontal-accordeon-item.active > .horizontal-accordeon-description{
