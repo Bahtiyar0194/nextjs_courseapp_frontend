@@ -1,7 +1,7 @@
 import React from 'react';
 import { Fade } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css';
-import IphoneScreen from '../misc/IphoneScreen';
+import PhoneScreen from '../misc/PhoneScreen';
 import MacBookScreen from '../misc/MacBookScreen';
 
 const fadeImages = [
@@ -51,9 +51,9 @@ const FadeSlider = () => {
 
             <div className='custom-grid absolute bottom-0 z-20'>
                 <div className='col-span-5 col-start-11 md:col-span-6 md:col-start-11 lg:col-span-7 lg:col-start-11'>
-                    <IphoneScreen>
+                    <PhoneScreen>
                         <img src='/img/index/users-mobile.png'/>
-                    </IphoneScreen>
+                    </PhoneScreen>
                 </div>
             </div>
         </div>

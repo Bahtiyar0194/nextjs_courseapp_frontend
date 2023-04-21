@@ -1,4 +1,4 @@
-const IphoneScreen = (props) => {
+const PhoneScreen = (props) => {
     return (
         <div className="bg-active p-0.5 md:p-1.5 lg:p-2 border-inactive rounded-xl md:rounded-3xl shadow-2xl relative">
             <div className="w-2/4 border-b-inactive border-l-inactive border-r-inactive rounded-t-none md:rounded-t-none rounded-md md:rounded-xl absolute bg-active left-1/4 z-10 p-0.5 md:p-1">
@@ -12,4 +12,4 @@ const IphoneScreen = (props) => {
     );
 };
 
-export default IphoneScreen;
+export default PhoneScreen;
