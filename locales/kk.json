@@ -36,7 +36,17 @@
     "page.registration.form.school_domain": "Домендік мекен-жайы",
     "page.registration.form.password": "Құпия сөз",
     "page.registration.form.confirm_password": "Құпия сөзді растаңыз",
+    "page.registration.form.new_password": "Жаңа құпия сөз",
+    "page.registration.form.confirm_new_password": "Жаңа құпия сөзді растаңыз",
     "page.registration.form.have_an_account": "Менде аккаунт бар.",
+
+    "page.password.forgot.title": "Құпия сөзді қалпына келтіру",
+    "page.password.forgot.instruction": "Электрондық поштаңызды енгізіңіз. Біз сізге құпия сөзді қалпына келтіру туралы нұсқаулық пен растау кодын жібереміз.",
+    "page.password.recovery.instruction": "Сіздің электрондық поштаңызға құпия сөзді қалпына келтіретін растау кодын жібердік, оны төменге енгізуіңіз сұралады.",
+    "page.password.send_the_code": "Код жіберу",
+    "page.password.recovery_code": "Құпия сөзді қалпына келтіру коды",
+    "page.password.recovery_password": "Құпия сөзді қалпына келтіру",
+    "page.password.can't_recover_my_password": "Құпия сөзді қалпына келтіру мүмкін емес пе?",
 
     "page.account_activation.title": "Аккаунтты белсендіру",
     "page.account_activation.description": "Аккаунтыңызды белсендіру үшін әріптерден, сандардан және басқа таңбалардан тұратын құпия сөз ойлап табыңыз",
@@ -235,6 +245,7 @@
     "hide_search_filter": "Іздеу сүзгісін жасыру",
     "show_error": "Қатені көрсету",
     "hide_error": "Қатені жасыру",
+    "try_again": "Қайтадан көру",
 
     "pagination.first_page_title": "Бірінші бетке өту",
     "pagination.previous_page_title": "Алдыңғы бетке өту",

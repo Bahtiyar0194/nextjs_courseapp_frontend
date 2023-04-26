@@ -36,7 +36,17 @@
     "page.registration.form.school_domain": "Доменный адрес",
     "page.registration.form.password": "Пароль",
     "page.registration.form.confirm_password": "Подтвердите пароль",
+    "page.registration.form.new_password": "Новый пароль",
+    "page.registration.form.confirm_new_password": "Подтвердите новый пароль",
     "page.registration.form.have_an_account": "У меня есть аккаунт.",
+
+    "page.password.forgot.title": "Восстановление пароля",
+    "page.password.forgot.instruction": "Введите ваш E-mail адрес. Мы вышлем Вам инструкцию по восстановлению пароля и код подтверждения.",
+    "page.password.recovery.instruction": "Введите код восстановления пароля, которую мы выслали Вам по Вашему E-mail адресу.",
+    "page.password.send_the_code": "Выслать код",
+    "page.password.recovery_code": "Код для восстановления пароля",
+    "page.password.recovery_password": "Восстановить пароль",
+    "page.password.can't_recover_my_password": "Не получается восстановить пароль?",
 
     "page.account_activation.title": "Активация аккаунта",
     "page.account_activation.description": "Для активации Вашего аккаунта придумайте надёжный пароль, состоящий из букв, цифр и других символов",
@@ -235,6 +245,7 @@
     "hide_search_filter": "Скрыть фильтр поиска",
     "show_error": "Показать ошибку",
     "hide_error": "Скрыть ошибку",
+    "try_again": "Попробовать заново",
 
     "pagination.first_page_title": "Перейти на первую страницу",
     "pagination.previous_page_title": "Перейти на предыдущую страницу",

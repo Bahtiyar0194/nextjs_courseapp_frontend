@@ -36,7 +36,17 @@
     "page.registration.form.school_domain": "School domain",
     "page.registration.form.password": "Password",
     "page.registration.form.confirm_password": "Confirm password",
+    "page.registration.form.new_password": "New password",
+    "page.registration.form.confirm_new_password": "Confirm new password",
     "page.registration.form.have_an_account": "I have an account.",
+
+    "page.password.forgot.title": "Password recovery",
+    "page.password.forgot.instruction": "Enter your E-mail address. We will send you instructions for password recovery and a confirmation code.",
+    "page.password.recovery.instruction": "Enter the password recovery code that we have sent to your E-mail address.",
+    "page.password.send_the_code": "Send the code",
+    "page.password.recovery_code": "Password recovery code",
+    "page.password.recovery_password": "Recovery password",
+    "page.password.can't_recover_my_password": "Can't recover the password?",
 
     "page.account_activation.title": "Account activation",
     "page.account_activation.description": "To activate your account, come up with a strong password consisting of letters, numbers and other symbols",
@@ -235,6 +245,7 @@
     "hide_search_filter": "Hide search filter",
     "show_error": "Show error",
     "hide_error": "Hide error",
+    "try_again": "Try again",
 
     "pagination.first_page_title": "Go to the first page",
     "pagination.previous_page_title": "Go to the previous page",

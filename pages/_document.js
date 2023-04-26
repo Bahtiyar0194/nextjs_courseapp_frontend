@@ -24,7 +24,7 @@ class MyDocument extends Document {
           <link sizes="180x180" rel="apple-touch-icon" href="/apple-touch-icon-180x180.png"></link>
           <meta name="theme-color" content="#fff" />
         </Head>
-        <body className="indigo">
+        <body>
           <Main />
           <NextScript />
         </body>

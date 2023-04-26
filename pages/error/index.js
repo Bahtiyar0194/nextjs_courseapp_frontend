@@ -31,7 +31,7 @@ export default function PageNumError() {
                     <>
                         {show_message == true &&
                             <div className="w-full overflow-hidden bg-inactive p-4 text-justify rounded-md mb-4">
-                                <p>{message}</p>
+                                <p className="break-all">{message}</p>
                                 {url && <p className="text-danger break-all">{url}</p>}
                             </div>
                         }
