@@ -154,7 +154,7 @@
 }
 
 .bg-success{
-    @apply bg-green-300;
+    @apply bg-green-500;
 }
 
 .border-active{
@@ -213,6 +213,10 @@
     @apply text-dark-500 dark:text-white;
 }
 
+.text-active-invert {
+    @apply text-white dark:text-dark-500;
+}
+
 .fill-active{
     @apply fill-dark-200 dark:fill-white;
 }
@@ -230,7 +234,7 @@
 }
 
 .text-inactive {
-    @apply text-current-500;
+    @apply text-neutral-500 dark:text-neutral-400;
 }
 
 .text-corp{
@@ -277,7 +281,11 @@ body {
 }
 
 a {
-    @apply cursor-pointer text-corp;
+    @apply cursor-pointer text-corp duration-200;
+}
+
+a:hover{
+    @apply text-active;
 }
 
 h1 > a,
@@ -316,13 +324,13 @@ b, strong{
 }
 
 h1{
-    @apply text-5xl;
-}
-h2{
     @apply text-4xl;
 }
-h3{
+h2{
     @apply text-3xl;
+}
+h3{
+    @apply text-2xl;
 }
 h4{
     @apply text-xl;
@@ -681,7 +689,7 @@ select option {
 }
 
 .title-wrap{
-    @apply flex max-md:flex-col justify-between gap-4 mb-2;
+    @apply flex flex-wrap justify-between gap-4 mb-2;
 }
 
 .title-wrap > h1,
@@ -898,6 +906,14 @@ select option {
 
 .alert.light{
     @apply bg-active text-active;
+}
+
+.alert.primary{
+    @apply bg-corp text-white;
+}
+
+.alert.outline-primary{
+    @apply border-corp text-active;
 }
 
 .alert.danger{
@@ -1402,6 +1418,10 @@ select option {
 
 .hamburger.active .bottom{
     transform: rotate(45deg);
+}
+
+.horizontal-accordeon{
+    @apply lg:pr-4;
 }
 
 .horizontal-accordeon-item{

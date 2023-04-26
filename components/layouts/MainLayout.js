@@ -11,11 +11,13 @@ import { authenticate } from "../../store/slices/userSlice";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { useIntl } from "react-intl";
 
 export default function MainLayout(props) {
   const user = useSelector((state) => state.authUser.user);
   const dispatch = useDispatch();
   const [show_hide_main_menu, setShowHideMainMenu] = useState(false);
+  const intl = useIntl();
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -78,6 +80,27 @@ export default function MainLayout(props) {
         </div>
       </StickyBox>
       {props.children}
+      <section className="bg-active border-t-active py-10">
+        <div className="custom-container">
+          <div className="custom-grid">
+            <div className="col-span-12 lg:col-span-4">
+              <DefaultLogo />
+              <p className="text-xs text-inactive mt-2 mb-4">{intl.formatMessage({ id: "page.home.company_slogan" })}</p>
+              <p className="text-inactive mt-2">© {new Date().getFullYear()} WebTeach. {intl.formatMessage({ id: "page.home.all_rights_reserved" })}</p>
+            </div>
+            <div className="col-span-12 lg:col-span-3">
+              <div className="inline-flex flex-col gap-y-2">
+                <MainNavigationMenu />
+              </div>
+            </div>
+            <div className="col-span-12 lg:col-span-5">
+              <div className="inline-flex flex-col gap-y-2">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

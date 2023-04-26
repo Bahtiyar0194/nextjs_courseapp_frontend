@@ -1,7 +1,14 @@
 {
     "page.home.title": "WebTeach | Қош келдіңіз!",
+    "page.home.welcome": "Қош келдіңіз",
     "page.home.to": "Басты бетке",
     "page.home.description": "Сіз біздің басты беттесіз",
+    "page.home.all_rights_reserved": "Барлық құқықтар сақталған.",
+    "page.home.company_slogan": "Cіздің бизнесіңізді жеңілдететін технологиялар.",
+
+    "subscription_plan.max_courses_count": "Курстардың жалпы саны", 
+    "subscription_plan.max_users_count": "Қолданушылардың жалпы саны",
+    "subscription_plan.disk_space": "Диск кеңістігі",
 
     "page.error.undefined": "Белгісіз қате орын алды!",
     "page.error.400": "Серверде белгісіз қате орын алды!",
@@ -28,7 +35,12 @@
     "page.registration.form.school_name": "Мектептің атауы",
     "page.registration.form.school_domain": "Домендік мекен-жайы",
     "page.registration.form.password": "Құпия сөз",
+    "page.registration.form.confirm_password": "Құпия сөзді растаңыз",
     "page.registration.form.have_an_account": "Менде аккаунт бар.",
+
+    "page.account_activation.title": "Аккаунтты белсендіру",
+    "page.account_activation.description": "Аккаунтыңызды белсендіру үшін әріптерден, сандардан және басқа таңбалардан тұратын құпия сөз ойлап табыңыз",
+    "page.account_activation.button": "Белсендіру",
 
     "page.dashboard.title": "Жеке кабинет",
     "page.dashboard.go_to_dashboard": "Жеке кабинетке өту",
@@ -214,12 +226,15 @@
     "operator": "Оператор",
     "recipient": "Алушы",
     "cost": "Бағасы",
+    "free": "Тегін",
     "status": "Мәртебе",
     "invite": "Шақыру",
     "search": "Іздеу",
     "reset_search_filter": "Cүзгіні қалпына келтіру",
     "show_search_filter": "Іздеу сүзгісін көрсету",
     "hide_search_filter": "Іздеу сүзгісін жасыру",
+    "show_error": "Қатені көрсету",
+    "hide_error": "Қатені жасыру",
 
     "pagination.first_page_title": "Бірінші бетке өту",
     "pagination.previous_page_title": "Алдыңғы бетке өту",

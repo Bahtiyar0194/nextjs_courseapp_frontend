@@ -30,16 +30,16 @@ export default function PageNumError() {
                 {message &&
                     <>
                         {show_message == true &&
-                            <div className="bg-inactive p-4 text-justify rounded-md mb-4">
+                            <div className="w-full overflow-hidden bg-inactive p-4 text-justify rounded-md mb-4">
                                 <p>{message}</p>
-                                {url && <p className="text-danger">{url}</p>}
+                                {url && <p className="text-danger break-all">{url}</p>}
                             </div>
                         }
                     </>
                 }
 
-                <div className="flex gap-4">
-                    {message && <button className="btn btn-light" onClick={e => setShowMessage(!show_message)}>Показать сообщение</button>}
+                <div className="flex gap-4 justify-center max-md:flex-wrap">
+                    {message && <button className="btn btn-light" onClick={e => setShowMessage(!show_message)}>{show_message === true ? intl.formatMessage({ id: "hide_error" }) : intl.formatMessage({ id: "show_error" })}</button>}
                     {status != 400 && <Link className="btn btn-outline-primary" href={'/'}>{intl.formatMessage({ id: "page.home.to" })}</Link>}
                 </div>
             </div>

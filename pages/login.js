@@ -104,10 +104,6 @@ export default function Login() {
             });
     }
 
-    const goToSchool = async (e) => {
-        e.preventDefault();
-    }
-
     return (
         <AuthLayout title={title} school_name={school.school_name}>
             {loader && <Loader className="overlay" />}

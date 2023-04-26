@@ -1,7 +1,14 @@
 {
     "page.home.title": "WebTeach | Добро пожаловать",
+    "page.home.welcome": "Добро пожаловать",
     "page.home.to": "На главную страницу",
     "page.home.description": "Вы на главной странице нашего сайта",
+    "page.home.all_rights_reserved": "Все права защищены.",
+    "page.home.company_slogan": "Технологии, делающие Ваш бизнес проще.",
+
+    "subscription_plan.max_courses_count": "Макс. количество курсов", 
+    "subscription_plan.max_users_count": "Макс. количество пользователей",
+    "subscription_plan.disk_space": "Дисковое пространство",
 
     "page.error.undefined": "Неизвестная ошибка!",
     "page.error.400": "Непредвиденная ошибка на сервере!",
@@ -28,7 +35,12 @@
     "page.registration.form.school_name": "Название школы",
     "page.registration.form.school_domain": "Доменный адрес",
     "page.registration.form.password": "Пароль",
+    "page.registration.form.confirm_password": "Подтвердите пароль",
     "page.registration.form.have_an_account": "У меня есть аккаунт.",
+
+    "page.account_activation.title": "Активация аккаунта",
+    "page.account_activation.description": "Для активации Вашего аккаунта придумайте надёжный пароль, состоящий из букв, цифр и других символов",
+    "page.account_activation.button": "Активировать",
 
     "page.dashboard.title": "Личный кабинет",
     "page.dashboard.go_to_dashboard": "Перейти в личный кабинет",
@@ -214,12 +226,15 @@
     "operator": "Оператор",
     "recipient": "Получатель",
     "cost": "Цена",
+    "free": "Бесплатно",
     "status": "Статус",
     "invite": "Пригласить",
     "search": "Искать",
     "reset_search_filter": "Сбросить фильтр",
     "show_search_filter": "Показать фильтр поиска",
     "hide_search_filter": "Скрыть фильтр поиска",
+    "show_error": "Показать ошибку",
+    "hide_error": "Скрыть ошибку",
 
     "pagination.first_page_title": "Перейти на первую страницу",
     "pagination.previous_page_title": "Перейти на предыдущую страницу",

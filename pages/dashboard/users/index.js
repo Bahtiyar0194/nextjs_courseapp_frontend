@@ -25,6 +25,7 @@ export default function Users() {
     const [users, setUsers] = useState([]);
     const [loader, setLoader] = useState(false);
     const [users_loader, setUsersLoader] = useState(false);
+    const [showFullLoader, setShowFullLoader] = useState(true);
     const [edit_user, setEditUser] = useState([]);
     const [invite_user_phone, setInviteUserPhone] = useState('');
     const [edit_user_phone, setEditUserPhone] = useState('');
@@ -75,6 +76,7 @@ export default function Users() {
             .then(response => {
                 setUsers(response.data)
                 setUsersLoader(false);
+                setShowFullLoader(false);
             }).catch(err => {
                 console.log(err)
                 if (err.response) {
@@ -115,11 +117,12 @@ export default function Users() {
     }
 
     useEffect(() => {
+        setShowFullLoader(true);
         getUsers();
     }, []);
 
     return (
-        <DashboardLayout showLoader={false} title={intl.formatMessage({ id: "page.users.title" })}>
+        <DashboardLayout showLoader={showFullLoader} title={intl.formatMessage({ id: "page.users.title" })}>
             <RoleProvider roles={[2]} redirect={true}>
                 <Breadcrumb>
                     {intl.formatMessage({ id: "page.users.title" })}

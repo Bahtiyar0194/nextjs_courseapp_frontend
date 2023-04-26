@@ -30,13 +30,13 @@ const Locales = () => {
             <CDropdownMenu>
                 {
                     locales?.map(localeItem => (
-                        <CDropdownItem key={localeItem} onClick={() => handleLocaleChange(localeItem)} href={'#'}>
+                        <button key={localeItem} onClick={() => handleLocaleChange(localeItem)}>
                             {
                                 localeItem === 'kk' ? <LocaleItem flag='/flags/kz.svg' text='Қазақша' /> :
                                     localeItem === 'ru' ? <LocaleItem flag='/flags/ru.svg' text='Русский' /> :
                                         localeItem === 'en' ? <LocaleItem flag='/flags/us.svg' text='English' /> : ''
                             }
-                        </CDropdownItem>
+                        </button>
                     ))
                 }
             </CDropdownMenu>

@@ -24,15 +24,15 @@ export default function AuthLayout(props) {
                         <div className="col-span-12 lg:col-span-6 lg:col-start-4">
                             <div className="card">
                                 <div className="card-header">
-                                    <div className="flex justify-between">
-                                        <h3 className="mb-2">{props.title}</h3>
+                                    <div className="title-wrap">
+                                        <h3>{props.title}</h3>
                                         <div className="btn-wrap items-center">
                                             <ThemeChanger />
                                             <Locales />
                                         </div>
                                     </div>
 
-                                    {props.school_name && <h5 className="text-corp mb-0">{props.school_name}</h5>}
+                                    {props.school_name && <h6 className="text-corp mb-0">{props.school_name}</h6>}
                                 </div>
                                 <div className="card-body">
                                     {props.children}

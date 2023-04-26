@@ -1,7 +1,14 @@
 {
     "page.home.title": "WebTeach | Welcome",
+    "page.home.welcome": "Welcome",
     "page.home.to": "To main page",
     "page.home.description": "You are currently viewing the main page",
+    "page.home.all_rights_reserved": "All rights reserved.",
+    "page.home.company_slogan": "Technologies that make your business easier.",
+
+    "subscription_plan.max_courses_count": "Max courses count", 
+    "subscription_plan.max_users_count": "Max users count",
+    "subscription_plan.disk_space": "Disk space",
 
     "page.error.undefined": "Unknown error!",
     "page.error.400": "Unexpected error on server!",
@@ -28,7 +35,12 @@
     "page.registration.form.school_name": "School name",
     "page.registration.form.school_domain": "School domain",
     "page.registration.form.password": "Password",
+    "page.registration.form.confirm_password": "Confirm password",
     "page.registration.form.have_an_account": "I have an account.",
+
+    "page.account_activation.title": "Account activation",
+    "page.account_activation.description": "To activate your account, come up with a strong password consisting of letters, numbers and other symbols",
+    "page.account_activation.button": "Activate",
 
     "page.dashboard.title": "Dashboard",
     "page.dashboard.go_to_dashboard": "Go to dashboard",
@@ -214,12 +226,15 @@
     "operator": "Operator",
     "recipient": "Recipient",
     "cost": "Cost",
+    "free": "Free",
     "status": "Status",
     "invite": "Invite",
     "search": "Search",
     "reset_search_filter": "Reset filter",
     "show_search_filter": "Show search filter",
     "hide_search_filter": "Hide search filter",
+    "show_error": "Show error",
+    "hide_error": "Hide error",
 
     "pagination.first_page_title": "Go to the first page",
     "pagination.previous_page_title": "Go to the previous page",
