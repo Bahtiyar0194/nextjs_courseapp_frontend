@@ -43,7 +43,7 @@ const CreateImageModal = ({ create_lesson, create_task, closeModal }) => {
             },
         }
 
-        await axios.post('lessons/upload_image', form_data, config)
+        await axios.post('media/upload_image', form_data, config)
             .then(response => {
                 const data = response.data.data;
 

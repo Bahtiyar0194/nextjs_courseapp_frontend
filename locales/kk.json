@@ -6,9 +6,12 @@
     "page.home.all_rights_reserved": "Барлық құқықтар сақталған.",
     "page.home.company_slogan": "Cіздің бизнесіңізді жеңілдететін технологиялар.",
 
+    "page.home.leave_a_feedback": "Өтінімді қалдырыңыз, біздің менеджер жақын арада сізбен байланысып, сұрақтарыңызға жауап береді.",
+    "page.home.feedback.succesfully_sent": "Сіздің өтінішіңіз сәтті жіберілді. Біздің менеджер жақын арада сізбен байланысады және сіздің сұрақтарыңызға жауап береді.",
+
     "subscription_plan.max_courses_count": "Курстардың жалпы саны", 
     "subscription_plan.max_users_count": "Қолданушылардың жалпы саны",
-    "subscription_plan.disk_space": "Диск кеңістігі",
+    "subscription_plan.disk_space": "Файл сақтау орны",
 
     "page.error.undefined": "Белгісіз қате орын алды!",
     "page.error.400": "Серверде белгісіз қате орын алды!",
@@ -30,7 +33,7 @@
     "page.registration.description": "Сіз біздің тіркелу бетіндесіз",
     "page.registration.form.first_name": "Аты",
     "page.registration.form.last_name": "Тегі",
-    "page.registration.form.email": "E-mail пошта",
+    "page.registration.form.email": "Электрондық пошта",
     "page.registration.form.phone": "Телефон",
     "page.registration.form.school_name": "Мектептің атауы",
     "page.registration.form.school_domain": "Домендік мекен-жайы",
@@ -221,6 +224,8 @@
     "upload_from_media": "Бұрын жүктелгендердің ішінен таңдау",
     "file_size": "Файлдың өлшемі",
     "megabyte": "МБ",
+    "gigabyte": "ГБ",
+    "free_space": "Бос орын",
     "choose_file": "Файлды таңдаңыз",
 
     "move_up": "Жоғары көтеру",
@@ -246,6 +251,10 @@
     "show_error": "Қатені көрсету",
     "hide_error": "Қатені жасыру",
     "try_again": "Қайтадан көру",
+    "your_question": "Сіздің сұрақ",
+    "not_necessary": "Толтыру міндетті емес",
+    "data_agreement": "Менің деректерімді өңдеуге келісемін",
+    "you_must_accept_data_agreement": "Сіз өзіңіздің деректеріңізді өңдеу туралы келісімді қабылдауыңыз керек",
 
     "pagination.first_page_title": "Бірінші бетке өту",
     "pagination.previous_page_title": "Алдыңғы бетке өту",

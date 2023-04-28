@@ -39,12 +39,12 @@ const TestQuestionMaterialBlock = ({ question_material_block, question_index, ed
             </RoleProvider>}
 
             {question_material_block.file_type_id == 3 &&
-                <ReactAudioPlayer width="100%" src={API_URL + '/lessons/audio/' + question_material_block.file_id} controls />
+                <ReactAudioPlayer width="100%" src={API_URL + '/media/audio/' + question_material_block.file_id} controls />
             }
 
             {question_material_block.file_type_id == 4 &&
                 <div className='col-span-12 md:col-span-4 lg:col-span-2'>
-                    <img className={question_material_block.image_width} src={API_URL + '/lessons/image/' + question_material_block.file_id} />
+                    <img className={question_material_block.image_width} src={API_URL + '/media/image/' + question_material_block.file_id} />
                 </div>
             }
 

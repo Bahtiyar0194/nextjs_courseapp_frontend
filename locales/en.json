@@ -6,9 +6,12 @@
     "page.home.all_rights_reserved": "All rights reserved.",
     "page.home.company_slogan": "Technologies that make your business easier.",
 
+    "page.home.leave_a_feedback": "Leave a feedback, our manager will contact you soon and answer your questions.",
+    "page.home.feedback.succesfully_sent": "Your feedback has been successfully sent. Our manager will contact you soon and answer your questions.",
+
     "subscription_plan.max_courses_count": "Max courses count", 
     "subscription_plan.max_users_count": "Max users count",
-    "subscription_plan.disk_space": "Disk space",
+    "subscription_plan.disk_space": "File storage",
 
     "page.error.undefined": "Unknown error!",
     "page.error.400": "Unexpected error on server!",
@@ -221,6 +224,8 @@
     "upload_from_media": "Select from previously uploaded",
     "file_size": "File size",
     "megabyte": "MB",
+    "gigabyte": "GB",
+    "free_space": "Free space",
     "choose_file": "Choose file",
 
     "move_up": "Move up",
@@ -246,6 +251,10 @@
     "show_error": "Show error",
     "hide_error": "Hide error",
     "try_again": "Try again",
+    "your_question": "Your question",
+    "not_necessary": "Not necessary",
+    "data_agreement": "I agree to the processing of my data",
+    "you_must_accept_data_agreement": "You must accept the agreement for the processing of your data",
 
     "pagination.first_page_title": "Go to the first page",
     "pagination.previous_page_title": "Go to the previous page",

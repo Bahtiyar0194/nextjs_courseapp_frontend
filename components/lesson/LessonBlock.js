@@ -77,7 +77,7 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
             {lesson_block.block_type_id == 1 && parse(lesson_block.content)}
 
             {lesson_block.file_type_id == 1 &&
-                <Player playsInline src={API_URL + '/lessons/video/' + lesson_block.file_id} />
+                <Player playsInline src={API_URL + '/media/video/' + lesson_block.file_id} />
             }
 
             {lesson_block.file_type_id == 2 &&
@@ -85,11 +85,11 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
             }
 
             {lesson_block.file_type_id == 3 &&
-                <ReactAudioPlayer width="100%" src={API_URL + '/lessons/audio/' + lesson_block.file_id} controls />
+                <ReactAudioPlayer width="100%" src={API_URL + '/media/audio/' + lesson_block.file_id} controls />
             }
 
             {lesson_block.file_type_id == 4 &&
-                <img src={API_URL + '/lessons/image/' + lesson_block.file_id} />
+                <img src={API_URL + '/media/image/' + lesson_block.file_id} />
             }
 
             {lesson_block.block_type_id == 5 && parse(lesson_block.content)}

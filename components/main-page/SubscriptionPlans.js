@@ -11,7 +11,7 @@ const SubscriptionPlans = () => {
     const intl = useIntl();
 
     const getSubscriptionPlans = async () => {
-        await axios.get('school/get_subscription_plans')
+        await axios.get('subscription_plan/get')
             .then(response => {
                 SetSubscriptionPlans(response.data);
             }).catch(err => {
@@ -54,7 +54,7 @@ const SubscriptionPlans = () => {
 
                     <div className="flex items-center mb-8 gap-1">
                         <AiOutlineHdd className="text-xl" />
-                        <p className="max-md:text-sm mb-0">{intl.formatMessage({ id: "subscription_plan.disk_space" })}: <b>{item.disk_space / 1024} гб</b></p>
+                        <p className="max-md:text-sm mb-0">{intl.formatMessage({ id: "subscription_plan.disk_space" })}: <b>{item.disk_space / 1024} {intl.formatMessage({ id: "gigabyte" })}</b></p>
                     </div>
 
                     {item.price == 0

@@ -6,9 +6,12 @@
     "page.home.all_rights_reserved": "Все права защищены.",
     "page.home.company_slogan": "Технологии, делающие Ваш бизнес проще.",
 
+    "page.home.leave_a_feedback": "Оставьте заявку, наш менеджер свяжется с Вами в ближайшее время и ответит на Ваши вопросы.",
+    "page.home.feedback.succesfully_sent": "Ваша заявка была успешно отправлена. Наш менеджер свяжется с Вами в ближайшее время и ответит на Ваши вопросы.",
+
     "subscription_plan.max_courses_count": "Макс. количество курсов", 
     "subscription_plan.max_users_count": "Макс. количество пользователей",
-    "subscription_plan.disk_space": "Дисковое пространство",
+    "subscription_plan.disk_space": "Файловое хранилище",
 
     "page.error.undefined": "Неизвестная ошибка!",
     "page.error.400": "Непредвиденная ошибка на сервере!",
@@ -221,6 +224,8 @@
     "upload_from_media": "Выбрать из ранее загруженных",
     "file_size": "Размер файла",
     "megabyte": "МБ",
+    "gigabyte": "ГБ",
+    "free_space": "Свободно",
     "choose_file": "Выберите файл",
 
     "move_up": "Переместить вверх",
@@ -246,6 +251,10 @@
     "show_error": "Показать ошибку",
     "hide_error": "Скрыть ошибку",
     "try_again": "Попробовать заново",
+    "your_question": "Ваш вопрос",
+    "not_necessary": "Необязательно",
+    "data_agreement": "Я согласен(-на) на обработку моих данных",
+    "you_must_accept_data_agreement": "Вы должны принять соглашение на обработку Ваших данных",
 
     "pagination.first_page_title": "Перейти на первую страницу",
     "pagination.previous_page_title": "Перейти на предыдущую страницу",

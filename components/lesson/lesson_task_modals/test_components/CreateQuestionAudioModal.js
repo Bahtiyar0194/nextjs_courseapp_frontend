@@ -44,7 +44,7 @@ const CreateQuestionAudioModal = ({ question_index, closeModal }) => {
             },
         }
 
-        await axios.post('lessons/upload_audio', form_data, config)
+        await axios.post('media/upload_audio', form_data, config)
             .then(response => {
                 const data = response.data.data;
 

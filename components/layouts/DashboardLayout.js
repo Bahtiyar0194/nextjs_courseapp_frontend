@@ -3,7 +3,7 @@ import ThemeChanger from "../ui/ThemeChanger";
 import Locales from "../ui/Locales";
 import Link from "next/link";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineLogout, AiOutlineDashboard, AiOutlinePlaySquare, AiOutlineTeam, AiOutlineRead, AiOutlineSetting } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineDashboard, AiOutlinePlaySquare, AiOutlineTeam, AiOutlineRead, AiOutlineSetting, AiOutlineFile } from "react-icons/ai";
 import AuthProvider from "../../services/AuthProvider";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -101,12 +101,44 @@ export default function DashboardLayout(props) {
                     <ThemeChanger />
                     <CDropdown>
                         <CDropdownToggle href="#" color="transparent no-px" className="pl-0">
-                            <div className="rounded-full w-6 h-6 bg-corp flex items-center justify-center text-white">{user.first_name?.substring(0, 1)}</div> <span className="text-active">{user.first_name}</span>
+                            <div className="flex items-center gap-x-1 sm:gap-x-1.5">
+                                <div className="rounded-full w-8 h-8 bg-corp flex items-center justify-center text-white">{user.first_name?.substring(0, 1)}</div>
+                                <div>
+                                    <svg className="sm:hidden" width="18" height="18" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
+                                    <p className="hidden sm:block text-active font-medium text-sm mb-0">{user.first_name}</p>
+                                    <p className="hidden sm:block text-inactive text-xs mb-0">{user.current_role_name}</p>
+                                </div>
+                            </div>
                         </CDropdownToggle>
                         <CDropdownMenu>
+                            <div>
+                                <div className="flex items-center gap-x-2 mb-4">
+                                    <div className="rounded-full w-10 h-10 bg-corp flex items-center justify-center text-white text-xl">{user.first_name?.substring(0, 1)}</div>
+                                    <div>
+                                        <p className="text-active font-medium text-base mb-0">{user.last_name} {user.first_name}</p>
+                                        <p className="text-inactive text-xs mb-0">{user.email}</p>
+                                    </div>
+                                </div>
+
+                                <RoleProvider roles={[2]}>
+                                    <Link href={'/dashboard/disk'}>
+                                        <div className="p-2 bg-inactive border-active rounded-lg min-w-full w-52">
+                                            <p className="m-0">{intl.formatMessage({ id: "subscription_plan.disk_space" })}</p>
+                                            <div className="progress active sm">
+                                                <div className="progress-bar" style={{ 'width': '50%' }}></div>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <p className="text-xs text-inactive m-0">{intl.formatMessage({ id: "free_space" })} 0.5 / 1 {intl.formatMessage({ id: "gigabyte" })}</p>
+                                                <p className="text-xs text-inactive m-0">50%</p>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </RoleProvider>
+                            </div>
+
                             {user.roles?.length > 1 &&
                                 <div>
-                                    <p className="mb-2.5 font-medium">{intl.formatMessage({ id: "page.users.user_mode" })}</p>
+                                    <p className="mb-2.5">{intl.formatMessage({ id: "page.users.user_mode" })}</p>
                                     {user.roles?.map(role =>
                                         <div key={role.role_type_id} className="mt-1.5">
                                             <label className="custom-radio">
@@ -129,6 +161,7 @@ export default function DashboardLayout(props) {
                     <Link href={'/dashboard/courses/catalogue'}><AiOutlineRead /><span>{intl.formatMessage({ id: "page.courses_catalogue.title" })}</span></Link>
                     <Link href={'/dashboard/courses/my-courses'}><AiOutlinePlaySquare /><span>{intl.formatMessage({ id: "page.my_courses.title" })}</span></Link>
                     <RoleProvider roles={[2]}>
+                        <Link href={'/dashboard/disk'}><AiOutlineFile /><span>{intl.formatMessage({ id: "subscription_plan.disk_space" })}</span></Link>
                         <Link href={'/dashboard/users'}><AiOutlineTeam /><span>{intl.formatMessage({ id: "page.users.title" })}</span></Link>
                     </RoleProvider>
                 </div>

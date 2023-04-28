@@ -45,7 +45,7 @@ const CreateVideoModal = ({ create_lesson, create_task, closeModal }) => {
             },
         }
 
-        await axios.post('lessons/upload_video', form_data, config)
+        await axios.post('media/upload_video', form_data, config)
             .then(response => {
                 const data = response.data.data;
 

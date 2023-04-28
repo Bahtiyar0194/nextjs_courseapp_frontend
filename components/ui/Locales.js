@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
-import { CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem } from "@coreui/react";
+import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
 import LocaleItem from "./LocaleItem";
 import { useIntl } from "react-intl";
 
@@ -14,7 +14,7 @@ const Locales = () => {
         const value = locale;
         Cookies.set('locale', value)
         router.push(router.route, router.asPath, {
-            locale: value
+            locale: value, scroll: false
         });
     };
 
@@ -30,7 +30,7 @@ const Locales = () => {
             <CDropdownMenu>
                 {
                     locales?.map(localeItem => (
-                        <button key={localeItem} onClick={() => handleLocaleChange(localeItem)}>
+                        <button type="button" key={localeItem} onClick={() => handleLocaleChange(localeItem)}>
                             {
                                 localeItem === 'kk' ? <LocaleItem flag='/flags/kz.svg' text='Қазақша' /> :
                                     localeItem === 'ru' ? <LocaleItem flag='/flags/ru.svg' text='Русский' /> :

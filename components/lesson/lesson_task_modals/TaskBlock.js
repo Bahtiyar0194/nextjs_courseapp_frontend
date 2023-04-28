@@ -77,7 +77,7 @@ const TaskBlock = ({ task_block, index, edit }) => {
             {task_block.block_type_id == 1 && parse(task_block.content)}
 
             {task_block.file_type_id == 1 &&
-                <Player playsInline src={API_URL + '/lessons/video/' + task_block.file_id} />
+                <Player playsInline src={API_URL + '/media/video/' + task_block.file_id} />
             }
 
             {task_block.file_type_id == 2 &&
@@ -85,11 +85,11 @@ const TaskBlock = ({ task_block, index, edit }) => {
             }
 
             {task_block.file_type_id == 3 &&
-                <ReactAudioPlayer width="100%" src={API_URL + '/lessons/audio/' + task_block.file_id} controls />
+                <ReactAudioPlayer width="100%" src={API_URL + '/media/audio/' + task_block.file_id} controls />
             }
 
             {task_block.file_type_id == 4 &&
-                <img src={API_URL + '/lessons/image/' + task_block.file_id} />
+                <img src={API_URL + '/media/image/' + task_block.file_id} />
             }
 
             {task_block.block_type_id == 5 && parse(task_block.content)}

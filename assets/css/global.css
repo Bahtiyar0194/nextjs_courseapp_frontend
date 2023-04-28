@@ -538,7 +538,7 @@ select option {
 }
 
 .form-group-border > label.label-error{
-    @apply text-danger -top-2 text-xs left-2 bg-active px-1;
+    @apply text-danger -top-2.5 text-xs left-2 bg-active px-1;
 }
 
 .form-group-border > input:focus ~ label,
@@ -670,6 +670,12 @@ select option {
 .custom-radio-checkbox > input:checked + span,
 .custom-checkbox > input:checked + span{
     @apply text-corp;
+}
+
+.custom-radio > input:checked + span.error,
+.custom-radio-checkbox > input:checked + span.error,
+.custom-checkbox > input:checked + span.error{
+    @apply text-danger;
 }
 
 .custom-radio-checkbox > input:checked + span::before,
@@ -1125,7 +1131,7 @@ select option {
 }
 
 .dropdown-menu{
-    @apply hidden rounded-lg shadow-md bg-active text-sm border-active z-10 px-3 border my-2;
+    @apply hidden rounded-lg shadow-md bg-active text-sm border-active z-30 px-3 border my-2;
 }
 
 .dropdown-menu.show{
@@ -1144,12 +1150,12 @@ select option {
     @apply  border-b-0;
 }
 
-.dropdown-menu li a{
+.dropdown-menu li > a{
     @apply flex items-center text-active duration-200;
 }
 
-.dropdown-menu li a:hover{
-    @apply flex items-center text-corp;
+.dropdown-menu li > a:hover{
+    @apply text-corp;
 }
 
 .dropdown-menu li a svg{
@@ -1319,6 +1325,10 @@ select option {
 
 .progress{
     @apply w-full bg-inactive rounded-lg h-2.5 my-4 border-active;
+}
+
+.progress.sm{
+    @apply h-1.5 my-2 rounded-md;
 }
 
 .progress.active{
