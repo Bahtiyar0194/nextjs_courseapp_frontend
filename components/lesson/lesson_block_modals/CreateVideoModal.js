@@ -8,7 +8,7 @@ import { setLessonBlocks, setLessonBlocksCount } from "../../../store/slices/les
 import { setTaskBlocks, setTaskBlocksCount } from '../../../store/slices/taskBlocksSlice';
 import axios from "axios";
 
-const CreateVideoModal = ({ create_lesson, create_task, closeModal }) => {
+const CreateVideoModal = ({ create_lesson, create_task, upload_file, getDiskData, closeModal }) => {
     const router = useRouter();
     const intl = useIntl();
     const [error, setError] = useState([]);
@@ -73,6 +73,10 @@ const CreateVideoModal = ({ create_lesson, create_task, closeModal }) => {
                     dispatch(setTaskBlocks(task_blocks));
                 }
 
+                if(upload_file === true){
+                    getDiskData();
+                }
+
                 setLoader(false);
                 setVideoName('');
                 setVideoType('video_file');
@@ -107,26 +111,31 @@ const CreateVideoModal = ({ create_lesson, create_task, closeModal }) => {
             {loader && <Loader className="overlay" progress={progress} />}
             <div className="modal-body">
                 <form onSubmit={e => createVideoSubmit(e)} encType="multipart/form-data">
-                    <div className="mt-4">
-                        <label className="custom-radio">
-                            <input type="radio" onChange={e => setVideoType('video_file')} defaultChecked name="video_type" />
-                            <span>{intl.formatMessage({ id: "videoModal.form.upload_new_video" })}</span>
-                        </label>
-                    </div>
+                    {upload_file === false &&
+                        <>
+                            <div className="mt-4">
+                                <label className="custom-radio">
+                                    <input type="radio" onChange={e => setVideoType('video_file')} defaultChecked name="video_type" />
+                                    <span>{intl.formatMessage({ id: "videoModal.form.upload_new_video" })}</span>
+                                </label>
+                            </div>
 
-                    <div className="mt-2">
-                        <label className="custom-radio">
-                            <input type="radio" onChange={e => setVideoType('video_url')} name="video_type" />
-                            <span>{intl.formatMessage({ id: "videoModal.form.upload_video_from_internet" })}</span>
-                        </label>
-                    </div>
+                            <div className="mt-2">
+                                <label className="custom-radio">
+                                    <input type="radio" onChange={e => setVideoType('video_url')} name="video_type" />
+                                    <span>{intl.formatMessage({ id: "videoModal.form.upload_video_from_internet" })}</span>
+                                </label>
+                            </div>
 
-                    <div className="mt-2">
-                        <label className="custom-radio">
-                            <input type="radio" onChange={e => setVideoType('video_from_media')} name="video_type" />
-                            <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
-                        </label>
-                    </div>
+                            <div className="mt-2">
+                                <label className="custom-radio">
+                                    <input type="radio" onChange={e => setVideoType('video_from_media')} name="video_type" />
+                                    <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
+                                </label>
+                            </div>
+                        </>
+                    }
+
 
                     {video_type != 'video_from_media' &&
                         <div className="form-group mt-4">

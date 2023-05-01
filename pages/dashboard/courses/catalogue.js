@@ -6,12 +6,12 @@ import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
 import Loader from "../../../components/ui/Loader";
 import { AiOutlineRead, AiOutlineFlag, AiOutlinePercentage, AiOutlinePlus, AiOutlinePicture } from "react-icons/ai";
-import { IoGridOutline, IoList } from "react-icons/io5";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import API_URL from "../../../config/api";
 import RoleProvider from "../../../services/RoleProvider";
+import ContentViewTypeButtons from "../../../components/ui/ContentViewTypeButtons";
 
 export default function CourseCatalogue() {
     const [showFullLoader, setShowFullLoader] = useState(true);
@@ -180,10 +180,7 @@ export default function CourseCatalogue() {
                                         <span>{intl.formatMessage({ id: "page.my_courses.form.course_create" })}</span>
                                     </button>
                                 </RoleProvider>
-                                {
-                                    contentViewType === 'grid' ? <button onClick={() => setContentViewType('list')} className="btn btn-outline-primary"><IoList /></button> :
-                                        contentViewType === 'list' ? <button onClick={() => setContentViewType('grid')} className="btn btn-outline-primary"><IoGridOutline /></button> : ''
-                                }
+                                <ContentViewTypeButtons contentViewType={contentViewType} setContentViewType={setContentViewType}/>
                             </div>
                         </div>
                     </div>

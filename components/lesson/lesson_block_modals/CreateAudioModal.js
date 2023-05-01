@@ -8,7 +8,7 @@ import { setLessonBlocks, setLessonBlocksCount } from "../../../store/slices/les
 import { setTaskBlocks, setTaskBlocksCount } from '../../../store/slices/taskBlocksSlice';
 import axios from "axios";
 
-const CreateAudioModal = ({ create_lesson, create_task, closeModal }) => {
+const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData, closeModal }) => {
     const router = useRouter();
     const intl = useIntl();
     const [error, setError] = useState([]);
@@ -70,6 +70,10 @@ const CreateAudioModal = ({ create_lesson, create_task, closeModal }) => {
                     dispatch(setTaskBlocks(task_blocks));
                 }
 
+                if(upload_file === true){
+                    getDiskData();
+                }
+
                 setLoader(false);
                 setAudioName('');
                 setAudioType('audio_file');
@@ -103,19 +107,23 @@ const CreateAudioModal = ({ create_lesson, create_task, closeModal }) => {
             {loader && <Loader className="overlay" progress={progress} />}
             <div className="modal-body">
                 <form onSubmit={e => createAudioSubmit(e)} encType="multipart/form-data">
-                    <div className="mt-4">
-                        <label className="custom-radio">
-                            <input type="radio" onChange={e => setAudioType('audio_file')} defaultChecked name="audio_type" />
-                            <span>{intl.formatMessage({ id: "audioModal.form.upload_new_audio" })}</span>
-                        </label>
-                    </div>
+                    {upload_file === false &&
+                        <>
+                            <div className="mt-4">
+                                <label className="custom-radio">
+                                    <input type="radio" onChange={e => setAudioType('audio_file')} defaultChecked name="audio_type" />
+                                    <span>{intl.formatMessage({ id: "audioModal.form.upload_new_audio" })}</span>
+                                </label>
+                            </div>
 
-                    <div className="mt-2">
-                        <label className="custom-radio">
-                            <input type="radio" onChange={e => setAudioType('audio_from_media')} name="audio_type" />
-                            <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
-                        </label>
-                    </div>
+                            <div className="mt-2">
+                                <label className="custom-radio">
+                                    <input type="radio" onChange={e => setAudioType('audio_from_media')} name="audio_type" />
+                                    <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
+                                </label>
+                            </div>
+                        </>
+                    }
 
                     {audio_type != 'audio_from_media' &&
                         <div className="form-group mt-4">

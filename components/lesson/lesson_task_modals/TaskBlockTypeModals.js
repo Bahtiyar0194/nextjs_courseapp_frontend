@@ -48,15 +48,15 @@ export default function TaskBlockTypeModals() {
             </Modal>
 
             <Modal show={imageModal} onClose={() => setImageModal(false)} modal_title={intl.formatMessage({ id: "imageModal.title" })} modal_size="modal-xl">
-                <CreateImageModal create_task={true} closeModal={() => setImageModal(false)} />
+                <CreateImageModal create_task={true} upload_file={false} closeModal={() => setImageModal(false)} />
             </Modal>
 
             <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoModal.title" })} modal_size="modal-xl">
-                <CreateVideoModal create_task={true} closeModal={() => setVideoModal(false)} />
+                <CreateVideoModal create_task={true} upload_file={false} closeModal={() => setVideoModal(false)} />
             </Modal>
 
             <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-xl">
-                <CreateAudioModal create_task={true} closeModal={() => setAudioModal(false)} />
+                <CreateAudioModal create_task={true} upload_file={false} closeModal={() => setAudioModal(false)} />
             </Modal>
 
             <Modal show={codeModal} onClose={() => setCodeModal(false)} modal_title={intl.formatMessage({ id: "codeModal.title" })} modal_size="modal-4xl">

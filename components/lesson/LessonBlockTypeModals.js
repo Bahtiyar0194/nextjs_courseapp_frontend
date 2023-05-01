@@ -48,21 +48,20 @@ export default function LessonBlockTypeModals() {
             </Modal>
 
             <Modal show={imageModal} onClose={() => setImageModal(false)} modal_title={intl.formatMessage({ id: "imageModal.title" })} modal_size="modal-xl">
-                <CreateImageModal create_lesson={true} closeModal={() => setImageModal(false)} />
+                <CreateImageModal create_lesson={true} upload_file={false} closeModal={() => setImageModal(false)} />
             </Modal>
 
             <Modal show={videoModal} onClose={() => setVideoModal(false)} modal_title={intl.formatMessage({ id: "videoModal.title" })} modal_size="modal-xl">
-                <CreateVideoModal create_lesson={true} closeModal={() => setVideoModal(false)} />
+                <CreateVideoModal create_lesson={true} upload_file={false} closeModal={() => setVideoModal(false)} />
             </Modal>
 
             <Modal show={audioModal} onClose={() => setAudioModal(false)} modal_title={intl.formatMessage({ id: "audioModal.title" })} modal_size="modal-xl">
-                <CreateAudioModal create_lesson={true} closeModal={() => setAudioModal(false)} />
+                <CreateAudioModal create_lesson={true} upload_file={false} closeModal={() => setAudioModal(false)} />
             </Modal>
 
             <Modal show={codeModal} onClose={() => setCodeModal(false)} modal_title={intl.formatMessage({ id: "codeModal.title" })} modal_size="modal-4xl">
                 <CreateCodeModal create_lesson={true} closeModal={() => setCodeModal(false)} />
             </Modal>
         </>
-
     )
 }

@@ -8,7 +8,7 @@ import { setLessonBlocks, setLessonBlocksCount } from "../../../store/slices/les
 import { setTaskBlocks, setTaskBlocksCount } from '../../../store/slices/taskBlocksSlice';
 import axios from "axios";
 
-const CreateImageModal = ({ create_lesson, create_task, closeModal }) => {
+const CreateImageModal = ({ create_lesson, create_task, upload_file, getDiskData, closeModal }) => {
     const router = useRouter();
     const intl = useIntl();
     const [error, setError] = useState([]);
@@ -73,6 +73,10 @@ const CreateImageModal = ({ create_lesson, create_task, closeModal }) => {
                     dispatch(setTaskBlocks(task_blocks));
                 }
 
+                if(upload_file === true){
+                    getDiskData();
+                }
+
                 setLoader(false);
                 setImageName('');
                 setImageFile('');
@@ -105,19 +109,23 @@ const CreateImageModal = ({ create_lesson, create_task, closeModal }) => {
             {loader && <Loader className="overlay" progress={progress} />}
             <div className="modal-body">
                 <form onSubmit={e => createImageSubmit(e)} encType="multipart/form-data">
-                    <div className="mt-4">
-                        <label className="custom-radio">
-                            <input type="radio" onChange={e => setImageType('image_file')} defaultChecked name="image_type" />
-                            <span>{intl.formatMessage({ id: "imageModal.form.upload_new_image" })}</span>
-                        </label>
-                    </div>
+                    {upload_file === false &&
+                        <>
+                            <div className="mt-4">
+                                <label className="custom-radio">
+                                    <input type="radio" onChange={e => setImageType('image_file')} defaultChecked name="image_type" />
+                                    <span>{intl.formatMessage({ id: "imageModal.form.upload_new_image" })}</span>
+                                </label>
+                            </div>
 
-                    <div className="mt-2">
-                        <label className="custom-radio">
-                            <input type="radio" onChange={e => setImageType('image_from_media')} name="image_type" />
-                            <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
-                        </label>
-                    </div>
+                            <div className="mt-2">
+                                <label className="custom-radio">
+                                    <input type="radio" onChange={e => setImageType('image_from_media')} name="image_type" />
+                                    <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
+                                </label>
+                            </div>
+                        </>
+                    }
 
                     <div className="form-group mt-4">
                         <AiOutlineFile />

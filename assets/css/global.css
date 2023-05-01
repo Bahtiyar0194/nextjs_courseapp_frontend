@@ -157,6 +157,10 @@
     @apply bg-green-500;
 }
 
+.bg-danger{
+    @apply bg-red-500;
+}
+
 .border-active{
     @apply border border-gray-200 dark:border-dark-200;
 }
@@ -823,7 +827,7 @@ select option {
 .btn-down,
 .btn-delete,
 .btn-edit{
-    @apply rounded-full p-1.5 border-active text-inactive duration-200;
+    @apply rounded-lg p-1.5 border-active text-inactive duration-200;
 }
 
 .btn-up:hover,
@@ -857,7 +861,7 @@ select option {
 }
 
 .per-page-select{
-    @apply relative w-60;
+    @apply relative w-48;
 }
 
 .per-page-select > select {
@@ -1097,7 +1101,7 @@ select option {
 }
 
 .db__sidebar__menu a{
-    @apply py-3 duration-200 text-active border-b-active flex items-center;
+    @apply py-3 duration-200 text-active border-b-active flex items-center font-medium;
 }
 
 .db__sidebar__menu a:hover{
@@ -1147,7 +1151,7 @@ select option {
 }
 
 .dropdown-menu li:last-child{
-    @apply  border-b-0;
+    @apply pb-3 border-b-0;
 }
 
 .dropdown-menu li > a{
@@ -1335,8 +1339,16 @@ select option {
     @apply bg-active;
 }
 
+.progress.success{
+    @apply bg-success border-0;
+}
+
 .progress-bar{
     @apply h-full bg-corp rounded-lg duration-200;
+}
+
+.progress-bar.danger{
+    @apply bg-danger;
 }
 
 .logo{

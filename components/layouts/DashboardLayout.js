@@ -15,12 +15,14 @@ import Loader from "../ui/Loader";
 import RoleProvider from "../../services/RoleProvider";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import DefaultLogo from "../ui/Logo";
+import DiskSpace from "../ui/DiskSpace";
 
 export default function DashboardLayout(props) {
     const intl = useIntl();
     const router = useRouter();
     const dispatch = useDispatch();
     const user = useSelector((state) => state.authUser.user);
+    const disk_data = useSelector((state) => state.disk.disk_data);
     const [animateParent, enableAnimations] = useAutoAnimate();
 
     const changeUserMode = async (role_type_id) => {
@@ -112,7 +114,7 @@ export default function DashboardLayout(props) {
                         </CDropdownToggle>
                         <CDropdownMenu>
                             <div>
-                                <div className="flex items-center gap-x-2 mb-4">
+                                <div className="flex items-center gap-x-2">
                                     <div className="rounded-full w-10 h-10 bg-corp flex items-center justify-center text-white text-xl">{user.first_name?.substring(0, 1)}</div>
                                     <div>
                                         <p className="text-active font-medium text-base mb-0">{user.last_name} {user.first_name}</p>
@@ -121,18 +123,7 @@ export default function DashboardLayout(props) {
                                 </div>
 
                                 <RoleProvider roles={[2]}>
-                                    <Link href={'/dashboard/disk'}>
-                                        <div className="p-2 bg-inactive border-active rounded-lg min-w-full w-52">
-                                            <p className="m-0">{intl.formatMessage({ id: "subscription_plan.disk_space" })}</p>
-                                            <div className="progress active sm">
-                                                <div className="progress-bar" style={{ 'width': '50%' }}></div>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <p className="text-xs text-inactive m-0">{intl.formatMessage({ id: "free_space" })} 0.5 / 1 {intl.formatMessage({ id: "gigabyte" })}</p>
-                                                <p className="text-xs text-inactive m-0">50%</p>
-                                            </div>
-                                        </div>
-                                    </Link>
+                                    <DiskSpace intl={intl} disk_data={disk_data} />
                                 </RoleProvider>
                             </div>
 
