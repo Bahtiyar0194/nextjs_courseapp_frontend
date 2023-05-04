@@ -25,6 +25,39 @@ const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData
     const [audio_name, setAudioName] = useState('');
     const [audio_type, setAudioType] = useState('audio_file');
     const [audio_file, setAudioFile] = useState('');
+    const [audios, setAudios] = useState([]);
+    const [selected_audio_id, setSelectedAudioId] = useState('');
+
+    const changeAudioType = (audio_type) => {
+        setAudioType(audio_type);
+
+        if (audio_type === 'audio_from_media') {
+            getAudios();
+        }
+    }
+
+    const getAudios = async () => {
+        setLoader(true);
+        await axios.get('media/get_audios')
+            .then(response => {
+                setAudios(response.data);
+                setLoader(false);
+            }).catch(err => {
+                if (err.response) {
+                    router.push({
+                        pathname: '/error',
+                        query: {
+                            status: err.response.status,
+                            message: err.response.data.message,
+                            url: err.request.responseURL,
+                        }
+                    });
+                }
+                else {
+                    router.push('/error');
+                }
+            });
+    }
 
     const createAudioSubmit = async (e) => {
         e.preventDefault();
@@ -32,7 +65,9 @@ const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData
 
         const form_data = new FormData();
         form_data.append('audio_name', audio_name);
+        form_data.append('audio_type', audio_type);
         form_data.append('audio_file', audio_file);
+        form_data.append('selected_audio_id', selected_audio_id);
         form_data.append('operation_type_id', 8);
 
         const config = {
@@ -70,7 +105,7 @@ const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData
                     dispatch(setTaskBlocks(task_blocks));
                 }
 
-                if(upload_file === true){
+                if (upload_file === true) {
                     getDiskData();
                 }
 
@@ -78,6 +113,8 @@ const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData
                 setAudioName('');
                 setAudioType('audio_file');
                 setAudioFile('');
+                setSelectedAudioId('');
+                setError([]);
                 closeModal();
             }).catch(err => {
                 if (err.response) {
@@ -111,14 +148,14 @@ const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData
                         <>
                             <div className="mt-4">
                                 <label className="custom-radio">
-                                    <input type="radio" onChange={e => setAudioType('audio_file')} defaultChecked name="audio_type" />
+                                    <input type="radio" onChange={e => changeAudioType('audio_file')} checked={audio_type === 'audio_file'} name="audio_type" />
                                     <span>{intl.formatMessage({ id: "audioModal.form.upload_new_audio" })}</span>
                                 </label>
                             </div>
 
                             <div className="mt-2">
                                 <label className="custom-radio">
-                                    <input type="radio" onChange={e => setAudioType('audio_from_media')} name="audio_type" />
+                                    <input type="radio" onChange={e => changeAudioType('audio_from_media')} checked={audio_type === 'audio_from_media'} name="audio_type" />
                                     <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
                                 </label>
                             </div>
@@ -126,7 +163,7 @@ const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData
                     }
 
                     {audio_type != 'audio_from_media' &&
-                        <div className="form-group mt-4">
+                        <div className="form-group mt-6">
                             <AiOutlineFile />
                             <input onInput={e => setAudioName(e.target.value)} type="text" value={audio_name} placeholder=" " />
                             <label className={(error.audio_name && 'label-error')}>{error.audio_name ? error.audio_name : intl.formatMessage({ id: "audioModal.audio_name" })}</label>
@@ -150,7 +187,17 @@ const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData
                                 }
                             </label>
                         </div>
-                        : "Under construction"
+                        :
+                        <div className="form-group mt-6 mb-4">
+                            <AiOutlineFile />
+                            <select defaultValue={''} onChange={e => setSelectedAudioId(e.target.value)}>
+                                <option value='' selected>{intl.formatMessage({ id: "choose_file" })}</option>
+                                {audios.map(audio => (
+                                    <option key={audio.file_id} value={audio.file_id}>{audio.file_name}</option>
+                                ))}
+                            </select>
+                            <label className={(error.selected_audio_id && 'label-error')}>{error.selected_audio_id ? error.selected_audio_id : intl.formatMessage({ id: "selected_file" })}</label>
+                        </div>
                     }
 
                     <button className="btn btn-primary mt-4" type="submit"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "done" })}</span></button>

@@ -229,6 +229,8 @@
     "uploading_a_new_file": "Загрузка нового файла",
     "uploading_file": "Идет загрузка файла...",
     "upload_from_media": "Выбрать из ранее загруженных",
+    "deleting_a_file": "Удаление файла",
+    "file_delete_confirm": "Вы действительно хотите удалить данный файл? Все связанное с ним будет также удалено.",
     "file_size": "Размер файла",
     "kilobyte": "КБ",
     "megabyte": "МБ",
@@ -238,6 +240,7 @@
     "increase_the_space": "Увеличить место",
     "choose_file": "Выберите файл",
     "file_search_filter": "Фильтр поиска файлов",
+    "close": "Закрыть",
 
     "show_as_a_list": "Показать списком",
     "show_as_a_table": "Показать таблицей",

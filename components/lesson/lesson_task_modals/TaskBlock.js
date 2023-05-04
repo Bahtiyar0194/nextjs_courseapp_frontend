@@ -49,7 +49,7 @@ const TaskBlock = ({ task_block, index, edit }) => {
     }
 
     return (
-        <div id={'block_' + task_block.block_id} className={"lesson-block " + (edit === true ? "edit " : " ") + (task_block.file_type_id == 4 ? task_block.image_width : "col-span-12")}>
+        <div id={'block_' + task_block.block_id} className={"lesson-block " + (edit === true ? "edit " : " ") + (task_block.file_type_id == 3 ? task_block.image_width : "col-span-12")}>
             {edit === true &&
                 <RoleProvider roles={[2]}>
                     <div className="flex justify-between items-center border-b-active pb-4 mb-4">
@@ -61,9 +61,8 @@ const TaskBlock = ({ task_block, index, edit }) => {
 
                             {/* Если это файлы */}
                             {task_block.file_type_id == 1 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {task_block.file_name}</p>}
-                            {task_block.file_type_id == 2 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {task_block.file_name}</p>}
-                            {task_block.file_type_id == 3 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "audioModal.audio" })}:</span> {task_block.file_name}</p>}
-                            {task_block.file_type_id == 4 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "imageModal.image" })}:</span> {task_block.file_name}</p>}
+                            {task_block.file_type_id == 2 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "audioModal.audio" })}:</span> {task_block.file_name}</p>}
+                            {task_block.file_type_id == 3 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "imageModal.image" })}:</span> {task_block.file_name}</p>}
                         </div>
                         <div className='btn-wrap'>
                             {index > 0 && <button title={intl.formatMessage({ id: "move_up" })} onClick={e => moveTaskBlock(index, 'up', task_block.block_id)} className="btn-up"><AiOutlineArrowUp /></button>}
@@ -81,14 +80,10 @@ const TaskBlock = ({ task_block, index, edit }) => {
             }
 
             {task_block.file_type_id == 2 &&
-                <iframe width="100%" height="100%" src={task_block.file_target}></iframe>
-            }
-
-            {task_block.file_type_id == 3 &&
                 <ReactAudioPlayer width="100%" src={API_URL + '/media/audio/' + task_block.file_id} controls />
             }
 
-            {task_block.file_type_id == 4 &&
+            {task_block.file_type_id == 3 &&
                 <img src={API_URL + '/media/image/' + task_block.file_id} />
             }
 

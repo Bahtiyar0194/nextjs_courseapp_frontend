@@ -229,6 +229,8 @@
     "uploading_a_new_file": "Upload a new file",
     "uploading_file": "File is uploading",
     "upload_from_media": "Select from previously uploaded",
+    "deleting_a_file": "Deleting a file",
+    "file_delete_confirm": "Do you really want to delete this file? Everything related to it will also be deleted.",
     "file_size": "File size",
     "kilobyte": "KB",
     "megabyte": "MB",
@@ -238,6 +240,7 @@
     "increase_the_space": "Increase the space",
     "choose_file": "Choose file",
     "file_search_filter": "File search filter",
+    "close": "Close",
 
     "show_as_a_list": "Show as a list",
     "show_as_a_table": "Show as a table",

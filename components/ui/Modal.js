@@ -1,5 +1,8 @@
 import { MdOutlineClose } from "react-icons/md";
+import { useIntl } from "react-intl";
 const Modal = ({ show, onClose, modal_title, modal_size, children }) => {
+    const intl = useIntl();
+
     const closeModal = (e) => {
         e.preventDefault();
         onClose();
@@ -10,7 +13,7 @@ const Modal = ({ show, onClose, modal_title, modal_size, children }) => {
             <div className={'modal ' + modal_size}>
                 <div className="modal-header">
                     <h3 className="mb-0">{modal_title}</h3>
-                    <span onClick={closeModal} className="modal-close-button"><MdOutlineClose/></span>
+                    <span title={intl.formatMessage({ id: "close" })} onClick={closeModal} className="modal-close-button"><MdOutlineClose/></span>
                 </div>
                 {children}
             </div>

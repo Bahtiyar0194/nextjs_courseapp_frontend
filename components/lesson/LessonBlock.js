@@ -49,7 +49,7 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
     }
 
     return (
-        <div id={'block_' + lesson_block.block_id} className={"lesson-block " + (edit === true ? "edit " : " ") + (lesson_block.file_type_id == 4 ? lesson_block.image_width : "col-span-12")}>
+        <div id={'block_' + lesson_block.block_id} className={"lesson-block " + (edit === true ? "edit " : " ") + (lesson_block.file_type_id == 3 ? lesson_block.image_width : "col-span-12")}>
             {edit === true &&
                 <RoleProvider roles={[2]}>
                     <div className="flex justify-between items-center border-b-active pb-4 mb-4">
@@ -61,9 +61,8 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
 
                             {/* Если это файлы */}
                             {lesson_block.file_type_id == 1 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
-                            {lesson_block.file_type_id == 2 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "videoModal.video" })}:</span> {lesson_block.file_name}</p>}
-                            {lesson_block.file_type_id == 3 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "audioModal.audio" })}:</span> {lesson_block.file_name}</p>}
-                            {lesson_block.file_type_id == 4 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "imageModal.image" })}:</span> {lesson_block.file_name}</p>}
+                            {lesson_block.file_type_id == 2 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "audioModal.audio" })}:</span> {lesson_block.file_name}</p>}
+                            {lesson_block.file_type_id == 3 && <p className='mb-0'><span className='text-corp'>{intl.formatMessage({ id: "imageModal.image" })}:</span> {lesson_block.file_name}</p>}
                         </div>
                         <div className='btn-wrap'>
                             {index > 0 && <button title={intl.formatMessage({ id: "move_up" })} onClick={e => moveLessonBlock(index, 'up', lesson_block.block_id)} className="btn-up"><AiOutlineArrowUp /></button>}
@@ -81,14 +80,10 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
             }
 
             {lesson_block.file_type_id == 2 &&
-                <iframe width="100%" height="100%" src={lesson_block.file_target}></iframe>
-            }
-
-            {lesson_block.file_type_id == 3 &&
                 <ReactAudioPlayer width="100%" src={API_URL + '/media/audio/' + lesson_block.file_id} controls />
             }
 
-            {lesson_block.file_type_id == 4 &&
+            {lesson_block.file_type_id == 3 &&
                 <img src={API_URL + '/media/image/' + lesson_block.file_id} />
             }
 

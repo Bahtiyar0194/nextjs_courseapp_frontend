@@ -751,6 +751,10 @@ select option {
     @apply pointer-events-none;
 }
 
+.btn-group{
+    @apply w-fit;
+}
+
 .btn-wrap{
     @apply flex gap-2 flex-wrap;
 }
@@ -1000,6 +1004,10 @@ select option {
     background-color: rgb(0 0 0 / 50%);
 }
 
+.dark .modal-backdrop{
+    background-color: rgb(0 0 0 / 85%);
+}
+
 .modal-backdrop.show{
     @apply opacity-100 pointer-events-auto;
 }
@@ -1059,7 +1067,7 @@ select option {
 }
 
 .modal-close-button{
-    @apply absolute right-4 top-4 text-xl cursor-pointer text-inactive;
+    @apply absolute right-4 top-4 text-2xl cursor-pointer text-inactive;
 }
 
 .full-overlay {

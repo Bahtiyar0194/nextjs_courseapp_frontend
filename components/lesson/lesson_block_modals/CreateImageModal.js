@@ -26,6 +26,39 @@ const CreateImageModal = ({ create_lesson, create_task, upload_file, getDiskData
     const [image_type, setImageType] = useState('image_file');
     const [image_width, setImageWidth] = useState('col-span-12');
     const [image_file, setImageFile] = useState('');
+    const [images, setImages] = useState([]);
+    const [selected_image_id, setSelectedImageId] = useState('');
+
+    const changeImageType = (image_type) => {
+        setImageType(image_type);
+
+        if (image_type === 'image_from_media') {
+            getImages();
+        }
+    }
+
+    const getImages = async () => {
+        setLoader(true);
+        await axios.get('media/get_images')
+            .then(response => {
+                setImages(response.data);
+                setLoader(false);
+            }).catch(err => {
+                if (err.response) {
+                    router.push({
+                        pathname: '/error',
+                        query: {
+                            status: err.response.status,
+                            message: err.response.data.message,
+                            url: err.request.responseURL,
+                        }
+                    });
+                }
+                else {
+                    router.push('/error');
+                }
+            });
+    }
 
     const createImageSubmit = async (e) => {
         e.preventDefault();
@@ -33,7 +66,9 @@ const CreateImageModal = ({ create_lesson, create_task, upload_file, getDiskData
 
         const form_data = new FormData();
         form_data.append('image_name', image_name);
+        form_data.append('image_type', image_type);
         form_data.append('image_file', image_file);
+        form_data.append('selected_image_id', selected_image_id);
         form_data.append('operation_type_id', 9);
 
         const config = {
@@ -73,15 +108,19 @@ const CreateImageModal = ({ create_lesson, create_task, upload_file, getDiskData
                     dispatch(setTaskBlocks(task_blocks));
                 }
 
-                if(upload_file === true){
+                if (upload_file === true) {
                     getDiskData();
                 }
 
                 setLoader(false);
                 setImageName('');
+                setImageType('image_file');
                 setImageFile('');
+                setSelectedImageId('');
+                setError([]);
                 closeModal();
             }).catch(err => {
+                console.log(err)
                 if (err.response) {
                     if (err.response.status == 422) {
                         setError(err.response.data.data);
@@ -113,29 +152,31 @@ const CreateImageModal = ({ create_lesson, create_task, upload_file, getDiskData
                         <>
                             <div className="mt-4">
                                 <label className="custom-radio">
-                                    <input type="radio" onChange={e => setImageType('image_file')} defaultChecked name="image_type" />
+                                    <input type="radio" onChange={e => changeImageType('image_file')} checked={image_type === 'image_file'} name="image_type" />
                                     <span>{intl.formatMessage({ id: "imageModal.form.upload_new_image" })}</span>
                                 </label>
                             </div>
 
                             <div className="mt-2">
                                 <label className="custom-radio">
-                                    <input type="radio" onChange={e => setImageType('image_from_media')} name="image_type" />
+                                    <input type="radio" onChange={e => changeImageType('image_from_media')} checked={image_type === 'image_from_media'} name="image_type" />
                                     <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
                                 </label>
                             </div>
                         </>
                     }
 
-                    <div className="form-group mt-4">
-                        <AiOutlineFile />
-                        <input onInput={e => setImageName(e.target.value)} type="text" value={image_name} placeholder=" " />
-                        <label className={(error.image_name && 'label-error')}>{error.image_name ? error.image_name : intl.formatMessage({ id: "imageModal.image_name" })}</label>
-                    </div>
+                    {image_type != 'image_from_media' &&
+                        <div className="form-group mt-4">
+                            <AiOutlineFile />
+                            <input onInput={e => setImageName(e.target.value)} type="text" value={image_name} placeholder=" " />
+                            <label className={(error.image_name && 'label-error')}>{error.image_name ? error.image_name : intl.formatMessage({ id: "imageModal.image_name" })}</label>
+                        </div>
+                    }
 
-                    <p className="text-inactive">{intl.formatMessage({ id: "imageModal.image_width" })}</p>
+                    <p className="text-inactive mt-4">{intl.formatMessage({ id: "imageModal.image_width" })}</p>
 
-                    <div className="btn-wrap-lg mb-4">
+                    <div className="flex gap-x-4 mb-4">
                         <label className="custom-radio">
                             <input type="radio" onChange={e => setImageWidth('col-span-12')} defaultChecked name="image_width" />
                             <span>100%</span>
@@ -175,9 +216,18 @@ const CreateImageModal = ({ create_lesson, create_task, upload_file, getDiskData
                                 }
                             </label>
                         </div>
-                        : "Under construction"
+                        :
+                        <div className="form-group mt-6 mb-4">
+                            <AiOutlineFile />
+                            <select defaultValue={''} onChange={e => setSelectedImageId(e.target.value)}>
+                                <option value='' selected>{intl.formatMessage({ id: "choose_file" })}</option>
+                                {images.map(image => (
+                                    <option key={image.file_id} value={image.file_id}>{image.file_name}</option>
+                                ))}
+                            </select>
+                            <label className={(error.selected_image_id && 'label-error')}>{error.selected_image_id ? error.selected_image_id : intl.formatMessage({ id: "selected_file" })}</label>
+                        </div>
                     }
-
 
                     <button className="btn btn-primary mt-4" type="submit"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "done" })}</span></button>
                 </form>
