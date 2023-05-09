@@ -162,43 +162,43 @@
 }
 
 .border-active{
-    @apply border border-gray-200 dark:border-dark-200;
+    @apply border border-gray-300 dark:border-dark-200;
 }
 
 .border-t-active{
-    @apply border-t border-gray-200 dark:border-dark-200;
+    @apply border-t border-gray-300 dark:border-dark-200;
 }
 
 .border-r-active{
-    @apply border-r border-gray-200 dark:border-dark-200;
+    @apply border-r border-gray-300 dark:border-dark-200;
 }
 
 .border-b-active{
-    @apply border-b border-gray-200 dark:border-dark-200;
+    @apply border-b border-gray-300 dark:border-dark-200;
 }
 
 .border-l-active{
-    @apply border-l border-gray-200 dark:border-dark-200;
+    @apply border-l border-gray-300 dark:border-dark-200;
 }
 
 .border-inactive{
-    @apply border border-gray-400 dark:border-dark-200;
+    @apply border border-gray-500 dark:border-dark-200;
 }
 
 .border-t-inactive{
-    @apply border-t border-gray-400 dark:border-dark-200;
+    @apply border-t border-gray-500 dark:border-dark-200;
 }
 
 .border-r-inactive{
-    @apply border-r border-gray-400 dark:border-dark-200;
+    @apply border-r border-gray-500 dark:border-dark-200;
 }
 
 .border-b-inactive{
-    @apply border-b border-gray-400 dark:border-dark-200;
+    @apply border-b border-gray-500 dark:border-dark-200;
 }
 
 .border-l-inactive{
-    @apply border-l border-gray-400 dark:border-dark-200;
+    @apply border-l border-gray-500 dark:border-dark-200;
 }
 
 .border-corp{
@@ -480,7 +480,7 @@ select option {
 }
 
 .custom-grid{
-    @apply grid grid-cols-12 gap-4;
+    @apply grid grid-cols-12 gap-6;
 }
 
 .form-group {
@@ -528,7 +528,7 @@ select option {
 .form-group-border > input, 
 .form-group-border > select, 
 .form-group-border > textarea {
-    @apply border border-corp rounded-lg bg-transparent w-full text-active py-2 pl-8 pr-2.5;
+    @apply border border-corp rounded-lg bg-transparent w-full text-active py-2 pl-9 pr-2.5;
 }
 
 .form-group-border.active > input,
@@ -538,11 +538,15 @@ select option {
 }
 
 .form-group-border > label {
-    @apply absolute left-8 top-2 pointer-events-none duration-200 z-0 bg-inherit text-inactive;
+    @apply absolute left-9 top-2 pointer-events-none duration-200 z-0 bg-inherit text-inactive;
 }
 
 .form-group-border > label.label-error{
     @apply text-danger -top-2.5 text-xs left-2 bg-active px-1;
+}
+
+.form-group-border.label-inactive > label.label-error{
+    @apply bg-inactive;
 }
 
 .form-group-border > input:focus ~ label,
@@ -553,6 +557,16 @@ select option {
 .form-group-border > textarea:not(:placeholder-shown) ~ label
 {
     @apply -top-2.5 text-xs left-2 text-inactive bg-active px-1;
+}
+
+.form-group-border.label-inactive > input:focus ~ label,
+.form-group-border.label-inactive > input:not(:placeholder-shown) ~ label,
+.form-group-border.label-inactive > select:focus ~ label,
+.form-group-border.label-inactive > select:not(:placeholder-shown) ~ label,
+.form-group-border.label-inactive > textarea:focus ~ label,
+.form-group-border.label-inactive > textarea:not(:placeholder-shown) ~ label
+{
+    @apply bg-inactive;
 }
 
 .form-group-border > input:focus ~ label.label-error,
@@ -578,7 +592,7 @@ select option {
 }
 
 .form-group-border > svg{
-    @apply absolute text-xl top-2.5 left-2 text-inactive;
+    @apply absolute text-xl top-2.5 left-2.5 text-inactive;
 }
 
 .form-group .show-password{
@@ -887,15 +901,19 @@ select option {
 }
 
 .badge{
-    @apply text-xs font-medium px-2 py-1 rounded-lg mr-2 inline-block ;
+    @apply font-medium px-2 py-1 rounded-xl;
+}
+
+.badge.badge-sm{
+    @apply text-xs px-1.5 py-0.5 rounded-lg;
+}
+
+.badge.badge-lg{
+    @apply text-lg px-2.5 py-1.5 rounded-2xl;
 }
 
 .badge > svg{
     @apply inline text-lg;
-}
-
-.badge-lg{
-    @apply text-base px-3 py-2 rounded-lg;
 }
 
 .badge-light{
@@ -908,10 +926,6 @@ select option {
 
 .badge-outline-primary{
     @apply border-corp border text-corp;
-}
-
-.badge-success{
-    @apply bg-blue-200 text-accent-300 border border-accent-300 dark:bg-transparent;
 }
 
 .alert{
@@ -957,6 +971,54 @@ select option {
 
 .card-bg{
     @apply bg-cover bg-center bg-no-repeat;
+}
+
+.tag-wrap{
+    @apply bg-active rounded-lg border-active flex flex-wrap gap-2;
+}
+
+.tag-wrap.inactive{
+    @apply bg-inactive;
+}
+
+.tag-wrap ~ label{
+    @apply absolute -top-2.5 text-xs left-2 text-inactive bg-active px-1;
+}
+
+.tag-wrap.inactive ~ label{
+    @apply bg-inactive;
+}
+
+.tag-wrap ~ label.label-error{
+    @apply text-danger;
+}
+
+.tag{
+    @apply text-sm pr-1.5 pl-2 py-1 rounded-2xl flex items-center;
+}
+
+.tag.tag-sm{
+    @apply pr-1 pl-1.5 py-0.5 rounded-xl text-xs;
+}
+
+.tag.tag-lg{
+    @apply pr-2 pl-2.5 py-1.5 rounded-3xl text-base;
+}
+
+.tag > svg{
+    @apply inline text-lg;
+}
+
+.tag-light{
+    @apply border-active bg-inactive text-active;
+}
+
+.tag-primary{
+    @apply bg-corp text-white;
+}
+
+.tag-outline-primary{
+    @apply border-corp border text-corp;
 }
 
 .list-group{
@@ -1252,6 +1314,22 @@ select option {
     @apply bg-active border-active rounded-tl-none rounded-tr-none rounded-lg corp-font;
 }
 
+.quill ~ label{
+    @apply absolute -top-2.5 text-xs left-2 text-inactive bg-active px-1;
+}
+
+.quill.inactive ~ label{
+    @apply bg-inactive;
+}
+
+.quill ~ label.label-error{
+    @apply text-danger;
+}
+
+.quill.inactive > .ql-toolbar.ql-snow, .quill > .ql-container.ql-snow{
+    @apply bg-inactive
+}
+
 .ql-snow .ql-stroke {
     @apply stroke-active;
 }
@@ -1300,19 +1378,6 @@ select option {
 
 .ql-size-huge{
     @apply text-4xl;
-}
-
-.course-image{
-    @apply w-full bg-center bg-cover bg-no-repeat rounded-lg border-active overflow-hidden;
-}
-
-.course-image > div {
-    @apply p-4 pt-20 lg:p-6 lg:pt-40;
-    background: linear-gradient(0deg, #FFFFFF 40%, rgba(255,255,255,0) 100%);
-}
-
-.dark .course-image > div {
-    background: linear-gradient(0deg, #212121 40%, rgba(255,255,255,0) 100%);
 }
 
 .lesson-block.edit,

@@ -84,7 +84,7 @@ const LessonBlock = ({ lesson_block, index, edit }) => {
             }
 
             {lesson_block.file_type_id == 3 &&
-                <img src={API_URL + '/media/image/' + lesson_block.file_id} />
+                <img className='w-full' src={API_URL + '/media/image/' + lesson_block.file_id} />
             }
 
             {lesson_block.block_type_id == 5 && parse(lesson_block.content)}

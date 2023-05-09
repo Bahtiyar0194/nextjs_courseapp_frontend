@@ -396,8 +396,8 @@ export default function Files() {
                             <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
                         :
                         <div className="p-6 bg-active border-active rounded-lg flex items-center flex-col">
-                            <h3 className="text-center mb-2">Добро пожаловать в хранилище файлов!</h3>
-                            <p className="text-center mb-4">Загружайте изображения, видео и аудиоматериалы для использования их в Ваших уроках или заданиях.</p>
+                            <h3 className="text-center mb-2">{intl.formatMessage({ id: "page.disk.welcome" })}</h3>
+                            <p className="text-center mb-4">{intl.formatMessage({ id: "page.disk.welcome_description" })}</p>
                             <UploadFileModals getDiskData={getDiskData} />
                         </div>
                     }

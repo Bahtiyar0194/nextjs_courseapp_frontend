@@ -174,9 +174,25 @@ const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData
                         ?
                         <div className="form-group-file mt-2 mb-4">
                             <input id="audio_file" onChange={e => setAudioFile(e.target.files[0])} type="file" accept="audio/*" placeholder=" " />
-                            <label htmlFor="audio_file" className={(error.audio_file && 'label-error')}>
+                            <label htmlFor="audio_file" className={(error.audio_file && 'label-error' || error.lack_of_disk_space && 'label-error')}>
                                 <AiOutlineAudio />
-                                <p className="mb-1">{error.audio_file ? error.audio_file : audio_file ? intl.formatMessage({ id: "file_ready_to_upload" }) : intl.formatMessage({ id: "audioModal.form.upload_audio_file" })}</p>
+                                <p className="mb-1">
+                                    {
+                                        error.audio_file
+                                            ?
+                                            error.audio_file
+                                            :
+                                            error.lack_of_disk_space
+                                                ?
+                                                intl.formatMessage({ id: "lack_of_disk_space" })
+                                                :
+                                                audio_file
+                                                    ?
+                                                    intl.formatMessage({ id: "file_ready_to_upload" })
+                                                    :
+                                                    intl.formatMessage({ id: "audioModal.form.upload_audio_file" })
+                                    }
+                                </p>
                                 {audio_file ?
                                     <div>
                                         {audio_file.name && <p className="text-xs mb-0">{intl.formatMessage({ id: "selected_file" })}: <b>{audio_file.name}</b></p>}

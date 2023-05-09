@@ -203,9 +203,25 @@ const CreateImageModal = ({ create_lesson, create_task, upload_file, getDiskData
                         ?
                         <div className="form-group-file mt-2 mb-4">
                             <input id="image_file" onChange={e => setImageFile(e.target.files[0])} type="file" accept="image/*" placeholder=" " />
-                            <label htmlFor="image_file" className={(error.image_file && 'label-error')}>
+                            <label htmlFor="image_file" className={(error.image_file && 'label-error' || error.lack_of_disk_space && 'label-error')}>
                                 <AiOutlineFileImage />
-                                <p className="mb-1">{error.image_file ? error.image_file : image_file ? intl.formatMessage({ id: "file_ready_to_upload" }) : intl.formatMessage({ id: "imageModal.form.upload_image_file" })}</p>
+                                <p>
+                                    {
+                                        error.image_file
+                                            ?
+                                            error.image_file
+                                            :
+                                            error.lack_of_disk_space
+                                                ?
+                                                intl.formatMessage({ id: "lack_of_disk_space" })
+                                                :
+                                                image_file
+                                                    ?
+                                                    intl.formatMessage({ id: "file_ready_to_upload" })
+                                                    :
+                                                    intl.formatMessage({ id: "imageModal.form.upload_image_file" })
+                                    }
+                                </p>
                                 {image_file ?
                                     <div>
                                         {image_file.name && <p className="text-xs mb-0">{intl.formatMessage({ id: "selected_file" })}: <b>{image_file.name}</b></p>}

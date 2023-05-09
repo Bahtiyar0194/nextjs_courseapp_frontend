@@ -177,9 +177,25 @@ const CreateVideoModal = ({ create_lesson, create_task, upload_file, getDiskData
                             ?
                             <div className="form-group-file mt-2 mb-4">
                                 <input id="video_file" onChange={e => setVideoFile(e.target.files[0])} type="file" accept="video/*" placeholder=" " />
-                                <label htmlFor="video_file" className={(error.video_file && 'label-error')}>
+                                <label htmlFor="video_file" className={(error.video_file && 'label-error' || error.lack_of_disk_space && 'label-error')}>
                                     <AiOutlinePlayCircle />
-                                    <p className="mb-1">{error.video_file ? error.video_file : video_file ? intl.formatMessage({ id: "file_ready_to_upload" }) : intl.formatMessage({ id: "videoModal.form.upload_video_file" })}</p>
+                                    <p>
+                                        {
+                                            error.video_file
+                                                ?
+                                                error.video_file
+                                                :
+                                                error.lack_of_disk_space
+                                                    ?
+                                                    intl.formatMessage({ id: "lack_of_disk_space" })
+                                                    :
+                                                    video_file
+                                                        ?
+                                                        intl.formatMessage({ id: "file_ready_to_upload" })
+                                                        :
+                                                        intl.formatMessage({ id: "videoModal.form.upload_video_file" })
+                                        }
+                                    </p>
                                     {video_file ?
                                         <div>
                                             {video_file.name && <p className="text-xs mb-0">{intl.formatMessage({ id: "selected_file" })}: <b>{video_file.name}</b></p>}
