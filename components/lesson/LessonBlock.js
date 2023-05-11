@@ -1,8 +1,8 @@
 import API_URL from '../../config/api';
 import { Player } from 'video-react';
+import "../../node_modules/video-react/dist/video-react.css";
 import ReactAudioPlayer from 'react-audio-player';
 import parse from 'html-react-parser';
-import "../../node_modules/video-react/dist/video-react.css";
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { setLessonBlocks } from '../../store/slices/lessonBlocksSlice';

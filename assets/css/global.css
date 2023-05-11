@@ -463,6 +463,46 @@ textarea:focus {
     @apply overflow-hidden rounded-lg;
 }
 
+.video-react .video-react-poster{
+    background-size: cover !important;
+}
+
+.video-react-poster::before{
+    @apply absolute top-0 right-0 bottom-0 left-0;
+    background-color: rgba(43, 51, 63, 0.7);
+    content: "";
+}
+
+.video-react-poster::after{
+    @apply absolute top-1/2 right-0 bottom-0 left-0 flex justify-center items-center font-medium text-base text-center;
+}
+
+.video-react.kk .video-react-poster::after{
+    content: "Курстың трейлерін көру";
+}
+
+.video-react.ru .video-react-poster::after{
+    content: "Посмотреть трейлер курса";
+}
+
+.video-react.en .video-react-poster::after{
+    content: "Watch the course trailer";
+}
+
+.video-react .video-react-big-play-button{
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    left: calc(50% + 20px) !important;
+}
+
+.video-react .video-react-big-play-button::before{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
 .react-audio-player{
     @apply w-full;
 } 
@@ -620,9 +660,10 @@ select option {
 }
 
 .custom-radio > input, 
+.rating-radio > input,
 .custom-radio-checkbox > input, 
-.custom-checkbox > input {
-    @apply absolute -z-10 opacity-0
+.custom-checkbox > input, {
+    @apply absolute -z-10 opacity-0;
 }
   
 .custom-radio > span, 
@@ -678,6 +719,14 @@ select option {
 .custom-radio > input:checked + span::before {
     @apply border-corp bg-corp;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+.rating-radio{
+    @apply cursor-pointer;
+}
+
+.rating-radio > svg{
+    @apply text-2xl text-yellow-500;
 }
 
 .dark .custom-radio > input:checked + span::before {
@@ -900,16 +949,20 @@ select option {
     @apply -top-2.5 text-xs left-2 text-inactive bg-inactive px-1.5;
 }
 
+.badge-wrap{
+    @apply flex flex-wrap gap-2;
+}
+
 .badge{
-    @apply font-medium px-2 py-1 rounded-xl;
+    @apply text-sm px-2 py-1 rounded-lg max-w-full break-all;
 }
 
 .badge.badge-sm{
-    @apply text-xs px-1.5 py-0.5 rounded-lg;
+    @apply text-xs px-1.5 py-0.5 rounded-sm;
 }
 
 .badge.badge-lg{
-    @apply text-lg px-2.5 py-1.5 rounded-2xl;
+    @apply text-base px-2.5 py-1.5 rounded-xl;
 }
 
 .badge > svg{
@@ -917,7 +970,7 @@ select option {
 }
 
 .badge-light{
-    @apply border-active bg-inactive text-inactive;
+    @apply border-active bg-active text-active;
 }
 
 .badge-primary{
@@ -994,15 +1047,15 @@ select option {
 }
 
 .tag{
-    @apply text-sm pr-1.5 pl-2 py-1 rounded-2xl flex items-center;
+    @apply text-sm pr-1.5 pl-2 py-1 rounded-lg flex items-center max-w-full break-all;
 }
 
 .tag.tag-sm{
-    @apply pr-1 pl-1.5 py-0.5 rounded-xl text-xs;
+    @apply text-xs pr-1 pl-1.5 py-0.5 rounded-sm;
 }
 
 .tag.tag-lg{
-    @apply pr-2 pl-2.5 py-1.5 rounded-3xl text-base;
+    @apply text-base pr-2 pl-2.5 py-1.5 rounded-xl;
 }
 
 .tag > svg{
@@ -1010,7 +1063,7 @@ select option {
 }
 
 .tag-light{
-    @apply border-active bg-inactive text-active;
+    @apply border-active bg-active text-active;
 }
 
 .tag-primary{
@@ -1378,6 +1431,26 @@ select option {
 
 .ql-size-huge{
     @apply text-4xl;
+}
+
+.course-content{
+    @apply h-full duration-500 relative overflow-y-hidden;
+}
+
+.course-content.hide{
+    @apply h-32;
+}
+
+.course-content.hide::after{
+    @apply absolute bottom-0 left-0 right-0 w-full h-full;
+    content: "";
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(249,250,251,1) 0%, rgba(255,255,255,0) 100%);
+}
+
+.dark .course-content.hide::after{
+    background: rgb(20,20,20);
+    background: linear-gradient(0deg, rgba(20,20,20,1) 0%, rgba(255,255,255,0) 100%);
 }
 
 .lesson-block.edit,

@@ -73,15 +73,16 @@ export default function CourseCatalogue() {
                             <div key={course.course_id} className="col-span-12 sm:col-span-6 lg:col-span-3">
                                 <Link href={'/dashboard/courses/' + course.course_id}>
                                     <div className="card">
-                                        <div className="card-bg h-40 p-4" style={{ backgroundImage: `url('${API_URL + '/courses/images/posters/' + course.course_poster_file}')` }}>
-                                        </div>
+                                        <img className="w-full" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />
                                         <div className="p-4">
                                             <h4 className="mb-2 text-active">
                                                 {course.course_name}
                                             </h4>
                                             <p className="text-sm text-inactive">{course.course_description.substring(0, 100) + '...'}</p>
-                                            <span className="badge badge-outline-primary"> {course.course_category_name}</span>
-                                            <span className="badge badge-light"> {course.lang_name}</span>
+                                            <div className="badge-wrap">
+                                                <div className="badge badge-outline-primary"> {course.course_category_name}</div>
+                                                <div className="badge badge-light"> {course.lang_name}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </Link>

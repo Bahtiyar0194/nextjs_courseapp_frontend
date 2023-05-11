@@ -68,7 +68,7 @@ export default function MyCourses() {
                     </div>
                     {
                         contentViewType === 'grid' ? courses?.map(course => (
-                            <div key={course.course_id} className="col-span-12 sm:col-span-6 lg:col-span-4">
+                            <div key={course.course_id} className="col-span-12 sm:col-span-6 lg:col-span-3">
                                 <Link href={'/dashboard/courses/' + course.course_id}>
                                     <div className="card">
                                         <img className="w-full" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />
@@ -76,9 +76,11 @@ export default function MyCourses() {
                                             <h4 className="mb-2 text-active">
                                                 {course.course_name}
                                             </h4>
-                                            <p className="text-sm text-inactive">{course.course_description.substring(0, 200) + '...'}</p>
-                                            <span className="badge badge-outline-primary"> {course.course_category_name}</span>
-                                            <span className="badge badge-light"> {course.lang_name}</span>
+                                            <p className="text-sm text-inactive">{course.course_description.substring(0, 100) + '...'}</p>
+                                            <div className="badge-wrap">
+                                                <div className="badge badge-outline-primary"> {course.course_category_name}</div>
+                                                <div className="badge badge-light"> {course.lang_name}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </Link>

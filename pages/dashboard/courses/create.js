@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { AiOutlineRead, AiOutlineCheck, AiOutlineFlag, AiOutlinePicture, AiOutlinePercentage, AiOutlineVideoCamera, AiOutlineRise, AiOutlineUser, } from "react-icons/ai";
+import { AiOutlineRead, AiOutlineCheck, AiOutlineFlag, AiOutlinePicture, AiOutlinePercentage, AiOutlineVideoCamera, AiOutlineRise, AiOutlineUser, AiOutlineDollar, } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
@@ -29,6 +29,8 @@ export default function CreateCourse() {
 
     const [course_attributes, setCourseAttributes] = useState([]);
     const [course_skills, setCourseSkills] = useState([]);
+    const [course_suitables, setCourseSuitables] = useState([]);
+    const [course_requirements, setCourseRequirements] = useState([]);
     const [course_poster, setCoursePoster] = useState('');
     const [course_trailer, setCourseTrailer] = useState('');
     const [course_free, setCourseFree] = useState(false);
@@ -85,6 +87,8 @@ export default function CreateCourse() {
         form_data.append('course_cost', document.querySelector('input[name="course_cost"]').value);
         form_data.append('course_free', course_free);
         form_data.append('course_skills', JSON.stringify(course_skills));
+        form_data.append('course_suitables', JSON.stringify(course_suitables));
+        form_data.append('course_requirements', JSON.stringify(course_requirements));
         form_data.append('operation_type_id', 3);
 
         await axios.post('courses/create', form_data)
@@ -176,7 +180,7 @@ export default function CreateCourse() {
                                     <label className={(error.course_content && 'label-error')}>{error.course_content ? error.course_content : intl.formatMessage({ id: "page.my_courses.form.course_content" })}</label>
                                 </div>
                             </div>
-                            <div className="col-span-12 lg:col-span-6">
+                            <div className="col-span-12 lg:col-span-3">
                                 <div className="form-group-border active label-inactive">
                                     <AiOutlineRead />
                                     <select name="course_category_id" defaultValue={''} >
@@ -190,7 +194,7 @@ export default function CreateCourse() {
                                     <label className={(error.course_category_id && 'label-error')}>{error.course_category_id ? error.course_category_id : intl.formatMessage({ id: "page.my_courses.form.course_category" })}</label>
                                 </div>
                             </div>
-                            <div className="col-span-12 lg:col-span-6">
+                            <div className="col-span-12 lg:col-span-3">
                                 <div className="form-group-border active label-inactive">
                                     <AiOutlineFlag />
                                     <select name="course_lang_id" defaultValue={''} >
@@ -204,7 +208,7 @@ export default function CreateCourse() {
                                     <label className={(error.course_lang_id && 'label-error')}>{error.course_lang_id ? error.course_lang_id : intl.formatMessage({ id: "page.my_courses.form.course_language" })}</label>
                                 </div>
                             </div>
-                            <div className="col-span-12 lg:col-span-6">
+                            <div className="col-span-12 lg:col-span-3">
                                 <div className="form-group-border active label-inactive">
                                     <AiOutlineRise />
                                     <select name="level_type_id" defaultValue={''} >
@@ -218,7 +222,7 @@ export default function CreateCourse() {
                                     <label className={(error.level_type_id && 'label-error')}>{error.level_type_id ? error.level_type_id : intl.formatMessage({ id: "page.my_courses.form.course_level" })}</label>
                                 </div>
                             </div>
-                            <div className="col-span-12 lg:col-span-6">
+                            <div className="col-span-12 lg:col-span-3">
                                 <div className="form-group-border active label-inactive">
                                     <AiOutlineUser />
                                     <select name="author_id" defaultValue={''} >
@@ -232,8 +236,14 @@ export default function CreateCourse() {
                                     <label className={(error.author_id && 'label-error')}>{error.author_id ? error.author_id : intl.formatMessage({ id: "page.my_courses.form.course_author" })}</label>
                                 </div>
                             </div>
-                            <div className="col-span-12 relative">
-                                <AddTag items={course_skills} setItems={setCourseSkills} className={"inactive p-4"} tagClass={"tag-light"} intl={intl}/>
+                            <div className="col-span-12 lg:col-span-4 relative">
+                                <AddTag items={course_skills} setItems={setCourseSkills} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-skill-input"} label={"page.my_courses.form.what_skills_will_this_course_provide"}/>
+                            </div>
+                            <div className="col-span-12 lg:col-span-4 relative">
+                                <AddTag items={course_suitables} setItems={setCourseSuitables} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-suitable-input"} label={"page.my_courses.form.who_is_suitable_for_this_course"}/>
+                            </div>
+                            <div className="col-span-12 lg:col-span-4 relative">
+                                <AddTag items={course_requirements} setItems={setCourseRequirements} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-requirement-input"} label={"page.my_courses.form.what_are_the_requirements_of_this_course"}/>
                             </div>
                             <div className="col-span-12 lg:col-span-6">
                                 <div className="form-group-file">
@@ -273,9 +283,9 @@ export default function CreateCourse() {
                             <div className='col-span-12'>
                                 {!course_free &&
                                     <div className="form-group-border active label-inactive mb-4">
-                                        <AiOutlinePercentage />
+                                        <AiOutlineDollar/>
                                         <input name="course_cost" type="number" defaultValue={''} placeholder=" " />
-                                        <label className={(error.course_cost && 'label-error')}>{error.course_cost ? error.course_cost : intl.formatMessage({ id: "page.my_courses.form.course_cost" })} &#8376;</label>
+                                        <label className={(error.course_cost && 'label-error')}>{error.course_cost ? error.course_cost : intl.formatMessage({ id: "page.my_courses.form.course_cost" })}, &#8376;</label>
                                     </div>
                                 }
 
@@ -284,7 +294,7 @@ export default function CreateCourse() {
                                     <span>{intl.formatMessage({ id: "page.my_courses.form.free_course" })}</span>
                                 </label>
 
-                                <div className="btn-wrap mt-4">
+                                <div className="btn-wrap mt-6">
                                     <button disabled={button_loader} className="btn btn-outline-primary" type="submit">
                                         {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
                                         <span>{intl.formatMessage({ id: "done" })}</span>
