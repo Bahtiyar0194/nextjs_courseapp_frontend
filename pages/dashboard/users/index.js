@@ -78,7 +78,6 @@ export default function Users() {
                 setUsersLoader(false);
                 setShowFullLoader(false);
             }).catch(err => {
-                console.log(err)
                 if (err.response) {
                     router.push({
                         pathname: '/error',
@@ -201,7 +200,7 @@ export default function Users() {
                 </div>}
 
 
-                <div className={"col-span-12 " + (search_user_filter === true ? 'lg:col-span-9' : '')}>
+                <div className={"relative col-span-12 " + (search_user_filter === true ? 'lg:col-span-9' : '')}>
                     {users.data?.length > 0 ?
                         <>
                             <div className="relative">
@@ -243,7 +242,10 @@ export default function Users() {
                             <Pagination items={users} setItems={getUsers} />
                         </>
                         :
-                        <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
+                        <>
+                            {users_loader && <Loader className="overlay" />}
+                            <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
+                        </>
                     }
                 </div>
 

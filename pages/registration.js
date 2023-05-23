@@ -1,6 +1,7 @@
 import AuthLayout from "../components/layouts/AuthLayout";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import Loader from "../components/ui/Loader";
@@ -15,54 +16,22 @@ export default function Registration() {
     const intl = useIntl();
     const title = intl.formatMessage({ id: "page.registration.title" });
     const [loader, setLoader] = useState(false);
+    const [showFullLoader, setShowFullLoader] = useState(true);
     const [first_name, setFirstName] = useState('');
     const [last_name, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [school_name, setSchoolName] = useState('');
     const [school_domain, setSchoolDomain] = useState('');
-    const [first_registration, setFirstRegistration] = useState(true);
     const [password, setPassword] = useState('');
     const [error, setError] = useState([]);
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
-    const [school, setSchool] = useState([]);
+    const school = useSelector((state) => state.school.school_data);
 
     const redirectToLoginPage = () => {
         window.location.replace('http://' + school_domain + '.' + MAIN_DOMAIN + '/login');
     }
-
-    const getSchool = async () => {
-        setLoader(true)
-        await axios.get('school/get')
-            .then(response => {
-                setSchool(response.data);
-
-                if (response.data.school_domain) {
-                    setFirstRegistration(false);
-                }
-
-                setLoader(false);
-            }).catch(err => {
-                if (err.response) {
-                    router.push({
-                        pathname: '/error',
-                        query: {
-                            status: err.response.status,
-                            message: err.response.data.message,
-                            url: err.request.responseURL,
-                        }
-                    });
-                }
-                else {
-                    router.push('/error');
-                }
-            });
-    }
-
-    useEffect(() => {
-        getSchool();
-    }, []);
 
     const registerSubmit = async (e) => {
         e.preventDefault();
@@ -74,15 +43,20 @@ export default function Registration() {
         form_data.append('phone', phone);
         form_data.append('school_name', school_name);
         form_data.append('school_domain', school_domain);
-        form_data.append('first_registration', first_registration);
+        if (school.school_domain) {
+            form_data.append('first_registration', false);
+        }
+        else {
+            form_data.append('first_registration', true);
+        }
         form_data.append('password', password);
 
         await axios.post('auth/register', form_data)
             .then(response => {
-                if (first_registration === true) {
+                if (!school.school_domain) {
                     redirectToLoginPage();
                 }
-                else if (first_registration === false) {
+                else {
                     router.push('/login');
                 }
             }).catch(err => {
@@ -108,8 +82,16 @@ export default function Registration() {
             });
     }
 
+    useEffect(() => {
+        if (router.isReady) {
+            if (school) {
+                setShowFullLoader(false);
+            }
+        }
+    }, [router.isReady, school]);
+
     return (
-        <AuthLayout title={title} school_name={school.school_name}>
+        <AuthLayout showLoader={showFullLoader} title={title} school_name={school.school_name}>
             {loader && <Loader className="overlay" />}
             <form onSubmit={registerSubmit}>
                 {error.registration_failed && <p className="text-danger mb-4">{error.registration_failed}</p>}
@@ -125,7 +107,7 @@ export default function Registration() {
                 </div>
 
 
-                {first_registration === true &&
+                {!school.school_domain &&
                     <>
                         <div className="form-group">
                             <HiOutlineAcademicCap />
@@ -160,7 +142,7 @@ export default function Registration() {
                     <label className={(error.password && 'label-error')}>{error.password ? error.password : intl.formatMessage({ id: "page.registration.form.password" })}</label>
                     <div onClick={() => setShowPassword(!showPassword)}>{showPassword ? <AiOutlineEye className="show-password" /> : <AiOutlineEyeInvisible className="show-password" />}</div>
                 </div>
-                <p className="text-sm">{intl.formatMessage({ id: "page.registration.form.have_an_account" })} <Link href={'/login'}>{intl.formatMessage({ id: "page.login.title" })}</Link></p>
+                <p className="text-sm">{intl.formatMessage({ id: "page.registration.form.have_an_account" })} <Link className="text-corp" href={'/login'}>{intl.formatMessage({ id: "page.login.title" })}</Link></p>
 
                 <button className="btn btn-primary mt-4" type="submit"><FiUserPlus /> <span>{title}</span></button>
             </form>

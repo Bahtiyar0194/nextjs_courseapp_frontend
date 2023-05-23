@@ -2,6 +2,7 @@ import AuthLayout from "../../components/layouts/AuthLayout";
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Loader from "../../components/ui/Loader";
@@ -17,33 +18,10 @@ export default function Activation() {
     const title = intl.formatMessage({ id: "page.account_activation.title" });
     const [email_hash, setEmailHash] = useState('');
     const [loader, setLoader] = useState(false);
-    const [school, setSchool] = useState([]);
+    const school = useSelector((state) => state.school.school_data);
     const [user, setUser] = useState([]);
     const [error, setError] = useState([]);
     const [showPassword, setShowPassword] = useState(false);
-
-    const getSchool = async (hash) => {
-        setLoader(true);
-        await axios.get('school/get')
-            .then(response => {
-                setSchool(response.data);
-                getActivationUser(hash);
-            }).catch(err => {
-                if (err.response) {
-                    router.push({
-                        pathname: '/error',
-                        query: {
-                            status: err.response.status,
-                            message: err.response.data.message,
-                            url: err.request.responseURL,
-                        }
-                    });
-                }
-                else {
-                    router.push('/error');
-                }
-            });
-    }
 
     const getActivationUser = async (hash) => {
         await axios.get('auth/get_activation_user/' + hash)
@@ -104,7 +82,7 @@ export default function Activation() {
     useEffect(() => {
         if (router.isReady) {
             setEmailHash(router.query.hash);
-            getSchool(router.query.hash);
+            getActivationUser(router.query.hash);
         }
     }, [router.isReady]);
 

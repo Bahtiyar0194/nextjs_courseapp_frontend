@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { useRouter } from 'next/router';
 import { IntlProvider } from "react-intl";
 import { store } from '../store/store';
 import axios from "axios";
 import Cookies from 'js-cookie';
+import SchoolProvider from '../services/SchoolProvider';
 
 import API_URL from '../config/api';
 import { ThemeProvider } from 'next-themes';
@@ -28,35 +28,6 @@ export default function MyApp({ Component, pageProps }) {
     axios.defaults.baseURL = API_URL;
     axios.defaults.headers.common['Accept'] = 'application/json';
 
-    const getSchool = async () => {
-        await axios.get('school/get')
-            .then(response => {
-                if (response.data.school_name) {
-                    if (router.asPath === '/') {
-                        router.push('/login');
-                    }
-                }
-            }).catch(err => {
-                if (err.response) {
-                    router.push({
-                        pathname: '/error',
-                        query: {
-                            status: err.response.status,
-                            message: err.response.data.message,
-                            url: err.request.responseURL,
-                        }
-                    });
-                }
-                else {
-                    router.push('/error');
-                }
-            });
-    }
-
-    useEffect(() => {
-        getSchool();
-    }, []);
-
     const token = Cookies.get('token');
 
     if (token) {
@@ -75,9 +46,11 @@ export default function MyApp({ Component, pageProps }) {
     return (
         <IntlProvider locale={locale} messages={messages[locale]}>
             <Provider store={store}>
-                <ThemeProvider attribute="class">
-                    <Component {...pageProps} />
-                </ThemeProvider>
+                <SchoolProvider>
+                    <ThemeProvider attribute="class">
+                        <Component {...pageProps} />
+                    </ThemeProvider>
+                </SchoolProvider>
             </Provider>
         </IntlProvider>
     )

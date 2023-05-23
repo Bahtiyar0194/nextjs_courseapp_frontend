@@ -46,12 +46,12 @@ const CourseCard = ({ course, lessons, getCourse, getLessons, setSubscribersModa
                     <LoadingSpinner />
                 </Player>
                 :
-                <img className="w-full border-b-active" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />
+                <img className="w-full rounded-lg" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />
             }
             <div className="p-4">
-                <h4>{course.course_name}</h4>
+                <h4 className="max-md:hidden">{course.course_name}</h4>
                 <div className="flex flex-wrap gap-4">
-                    {course.course_trailer_file && <img className="h-16 border-active rounded-lg" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />}
+                    {course.course_trailer_file && <img className="h-20 mb-4 border-active rounded-lg" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />}
                     <div className="mb-4">
                         {course.course_cost > 0
                             ?

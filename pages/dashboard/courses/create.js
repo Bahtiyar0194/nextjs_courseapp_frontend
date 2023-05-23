@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { AiOutlineRead, AiOutlineCheck, AiOutlineFlag, AiOutlinePicture, AiOutlinePercentage, AiOutlineVideoCamera, AiOutlineRise, AiOutlineUser, AiOutlineDollar, } from "react-icons/ai";
+import { AiOutlineRead, AiOutlineCheck, AiOutlineFlag, AiOutlinePicture, AiOutlineVideoCamera, AiOutlineRise, AiOutlineUser, AiOutlineDollar, } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
@@ -12,6 +12,7 @@ import ButtonLoader from "../../../components/ui/ButtonLoader";
 import { scrollIntoView } from "seamless-scroll-polyfill";
 import RoleProvider from "../../../services/RoleProvider";
 import AddTag from '../../../components/ui/AddTag';
+import FileUploadButton from '../../../components/ui/FileUploadButton';
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
@@ -34,6 +35,7 @@ export default function CreateCourse() {
     const [course_poster, setCoursePoster] = useState('');
     const [course_trailer, setCourseTrailer] = useState('');
     const [course_free, setCourseFree] = useState(false);
+    const [text, setText] = useState('');
 
     const modules = {
         toolbar: [
@@ -68,8 +70,6 @@ export default function CreateCourse() {
         'indent'
     ];
 
-    const [text, setText] = useState('');
-
     const createCourseSubmit = async (e) => {
         e.preventDefault();
         setButtonLoader(true);
@@ -84,7 +84,9 @@ export default function CreateCourse() {
         form_data.append('author_id', document.querySelector('select[name="author_id"]').value);
         form_data.append('course_poster_file', course_poster);
         form_data.append('course_trailer_file', course_trailer);
-        form_data.append('course_cost', document.querySelector('input[name="course_cost"]').value);
+        if (course_free === false) {
+            form_data.append('course_cost', document.querySelector('input[name="course_cost"]').value);
+        }
         form_data.append('course_free', course_free);
         form_data.append('course_skills', JSON.stringify(course_skills));
         form_data.append('course_suitables', JSON.stringify(course_suitables));
@@ -237,53 +239,40 @@ export default function CreateCourse() {
                                 </div>
                             </div>
                             <div className="col-span-12 lg:col-span-4 relative">
-                                <AddTag items={course_skills} setItems={setCourseSkills} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-skill-input"} label={"page.my_courses.form.what_skills_will_this_course_provide"}/>
+                                <AddTag items={course_skills} setItems={setCourseSkills} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-skill-input"} label={"page.my_courses.form.what_skills_will_this_course_provide"} />
                             </div>
                             <div className="col-span-12 lg:col-span-4 relative">
-                                <AddTag items={course_suitables} setItems={setCourseSuitables} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-suitable-input"} label={"page.my_courses.form.who_is_suitable_for_this_course"}/>
+                                <AddTag items={course_suitables} setItems={setCourseSuitables} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-suitable-input"} label={"page.my_courses.form.who_is_suitable_for_this_course"} />
                             </div>
                             <div className="col-span-12 lg:col-span-4 relative">
-                                <AddTag items={course_requirements} setItems={setCourseRequirements} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-requirement-input"} label={"page.my_courses.form.what_are_the_requirements_of_this_course"}/>
+                                <AddTag items={course_requirements} setItems={setCourseRequirements} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-requirement-input"} label={"page.my_courses.form.what_are_the_requirements_of_this_course"} />
                             </div>
                             <div className="col-span-12 lg:col-span-6">
-                                <div className="form-group-file">
-                                    <input id="course_poster_file" onChange={e => setCoursePoster(e.target.files[0])} type="file" accept="image/*" placeholder=" " />
-                                    <label htmlFor="course_poster_file" className={(error.course_poster_file && 'label-error')}>
-                                        <AiOutlinePicture />
-                                        <p className="mb-1">{error.course_poster_file ? error.course_poster_file : intl.formatMessage({ id: "page.my_courses.form.course_poster" })}</p>
-                                        {course_poster ?
-                                            <div>
-                                                {course_poster.name && <p className="text-xs mb-0">{intl.formatMessage({ id: "file_name" })}: <b>{course_poster.name}</b></p>}
-                                                {course_poster.size && <p className="text-xs mb-0">{intl.formatMessage({ id: "file_size" })}: <b>{(course_poster.size / 1048576).toFixed(2)} МБ</b></p>}
-                                            </div>
-                                            :
-                                            <p className="text-xs mb-0">{intl.formatMessage({ id: "choose_file" })}</p>
-                                        }
-                                    </label>
-                                </div>
+                                <FileUploadButton
+                                    item={course_poster}
+                                    trigger={setCoursePoster}
+                                    id={"course_poster_file"}
+                                    accept={"image/*"}
+                                    error={error.course_poster_file}
+                                    icon={<AiOutlinePicture />}
+                                    label={intl.formatMessage({ id: "page.my_courses.form.course_poster" })}
+                                />
                             </div>
                             <div className="col-span-12 lg:col-span-6">
-                                <div className="form-group-file">
-                                    <input id="course_trailer_file" onChange={e => setCourseTrailer(e.target.files[0])} type="file" accept="video/*" placeholder=" " />
-                                    <label htmlFor="course_trailer_file" className={(error.course_trailer_file && 'label-error')}>
-                                        <AiOutlineVideoCamera />
-                                        <p className="mb-1">{error.course_trailer_file ? error.course_trailer_file : intl.formatMessage({ id: "page.my_courses.form.course_trailer" })}</p>
-                                        {course_trailer
-                                            ?
-                                            <div>
-                                                {course_trailer.name && <p className="text-xs mb-0">{intl.formatMessage({ id: "file_name" })}: <b>{course_trailer.name}</b></p>}
-                                                {course_trailer.size && <p className="text-xs mb-0">{intl.formatMessage({ id: "file_size" })}: <b>{(course_trailer.size / 1048576).toFixed(2)} МБ</b></p>}
-                                            </div>
-                                            :
-                                            <p className="text-xs mb-0">{intl.formatMessage({ id: "choose_file" })}</p>
-                                        }
-                                    </label>
-                                </div>
+                                <FileUploadButton
+                                    item={course_trailer}
+                                    trigger={setCourseTrailer}
+                                    id={"course_trailer_file"}
+                                    accept={"video/*"}
+                                    error={error.course_trailer_file}
+                                    icon={<AiOutlineVideoCamera />}
+                                    label={intl.formatMessage({ id: "page.my_courses.form.course_trailer" })}
+                                />
                             </div>
                             <div className='col-span-12'>
                                 {!course_free &&
-                                    <div className="form-group-border active label-inactive mb-4">
-                                        <AiOutlineDollar/>
+                                    <div className="form-group-border active label-inactive mb-6">
+                                        <AiOutlineDollar />
                                         <input name="course_cost" type="number" defaultValue={''} placeholder=" " />
                                         <label className={(error.course_cost && 'label-error')}>{error.course_cost ? error.course_cost : intl.formatMessage({ id: "page.my_courses.form.course_cost" })}, &#8376;</label>
                                     </div>

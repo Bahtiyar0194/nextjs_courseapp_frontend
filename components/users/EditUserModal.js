@@ -20,6 +20,7 @@ const EditUserModal = ({ edit_user, getUsers, setEditUserPhone, edit_user_phone,
 
         form_body.roles_count = roles.length;
         form_body.roles = roles;
+        form_body.operation_type_id = 15;
 
         await axios.post('users/update/' + edit_user.user_id, form_body)
             .then(response => {

@@ -1,7 +1,7 @@
 import AuthLayout from "../../components/layouts/AuthLayout";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Cookies from 'js-cookie';
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useIntl } from "react-intl";
 import Loader from "../../components/ui/Loader";
@@ -18,39 +18,7 @@ export default function ForgotPassword() {
     const [error, setError] = useState([]);
     const router = useRouter();
 
-    const [school, setSchool] = useState([]);
-
-    const getSchool = async () => {
-        setLoader(true)
-        await axios.get('school/get')
-            .then(response => {
-                setSchool(response.data);
-
-                if (response.data.school_id) {
-                    setSchoolDomain(response.data.school_domain);
-                }
-
-                setLoader(false)
-            }).catch(err => {
-                if (err.response) {
-                    router.push({
-                        pathname: '/error',
-                        query: {
-                            status: err.response.status,
-                            message: err.response.data.message,
-                            url: err.request.responseURL,
-                        }
-                    });
-                }
-                else {
-                    router.push('/error');
-                }
-            });
-    }
-
-    useEffect(() => {
-        getSchool();
-    }, [router.isReady]);
+    const school = useSelector((state) => state.school.school_data);
 
     const forgotSubmit = async (e) => {
         e.preventDefault();
@@ -61,7 +29,7 @@ export default function ForgotPassword() {
 
         await axios.post('auth/forgot_password', form_data)
             .then(response => {
-                if (school === 'main') {
+                if (!school.school_domain) {
                     window.location.replace('http://' + school_domain + '.' + MAIN_DOMAIN + '/password/recovery');
                 }
                 else {
@@ -90,13 +58,21 @@ export default function ForgotPassword() {
             });
     }
 
+    useEffect(() => {
+        if (router.isReady) {
+            if (school.school_id) {
+                setSchoolDomain(school.school_domain);
+            }
+        }
+    }, [router.isReady, school]);
+
     return (
         <AuthLayout title={title} school_name={school.school_name}>
             {loader && <Loader className="overlay" />}
             <form onSubmit={forgotSubmit}>
                 <Alert className="-mt-2 mb-6 light" text={intl.formatMessage({ id: "page.password.forgot.instruction" })} />
 
-                {school === 'main' &&
+                {!school.school_domain &&
                     <div className="flex justify-between items-center">
                         <div className="form-group">
                             <AiOutlineGlobal />

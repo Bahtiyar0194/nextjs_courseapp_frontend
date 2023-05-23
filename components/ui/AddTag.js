@@ -1,4 +1,4 @@
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { AiOutlineCloseCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import { useIntl } from "react-intl";
 const AddTag = ({ items, setItems, className, tagClass, tagInputId, label }) => {
     const intl = useIntl();
@@ -38,8 +38,8 @@ const AddTag = ({ items, setItems, className, tagClass, tagInputId, label }) => 
                     ))
                 }
                 <div className='flex gap-2'>
-                    <input id={tagInputId} className='border-active rounded-lg px-2 w-full text-sm' type="text" placeholder={intl.formatMessage({ id: "textModal.write_here" }) + '...'} />
-                    <button onClick={e => addItem()} className='btn btn-sm btn-light' type='button'>{intl.formatMessage({ id: "lesson.add" })}</button>
+                    <input id={tagInputId} className='border border-corp rounded-lg px-2 w-full text-sm' type="text" placeholder={intl.formatMessage({ id: "textModal.write_here" }) + '...'} />
+                    <button onClick={e => addItem()} className='btn btn-sm btn-light' type='button'><AiOutlinePlusCircle/></button>
                 </div>
             </div>
             <label>{intl.formatMessage({ id: label })}</label>

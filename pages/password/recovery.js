@@ -2,6 +2,7 @@ import AuthLayout from "../../components/layouts/AuthLayout";
 import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Loader from "../../components/ui/Loader";
@@ -18,33 +19,10 @@ export default function Activation() {
     const intl = useIntl();
     const title = intl.formatMessage({ id: "page.password.forgot.title" });
     const [loader, setLoader] = useState(false);
-    const [school, setSchool] = useState([]);
+    const school = useSelector((state) => state.school.school_data);
     const [error, setError] = useState([]);
     const [showPassword, setShowPassword] = useState(false);
     const [recovery_code, setRecoveryCode] = useState('');
-
-    const getSchool = async () => {
-        setLoader(true);
-        await axios.get('school/get')
-            .then(response => {
-                setSchool(response.data);
-                setLoader(false);
-            }).catch(err => {
-                if (err.response) {
-                    router.push({
-                        pathname: '/error',
-                        query: {
-                            status: err.response.status,
-                            message: err.response.data.message,
-                            url: err.request.responseURL,
-                        }
-                    });
-                }
-                else {
-                    router.push('/error');
-                }
-            });
-    }
 
     const recoverySubmit = async (e) => {
         e.preventDefault();
@@ -52,14 +30,14 @@ export default function Activation() {
 
         const form_body = serialize(e.currentTarget, { hash: true, empty: true });
         form_body.school_domain = school.school_domain;
+
         let recovery_code = form_body.recovery_code.replace(/[^0-9]/g, '');
         form_body.recovery_code = recovery_code;
 
         await axios.post('auth/password_recovery', form_body)
             .then(response => {
-                Cookies.set('token', response.data.data.token);
-                router.push('/dashboard');
-                setLoader(false);
+                    Cookies.set('token', response.data.data.token);
+                    router.push('/dashboard');
             }).catch(err => {
                 if (err.response) {
                     if (err.response.status == 422) {
@@ -85,8 +63,7 @@ export default function Activation() {
 
     useEffect(() => {
         if (router.isReady) {
-            getSchool();
-            if(router.query.code){
+            if (router.query.code) {
                 setRecoveryCode(router.query.code);
             }
         }
@@ -117,8 +94,8 @@ export default function Activation() {
                     <label className={(error.password_confirmation && 'label-error')}>{error.password_confirmation ? error.password_confirmation : intl.formatMessage({ id: "page.registration.form.confirm_new_password" })}</label>
                 </div>
 
-                <p className="text-sm">{intl.formatMessage({ id: "page.password.can't_recover_my_password" })} <Link href={'/password/forgot'}>{intl.formatMessage({ id: "try_again" })}</Link></p>
-                <p className="text-sm">{intl.formatMessage({ id: "page.login.form.dont_have_an_account" })} <Link href={'/registration'}>{intl.formatMessage({ id: "page.registration.title" })}</Link></p>
+                <p className="text-sm">{intl.formatMessage({ id: "page.password.can't_recover_my_password" })} <Link className="text-corp" href={'/password/forgot'}>{intl.formatMessage({ id: "try_again" })}</Link></p>
+                <p className="text-sm">{intl.formatMessage({ id: "page.login.form.dont_have_an_account" })} <Link className="text-corp" href={'/registration'}>{intl.formatMessage({ id: "page.registration.title" })}</Link></p>
 
                 <button className="btn btn-primary mt-4" type="submit"><FiUserCheck /> <span>{intl.formatMessage({ id: "page.password.recovery_password" })}</span></button>
             </form>

@@ -24,7 +24,7 @@ export default function RoleProvider({ children, roles, redirect }) {
                         <AiOutlineLock className="text-6xl mb-2 text-corp"></AiOutlineLock>
                             <div className="text-center">
                                 <h4 className="mb-2">{intl.formatMessage({ id: "page.error.page_is_not_available" })}</h4>
-                                <Link href={'/dashboard'}>{intl.formatMessage({ id: "page.dashboard.go_to_dashboard" })}</Link>
+                                <Link className="text-corp" href={'/dashboard'}>{intl.formatMessage({ id: "page.dashboard.go_to_dashboard" })}</Link>
                             </div>
                         </div>
                     </div>

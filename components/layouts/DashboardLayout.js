@@ -3,7 +3,7 @@ import ThemeChanger from "../ui/ThemeChanger";
 import Locales from "../ui/Locales";
 import Link from "next/link";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineLogout, AiOutlineDashboard, AiOutlinePlaySquare, AiOutlineTeam, AiOutlineRead, AiOutlineSetting, AiOutlineFile } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineDashboard, AiOutlinePlaySquare, AiOutlineTeam, AiOutlineRead, AiOutlineSetting, AiOutlineFile, AiOutlineUser } from "react-icons/ai";
 import AuthProvider from "../../services/AuthProvider";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -16,6 +16,7 @@ import RoleProvider from "../../services/RoleProvider";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import DefaultLogo from "../ui/Logo";
 import DiskSpace from "../ui/DiskSpace";
+import UserAvatar from "../ui/UserAvatar";
 
 export default function DashboardLayout(props) {
     const intl = useIntl();
@@ -96,7 +97,7 @@ export default function DashboardLayout(props) {
         <AuthProvider>
             <Header title={props.title} />
             <div className="db__header">
-                <DefaultLogo />
+                <DefaultLogo show_logo_alt={true} />
 
                 <div className="btn-wrap items-center">
                     <Locales />
@@ -104,7 +105,7 @@ export default function DashboardLayout(props) {
                     <CDropdown>
                         <CDropdownToggle href="#" color="transparent no-px" className="pl-0">
                             <div className="flex items-center gap-x-1 sm:gap-x-1.5">
-                                <div className="rounded-full w-8 h-8 bg-corp flex items-center justify-center text-white">{user.first_name?.substring(0, 1)}</div>
+                                <UserAvatar user_avatar={user.avatar} className={'w-10 h-10 p-0.5'} />
                                 <div>
                                     <svg className="sm:hidden" width="18" height="18" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd"></path></svg>
                                     <p className="hidden sm:block text-active font-medium mb-0">{user.first_name}</p>
@@ -114,8 +115,8 @@ export default function DashboardLayout(props) {
                         </CDropdownToggle>
                         <CDropdownMenu>
                             <div>
-                                <div className="flex items-center gap-x-2">
-                                    <div className="rounded-full w-10 h-10 bg-corp flex items-center justify-center text-white text-xl">{user.first_name?.substring(0, 1)}</div>
+                                <div className="flex items-center gap-x-3">
+                                    <UserAvatar user_avatar={user.avatar} className={'w-16 h-16 p-1'} />
                                     <div>
                                         <p className="text-active font-medium text-base mb-0">{user.last_name} {user.first_name}</p>
                                         <p className="text-inactive text-xs mb-0">{user.email}</p>
@@ -129,7 +130,7 @@ export default function DashboardLayout(props) {
 
                             {user.roles?.length > 1 &&
                                 <div>
-                                    <p className="mb-2.5">{intl.formatMessage({ id: "page.users.user_mode" })}</p>
+                                    <p className="mb-2.5">{intl.formatMessage({ id: "page.users.user_mode" })}:</p>
                                     {user.roles?.map(role =>
                                         <div key={role.role_type_id} className="mt-1.5">
                                             <label className="custom-radio">
@@ -140,7 +141,10 @@ export default function DashboardLayout(props) {
                                     )}
                                 </div>
                             }
-                            <Link href={'/dashboard'}><AiOutlineSetting />{intl.formatMessage({ id: "page.users.profile_settings" })}</Link>
+                            <Link href={'/dashboard/profile'}><AiOutlineUser />{intl.formatMessage({ id: "page.users.profile_settings" })}</Link>
+                            <RoleProvider roles={[2]}>
+                                <Link href={'/dashboard/site-settings'}><AiOutlineSetting />{intl.formatMessage({ id: "page.site_settings.title" })}</Link>
+                            </RoleProvider>
                             <Link href={'#'} onClick={logout}><AiOutlineLogout />{intl.formatMessage({ id: "logout" })}</Link>
                         </CDropdownMenu>
                     </CDropdown>

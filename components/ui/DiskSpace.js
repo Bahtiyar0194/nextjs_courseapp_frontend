@@ -1,8 +1,8 @@
 import Link from "next/link";
 const DiskSpace = ({ intl, disk_data }) => {
     return (
-        <Link className="text-active" href={'/dashboard/disk'}>
-            <div className="p-2 bg-inactive border-active rounded-lg min-w-full w-60 mt-4">
+        <Link href={'/dashboard/disk'}>
+            <div className="p-2 bg-inactive text-active border-active rounded-lg min-w-full w-60 mt-4">
                 <div className="flex justify-between">
                     <p className="m-0">{intl.formatMessage({ id: "subscription_plan.disk_space" })}:</p>
                     <p className="m-0">{disk_data.disk_space_gb?.toFixed()} {intl.formatMessage({ id: "gigabyte" })}</p>

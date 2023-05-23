@@ -24,6 +24,7 @@ const InviteUserModal = ({ getUsers, setInviteUserPhone, invite_user_phone, load
 
         form_body.roles_count = roles.length;
         form_body.roles = roles;
+        form_body.operation_type_id = 14;
 
         await axios.post('users/invite', form_body)
             .then(response => {

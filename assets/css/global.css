@@ -11,53 +11,7 @@
     }
 }
 
-@font-face {
-    font-family: 'Euclid Circular A';
-    src: url('../fonts/euclid/EuclidCircularA-Bold.eot');
-    src: local('Euclid Circular A Bold'), local('EuclidCircularA-Bold'),
-        url('../fonts/euclid/EuclidCircularA-Bold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/euclid/EuclidCircularA-Bold.woff2') format('woff2'),
-        url('../fonts/euclid/EuclidCircularA-Bold.woff') format('woff'),
-        url('../fonts/euclid/EuclidCircularA-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Euclid Circular A';
-    src: url('../fonts/euclid/EuclidCircularA-Light.eot');
-    src: local('Euclid Circular A Light'), local('EuclidCircularA-Light'),
-        url('../fonts/euclid/EuclidCircularA-Light.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/euclid/EuclidCircularA-Light.woff2') format('woff2'),
-        url('../fonts/euclid/EuclidCircularA-Light.woff') format('woff'),
-        url('../fonts/euclid/EuclidCircularA-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Euclid Circular A';
-    src: url('../fonts/euclid/EuclidCircularA-BoldItalic.eot');
-    src: local('Euclid Circular A Bold Italic'), local('EuclidCircularA-BoldItalic'),
-        url('../fonts/euclid/EuclidCircularA-BoldItalic.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/euclid/EuclidCircularA-BoldItalic.woff2') format('woff2'),
-        url('../fonts/euclid/EuclidCircularA-BoldItalic.woff') format('woff'),
-        url('../fonts/euclid/EuclidCircularA-BoldItalic.ttf') format('truetype');
-    font-weight: bold;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Euclid Circular A';
-    src: url('../fonts/euclid/EuclidCircularA-LightItalic.eot');
-    src: local('Euclid Circular A Light Italic'), local('EuclidCircularA-LightItalic'),
-        url('../fonts/euclid/EuclidCircularA-LightItalic.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/euclid/EuclidCircularA-LightItalic.woff2') format('woff2'),
-        url('../fonts/euclid/EuclidCircularA-LightItalic.woff') format('woff'),
-        url('../fonts/euclid/EuclidCircularA-LightItalic.ttf') format('truetype');
-    font-weight: 300;
-    font-style: italic;
-}
+/*Euclid*/
 
 @font-face {
     font-family: 'Euclid Circular A';
@@ -68,30 +22,6 @@
         url('../fonts/euclid/EuclidCircularA-Regular.woff') format('woff'),
         url('../fonts/euclid/EuclidCircularA-Regular.ttf') format('truetype');
     font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Euclid Circular A';
-    src: url('../fonts/euclid/EuclidCircularA-SemiBold.eot');
-    src: local('Euclid Circular A SemiBold'), local('EuclidCircularA-SemiBold'),
-        url('../fonts/euclid/EuclidCircularA-SemiBold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/euclid/EuclidCircularA-SemiBold.woff2') format('woff2'),
-        url('../fonts/euclid/EuclidCircularA-SemiBold.woff') format('woff'),
-        url('../fonts/euclid/EuclidCircularA-SemiBold.ttf') format('truetype');
-    font-weight: 600;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Euclid Circular A';
-    src: url('../fonts/euclid/EuclidCircularA-Medium.eot');
-    src: local('Euclid Circular A Medium'), local('EuclidCircularA-Medium'),
-        url('../fonts/euclid/EuclidCircularA-Medium.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/euclid/EuclidCircularA-Medium.woff2') format('woff2'),
-        url('../fonts/euclid/EuclidCircularA-Medium.woff') format('woff'),
-        url('../fonts/euclid/EuclidCircularA-Medium.ttf') format('truetype');
-    font-weight: 500;
     font-style: normal;
 }
 
@@ -109,14 +39,14 @@
 
 @font-face {
     font-family: 'Euclid Circular A';
-    src: url('../fonts/euclid/EuclidCircularA-SemiBoldItalic.eot');
-    src: local('Euclid Circular A SemiBold Italic'), local('EuclidCircularA-SemiBoldItalic'),
-        url('../fonts/euclid/EuclidCircularA-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/euclid/EuclidCircularA-SemiBoldItalic.woff2') format('woff2'),
-        url('../fonts/euclid/EuclidCircularA-SemiBoldItalic.woff') format('woff'),
-        url('../fonts/euclid/EuclidCircularA-SemiBoldItalic.ttf') format('truetype');
-    font-weight: 600;
-    font-style: italic;
+    src: url('../fonts/euclid/EuclidCircularA-Medium.eot');
+    src: local('Euclid Circular A Medium'), local('EuclidCircularA-Medium'),
+        url('../fonts/euclid/EuclidCircularA-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/euclid/EuclidCircularA-Medium.woff2') format('woff2'),
+        url('../fonts/euclid/EuclidCircularA-Medium.woff') format('woff'),
+        url('../fonts/euclid/EuclidCircularA-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
 }
 
 @font-face {
@@ -131,7 +61,502 @@
     font-style: italic;
 }
 
-/*THEME*/
+body {
+    font-family: 'Euclid Circular A', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Euclid Circular A', sans-serif;
+}
+
+/*Comfortaa*/
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('../fonts/comfortaa/Comfortaa-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('../fonts/comfortaa/Comfortaa-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+body.comfortaa_body{
+    font-family: 'Comfortaa', sans-serif;
+}
+
+.comfortaa_title h1,
+.comfortaa_title h2,
+.comfortaa_title h3,
+.comfortaa_title h4,
+.comfortaa_title h5,
+.comfortaa_title h6
+{
+    font-family: 'Comfortaa', sans-serif;
+}
+
+/*Gilroy*/
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/gilroy/Gilroy-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gilroy';
+    src: url('../fonts/gilroy/Gilroy-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+body.gilroy_body{
+    font-family: 'Gilroy', sans-serif;
+}
+
+.gilroy_title h1,
+.gilroy_title h2,
+.gilroy_title h3,
+.gilroy_title h4,
+.gilroy_title h5,
+.gilroy_title h6
+{
+    font-family: 'Gilroy', sans-serif;
+}
+
+/*Montserrat*/
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-Italic.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat/Montserrat-MediumItalic.ttf');
+    font-weight: 500;
+    font-style: italic;
+}
+
+body.montserrat_body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.montserrat_title h1,
+.montserrat_title h2,
+.montserrat_title h3,
+.montserrat_title h4,
+.montserrat_title h5,
+.montserrat_title h6
+{
+    font-family: 'Montserrat', sans-serif;
+}
+
+/*Open-Sans*/
+
+@font-face {
+    font-family: 'Open-Sans';
+    src: url('../fonts/opensans/OpenSans-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open-Sans';
+    src: url('../fonts/opensans/OpenSans-Italic.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Open-Sans';
+    src: url('../fonts/opensans/OpenSans-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open-Sans';
+    src: url('../fonts/opensans/OpenSans-MediumItalic.ttf');
+    font-weight: 500;
+    font-style: italic;
+}
+
+body.opensans_body{
+    font-family: 'Open-Sans', sans-serif;
+}
+
+.opensans_title h1,
+.opensans_title h2,
+.opensans_title h3,
+.opensans_title h4,
+.opensans_title h5,
+.opensans_title h6
+{
+    font-family: 'Open-Sans', sans-serif;
+}
+
+/*ProximaNova*/
+
+@font-face {
+    font-family: 'ProximaNova';
+    src: url('../fonts/proximanova/ProximaNova-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ProximaNova';
+    src: url('../fonts/proximanova/ProximaNova-Italic.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'ProximaNova';
+    src: url('../fonts/proximanova/ProximaNova-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ProximaNova';
+    src: url('../fonts/proximanova/ProximaNova-MediumItalic.ttf');
+    font-weight: 500;
+    font-style: italic;
+}
+
+body.proximanova_body{
+    font-family: 'ProximaNova', sans-serif;
+}
+
+.proximanova_title h1,
+.proximanova_title h2,
+.proximanova_title h3,
+.proximanova_title h4,
+.proximanova_title h5,
+.proximanova_title h6
+{
+    font-family: 'ProximaNova', sans-serif;
+}
+
+/*Roboto*/
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/roboto/Roboto-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/roboto/Roboto-Italic.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/roboto/Roboto-Medium.ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/roboto/Roboto-MediumItalic.ttf');
+    font-weight: 500;
+    font-style: italic;
+}
+
+body.roboto_body{
+    font-family: 'Roboto', sans-serif;
+}
+
+.roboto_title h1,
+.roboto_title h2,
+.roboto_title h3,
+.roboto_title h4,
+.roboto_title h5,
+.roboto_title h6
+{
+    font-family: 'Roboto', sans-serif;
+}
+
+/*DEFAULT THEME*/
+
+.bg-corp{
+    @apply bg-accent-300;
+}
+
+.border-corp{
+    @apply border-accent-300;
+}
+
+.text-corp{
+    @apply text-accent-300;
+}
+
+/*DEFAULT THEME*/
+
+.bg-corp {
+    @apply bg-accent-300;
+}
+
+.border-corp {
+    @apply border-accent-300;
+}
+
+.text-corp {
+    @apply text-accent-300;
+}
+
+/*CUSTOM THEME*/
+
+/*Amber*/
+.amber .bg-corp {
+    @apply bg-amber-500;
+}
+
+.amber .border-corp {
+    @apply border-amber-500;
+}
+
+.amber .text-corp {
+    @apply text-amber-500;
+}
+
+/*Blue*/
+.blue .bg-corp {
+    @apply bg-blue-500;
+}
+
+.blue .border-corp {
+    @apply border-blue-500;
+}
+
+.blue .text-corp {
+    @apply text-blue-500;
+}
+
+/*Cyan*/
+.cyan .bg-corp {
+    @apply bg-cyan-500;
+}
+
+.cyan .border-corp {
+    @apply border-cyan-500;
+}
+
+.cyan .text-corp {
+    @apply text-cyan-500;
+}
+
+/*Emerald*/
+.emerald .bg-corp {
+    @apply bg-emerald-500;
+}
+
+.emerald .border-corp {
+    @apply border-emerald-500;
+}
+
+.emerald .text-corp {
+    @apply text-emerald-500;
+}
+
+/*Fuchsia*/
+.fuchsia .bg-corp {
+    @apply bg-fuchsia-500;
+}
+
+.fuchsia .border-corp {
+    @apply border-fuchsia-500;
+}
+
+.fuchsia .text-corp {
+    @apply text-fuchsia-500;
+}
+
+/*Green*/
+.green .bg-corp {
+    @apply bg-green-500;
+}
+
+.green .border-corp {
+    @apply border-green-500;
+}
+
+.green .text-corp {
+    @apply text-green-500;
+}
+
+/*Indigo*/
+.indigo .bg-corp {
+    @apply bg-indigo-500;
+}
+
+.indigo .border-corp {
+    @apply border-indigo-500;
+}
+
+.indigo .text-corp {
+    @apply text-indigo-500;
+}
+
+/*Lime*/
+.lime .bg-corp {
+    @apply bg-lime-500;
+}
+
+.lime .border-corp {
+    @apply border-lime-500;
+}
+
+.lime .text-corp {
+    @apply text-lime-500;
+}
+
+/*Orange*/
+.orange .bg-corp {
+    @apply bg-orange-500;
+}
+
+.orange .border-corp {
+    @apply border-orange-500;
+}
+
+.orange .text-corp {
+    @apply text-orange-500;
+}
+
+/*Pink*/
+.pink .bg-corp {
+    @apply bg-pink-500;
+}
+
+.pink .border-corp {
+    @apply border-pink-500;
+}
+
+.pink .text-corp {
+    @apply text-pink-500;
+}
+
+/*Purple*/
+.purple .bg-corp {
+    @apply bg-purple-500;
+}
+
+.purple .border-corp {
+    @apply border-purple-500;
+}
+
+.purple .text-corp {
+    @apply text-purple-500;
+}
+
+/*Red*/
+.red .bg-corp {
+    @apply bg-red-500;
+}
+
+.red .border-corp {
+    @apply border-red-500;
+}
+
+.red .text-corp {
+    @apply text-red-500;
+}
+
+/*Rose*/
+.rose .bg-corp {
+    @apply bg-rose-500;
+}
+
+.rose .border-corp {
+    @apply border-rose-500;
+}
+
+.rose .text-corp {
+    @apply text-rose-500;
+}
+
+/*Sky*/
+.sky .bg-corp {
+    @apply bg-sky-500;
+}
+
+.sky .border-corp {
+    @apply border-sky-500;
+}
+
+.sky .text-corp {
+    @apply text-sky-500;
+}
+
+/*Teal*/
+.teal .bg-corp {
+    @apply bg-teal-500;
+}
+
+.teal .border-corp {
+    @apply border-teal-500;
+}
+
+.teal .text-corp {
+    @apply text-teal-500;
+}
+
+/*Violet*/
+.violet .bg-corp {
+    @apply bg-violet-500;
+}
+
+.violet .border-corp {
+    @apply border-violet-500;
+}
+
+.violet .text-corp {
+    @apply text-violet-500;
+}
+
+/*Yellow*/
+.yellow .bg-corp {
+    @apply bg-yellow-500;
+}
+
+.yellow .border-corp {
+    @apply border-yellow-500;
+}
+
+.yellow .text-corp {
+    @apply text-yellow-500;
+}
+
+/*STYLES*/
 
 .bg-active {
     @apply bg-white dark:bg-dark-500;
@@ -147,10 +572,6 @@
 
 .bg-inactive-inverse {
     @apply bg-dark-900 dark:bg-gray-50;
-}
-
-.bg-corp{
-    @apply bg-accent-300;
 }
 
 .bg-success{
@@ -201,10 +622,6 @@
     @apply border-l border-gray-500 dark:border-dark-200;
 }
 
-.border-corp{
-    @apply border-accent-300;
-}
-
 .border-success{
     @apply border-green-500;
 }
@@ -241,20 +658,12 @@
     @apply text-neutral-500 dark:text-neutral-400;
 }
 
-.text-corp{
-    @apply text-accent-300;
-}
-
 .text-success{
     @apply text-green-500;
 }
 
 .stroke-corp{
     @apply stroke-accent-300;
-}
-
-.corp-font{
-    font-family: 'Euclid Circular A', sans-serif;
 }
 
 ::-webkit-scrollbar {
@@ -281,15 +690,28 @@
 }
 
 body {
-    @apply bg-inactive text-active font-normal corp-font duration-200;
+    @apply bg-inactive text-active font-normal duration-200;
 }
 
 a {
-    @apply cursor-pointer text-corp duration-200;
+    @apply cursor-pointer duration-200;
 }
 
 a:hover{
     @apply text-active;
+}
+
+p {
+    @apply mb-2
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply font-medium mb-4;
 }
 
 h1 > a,
@@ -308,19 +730,6 @@ h4 > a:hover,
 h5 > a:hover,
 h6 > a:hover {
     @apply text-corp;
-}
-
-p {
-    @apply mb-2
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    @apply font-medium mb-4;
 }
 
 b, strong{
@@ -474,7 +883,7 @@ textarea:focus {
 }
 
 .video-react-poster::after{
-    @apply absolute top-1/2 right-0 bottom-0 left-0 flex justify-center items-center font-medium text-base text-center;
+    @apply absolute top-1/2 pt-2 right-0 bottom-0 left-0 flex justify-center items-center font-medium text-base text-center;
 }
 
 .video-react.kk .video-react-poster::after{
@@ -490,10 +899,12 @@ textarea:focus {
 }
 
 .video-react .video-react-big-play-button{
-    width: 48px !important;
-    height: 48px !important;
+    width: 50px !important;
+    height: 50px !important;
     border-radius: 50% !important;
-    left: calc(50% + 20px) !important;
+    left: calc(50% - 25px) !important;
+    top: calc(50% - 25px) !important;
+    margin: 0 !important;
 }
 
 .video-react .video-react-big-play-button::before{
@@ -524,17 +935,17 @@ select option {
 }
 
 .form-group {
-    @apply mb-5 relative;
+    @apply mb-5 relative border-t-0 border-l-0 border-r-0 border-b border-corp ;
 }
 
 .form-group > input, 
 .form-group > select, 
 .form-group > textarea {
-    @apply border-t-0 border-l-0 border-r-0 border-b border-corp bg-transparent w-full text-active py-3 pl-8 pr-2; 
+    @apply border-0 bg-transparent w-full text-active py-3 pl-8 pr-2 relative; 
 }
 
 .form-group > label {
-    @apply absolute left-8 top-3 pointer-events-none duration-200 z-0 bg-inherit text-inactive;
+    @apply absolute left-8 top-3 pointer-events-none duration-200 bg-inherit text-inactive;
 }
 
 .form-group > label.label-error{
@@ -561,28 +972,31 @@ select option {
     @apply text-danger -top-2.5 text-xs left-0;
 }
 
+.form-group .show-password
+{
+    @apply absolute right-0 text-2xl top-3 text-inactive z-20;
+}
+
 .form-group-border {
-    @apply relative;
+    @apply relative border border-corp rounded-lg;
+}
+
+.form-group-border.active{
+    @apply border-active;
 }
 
 .form-group-border > input, 
 .form-group-border > select, 
 .form-group-border > textarea {
-    @apply border border-corp rounded-lg bg-transparent w-full text-active py-2 pl-9 pr-2.5;
-}
-
-.form-group-border.active > input,
-.form-group-border.active > select, 
-.form-group-border.active > textarea{
-    @apply border-active;
+    @apply border-0 bg-transparent w-full text-active py-2 pl-9 pr-2.5 relative;
 }
 
 .form-group-border > label {
-    @apply absolute left-9 top-2 pointer-events-none duration-200 z-0 bg-inherit text-inactive;
+    @apply absolute left-9 top-2 pointer-events-none duration-200 bg-inherit text-inactive;
 }
 
 .form-group-border > label.label-error{
-    @apply text-danger -top-2.5 text-xs left-2 bg-active px-1;
+    @apply text-danger -top-2.5 text-xs left-2 bg-active px-1 mr-2;
 }
 
 .form-group-border.label-inactive > label.label-error{
@@ -619,6 +1033,11 @@ select option {
     @apply text-danger;
 }
 
+.form-group-border .show-password
+{
+    @apply absolute right-2 text-2xl top-2.5 text-inactive z-20;
+}
+
 .label-focus{
     @apply text-xs text-inactive;
 }
@@ -628,14 +1047,15 @@ select option {
 }
 
 .form-group > svg{
-    @apply absolute text-2xl top-3 text-inactive;
+    @apply absolute text-2xl top-3 text-inactive z-20;
 }
 
 .form-group-border > svg{
-    @apply absolute text-xl top-2.5 left-2.5 text-inactive;
+    @apply absolute text-xl top-2.5 left-2.5 text-inactive z-20;
 }
 
-.form-group .show-password{
+.form-group .show-password
+{
     @apply absolute right-0 text-2xl top-3 text-inactive;
 }
 
@@ -835,7 +1255,7 @@ select option {
 }
 
 .btn-primary{
-    @apply bg-corp text-white border-corp border;
+    @apply bg-corp border-corp border text-white;
 }
 
 .btn-primary:hover{
@@ -1186,16 +1606,16 @@ select option {
 }
 
 .full-overlay {
-    @apply fixed w-full h-full left-0 top-0 bg-inactive z-20 flex flex-col justify-center items-center duration-200;
+    @apply fixed w-full h-full left-0 top-0 bg-inactive z-50 flex flex-col justify-center items-center duration-200;
 }
 
 .overlay {
-    @apply absolute w-full h-full left-0 top-0 bg-active opacity-90 z-20 flex flex-col justify-center items-center duration-200;
+    @apply absolute w-full h-full left-0 top-0 bg-active opacity-90 z-40 flex flex-col justify-center items-center duration-200;
 }
 
 .overlay-loding-circle {
     @apply w-10 h-10 border-4 border-corp rounded-full;
-    border-bottom-color: transparent;
+    border-bottom-color: transparent !important;
     animation: 0.75s linear infinite spinner-border;
 }
 
@@ -1204,7 +1624,7 @@ select option {
 }
 
 .breadcrumb > a{
-    @apply inline-block mr-6 relative;
+    @apply inline-block mr-6 relative text-corp;
 }
 
 .breadcrumb > a:after{
@@ -1218,7 +1638,7 @@ select option {
 }
 
 .db__sidebar__menu{
-    @apply bg-active px-3 fixed z-20 border-r-active;
+    @apply bg-active px-3 fixed z-30 border-r-active;
     height: calc(100vh - 69px);
     top: 69px;
 }
@@ -1258,7 +1678,7 @@ select option {
 }
 
 .dropdown-menu{
-    @apply hidden rounded-lg shadow-md bg-active text-sm border-active z-30 px-3 border my-2;
+    @apply hidden rounded-lg shadow-xl bg-active text-sm border-active z-30 px-4 border my-2;
 }
 
 .dropdown-menu.show{
@@ -1269,12 +1689,16 @@ select option {
     @apply border-b-active py-3 list-none;
 }
 
+.dropdown-menu li:empty{
+    @apply hidden;
+}
+
 .dropdown-menu li:first-child{
-    @apply pt-3;
+    @apply pt-4;
 }
 
 .dropdown-menu li:last-child{
-    @apply pb-3 border-b-0;
+    @apply pb-4 border-b-0;
 }
 
 .dropdown-menu li > a{
@@ -1360,11 +1784,11 @@ select option {
 }
 
 .ql-toolbar.ql-snow{
-    @apply bg-active border-active rounded-bl-none rounded-br-none rounded-lg corp-font;
+    @apply bg-active border-active rounded-bl-none rounded-br-none rounded-lg;
 }
 
 .ql-container.ql-snow{
-    @apply bg-active border-active rounded-tl-none rounded-tr-none rounded-lg corp-font;
+    @apply bg-active border-active rounded-tl-none rounded-tr-none rounded-lg text-base;
 }
 
 .quill ~ label{
@@ -1626,4 +2050,12 @@ select option {
 
 .accordeon-img.active{
     @apply opacity-100;
+}
+
+.review-item{
+    @apply py-4 border-t-active;
+}
+
+.review-item:last-child{
+    @apply pb-0;
 }

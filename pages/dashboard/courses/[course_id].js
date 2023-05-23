@@ -22,6 +22,8 @@ import RoleProvider from "../../../services/RoleProvider";
 import CourseCard from "../../../components/course/CourseCard";
 import RatingStars from "../../../components/ui/RatingStars";
 import ReviewForm from "../../../components/ui/ReviewForm";
+import ReviewsList from "../../../components/ui/ReviewsList";
+import UserAvatar from "../../../components/ui/UserAvatar";
 
 export default function Course() {
   const router = useRouter();
@@ -180,38 +182,41 @@ export default function Course() {
           <div className="col-span-12 sm:col-span-6 md:col-span-7 lg:col-span-9">
             <div className="custom-grid">
               <div className="col-span-12">
-                <h2>{course.course_name}</h2>
+                <div className="title-wrap">
+                  <h2>{course.course_name}</h2>
+                  <RoleProvider roles={[2]}>
+                    <div className="btn-wrap">
+                      <Link href={'/dashboard/courses/edit/' + course.course_id} className="btn btn-outline-primary"><AiOutlineEdit /> <span>{intl.formatMessage({ id: "edit" })}</span></Link>
+                    </div>
+                  </RoleProvider>
+                </div>
               </div>
               <div className="col-span-12 sm:hidden">
                 <CourseCard course={course} lessons={lessons} getCourse={getCourse} getLessons={getLessons} setSubscribersModal={setSubscribersModal} />
               </div>
               <div className="col-span-12">
-                <div className="flex flex-wrap gap-4 md:gap-8">
-                  <div className="flex gap-4 md:gap-6">
-                    <div className="w-16 h-16 rounded-full border-active flex justify-center items-center">
-                      <div className="w-14 h-14 rounded-full bg-corp flex justify-center items-center text-2xl text-white">
-                      {course.last_name?.substring(0, 1)}{course.first_name?.substring(0, 1)}
-                      </div>
-                    </div>
-                    <div className="pt-2">
-                      <p className="text-inactive mb-0">{intl.formatMessage({ id: "page.my_courses.form.course_author" })}:</p>
+                <div className="flex flex-wrap gap-4 md:gap-8 items-center">
+                  <div className="flex gap-4 md:gap-6 items-center">
+                    <UserAvatar user_avatar={course.avatar} className={'w-20 h-20 p-1'} />
+                    <div>
+                      <p className="text-inactive mb-0 text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_author" })}:</p>
                       <p className="font-medium text-corp mb-0">{course.last_name} {course.first_name}</p>
                     </div>
                   </div>
-                  <div className="pt-2">
-                    <p className="text-inactive mb-0">{intl.formatMessage({ id: "page.my_courses.form.course_category" })}:</p>
+                  <div>
+                    <p className="text-inactive mb-0 text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_category" })}:</p>
                     <p className="font-medium text-corp mb-0">{course.course_category_name}</p>
                   </div>
-                  <div className="pt-2">
-                    <p className="text-inactive mb-0">{intl.formatMessage({ id: "page.my_courses.form.course_language" })}:</p>
+                  <div>
+                    <p className="text-inactive mb-0 text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_language" })}:</p>
                     <p className="font-medium text-corp mb-0">{course.lang_name}</p>
                   </div>
-                  <div className="pt-2">
-                    <p className="text-inactive mb-0">{intl.formatMessage({ id: "page.my_courses.form.course_level" })}:</p>
+                  <div>
+                    <p className="text-inactive mb-0 text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_level" })}:</p>
                     <p className="font-medium text-corp mb-0">{course.level_type_name}</p>
                   </div>
-                  <div className="pt-2">
-                    <p className="text-inactive mb-0">{intl.formatMessage({ id: "rating" })}:</p>
+                  <div>
+                    <p className="text-inactive mb-0 text-sm">{intl.formatMessage({ id: "rating" })}:</p>
                     <RatingStars className={'text-xl'} rating={course.rating} reviewers_count={course.reviewers_count} />
                   </div>
                 </div>
@@ -234,8 +239,8 @@ export default function Course() {
                       <h3>{intl.formatMessage({ id: "page.my_courses.form.who_is_suitable_for_this_course" })}</h3>
                       <div className="badge-wrap">
                         {course.suitables?.map(suitable => (
-                          <div key={suitable.id} className="badge badge-light">
-                            {suitable.suitable_name}
+                          <div key={suitable.item_id} className="badge badge-outline-primary">
+                            {suitable.item_value}
                           </div>
                         ))}
                       </div>
@@ -247,8 +252,8 @@ export default function Course() {
                       <h3>{intl.formatMessage({ id: "page.my_courses.form.what_skills_will_this_course_provide" })}</h3>
                       <div className="badge-wrap">
                         {course.skills?.map(skill => (
-                          <div key={skill.id} className="badge badge-light">
-                            {skill.skill_name}
+                          <div key={skill.item_id} className="badge badge-outline-primary">
+                            {skill.item_value}
                           </div>
                         ))}
                       </div>
@@ -260,8 +265,8 @@ export default function Course() {
                       <h3>{intl.formatMessage({ id: "page.my_courses.form.what_are_the_requirements_of_this_course" })}</h3>
                       <div className="badge-wrap">
                         {course.requirements?.map(requirement => (
-                          <div key={requirement.id} className="badge badge-light">
-                            {requirement.requirement_name}
+                          <div key={requirement.item_id} className="badge badge-outline-primary">
+                            {requirement.item_value}
                           </div>
                         ))}
                       </div>
@@ -340,30 +345,23 @@ export default function Course() {
                         <p className="text-inactive">{intl.formatMessage({ id: "no_added_lessons" })}</p>
                     }
                   </div>
-                  <div className="col-span-12">
-                    <h3>{intl.formatMessage({ id: "reviews_and_ratings" })}</h3>
-                    {course.reviews?.map(review => (
-                      <div className="py-4 border-b-active" key={review.id}>
-                        <div className="flex gap-2 mb-2">
-                          <div className="w-12 h-12 rounded-full border-active flex justify-center items-center">
-                            <div className="w-10 h-10 rounded-full bg-corp flex justify-center items-center text-lg text-white">
-                              {review.last_name?.substring(0, 1)}{review.first_name?.substring(0, 1)}
-                            </div>
-                          </div>
-                          <div>
-                            <p className="font-medium mb-0">{review.last_name} {review.first_name}</p>
-                            <RatingStars className={'text-base'} rating={review.rating} />
-                          </div>
-                        </div>
-
-                        {review.review != null ? <p>{review.review}</p> : <p className="text-inactive">Нет отзыва</p>}
-                        <p className="text-inactive text-xs">{new Date(review.created_at).toLocaleString()}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="col-span-12">
-                    <ReviewForm title={intl.formatMessage({ id: "leave_a_review_and_rating" })} description={intl.formatMessage({ id: "page.my_courses.form.how_much_did_you_like_the_course" })} url={'/courses/create_review/' + course.course_id} />
-                  </div>
+                  {
+                    course.reviews?.length > 0 &&
+                    <div className="col-span-12">
+                      <ReviewsList items={course.reviews} rating={course.rating} reviewers_count={course.reviewers_count} />
+                    </div>
+                  }
+                  {course.my_review == false
+                    ?
+                    <div className="col-span-12">
+                      <ReviewForm
+                        title={intl.formatMessage({ id: "leave_a_review_and_rating" })}
+                        description={intl.formatMessage({ id: "page.my_courses.form.how_much_did_you_like_the_course" })}
+                        url={'/courses/create_review/' + course.course_id} />
+                    </div>
+                    :
+                    null
+                  }
                 </>
               }
             </div>
@@ -380,7 +378,6 @@ export default function Course() {
           {intl.formatMessage({ id: "loading" })}
         </div>
       }
-
 
       <RoleProvider roles={[2]}>
         <Modal show={sectionModal} onClose={() => setSectionModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
