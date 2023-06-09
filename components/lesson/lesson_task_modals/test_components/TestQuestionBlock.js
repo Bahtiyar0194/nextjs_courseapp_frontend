@@ -28,7 +28,7 @@ const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuest
     }
 
     return (
-        <div className={"test-question-block " + (edit === true && "edit")}>
+        <div className={"test-question-block mt-6 " + (edit === true && "edit")}>
             <div className="flex justify-between items-center border-b-active pb-4 mb-4">
                 <div>
                     <p className='mb-0 text-corp'>{intl.formatMessage({ id: "task.test.addTestQuestionsModal.question" })} № {index + 1}</p>
@@ -69,7 +69,7 @@ const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuest
                 <AnswerElemInput key={i} index={i} question_id={test_question.question_id} question_index={index} answer={answer} intl={intl} />
             ))}
 
-            <button type="button" onClick={e => addAnswerElem()} className="text-sm flex items-center pb-1 border-b border-dashed border-inactive text-corp"><AiOutlinePlusCircle className="mr-1" /> {intl.formatMessage({ id: "task.test.addTestQuestionsModal.add_variant" })}</button>
+            <button type="button" onClick={e => addAnswerElem()} className="text-sm flex items-center mt-2 pb-1 border-dashed border-b-inactive text-corp"><AiOutlinePlusCircle className="mr-1" /> {intl.formatMessage({ id: "task.test.addTestQuestionsModal.add_variant" })}</button>
         </div>
     )
 }

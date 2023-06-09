@@ -49,7 +49,7 @@ const TaskBlock = ({ task_block, index, edit }) => {
     }
 
     return (
-        <div id={'block_' + task_block.block_id} className={"lesson-block " + (edit === true ? "edit " : " ") + (task_block.file_type_id == 3 ? task_block.image_width : "col-span-12")}>
+        <div id={'block_' + task_block.block_id} className={"lesson-block mt-6 " + (edit === true ? "edit " : " ") + (task_block.file_type_id == 3 ? task_block.image_width : "col-span-12")}>
             {edit === true &&
                 <RoleProvider roles={[2]}>
                     <div className="flex justify-between items-center border-b-active pb-4 mb-4">

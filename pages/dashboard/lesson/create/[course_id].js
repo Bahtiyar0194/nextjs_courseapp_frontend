@@ -128,13 +128,13 @@ export default function CreateLesson() {
                     {intl.formatMessage({ id: "lesson.create_lesson" })}
                 </Breadcrumb>
                 <div className="col-span-12">
-                    <div id="create_wrap" className="form-group mt-2">
+                    <div id="create_wrap" className="form-group-border active label-inactive mb-6">
                         <AiOutlineRead />
                         <input onInput={e => setLessonName(e.target.value)} type="text" value={lesson_name} placeholder=" " />
                         <label className={(error.lesson_name && 'label-error')}>{error.lesson_name ? error.lesson_name : intl.formatMessage({ id: "lesson_name" })}</label>
                     </div>
 
-                    <div className="form-group mt-2">
+                    <div className="form-group-border active label-inactive mb-6">
                         <AiOutlineRead />
                         <textarea onInput={e => setLessonDescription(e.target.value)} value={lesson_description} placeholder=" "></textarea>
                         <label className={(error.lesson_description && 'label-error')}>{error.lesson_description ? error.lesson_description : intl.formatMessage({ id: "lesson_description" })}</label>

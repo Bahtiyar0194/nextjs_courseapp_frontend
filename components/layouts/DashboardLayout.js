@@ -3,7 +3,7 @@ import ThemeChanger from "../ui/ThemeChanger";
 import Locales from "../ui/Locales";
 import Link from "next/link";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineLogout, AiOutlineDashboard, AiOutlinePlaySquare, AiOutlineTeam, AiOutlineRead, AiOutlineSetting, AiOutlineFile, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineDashboard, AiOutlinePlaySquare, AiOutlineTeam, AiOutlineRead, AiOutlineSetting, AiOutlineFile, AiOutlineUser, AiOutlineCheckSquare } from "react-icons/ai";
 import AuthProvider from "../../services/AuthProvider";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -157,7 +157,10 @@ export default function DashboardLayout(props) {
                     <Link href={'/dashboard/courses/my-courses'}><AiOutlinePlaySquare /><span>{intl.formatMessage({ id: "page.my_courses.title" })}</span></Link>
                     <RoleProvider roles={[2]}>
                         <Link href={'/dashboard/disk'}><AiOutlineFile /><span>{intl.formatMessage({ id: "subscription_plan.disk_space" })}</span></Link>
-                        <Link href={'/dashboard/users'}><AiOutlineTeam /><span>{intl.formatMessage({ id: "page.users.title" })}</span></Link>
+                        <Link href={'/dashboard/users-groups'}><AiOutlineTeam /><span>{intl.formatMessage({ id: "page.users.title" })}</span></Link>
+                    </RoleProvider>
+                    <RoleProvider roles={[2,3]}> 
+                        <Link href={'/dashboard/tasks'}><AiOutlineCheckSquare /><span>{intl.formatMessage({ id: "page.tasks.title" })}</span></Link>
                     </RoleProvider>
                 </div>
                 <div className="db__content">

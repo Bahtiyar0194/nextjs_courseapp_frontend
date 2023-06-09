@@ -118,13 +118,13 @@ export default function CreateTask() {
                 </Breadcrumb>
 
                 <div className="col-span-12">
-                    <div id="create_wrap" className="form-group mt-2">
+                    <div id="create_wrap" className="form-group-border label-inactive active mt-4">
                         <AiOutlineFileDone />
                         <input onInput={e => setTaskName(e.target.value)} type="text" value={task_name} placeholder=" " />
                         <label className={error.task_name && 'label-error'}>{error.task_name ? error.task_name : intl.formatMessage({ id: "task.task_name" })}</label>
                     </div>
 
-                    <div className="form-group mt-2">
+                    <div className="form-group-border label-inactive active mt-4">
                         <AiOutlineFileDone />
                         <textarea cols="20" onInput={e => setTaskDescription(e.target.value)} value={task_description} placeholder=" "></textarea>
                         <label className={error.task_description && 'label-error'}>{error.task_description ? error.task_description : intl.formatMessage({ id: "task.task_description" })}</label>

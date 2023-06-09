@@ -110,7 +110,9 @@
     "page.disk.welcome": "Добро пожаловать в хранилище файлов!",
     "page.disk.welcome_description": "Загружайте изображения, видео и аудиоматериалы для использования их в Ваших уроках или заданиях.",
 
-    "page.users.title": "Пользователи",
+    "page.users.title": "Пользователи и группы",
+    "page.users": "Пользователи",
+    "page.users.list_of_users": "Список участников",
     "page.users.invite_user_title": "Приглашение нового пользователя",
     "page.users.edit_user_title": "Редактирование данных пользователя",
     "page.users.user_roles": "Роли пользователя",
@@ -124,6 +126,18 @@
     "page.users.delete_photo": "Удалить фото",
     "page.users.delete_profile_photo": "Удаление фото профиля",
     "page.users.delete_profile_photo_confirm": "Вы действительно хотите удалить данное фото?",
+
+    "page.groups.title": "Группы",
+    "page.groups.create_group_title": "Создание группы",
+    "page.groups.create_group": "Создать группу",
+    "page.group.form.group_name": "Название группы",
+    "page.group.form.group_description": "Краткое описание группы",
+    "page.group.form.add_to_group": "Добавить в группу",
+    "page.group.form.delete_from_group": "Удалить из группы",
+    "page.group.form.added_users": "Количество участников",
+    "page.group.form.choose_a_mentor": "Выберите куратора",
+    "page.group.form.group_mentor": "Куратор группы",
+    "page.group.search_filter": "Фильтр для поиска группы",
 
     "page.site_settings.title": "Настройки сайта",
     "page.site.school_name": "Название школы",
@@ -196,6 +210,8 @@
     "codeModal.code_text": "Код",
     "codeModal.enter_the_code": "Введите код",
 
+
+    "page.tasks.title": "Выполненные задания",
     "task": "Задание",
     "task.title": "Добавление задания",
     "task.task_name": "Название задания",

@@ -108,7 +108,9 @@
     "page.disk.welcome": "Welcome to the file storage!",
     "page.disk.welcome_description": "Upload images, videos, and audio materials to use in your lessons or tasks.",
 
-    "page.users.title": "Users",
+    "page.users.title": "Users and groups",
+    "page.users.list_of_users": "List of members",
+    "page.users": "Users",
     "page.users.invite_user_title": "Inviting a new user",
     "page.users.edit_user_title": "Editing user data",
     "page.users.user_roles": "User roles",
@@ -122,6 +124,18 @@
     "page.users.delete_photo": "Delete a photo",
     "page.users.delete_profile_photo": "Deleting a profile photo",
     "page.users.delete_profile_photo_confirm": "Do you really want to delete this photo?",
+
+    "page.groups.title": "Groups",
+    "page.groups.create_group_title": "Creating a group",
+    "page.groups.create_group": "Create group",
+    "page.group.form.group_name": "Group name",
+    "page.group.form.group_description": "Group description",
+    "page.group.form.add_to_group": "Add to group",
+    "page.group.form.delete_from_group": "Delete from group",
+    "page.group.form.added_users": "Members",
+    "page.group.form.choose_a_mentor": "Choose a mentor",
+    "page.group.form.group_mentor": "Group mentor",
+    "page.group.search_filter": "Group search filter",
 
     "page.site_settings.title": "Site settings",
     "page.site.school_name": "School name",
@@ -195,6 +209,7 @@
     "codeModal.code_text": "Code",
     "codeModal.enter_the_code": "Enter the code",
 
+    "page.tasks.title": "Completed tasks",
     "task": "Task",
     "task.title": "Adding a task",
     "task.task_name": "Task name",
@@ -342,7 +357,9 @@
     "theme.delete_logo_title": "Deleting a logo",
     "theme.delete_logo_confirm": "Do you really want to delete this logo?",
     "theme.light_logo": "Logo for light theme",
+    "theme.light_logo_title": "Uploading a logo for a light theme",
     "theme.dark_logo": "Logo for dark theme",
+    "theme.dark_logo_title": "Uploading a logo for a dark theme",
 
     "theme.default_color_scheme": "Default color scheme",
     "theme.select_default_color_scheme": "Select default color scheme",

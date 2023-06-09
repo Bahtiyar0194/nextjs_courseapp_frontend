@@ -69,7 +69,7 @@ const PreviewFileModal = ({ file, closeModal, getFiles, edit_file_name, setEditF
                 }
 
                 {file.file_type_id == 3 &&
-                    <img className='w-full border-active rounded-lg' src={API_URL + '/media/image/' + file.file_id} />
+                    <img className='w-full border-inactive rounded-lg' src={API_URL + '/media/image/' + file.file_id} />
                 }
 
                 <div className="btn-wrap mt-4">

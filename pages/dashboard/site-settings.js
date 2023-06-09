@@ -4,7 +4,8 @@ import { useIntl } from "react-intl";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Breadcrumb from "../../components/ui/Breadcrumb";
-import { AiOutlineCheck, AiOutlineRead, AiOutlineFormatPainter, AiOutlineFontSize, AiOutlineCrown, AiOutlineDelete, AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
+import { AiOutlineCheck, AiOutlineRead, AiOutlineFormatPainter, AiOutlineFontSize, AiOutlineCrown, AiOutlineDelete, AiOutlineMail, AiOutlinePhone, AiOutlineInstagram, AiOutlineFacebook, AiOutlineWhatsApp, AiOutlineYoutube } from "react-icons/ai";
+import { FaTelegram, FaTiktok } from "react-icons/fa";
 import serialize from 'form-serialize';
 import InputMask from "react-input-mask";
 import ButtonLoader from "../../components/ui/ButtonLoader";
@@ -16,6 +17,7 @@ import Modal from "../../components/ui/Modal";
 import UploadLogoModal from "../../components/site-settings/UploadLogo";
 import API_URL from "../../config/api";
 import DeleteLogoModal from "../../components/site-settings/DeleteLogoModal";
+import { scrollIntoView } from "seamless-scroll-polyfill";
 
 export default function SiteSettings() {
     const [button_loader, setButtonLoader] = useState(false);
@@ -26,6 +28,7 @@ export default function SiteSettings() {
     const [school_attributes, setSchoolAttributes] = useState([]);
 
     const [edit_school_phone, setEditSchoolPhone] = useState('');
+    const [edit_school_whatsapp, setEditSchoolWhatsApp] = useState('');
 
     const [light_logo_modal, setLightLogoModal] = useState(false);
     const [light_logo_file, setLightLogoFile] = useState(null);
@@ -41,6 +44,38 @@ export default function SiteSettings() {
     const saveSchoolSubmit = async (e) => {
         e.preventDefault();
         setButtonLoader(true);
+
+        const form_body = serialize(e.currentTarget, { hash: true, empty: true });
+
+        await axios.post('school/update', form_body)
+            .then(response => {
+                dispatch(setSchoolData(response.data.school));
+                router.push('/dashboard');
+            }).catch(err => {
+                if (err.response) {
+                    if (err.response.status == 422) {
+                        setError(err.response.data.data);
+                        setButtonLoader(false);
+                        let card = document.querySelector('#edit_wrap');
+                        setTimeout(() => {
+                            scrollIntoView(card, { behavior: "smooth", block: "start", inline: "center" });
+                        }, 200);
+                    }
+                    else {
+                        router.push({
+                            pathname: '/error',
+                            query: {
+                                status: err.response.status,
+                                message: err.response.data.message,
+                                url: err.request.responseURL,
+                            }
+                        });
+                    }
+                }
+                else {
+                    router.push('/error');
+                }
+            });
     }
 
     const setSchoolSettings = async () => {
@@ -122,7 +157,7 @@ export default function SiteSettings() {
                 <Breadcrumb>
                     {intl.formatMessage({ id: "page.site_settings.title" })}
                 </Breadcrumb>
-                <div className="col-span-12 lg:col-span-12">
+                <div id="edit_wrap" className="col-span-12 lg:col-span-12">
                     <div className="title-wrap">
                         <h2>{intl.formatMessage({ id: "page.site_settings.title" })}</h2>
                     </div>
@@ -144,17 +179,53 @@ export default function SiteSettings() {
 
                         <div className="form-group-border active label-inactive mt-6">
                             <AiOutlineMail />
-                            <input autoComplete="edit_school_email" type="email" defaultValue={school.email} name="email" placeholder=" " />
+                            <input autoComplete="edit_school_email" type="text" defaultValue={school.email} name="email" placeholder=" " />
                             <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
                         </div>
 
                         <div className="form-group-border active label-inactive mt-6">
                             <AiOutlinePhone />
-                            <InputMask autoComplete="edit_school_phone" mask="+7 (799) 999-9999" onInput={e => setEditSchoolPhone(e.target.value)} value={edit_school_phone} name="phone" />
+                            <InputMask autoComplete="edit_school_phone" mask="+7 (799) 999-9999" onInput={e => setEditSchoolPhone(e.target.value)} value={edit_school_phone} name="phone" placeholder=" " />
                             <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
                         </div>
 
-                        <div className="btn-wrap mt-4">
+                        <div className="form-group-border active label-inactive mt-6">
+                            <AiOutlineInstagram />
+                            <input autoComplete="edit_school_instagram" type="text" defaultValue={school.instagram} name="instagram" placeholder=" " />
+                            <label className={(error.instagram && 'label-error')}>{error.instagram ? error.instagram : "Instagram"}</label>
+                        </div>
+
+                        <div className="form-group-border active label-inactive mt-6">
+                            <AiOutlineFacebook />
+                            <input autoComplete="edit_school_facebook" type="text" defaultValue={school.facebook} name="facebook" placeholder=" " />
+                            <label className={(error.facebook && 'label-error')}>{error.facebook ? error.facebook : "Facebook"}</label>
+                        </div>
+
+                        <div className="form-group-border active label-inactive mt-6">
+                            <FaTiktok />
+                            <input autoComplete="edit_school_tiktok" type="text" defaultValue={school.tiktok} name="tiktok" placeholder=" " />
+                            <label className={(error.tiktok && 'label-error')}>{error.tiktok ? error.tiktok : "TikTok"}</label>
+                        </div>
+
+                        <div className="form-group-border active label-inactive mt-6">
+                            <AiOutlineWhatsApp />
+                            <InputMask autoComplete="edit_school_whatsapp" mask="+7 (799) 999-9999" onInput={e => setEditSchoolWhatsApp(e.target.value)} value={edit_school_whatsapp} name="whatsapp" placeholder=" " />
+                            <label className={(error.whatsapp && 'label-error')}>{error.whatsapp ? error.whatsapp : "Whatsapp"}</label>
+                        </div>
+
+                        <div className="form-group-border active label-inactive mt-6">
+                            <FaTelegram />
+                            <input autoComplete="edit_school_telegram" type="text" defaultValue={school.telegram} name="telegram" placeholder=" " />
+                            <label className={(error.telegram && 'label-error')}>{error.telegram ? error.telegram : "Telegram"}</label>
+                        </div>
+
+                        <div className="form-group-border active label-inactive mt-6">
+                            <AiOutlineYoutube />
+                            <input autoComplete="edit_school_youtube" type="text" defaultValue={school.youtube} name="whatsapp" placeholder=" " />
+                            <label className={(error.youtube && 'label-error')}>{error.youtube ? error.youtube : "Youtube"}</label>
+                        </div>
+
+                        <div className="btn-wrap mt-6">
                             <button disabled={button_loader} className="btn btn-primary" type="submit">
                                 {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
                                 <span>{intl.formatMessage({ id: "save_changes" })}</span>
@@ -164,71 +235,8 @@ export default function SiteSettings() {
                 </div>
 
                 <div className="col-span-12 lg:col-span-6">
-                    <div className="custom-grid">
-                        {(school.theme_id == 1 || school.theme_id == 2) &&
-                            <div className="col-span-12">
-                                <div className="border-active p-4 rounded-lg">
-                                    <div className="flex gap-4 flex-wrap">
-                                        {school.light_theme_logo ?
-                                            <>
-                                                <div className="border-active border-dashed p-1">
-                                                    <div className="bg-white w-48 h-fit">
-                                                        <img className="w-full h-auto" src={API_URL + '/school/get_logo/' + school.light_theme_logo + '/light_logo'} />
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 className="mb-2">{intl.formatMessage({ id: "theme.light_logo" })}</h5>
-                                                    <div className="btn-wrap">
-                                                        <button className="btn btn-sm btn-outline-primary" onClick={e => setLightLogoModal(true)}><AiOutlineCrown /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.change_logo" })}</span></button>
-                                                        <button className="btn btn-sm btn-outline-danger" onClick={e => deleteLogo('light_logo')}><AiOutlineDelete /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.delete_logo" })}</span></button>
-                                                    </div>
-                                                </div>
-                                            </>
-                                            :
-                                            <div>
-                                                <h5 className="mb-2">{intl.formatMessage({ id: "theme.light_logo" })}</h5>
-                                                <button className="btn btn-sm btn-primary" onClick={e => setLightLogoModal(true)}><AiOutlineCrown /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.upload_logo" })}</span></button>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
-                        {(school.theme_id == 1 || school.theme_id == 3) &&
-                            <div className="col-span-12">
-                                <div className="border-active p-4 rounded-lg">
-                                    <div className="flex gap-4 flex-wrap">
-                                        {school.dark_theme_logo ?
-                                            <>
-                                                <div className="border-active border-dashed p-1">
-                                                    <div className="bg-black w-48 h-fit">
-                                                        <img className="w-full h-auto" src={API_URL + '/school/get_logo/' + school.dark_theme_logo + '/dark_logo'} />
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <h5 className="mb-2">{intl.formatMessage({ id: "theme.dark_logo" })}</h5>
-                                                    <div className="btn-wrap">
-                                                        <button className="btn btn-sm btn-outline-primary" onClick={e => setDarkLogoModal(true)}><AiOutlineCrown /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.change_logo" })}</span></button>
-                                                        <button className="btn btn-sm btn-outline-danger" onClick={e => deleteLogo('dark_logo')}><AiOutlineDelete /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.delete_logo" })}</span></button>
-                                                    </div>
-                                                </div>
-                                            </>
-                                            :
-                                            <div>
-                                                <h5 className="mb-2">{intl.formatMessage({ id: "theme.dark_logo" })}</h5>
-                                                <button className="btn btn-sm btn-primary" onClick={e => setDarkLogoModal(true)}><AiOutlineCrown /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.upload_logo" })}</span></button>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-
-
                     <form id="settings_form" onSubmit={e => saveSettingsSubmit(e)} encType="multipart/form-data">
-                        <div className="form-group-border active label-inactive mt-6">
+                        <div className="form-group-border active label-inactive">
                             <AiOutlineFormatPainter />
                             <select name="theme_id" defaultValue={school.theme_id} onChange={debounceHandler(e => setSchoolSettings(), 500)}>
                                 <option disabled value="">{intl.formatMessage({ id: "theme.select_default_theme" })}</option>
@@ -239,6 +247,68 @@ export default function SiteSettings() {
                                 }
                             </select>
                             <label className={(error.theme_id && 'label-error')}>{error.theme_id ? error.theme_id : intl.formatMessage({ id: "theme.default_theme" })}</label>
+                        </div>
+
+                        <div className="custom-grid mt-6">
+                            {(school.theme_id == 1 || school.theme_id == 2) &&
+                                <div className="col-span-12">
+                                    <div className="border-active p-4 rounded-lg">
+                                        <div className="flex gap-4 flex-wrap">
+                                            {school.light_theme_logo ?
+                                                <>
+                                                    <div className="border-active border-dashed p-1">
+                                                        <div className="bg-white w-48 h-fit">
+                                                            <img className="w-full h-auto" src={API_URL + '/school/get_logo/' + school.light_theme_logo + '/light_logo'} />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <h5 className="mb-2">{intl.formatMessage({ id: "theme.light_logo" })}</h5>
+                                                        <div className="btn-wrap">
+                                                            <button type="button" className="btn btn-sm btn-outline-primary" onClick={e => setLightLogoModal(true)}><AiOutlineCrown /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.change_logo" })}</span></button>
+                                                            <button type="button" className="btn btn-sm btn-outline-danger" onClick={e => deleteLogo('light_logo')}><AiOutlineDelete /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.delete_logo" })}</span></button>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                                :
+                                                <div>
+                                                    <h5 className="mb-2">{intl.formatMessage({ id: "theme.light_logo" })}</h5>
+                                                    <button type="button" className="btn btn-sm btn-primary" onClick={e => setLightLogoModal(true)}><AiOutlineCrown /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.upload_logo" })}</span></button>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            {(school.theme_id == 1 || school.theme_id == 3) &&
+                                <div className="col-span-12">
+                                    <div className="border-active p-4 rounded-lg">
+                                        <div className="flex gap-4 flex-wrap">
+                                            {school.dark_theme_logo ?
+                                                <>
+                                                    <div className="border-active border-dashed p-1">
+                                                        <div className="bg-black w-48 h-fit">
+                                                            <img className="w-full h-auto" src={API_URL + '/school/get_logo/' + school.dark_theme_logo + '/dark_logo'} />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <h5 className="mb-2">{intl.formatMessage({ id: "theme.dark_logo" })}</h5>
+                                                        <div className="btn-wrap">
+                                                            <button type="button" className="btn btn-sm btn-outline-primary" onClick={e => setDarkLogoModal(true)}><AiOutlineCrown /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.change_logo" })}</span></button>
+                                                            <button type="button" className="btn btn-sm btn-outline-danger" onClick={e => deleteLogo('dark_logo')}><AiOutlineDelete /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.delete_logo" })}</span></button>
+                                                        </div>
+                                                    </div>
+                                                </>
+                                                :
+                                                <div>
+                                                    <h5 className="mb-2">{intl.formatMessage({ id: "theme.dark_logo" })}</h5>
+                                                    <button type="button" className="btn btn-sm btn-primary" onClick={e => setDarkLogoModal(true)}><AiOutlineCrown /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.upload_logo" })}</span></button>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
 
                         <div className="form-group-border active label-inactive mt-6">

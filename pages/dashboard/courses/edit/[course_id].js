@@ -319,7 +319,7 @@ export default function EditCourse() {
                                     <div className='card card-inactive p-4'>
                                         <div className='custom-grid'>
                                             <div className='col-span-12 lg:col-span-5'>
-                                                <img className="w-full border-active rounded-lg" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />
+                                                <img className="w-full border-inactive rounded-lg" src={API_URL + '/courses/images/posters/' + course.course_poster_file} />
                                             </div>
                                             <div className='col-span-12 lg:col-span-7'>
                                                 <h4>{intl.formatMessage({ id: "page.my_courses.form.current_course_poster" })}</h4>

@@ -110,7 +110,9 @@
     "page.disk.welcome": "Файл сақтау орнына қош келдіңіз!",
     "page.disk.welcome_description": "Сабақтарыңызда немесе тапсырмаларыңызда пайдалануға кескіндер, бейнежазбалар және аудиожазбаларды жүктеп алыңыз.",
 
-    "page.users.title": "Қолданушылар",
+    "page.users.title": "Қолданушылар мен топтар",
+    "page.users.list_of_users": "Қатысушылар тізімі",
+    "page.users": "Қолданушылар",
     "page.users.invite_user_title": "Жаңа қолданушыны шақыру",
     "page.users.edit_user_title": "Қолданушының деректерін қайта өңдеу",
     "page.users.user_roles": "Қолданушының рөлдері",
@@ -124,6 +126,18 @@
     "page.users.delete_photo": "Фотосуретті жою",
     "page.users.delete_profile_photo": "Профильдің фотосуретін жою",
     "page.users.delete_profile_photo_confirm": "Сіз расыменде осы фотосуретті жойғыңыз келеді ме?",
+
+    "page.groups.title": "Топтар",
+    "page.groups.create_group_title": "Топ құру",
+    "page.groups.create_group": "Топ құру",
+    "page.group.form.group_name": "Топтың атауы",
+    "page.group.form.group_description": "Топтың қысқаша сипаттамасы",
+    "page.group.form.add_to_group": "Топқа қосу",
+    "page.group.form.delete_from_group": "Топтан шығару",
+    "page.group.form.added_users": "Қатысушылар саны",
+    "page.group.form.choose_a_mentor": "Кураторды таңдаңыз",
+    "page.group.form.group_mentor": "Топтың кураторы",
+    "page.group.search_filter": "Топты іздеу сүзгісі",
 
     "page.site_settings.title": "Сайттың баптамалары",
     "page.site.school_name": "Мектептің атауы",
@@ -204,6 +218,7 @@
     "task.tasks_for_this_lesson": "Осы сабақтың тапсырмалары",
     "task.number_of_tasks": "Тапсырмалардың саны",
 
+    "page.tasks.title": "Орындалған тапсырмалар",
     "task.test.title": "Тесттік тапсырма",
     "task.add_test": "Тест қосу",
     "task.test_name": "Тесттің атауы",
@@ -344,7 +359,9 @@
     "theme.delete_logo_title": "Логотипті жою",
     "theme.delete_logo_confirm": "Сіз расыменде осы логотипті жойғыңыз келеді ме?",
     "theme.light_logo": "Жарық тақырыпқа арналған логотип",
+    "theme.light_logo_title": "Жарық тақырыпқа арналған логотипті жүктеу",
     "theme.dark_logo": "Қараңғы тақырыпқа арналған логотип",
+    "theme.dark_logo_title": "Қараңғы тақырыпқа арналған логотипті жүктеу",
 
     "theme.default_color_scheme": "Әдеттегі түс схемасы",
     "theme.select_default_color_scheme": "Түс схемасын таңдаңыз",

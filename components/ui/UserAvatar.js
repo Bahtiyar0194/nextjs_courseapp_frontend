@@ -1,7 +1,7 @@
 import API_URL from "../../config/api";
 const UserAvatar = ({ user_avatar, className }) => {
     return (
-        <div className={"rounded-full flex items-center justify-center border-active " + className}>
+        <div className={"rounded-full flex items-center justify-center border-inactive " + className}>
             {user_avatar
                 ?
                 <div style={{ 'backgroundImage': 'url(' + API_URL + '/auth/get_avatar/' + user_avatar + ')' }} className={"bg-cover bg-no-repeat bg-center rounded-full w-full h-full"}>

@@ -42,7 +42,7 @@ export default function MainLayout(props) {
     <>
       <Header title={props.title} />
       <StickyBox className="relative z-30">
-        <div className="border-b-active bg-active">
+        <div className="border-b-inactive bg-active">
           <div className="custom-container py-6">
             <div className="flex items-center justify-between">
               <DefaultLogo />
@@ -69,7 +69,7 @@ export default function MainLayout(props) {
 
             <div className={"hidden pt-6 " + (show_hide_main_menu === true && 'max-lg:flex')}>
               <div className="flex flex-col gap-y-2 w-full">
-                <MainNavigationMenu className={'text-lg pb-3 font-medium border-b-active'} />
+                <MainNavigationMenu className={'text-lg pb-3 font-medium border-b-inactive'} />
                 <div className="flex gap-2 pt-2">
                   <AuthNavigationMenu user={user} />
                 </div>
@@ -80,7 +80,7 @@ export default function MainLayout(props) {
         </div>
       </StickyBox>
       {props.children}
-      <section className="bg-active border-t-active py-10">
+      <section className="bg-active border-t-inactive py-10">
         <div className="custom-container">
           <div className="custom-grid">
             <div className="col-span-12 lg:col-span-4">

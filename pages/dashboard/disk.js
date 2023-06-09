@@ -308,19 +308,19 @@ export default function Files() {
                                                                     {
                                                                         file.file_type_id == 1
                                                                             ?
-                                                                            <div className="w-10 h-10 rounded-lg bg-active border-active flex items-center justify-center text-2xl">
+                                                                            <div className="w-10 h-10 rounded-lg bg-active border-inactive flex items-center justify-center text-2xl">
                                                                                 <AiOutlinePlayCircle />
                                                                             </div>
                                                                             :
                                                                             file.file_type_id == 2
                                                                                 ?
-                                                                                <div className="w-10 h-10 rounded-lg bg-active border-active flex items-center justify-center text-2xl">
+                                                                                <div className="w-10 h-10 rounded-lg bg-active border-inactive flex items-center justify-center text-2xl">
                                                                                     <AiOutlineAudio />
                                                                                 </div>
                                                                                 :
                                                                                 file.file_type_id == 3
                                                                                     ?
-                                                                                    <div className="w-10 h-10 bg-center bg-cover bg-no-repeat border-active rounded-lg" style={{ backgroundImage: "url(" + API_URL + '/media/image/' + file.file_id + ")" }}></div>
+                                                                                    <div className="w-10 h-10 bg-center bg-cover bg-no-repeat border-inactive rounded-lg" style={{ backgroundImage: "url(" + API_URL + '/media/image/' + file.file_id + ")" }}></div>
                                                                                     :
                                                                                     <></>
                                                                     }
@@ -344,19 +344,19 @@ export default function Files() {
                                                             {
                                                                 file.file_type_id == 1
                                                                     ?
-                                                                    <div className="w-full h-24 sm:h-48 lg:h-36 rounded-lg bg-active border-active flex items-center justify-center text-inactive text-5xl">
+                                                                    <div className="w-full h-24 sm:h-48 lg:h-36 rounded-lg bg-active border-inactive flex items-center justify-center text-inactive text-5xl">
                                                                         <AiOutlinePlayCircle />
                                                                     </div>
                                                                     :
                                                                     file.file_type_id == 2
                                                                         ?
-                                                                        <div className="w-full h-24 sm:h-48 lg:h-36 rounded-lg bg-active border-active flex items-center justify-center text-inactive text-5xl">
+                                                                        <div className="w-full h-24 sm:h-48 lg:h-36 rounded-lg bg-active border-inactive flex items-center justify-center text-inactive text-5xl">
                                                                             <AiOutlineAudio />
                                                                         </div>
                                                                         :
                                                                         file.file_type_id == 3
                                                                             ?
-                                                                            <div className="w-full h-24 sm:h-48 lg:h-36 bg-center bg-cover bg-no-repeat rounded-lg border-active" style={{ backgroundImage: "url(" + API_URL + '/media/image/' + file.file_id + ")" }}></div>
+                                                                            <div className="w-full h-24 sm:h-48 lg:h-36 bg-center bg-cover bg-no-repeat rounded-lg border-inactive" style={{ backgroundImage: "url(" + API_URL + '/media/image/' + file.file_id + ")" }}></div>
                                                                             :
                                                                             <></>
                                                             }
@@ -395,7 +395,7 @@ export default function Files() {
                             :
                             <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
                         :
-                        <div className="p-6 bg-active border-active rounded-lg flex items-center flex-col">
+                        <div className="p-6 bg-active border-inactive rounded-lg flex items-center flex-col">
                             <h3 className="text-center mb-2">{intl.formatMessage({ id: "page.disk.welcome" })}</h3>
                             <p className="text-center mb-4">{intl.formatMessage({ id: "page.disk.welcome_description" })}</p>
                             <UploadFileModals getDiskData={getDiskData} />

@@ -44,7 +44,7 @@ export default function Index() {
                         </div>
                     </div>
                 </section>
-                <section className="bg-active border-t-active py-20">
+                <section className="bg-active border-t-inactive py-20">
                     <div className="custom-container">
                         <div className="custom-grid">
                             <div className="col-span-12">
@@ -81,7 +81,7 @@ export default function Index() {
                         </div>
                     </div>
                 </section>
-                <section className="bg-inactive border-t-active py-20">
+                <section className="bg-inactive border-t-inactive py-20">
                     <div className="custom-container">
                         <div className="custom-grid">
                             <div className="col-span-12">
@@ -92,7 +92,7 @@ export default function Index() {
                         </div>
                     </div>
                 </section>
-                <section className="bg-active border-t-active py-20">
+                <section className="bg-active border-t-inactive py-20">
                     <div className="custom-container">
                         <div className="custom-grid">
                             <div className="col-span-12">
@@ -104,7 +104,7 @@ export default function Index() {
                         </div>
                     </div>
                 </section>
-                <section className="bg-inactive border-t-active py-20">
+                <section className="bg-inactive border-t-inactive py-20">
                     <div className="custom-container">
                         <div className="custom-grid">
                             <div className="col-span-12 lg:col-span-12">

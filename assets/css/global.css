@@ -583,43 +583,43 @@ body.roboto_body{
 }
 
 .border-active{
-    @apply border border-gray-300 dark:border-dark-200;
+    @apply border border-dark-500 dark:border-white;
 }
 
 .border-t-active{
-    @apply border-t border-gray-300 dark:border-dark-200;
+    @apply border-t border-dark-500 dark:border-white;
 }
 
 .border-r-active{
-    @apply border-r border-gray-300 dark:border-dark-200;
+    @apply border-r border-dark-500 dark:border-white;
 }
 
 .border-b-active{
-    @apply border-b border-gray-300 dark:border-dark-200;
+    @apply border-b border-dark-500 dark:border-white;
 }
 
 .border-l-active{
-    @apply border-l border-gray-300 dark:border-dark-200;
+    @apply border-l border-dark-500 dark:border-white;
 }
 
 .border-inactive{
-    @apply border border-gray-500 dark:border-dark-200;
+    @apply border border-gray-300 dark:border-dark-200;
 }
 
 .border-t-inactive{
-    @apply border-t border-gray-500 dark:border-dark-200;
+    @apply border-t border-gray-300 dark:border-dark-200;
 }
 
 .border-r-inactive{
-    @apply border-r border-gray-500 dark:border-dark-200;
+    @apply border-r border-gray-300 dark:border-dark-200;
 }
 
 .border-b-inactive{
-    @apply border-b border-gray-500 dark:border-dark-200;
+    @apply border-b border-gray-300 dark:border-dark-200;
 }
 
 .border-l-inactive{
-    @apply border-l border-gray-500 dark:border-dark-200;
+    @apply border-l border-gray-300 dark:border-dark-200;
 }
 
 .border-success{
@@ -760,7 +760,7 @@ ol{
 }
 
 ul{
-    @apply list-disc pl-4 mb-2;
+    @apply list-disc pl-4;
 }
 
 ol > li::marker,
@@ -770,7 +770,7 @@ ul > li::marker
 }
 
 hr{
-    @apply border-active my-3;
+    @apply border-inactive my-3;
 }
 
 blockquote{
@@ -786,7 +786,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .table{
-    @apply w-full overflow-x-auto rounded-lg shadow-md flex border-active;
+    @apply w-full overflow-x-auto rounded-lg shadow-md flex border-inactive;
 }
 
 .table > table{
@@ -794,7 +794,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .table > table > thead{
-    @apply border-b-active bg-active;
+    @apply border-b-inactive bg-active;
 }
 
 .table > table > tbody > tr{
@@ -822,11 +822,11 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .table.bordered{
-    @apply border-active;
+    @apply border-inactive;
 }
 
 .table.bordered > table > tbody > tr{
-    @apply border-b-active;
+    @apply border-b-inactive;
 }
 
 .table.bordered > table > tbody > tr:last-child{
@@ -837,7 +837,7 @@ input[type=number]::-webkit-outer-spin-button {
 .table.bordered > table > thead > tr > td,
 .table.bordered > table > tbody > tr > th,
 .table.bordered > table > tbody > tr > td{
-    @apply border-r-active;
+    @apply border-r-inactive;
 }
 .table.bordered > table > thead > tr > th:last-child,
 .table.bordered > table > thead > tr > td:last-child,
@@ -941,7 +941,7 @@ select option {
 .form-group > input, 
 .form-group > select, 
 .form-group > textarea {
-    @apply border-0 bg-transparent w-full text-active py-3 pl-8 pr-2 relative; 
+    @apply border-0 bg-transparent w-full text-active py-3 pl-8 pr-2 relative z-10; 
 }
 
 .form-group > label {
@@ -982,13 +982,13 @@ select option {
 }
 
 .form-group-border.active{
-    @apply border-active;
+    @apply border-inactive;
 }
 
 .form-group-border > input, 
 .form-group-border > select, 
 .form-group-border > textarea {
-    @apply border-0 bg-transparent w-full text-active py-2 pl-9 pr-2.5 relative;
+    @apply border-0 bg-transparent w-full text-active py-2 pl-9 pr-2.5 relative z-10;
 }
 
 .form-group-border > label {
@@ -1182,7 +1182,7 @@ select option {
 }
 
 .title-wrap{
-    @apply flex flex-wrap justify-between gap-4 mb-2;
+    @apply flex flex-wrap justify-between gap-4;
 }
 
 .title-wrap > h1,
@@ -1251,7 +1251,7 @@ select option {
 }
 
 .btn-active{
-    @apply border-active text-active;
+    @apply border-inactive text-active;
 }
 
 .btn-primary{
@@ -1271,7 +1271,7 @@ select option {
 }
 
 .btn-light{
-    @apply bg-active text-active border-active border;
+    @apply bg-active text-active border-inactive border;
 }
 
 .btn-light:hover{
@@ -1314,7 +1314,7 @@ select option {
 .btn-down,
 .btn-delete,
 .btn-edit{
-    @apply rounded-lg p-1.5 border-active text-inactive duration-200;
+    @apply rounded-lg p-1.5 border-inactive text-inactive duration-200;
 }
 
 .btn-up:hover,
@@ -1356,7 +1356,7 @@ select option {
 }
 
 .per-page-select.active > select {
-    @apply border-active;
+    @apply border-inactive;
 }
 
 .per-page-select > label {
@@ -1390,7 +1390,7 @@ select option {
 }
 
 .badge-light{
-    @apply border-active bg-active text-active;
+    @apply border-inactive bg-active text-active;
 }
 
 .badge-primary{
@@ -1402,7 +1402,7 @@ select option {
 }
 
 .alert{
-    @apply p-4 text-center border-active text-inactive rounded-lg; 
+    @apply p-4 text-center border-inactive text-inactive rounded-lg; 
 }
 
 .alert.light{
@@ -1426,7 +1426,7 @@ select option {
 }
 
 .card {
-    @apply bg-active rounded-lg max-w-full relative border-active overflow-hidden shadow-lg;
+    @apply bg-active rounded-lg max-w-full relative border-inactive overflow-hidden shadow-lg;
 }
 
 .card.card-inactive{
@@ -1447,7 +1447,7 @@ select option {
 }
 
 .tag-wrap{
-    @apply bg-active rounded-lg border-active flex flex-wrap gap-2;
+    @apply bg-active rounded-lg border-inactive flex flex-wrap gap-2;
 }
 
 .tag-wrap.inactive{
@@ -1483,7 +1483,7 @@ select option {
 }
 
 .tag-light{
-    @apply border-active bg-active text-active;
+    @apply border-inactive bg-active text-active;
 }
 
 .tag-primary{
@@ -1494,12 +1494,44 @@ select option {
     @apply border-corp border text-corp;
 }
 
+.list-wrap{
+    @apply bg-active rounded-lg border-inactive;
+}
+
+.list-wrap.inactive{
+    @apply bg-inactive;
+}
+
+.list-wrap ~ label{
+    @apply absolute -top-2.5 text-xs left-2 text-inactive bg-active px-1;
+}
+
+.list-wrap.inactive ~ label{
+    @apply bg-inactive;
+}
+
+.list-wrap ~ label.label-error{
+    @apply text-danger;
+}
+
+.list-wrap > div{
+    @apply border-b-inactive py-3 flex flex-wrap gap-2 justify-between items-center;
+}
+
+.list-wrap > div:first-child{
+    @apply pt-0;
+}
+
+.list-wrap > div:last-child{
+    @apply border-none pb-0;
+}
+
 .list-group{
-    @apply bg-active rounded-lg border-active px-4;
+    @apply bg-active rounded-lg border-inactive px-4;
 }
 
 .list-group > li{
-    @apply py-4 border-b-active duration-200 list-none;
+    @apply py-4 border-b-inactive duration-200 list-none;
 }
 
 .list-group > li.section{
@@ -1527,7 +1559,7 @@ select option {
 }
 
 .tasks-list-group > li{
-    @apply border-b-active list-none py-3;
+    @apply border-b-inactive list-none py-3;
 }
 
 .tasks-list-group > li:last-child{
@@ -1548,7 +1580,7 @@ select option {
 }
 
 .modal{
-    @apply bg-active px-6 pt-8 pb-6 lg:px-8 lg:pt-10 lg:pb-8 shadow-md rounded-lg duration-200 w-full relative overflow-hidden;
+    @apply bg-active p-6 shadow-md rounded-lg duration-200 w-full relative overflow-hidden;
     transform: translateY(-2rem)
 }
 
@@ -1592,6 +1624,10 @@ select option {
     transform: translateY(0rem)
 }
 
+.modal-header{
+    @apply pr-6;
+}
+
 .modal-body{
     @apply overflow-y-auto overflow-x-hidden;
     max-height: 90vh;
@@ -1633,18 +1669,18 @@ select option {
 }
 
 .db__header{
-    @apply w-full bg-active flex justify-between items-center px-3 border-b-active;
-    height: 70px;
+    @apply w-full bg-active flex justify-between items-center px-3 border-b-inactive;
+    height: 80px;
 }
 
 .db__sidebar__menu{
-    @apply bg-active px-3 fixed z-30 border-r-active;
-    height: calc(100vh - 69px);
-    top: 69px;
+    @apply bg-active px-3 fixed z-30 border-r-inactive;
+    height: calc(100vh - 79px);
+    top: 79px;
 }
 
 .db__sidebar__menu a{
-    @apply py-3 duration-200 text-active border-b-active flex items-center font-medium;
+    @apply py-3 duration-200 text-active border-b-inactive flex items-center;
 }
 
 .db__sidebar__menu a:hover{
@@ -1669,7 +1705,7 @@ select option {
 
 .db__content{
     @apply pt-3 pb-3 pr-3 w-full relative overflow-auto pl-16;
-    height: calc(100vh - 70px);
+    height: calc(100vh - 80px);
 }
 
 .content-center{
@@ -1678,7 +1714,7 @@ select option {
 }
 
 .dropdown-menu{
-    @apply hidden rounded-lg shadow-xl bg-active text-sm border-active z-30 px-4 border my-2;
+    @apply hidden rounded-lg shadow-xl bg-active text-sm border-inactive z-30 px-4 border my-2;
 }
 
 .dropdown-menu.show{
@@ -1686,7 +1722,7 @@ select option {
 }
 
 .dropdown-menu li{
-    @apply border-b-active py-3 list-none;
+    @apply border-b-inactive py-3 list-none;
 }
 
 .dropdown-menu li:empty{
@@ -1713,6 +1749,34 @@ select option {
     @apply text-lg mr-1;
 }
 
+.tab-header{
+    @apply flex gap-2 mb-6;
+}
+
+.tab-header-item{
+    @apply px-3 py-2 border-inactive rounded-lg hover:cursor-pointer text-inactive flex items-center;
+}
+
+.tab-header-item.active{
+    @apply border-active text-active; 
+}
+
+.tab-header-item > span{
+    @apply ml-1;
+}
+
+.tab-header-item > svg{
+    @apply text-lg;
+}
+
+.tab-body-item{
+    @apply hidden;
+}
+
+.tab-body-item.active{
+    @apply block;
+}
+
 .quill{
     @apply mb-4;
 }
@@ -1732,7 +1796,7 @@ select option {
 .ql-snow.ql-toolbar button, 
 .ql-snow .ql-toolbar button{
     border: 1px solid;
-    @apply mr-1 mt-1.5 border-active border rounded-lg;
+    @apply mr-1 mt-1.5 border-inactive border rounded-lg;
 }
 
 .quill.kk .ql-picker-label[data-value=small]::before,
@@ -1784,11 +1848,11 @@ select option {
 }
 
 .ql-toolbar.ql-snow{
-    @apply bg-active border-active rounded-bl-none rounded-br-none rounded-lg;
+    @apply bg-active border-inactive rounded-bl-none rounded-br-none rounded-lg;
 }
 
 .ql-container.ql-snow{
-    @apply bg-active border-active rounded-tl-none rounded-tr-none rounded-lg text-base;
+    @apply bg-active border-inactive rounded-tl-none rounded-tr-none rounded-lg text-base;
 }
 
 .quill ~ label{
@@ -1834,7 +1898,7 @@ select option {
 
 .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-options,
 .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label{
-    @apply border-active;
+    @apply border-inactive;
 }
 
 .ql-snow.ql-toolbar button:hover .ql-stroke, .ql-snow .ql-toolbar button:hover .ql-stroke, .ql-snow.ql-toolbar button:focus .ql-stroke, .ql-snow .ql-toolbar button:focus .ql-stroke, .ql-snow.ql-toolbar button.ql-active .ql-stroke, .ql-snow .ql-toolbar button.ql-active .ql-stroke, .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke, .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke, .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke, .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke, .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke, .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke, .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke, .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke, .ql-snow.ql-toolbar button:hover .ql-stroke-miter, .ql-snow .ql-toolbar button:hover .ql-stroke-miter, .ql-snow.ql-toolbar button:focus .ql-stroke-miter, .ql-snow .ql-toolbar button:focus .ql-stroke-miter, .ql-snow.ql-toolbar button.ql-active .ql-stroke-miter, .ql-snow .ql-toolbar button.ql-active .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-miter, .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter, .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter{
@@ -1879,7 +1943,7 @@ select option {
 
 .lesson-block.edit,
 .test-question-block.edit{
-    @apply bg-active border-active rounded-lg p-4 duration-200;
+    @apply bg-active border-inactive rounded-lg p-4 duration-200;
 }
 
 .lesson-block.edit:hover,
@@ -1898,7 +1962,7 @@ select option {
 }
 
 .progress{
-    @apply w-full bg-inactive rounded-lg h-2.5 my-4 border-active;
+    @apply w-full bg-inactive rounded-lg h-2.5 my-4 border-inactive;
 }
 
 .progress.sm{
@@ -1921,8 +1985,9 @@ select option {
     @apply bg-danger;
 }
 
-.logo{
-    @apply w-36;
+.logo > img{
+    height: 56px;
+    max-width: 180px
 }
 
 .logo-dark{
@@ -2053,7 +2118,7 @@ select option {
 }
 
 .review-item{
-    @apply py-4 border-t-active;
+    @apply py-4 border-t-inactive;
 }
 
 .review-item:last-child{
