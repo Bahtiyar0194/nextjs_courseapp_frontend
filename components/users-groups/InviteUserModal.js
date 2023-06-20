@@ -7,8 +7,9 @@ import { AiOutlineUser, AiOutlinePhone, AiOutlineMail, AiOutlineEdit } from "rea
 import serialize from 'form-serialize';
 import RoleProvider from "../../services/RoleProvider";
 
-const InviteUserModal = ({ getUsers, setInviteUserPhone, invite_user_phone, loader, setLoader, error, setError, intl, router, closeModal }) => {
+const InviteUserModal = ({ getUsers, loader, setLoader, error, setError, intl, router, closeModal }) => {
     const [roles, setRoles] = useState([]);
+    const [invite_user_phone, setInviteUserPhone] = useState('');
 
     const inviteUserSubmit = async (e) => {
         e.preventDefault();
@@ -31,7 +32,7 @@ const InviteUserModal = ({ getUsers, setInviteUserPhone, invite_user_phone, load
                 setError([]);
                 getUsers();
                 closeModal();
-                
+
                 for (let role of role_inputs) {
                     role.checked = false;
                 }
@@ -97,28 +98,35 @@ const InviteUserModal = ({ getUsers, setInviteUserPhone, invite_user_phone, load
             {loader && <Loader className="overlay" />}
             <div className="modal-body">
                 <form onSubmit={inviteUserSubmit} encType="multipart/form-data">
-                    <div className="form-group-border active mt-6">
-                        <AiOutlineUser />
-                        <input autoComplete="new-first-name" type="text" defaultValue={''} name="first_name" placeholder=" " />
-                        <label className={(error.first_name && 'label-error')}>{error.first_name ? error.first_name : intl.formatMessage({ id: "page.registration.form.first_name" })}</label>
-                    </div>
-
-                    <div className="form-group-border active mt-6">
-                        <AiOutlineUser />
-                        <input autoComplete="new-last-name" type="text" defaultValue={''} name="last_name" placeholder=" " />
-                        <label className={(error.last_name && 'label-error')}>{error.last_name ? error.last_name : intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
-                    </div>
-
-                    <div className="form-group-border active mt-6">
-                        <AiOutlineMail />
-                        <input autoComplete="new-email" type="text" defaultValue={''} name="email" placeholder=" " />
-                        <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
-                    </div>
-
-                    <div className="form-group-border active mt-6">
-                        <AiOutlinePhone />
-                        <InputMask autoComplete="new-phone" mask="+7 (799) 999-9999" onInput={e => setInviteUserPhone(e.target.value)} value={invite_user_phone} name="phone" placeholder=" " />
-                        <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
+                    <div className="custom-grid mt-6">
+                        <div className="col-span-12">
+                            <div className="form-group-border active">
+                                <AiOutlineUser />
+                                <input autoComplete="new-first-name" type="text" defaultValue={''} name="first_name" placeholder=" " />
+                                <label className={(error.first_name && 'label-error')}>{error.first_name ? error.first_name : intl.formatMessage({ id: "page.registration.form.first_name" })}</label>
+                            </div>
+                        </div>
+                        <div className="col-span-12">
+                            <div className="form-group-border active">
+                                <AiOutlineUser />
+                                <input autoComplete="new-last-name" type="text" defaultValue={''} name="last_name" placeholder=" " />
+                                <label className={(error.last_name && 'label-error')}>{error.last_name ? error.last_name : intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
+                            </div>
+                        </div>
+                        <div className="col-span-12">
+                            <div className="form-group-border active">
+                                <AiOutlineMail />
+                                <input autoComplete="new-email" type="text" defaultValue={''} name="email" placeholder=" " />
+                                <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
+                            </div>
+                        </div>
+                        <div className="col-span-12">
+                            <div className="form-group-border active">
+                                <AiOutlinePhone />
+                                <InputMask autoComplete="new-phone" mask="+7 (799) 999-9999" onInput={e => setInviteUserPhone(e.target.value)} value={invite_user_phone} name="phone" placeholder=" " />
+                                <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
+                            </div>
+                        </div>
                     </div>
 
                     <RoleProvider roles={[2]}>

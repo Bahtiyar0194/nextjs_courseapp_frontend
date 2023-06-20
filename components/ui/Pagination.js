@@ -1,6 +1,6 @@
 import { useIntl } from "react-intl";
 
-const Pagination = ({ items, setItems }) => {
+const Pagination = ({ items, setItems, select_id }) => {
     const intl = useIntl();
 
     return (
@@ -43,7 +43,8 @@ const Pagination = ({ items, setItems }) => {
                 </div>
             }
             <div className="per-page-select active">
-                <select id="per-page-select" defaultValue={10} onChange={e => setItems()}>
+                <select id={select_id ? select_id : "per-page-select"} defaultValue={10} onChange={e => setItems()}>
+                    {/* <option value={1}>1</option> */}
                     <option value={10}>10</option>
                     <option value={100}>100</option>
                     <option value={1000}>1000</option>

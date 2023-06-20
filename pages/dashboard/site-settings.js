@@ -252,11 +252,11 @@ export default function SiteSettings() {
                         <div className="custom-grid mt-6">
                             {(school.theme_id == 1 || school.theme_id == 2) &&
                                 <div className="col-span-12">
-                                    <div className="border-active p-4 rounded-lg">
+                                    <div className="border-inactive p-4 rounded-lg">
                                         <div className="flex gap-4 flex-wrap">
                                             {school.light_theme_logo ?
                                                 <>
-                                                    <div className="border-active border-dashed p-1">
+                                                    <div className="border-inactive border-dashed p-1">
                                                         <div className="bg-white w-48 h-fit">
                                                             <img className="w-full h-auto" src={API_URL + '/school/get_logo/' + school.light_theme_logo + '/light_logo'} />
                                                         </div>
@@ -282,11 +282,11 @@ export default function SiteSettings() {
 
                             {(school.theme_id == 1 || school.theme_id == 3) &&
                                 <div className="col-span-12">
-                                    <div className="border-active p-4 rounded-lg">
+                                    <div className="border-inactive p-4 rounded-lg">
                                         <div className="flex gap-4 flex-wrap">
                                             {school.dark_theme_logo ?
                                                 <>
-                                                    <div className="border-active border-dashed p-1">
+                                                    <div className="border-inactive border-dashed p-1">
                                                         <div className="bg-black w-48 h-fit">
                                                             <img className="w-full h-auto" src={API_URL + '/school/get_logo/' + school.dark_theme_logo + '/dark_logo'} />
                                                         </div>

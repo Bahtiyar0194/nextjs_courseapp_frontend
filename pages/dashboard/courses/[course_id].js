@@ -7,14 +7,13 @@ import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
 import DeleteLessonModal from "../../../components/lesson/DeleteLessonModal";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineCaretDown, AiOutlineFileText, AiOutlinePushpin, AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineEdit, AiOutlineDelete, AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
+import { AiOutlineCaretDown, AiOutlineFileText, AiOutlinePushpin, AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineEdit, AiOutlineDelete, AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineTeam } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import CreateCourseSectionModal from "../../../components/lesson/CreateCourseSectionModal";
 import EditSectionModal from "../../../components/lesson/EditSectionModal";
 import BuyCourseModal from "../../../components/lesson/BuyCourseModal";
-import SubscribersModal from "../../../components/lesson/SubscribersModal";
 import { scrollIntoView } from "seamless-scroll-polyfill";
 import StickyBox from "react-sticky-box";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
@@ -31,7 +30,6 @@ export default function Course() {
   const intl = useIntl();
   const [sectionModal, setSectionModal] = useState(false);
   const [buyCourseModal, setBuyCourseModal] = useState(false);
-  const [subscribersModal, setSubscribersModal] = useState(false);
   const [edit_section_id, setEditSectionId] = useState('');
   const [section_name, setSectionName] = useState('');
   const [edit_section_modal, setEditSectionModal] = useState(false);
@@ -186,13 +184,20 @@ export default function Course() {
                   <h2>{course.course_name}</h2>
                   <RoleProvider roles={[2]}>
                     <div className="btn-wrap">
-                      <Link href={'/dashboard/courses/edit/' + course.course_id} className="btn btn-outline-primary"><AiOutlineEdit /> <span>{intl.formatMessage({ id: "edit" })}</span></Link>
+                      <Link href={'/dashboard/courses/subscribers/' + course.course_id} className="btn btn-outline-primary"><AiOutlineTeam /> <span>{intl.formatMessage({ id: "page.my_courses.subscribers" })}</span>
+                        {course.subscribers?.length > 0 &&
+                          <>
+                            : <span className="font-medium text-active">{course.subscribers.length}</span>
+                          </>
+                        }
+                      </Link>
+                      <Link href={'/dashboard/courses/edit/' + course.course_id} className="btn btn-light"><AiOutlineEdit /> <span>{intl.formatMessage({ id: "edit" })}</span></Link>
                     </div>
                   </RoleProvider>
                 </div>
               </div>
               <div className="col-span-12 sm:hidden">
-                <CourseCard course={course} lessons={lessons} getCourse={getCourse} getLessons={getLessons} setSubscribersModal={setSubscribersModal} />
+                <CourseCard course={course} lessons={lessons} getCourse={getCourse} getLessons={getLessons} />
               </div>
               <div className="col-span-12">
                 <div className="flex flex-wrap gap-4 md:gap-8 items-center">
@@ -290,86 +295,103 @@ export default function Course() {
                 </button>
               </div>
 
-              {course.subscribed == true &&
-                <>
-                  <div className="col-span-12">
-                    <div className="title-wrap">
-                      <h3 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "lessons" })}</h3>
-                      <RoleProvider roles={[2]}>
-                        <div className="btn-wrap">
-                          <CDropdown>
-                            <CDropdownToggle color="primary" href="#">
-                              {intl.formatMessage({ id: "lesson.add" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
-                            </CDropdownToggle>
-                            <CDropdownMenu>
-                              <Link href={'/dashboard/lesson/create/' + course.course_id}><AiOutlineFileText />{intl.formatMessage({ id: "lesson.add_lesson" })}</Link>
-                              <Link href={'#'} onClick={() => setSectionModal(true)}><AiOutlinePushpin />{intl.formatMessage({ id: "lesson_type.course_section" })}</Link>
-                            </CDropdownMenu>
-                          </CDropdown>
-                        </div>
-                      </RoleProvider>
+              <div className="col-span-12">
+                <div className="title-wrap">
+                  <h3 className="mb-0 max-lg:mb-4">{intl.formatMessage({ id: "lessons" })}</h3>
+                  <RoleProvider roles={[2]}>
+                    <div className="btn-wrap">
+                      <CDropdown>
+                        <CDropdownToggle color="primary" href="#">
+                          {intl.formatMessage({ id: "lesson.add" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
+                        </CDropdownToggle>
+                        <CDropdownMenu>
+                          <Link href={'/dashboard/lesson/create/' + course.course_id}><AiOutlineFileText />{intl.formatMessage({ id: "lesson.add_lesson" })}</Link>
+                          <Link href={'#'} onClick={() => setSectionModal(true)}><AiOutlinePushpin />{intl.formatMessage({ id: "lesson_type.course_section" })}</Link>
+                        </CDropdownMenu>
+                      </CDropdown>
                     </div>
+                  </RoleProvider>
+                </div>
 
-                    {
-                      lessons.total_count > 0 ?
-                        <ul id="lessons_wrap" className="list-group mt-4" ref={animateParent}>
-                          {lessons.my_lessons?.map(lesson => (
-                            <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 2 ? 'section' : 'lesson'}>
-                              {
-                                lesson.lesson_type_id == 2
-                                  ?
-                                  <h4 className="mb-0">{section_count++} {intl.formatMessage({ id: "section" })}. {lesson.lesson_name}</h4>
-                                  :
-                                  <Link className="block" href={'/dashboard/lesson/' + lesson.lesson_id}>
-                                    <h5 className="mb-1">{lesson.lesson_name}</h5>
-                                    <p className="text-active mb-2">{lesson.lesson_description.substring(0, 200)}{lesson.lesson_description.length > 200 && '...'}</p>
-
-                                    {lesson.tasks_count > 0 && <span className="badge badge-outline-primary">{intl.formatMessage({ id: "tasks" })}: {lesson.tasks_count}</span>}
-                                    {lesson.views_count > 0 && <span className="badge badge-light">{intl.formatMessage({ id: "views" })}: {lesson.views_count}</span>}
-                                  </Link>
-                              }
-
-                              <RoleProvider roles={[2]}>
-                                <div className="btn-wrap mt-4">
-                                  <button title={intl.formatMessage({ id: "edit" })} onClick={e => editLesson(lesson.lesson_id, lesson.lesson_type_id, lesson.lesson_name)} className="btn-edit"><AiOutlineEdit /></button>
-                                  <button title={intl.formatMessage({ id: "delete" })} onClick={e => deleteLesson(lesson.lesson_id)} className="btn-delete"><AiOutlineDelete /></button>
-                                  <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
-                                  <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down"><AiOutlineArrowDown /></button>
+                {
+                  lessons.total_count > 0 ?
+                    <ul id="lessons_wrap" className="list-group mt-4" ref={animateParent}>
+                      {lessons.my_lessons?.map(lesson => (
+                        <li data-id={lesson.lesson_id} key={lesson.lesson_id} className={lesson.lesson_type_id == 2 ? 'section' : 'lesson'}>
+                          {
+                            lesson.lesson_type_id == 2
+                              ?
+                              <h4 className="mb-0">{section_count++} {intl.formatMessage({ id: "section" })}. {lesson.lesson_name}</h4>
+                              :
+                              <Link className="block" href={'/dashboard/lesson/' + lesson.lesson_id}>
+                                <h5 className="mb-1">{lesson.lesson_name}</h5>
+                                <p className="text-active mb-2">{lesson.lesson_description.substring(0, 200)}{lesson.lesson_description.length > 200 && '...'}</p>
+                                <div className="badge-wrap">
+                                  {lesson.tasks_count > 0 && <span className="badge badge-outline-primary">{intl.formatMessage({ id: "tasks" })}: <b>{lesson.tasks_count}</b></span>}
+                                  {lesson.views_count > 0 && <span className="badge badge-light">{intl.formatMessage({ id: "views" })}: <b>{lesson.views_count}</b></span>}
                                 </div>
-                              </RoleProvider>
+                              </Link>
+                          }
 
-                            </li>
-                          ))}
-                        </ul>
-                        :
-                        <p className="text-inactive">{intl.formatMessage({ id: "no_added_lessons" })}</p>
-                    }
-                  </div>
-                  {
-                    course.reviews?.length > 0 &&
-                    <div className="col-span-12">
-                      <ReviewsList items={course.reviews} rating={course.rating} reviewers_count={course.reviewers_count} />
-                    </div>
-                  }
-                  {course.my_review == false
-                    ?
-                    <div className="col-span-12">
-                      <ReviewForm
-                        title={intl.formatMessage({ id: "leave_a_review_and_rating" })}
-                        description={intl.formatMessage({ id: "page.my_courses.form.how_much_did_you_like_the_course" })}
-                        url={'/courses/create_review/' + course.course_id} />
-                    </div>
+                          <RoleProvider roles={[2]}>
+                            <div className="btn-wrap mt-4">
+                              <button title={intl.formatMessage({ id: "edit" })} onClick={e => editLesson(lesson.lesson_id, lesson.lesson_type_id, lesson.lesson_name)} className="btn-edit"><AiOutlineEdit /></button>
+                              <button title={intl.formatMessage({ id: "delete" })} onClick={e => deleteLesson(lesson.lesson_id)} className="btn-delete"><AiOutlineDelete /></button>
+                              <button title={intl.formatMessage({ id: "move_up" })} onClick={e => move(e.currentTarget, 'up', course.course_id)} className="btn-up"><AiOutlineArrowUp /></button>
+                              <button title={intl.formatMessage({ id: "move_down" })} onClick={e => move(e.currentTarget, 'down', course.course_id)} className="btn-down"><AiOutlineArrowDown /></button>
+                            </div>
+                          </RoleProvider>
+
+                        </li>
+                      ))}
+                    </ul>
                     :
-                    null
-                  }
-                </>
+                    <p className="text-inactive">{intl.formatMessage({ id: "no_added_lessons" })}</p>
+                }
+              </div>
+
+              {
+                course.mentors?.length > 0 &&
+                <div className="col-span-12">
+                  <div className="card p-4 lg:p-6">
+                    <h3 className="mb-6">{intl.formatMessage({ id: "page.my_courses.form.course_mentors" })}</h3>
+
+                    <div className="flex flex-wrap gap-4 md:gap-6 items-center">
+                      {course.mentors?.map(item => (
+                        <div key={item.user_id} className="flex gap-4 items-center">
+                          <UserAvatar user_avatar={item.avatar} className={'w-14 h-14 p-1'} />
+                          <div>
+                            <p className="font-medium text-corp mb-0">{item.last_name} {item.first_name}</p>
+                            <p className="text-inactive mb-0 text-sm">{intl.formatMessage({ id: "mentor" })}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              }
+
+              <div className="col-span-12">
+                <ReviewsList items={course.reviews} rating={course.rating} reviewers_count={course.reviewers_count} />
+              </div>
+
+              {course.subscribed == true && course.my_review == false
+                ?
+                <div className="col-span-12">
+                  <ReviewForm
+                    title={intl.formatMessage({ id: "leave_a_review_and_rating" })}
+                    description={intl.formatMessage({ id: "page.my_courses.form.how_much_did_you_like_the_course" })}
+                    url={'/courses/create_review/' + course.course_id} />
+                </div>
+                :
+                null
               }
             </div>
           </div>
 
           <div className="col-span-12 sm:col-span-6 md:col-span-5 max-sm:hidden lg:col-span-3">
             <StickyBox offsetTop={6} offsetBottom={6}>
-              <CourseCard course={course} lessons={lessons} getCourse={getCourse} getLessons={getLessons} setSubscribersModal={setSubscribersModal} />
+              <CourseCard course={course} lessons={lessons} getCourse={getCourse} getLessons={getLessons} />
             </StickyBox>
           </div>
         </>
@@ -390,10 +412,6 @@ export default function Course() {
 
         <Modal show={delete_lesson_modal} onClose={() => setDeleteLessonModal(false)} modal_title={intl.formatMessage({ id: "lesson.deleteLessonModal.title" })} modal_size="modal-xl">
           <DeleteLessonModal course_id={course.course_id} delete_lesson_id={delete_lesson_id} redirect={false} getLessons={getLessons} closeModal={() => setDeleteLessonModal(false)} />
-        </Modal>
-
-        <Modal show={subscribersModal} onClose={() => setSubscribersModal(false)} modal_title={intl.formatMessage({ id: "page.courses.subscribersModal.title" })} modal_size="modal-6xl">
-          <SubscribersModal subscribers={course.subscribers} closeModal={() => setSubscribersModal(false)} />
         </Modal>
       </RoleProvider>
 

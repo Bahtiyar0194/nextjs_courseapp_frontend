@@ -931,7 +931,7 @@ select option {
 }
 
 .custom-grid{
-    @apply grid grid-cols-12 gap-6;
+    @apply grid grid-cols-12 gap-4;
 }
 
 .form-group {
@@ -989,6 +989,12 @@ select option {
 .form-group-border > select, 
 .form-group-border > textarea {
     @apply border-0 bg-transparent w-full text-active py-2 pl-9 pr-2.5 relative z-10;
+}
+
+.form-group-border.select::after{
+    content: "›";
+    writing-mode: vertical-rl;
+    @apply absolute right-0 text-inactive text-2xl top-4 w-3 h-3;
 }
 
 .form-group-border > label {
@@ -1195,7 +1201,7 @@ select option {
 }
 
 .btn {
-    @apply w-fit flex items-center rounded-lg px-2 py-1.5 duration-200; 
+    @apply w-fit flex items-center rounded-lg px-2 py-1.5 duration-200 whitespace-nowrap; 
 }
 
 .no-px{
@@ -1495,7 +1501,7 @@ select option {
 }
 
 .list-wrap{
-    @apply bg-active rounded-lg border-inactive;
+    @apply bg-active rounded-lg border-inactive max-h-44 overflow-y-scroll;
 }
 
 .list-wrap.inactive{
@@ -1754,7 +1760,7 @@ select option {
 }
 
 .tab-header-item{
-    @apply px-3 py-2 border-inactive rounded-lg hover:cursor-pointer text-inactive flex items-center;
+    @apply px-3 py-2 border-inactive rounded-lg hover:cursor-pointer text-inactive flex items-center relative;
 }
 
 .tab-header-item.active{
@@ -1767,6 +1773,10 @@ select option {
 
 .tab-header-item > svg{
     @apply text-lg;
+}
+
+.tab-header-item > span.count-badge{
+    @apply text-corp font-medium;
 }
 
 .tab-body-item{
@@ -1849,6 +1859,10 @@ select option {
 
 .ql-toolbar.ql-snow{
     @apply bg-active border-inactive rounded-bl-none rounded-br-none rounded-lg;
+}
+
+.ql-container{
+    font-family: inherit !important;
 }
 
 .ql-container.ql-snow{

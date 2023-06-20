@@ -11,6 +11,7 @@ import RoleProvider from "../../../services/RoleProvider";
 import InviteUserModal from "../../../components/users-groups/InviteUserModal";
 import EditUserModal from "../../../components/users-groups/EditUserModal";
 import CreateGroupModal from "../../../components/users-groups/CreateGroupModal";
+import UpdateGroupModal from "../../../components/users-groups/UpdateGroupModal";
 import Loader from "../../../components/ui/Loader";
 import Pagination from "../../../components/ui/Pagination";
 import InputMask from "react-input-mask";
@@ -25,19 +26,23 @@ export default function Users() {
     const intl = useIntl();
     const [invite_user_modal, setInviteUserModal] = useState(false);
     const [edit_user_modal, setEditUserModal] = useState(false);
-    const [create_group_modal, setCreateGroupModal] = useState(false);
     const [users, setUsers] = useState([]);
     const [loader, setLoader] = useState(false);
     const [users_loader, setUsersLoader] = useState(false);
     const [showFullLoader, setShowFullLoader] = useState(true);
     const [edit_user, setEditUser] = useState([]);
-    const [invite_user_phone, setInviteUserPhone] = useState('');
     const [edit_user_phone, setEditUserPhone] = useState('');
     const [search_user_phone, setSearchUserPhone] = useState('');
     const router = useRouter();
     const [error, setError] = useState([]);
     const [search_user_filter, setSearchUserFilter] = useState(false);
 
+    const [edit_group, setEditGroup] = useState([]);
+    const [edit_group_name, setEditGroupName] = useState('');
+    const [edit_group_description, setEditGroupDescription] = useState('');
+    const [edit_group_members, setEditGroupMembers] = useState([]);
+    const [create_group_modal, setCreateGroupModal] = useState(false);
+    const [edit_group_modal, setEditGroupModal] = useState(false);
     const [group_attributes, setGroupAttributes] = useState([]);
     const [groups_loader, setGroupsLoader] = useState(false);
     const [groups, setGroups] = useState([]);
@@ -53,7 +58,6 @@ export default function Users() {
                 setEditUserPhone(response.data.phone);
                 setLoader(false);
             }).catch(err => {
-                console.log(err)
                 if (err.response) {
                     router.push({
                         pathname: '/error',
@@ -75,7 +79,7 @@ export default function Users() {
         const search_form = document.querySelector('#user_search_form');
         const form_body = serialize(search_form, { hash: true, empty: true });
 
-        form_body.per_page = document.querySelector('#per-page-select')?.value;
+        form_body.per_page = document.querySelector('#users-per-page-select')?.value;
 
         if (!url) {
             url = 'users/get';
@@ -131,7 +135,7 @@ export default function Users() {
         const search_form = document.querySelector('#group_search_form');
         const form_body = serialize(search_form, { hash: true, empty: true });
 
-        form_body.per_page = document.querySelector('#per-page-select')?.value;
+        form_body.per_page = document.querySelector('#groups-per-page-select')?.value;
 
         if (!url) {
             url = 'groups/get';
@@ -141,6 +145,34 @@ export default function Users() {
             .then(response => {
                 setGroups(response.data)
                 setGroupsLoader(false);
+            }).catch(err => {
+                if (err.response) {
+                    router.push({
+                        pathname: '/error',
+                        query: {
+                            status: err.response.status,
+                            message: err.response.data.message,
+                            url: err.request.responseURL,
+                        }
+                    });
+                }
+                else {
+                    router.push('/error');
+                }
+            });
+    }
+
+    const getEditGroup = async (group_id) => {
+        setLoader(true);
+        setEditGroupModal(true);
+        await axios.get('groups/get/' + group_id)
+            .then(response => {
+                setError([]);
+                setEditGroup(response.data);
+                setEditGroupName(response.data.group_name);
+                setEditGroupDescription(response.data.group_description);
+                setEditGroupMembers(response.data.group_members);
+                setLoader(false);
             }).catch(err => {
                 if (err.response) {
                     router.push({
@@ -345,7 +377,7 @@ export default function Users() {
                                                     </table>
                                                 </div>
                                             </div>
-                                            <Pagination items={users} setItems={getUsers} />
+                                            <Pagination items={users} setItems={getUsers} select_id={"users-per-page-select"} />
                                         </>
                                         :
                                         <>
@@ -447,7 +479,7 @@ export default function Users() {
                                                     </table>
                                                 </div>
                                             </div>
-                                            <Pagination items={groups} setItems={getGroups} />
+                                            <Pagination items={groups} setItems={getGroups} select_id={"groups-per-page-select"} />
                                         </>
                                         :
                                         <>
@@ -464,8 +496,6 @@ export default function Users() {
                 <Modal show={invite_user_modal} onClose={() => setInviteUserModal(false)} modal_title={intl.formatMessage({ id: "page.users.invite_user_title" })} modal_size="modal-xl">
                     <InviteUserModal
                         getUsers={getUsers}
-                        invite_user_phone={invite_user_phone}
-                        setInviteUserPhone={setInviteUserPhone}
                         loader={loader}
                         setLoader={setLoader}
                         error={error}
@@ -495,11 +525,33 @@ export default function Users() {
                         loader={loader}
                         setLoader={setLoader}
                         group_attributes={group_attributes}
+                        getGroups={getGroups}
                         error={error}
                         setError={setError}
                         intl={intl}
                         router={router}
                         closeModal={() => setCreateGroupModal(false)} />
+                </Modal>
+
+                <Modal show={edit_group_modal} onClose={() => setEditGroupModal(false)} modal_title={intl.formatMessage({ id: "page.groups.edit_group_title" })} modal_size="modal-xl">
+                    <UpdateGroupModal
+                        loader={loader}
+                        setLoader={setLoader}
+                        group_attributes={group_attributes}
+                        edit_group_members={edit_group_members}
+                        setEditGroupMembers={setEditGroupMembers}
+                        edit_group={edit_group}
+                        edit_group_name={edit_group_name}
+                        setEditGroupName={setEditGroupName}
+                        edit_group_description={edit_group_description}
+                        setEditGroupDescription={setEditGroupDescription}
+                        setEditGroup={setEditGroup}
+                        getGroups={getGroups}
+                        error={error}
+                        setError={setError}
+                        intl={intl}
+                        router={router}
+                        closeModal={() => setEditGroupModal(false)} />
                 </Modal>
             </RoleProvider>
         </DashboardLayout>

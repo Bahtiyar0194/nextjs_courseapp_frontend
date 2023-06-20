@@ -28,7 +28,7 @@ export default function AuthLayout(props) {
                             <div className="flex justify-center">
                                 <DefaultLogo show_logo_alt={false} />
                             </div>
-                            <div className="card mt-10">
+                            <div className="card mt-8">
                                 <div className="card-header">
                                     <div className="title-wrap">
                                         <h3>{props.title}</h3>

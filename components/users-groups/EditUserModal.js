@@ -56,27 +56,35 @@ const EditUserModal = ({ edit_user, getUsers, setEditUserPhone, edit_user_phone,
             {loader && <Loader className="overlay" />}
             <div className="modal-body">
                 <form key={edit_user.user_id} onSubmit={editUserSubmit} encType="multipart/form-data">
-                    <div className="form-group-border active mt-6">
-                        <AiOutlineUser />
-                        <input type="text" defaultValue={edit_user.first_name} name="first_name" placeholder=" " />
-                        <label className={(error.first_name && 'label-error')}>{error.first_name ? error.first_name : intl.formatMessage({ id: "page.registration.form.first_name" })}</label>
-                    </div>
-                    <div className="form-group-border active mt-6">
-                        <AiOutlineUser />
-                        <input type="text" defaultValue={edit_user.last_name} name="last_name" placeholder=" " />
-                        <label className={(error.last_name && 'label-error')}>{error.last_name ? error.last_name : intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
-                    </div>
-
-                    <div className="form-group-border active mt-6">
-                        <AiOutlineMail />
-                        <input autoComplete="new-email" type="text" defaultValue={edit_user.email} name="email" placeholder=" " />
-                        <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
-                    </div>
-
-                    <div className="form-group-border active mt-6">
-                        <AiOutlinePhone />
-                        <InputMask mask="+7 (799) 999-9999" onInput={e => setEditUserPhone(e.target.value)} value={edit_user_phone} name="phone" />
-                        <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
+                    <div className="custom-grid mt-6">
+                        <div className="col-span-12">
+                            <div className="form-group-border active">
+                                <AiOutlineUser />
+                                <input type="text" defaultValue={edit_user.first_name} name="first_name" placeholder=" " />
+                                <label className={(error.first_name && 'label-error')}>{error.first_name ? error.first_name : intl.formatMessage({ id: "page.registration.form.first_name" })}</label>
+                            </div>
+                        </div>
+                        <div className="col-span-12">
+                            <div className="form-group-border active">
+                                <AiOutlineUser />
+                                <input type="text" defaultValue={edit_user.last_name} name="last_name" placeholder=" " />
+                                <label className={(error.last_name && 'label-error')}>{error.last_name ? error.last_name : intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
+                            </div>
+                        </div>
+                        <div className="col-span-12">
+                            <div className="form-group-border active">
+                                <AiOutlineMail />
+                                <input autoComplete="new-email" type="text" defaultValue={edit_user.email} name="email" placeholder=" " />
+                                <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
+                            </div>
+                        </div>
+                        <div className="col-span-12">
+                            <div className="form-group-border active">
+                                <AiOutlinePhone />
+                                <InputMask mask="+7 (799) 999-9999" onInput={e => setEditUserPhone(e.target.value)} value={edit_user_phone} name="phone" />
+                                <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
+                            </div>
+                        </div>
                     </div>
 
                     <RoleProvider roles={[2]}>

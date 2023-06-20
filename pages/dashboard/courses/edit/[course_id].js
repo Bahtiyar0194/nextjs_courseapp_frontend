@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { AiOutlineRead, AiOutlineCheck, AiOutlineFlag, AiOutlinePicture, AiOutlineVideoCamera, AiOutlineRise, AiOutlineUser, AiOutlineDollar, } from "react-icons/ai";
+import { AiOutlineRead, AiOutlineCheck, AiOutlineFlag, AiOutlinePicture, AiOutlineVideoCamera, AiOutlineRise, AiOutlineUser, AiOutlineDollar, AiOutlineDelete, AiOutlinePlusCircle, } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from '../../../../components/ui/Breadcrumb';
@@ -16,6 +16,7 @@ import FileUploadButton from '../../../../components/ui/FileUploadButton';
 import API_URL from '../../../../config/api';
 import { Player, BigPlayButton, LoadingSpinner } from 'video-react';
 import "../../../../node_modules/video-react/dist/video-react.css";
+import UserAvatar from '../../../../components/ui/UserAvatar';
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
@@ -43,9 +44,9 @@ export default function EditCourse() {
     const [old_course_trailer, setOldCourseTrailer] = useState(false);
     const [new_course_trailer, setNewCourseTrailer] = useState('');
 
-
     const [course_free, setCourseFree] = useState(false);
     const [text, setText] = useState('');
+    const [mentors, setMentors] = useState([]);
 
     const modules = {
         toolbar: [
@@ -104,6 +105,8 @@ export default function EditCourse() {
         }
 
         form_data.append('course_free', course_free);
+        form_data.append('course_mentors', JSON.stringify(mentors));
+        form_data.append('course_mentors_count', mentors.length);
         form_data.append('course_skills', JSON.stringify(course_skills));
         form_data.append('course_suitables', JSON.stringify(course_suitables));
         form_data.append('course_requirements', JSON.stringify(course_requirements));
@@ -139,6 +142,18 @@ export default function EditCourse() {
             });
     }
 
+    const addToMentors = (user_id) => {
+        let newArr = JSON.parse(JSON.stringify(mentors));
+        newArr.push(user_id);
+        setMentors(newArr);
+    }
+
+    const deleteFromMentors = (user_id) => {
+        let newArr = JSON.parse(JSON.stringify(mentors));
+        newArr = newArr.filter(item => item !== user_id)
+        setMentors(newArr);
+    }
+
     const getCourseAttributes = async () => {
         setShowFullLoader(true);
         await axios.get('courses/get_course_attributes')
@@ -167,6 +182,7 @@ export default function EditCourse() {
             .then(response => {
                 setCourse(response.data);
                 setText(response.data.course_content);
+                setMentors(response.data.mentors_id);
                 setCourseSkills(response.data.skills);
                 setCourseSuitables(response.data.suitables);
                 setCourseRequirements(response.data.requirements);
@@ -239,7 +255,7 @@ export default function EditCourse() {
                                 </div>
                             </div>
                             <div className="col-span-12 lg:col-span-3">
-                                <div className="form-group-border active label-inactive">
+                                <div className="form-group-border select active label-inactive">
                                     <AiOutlineRead />
                                     <select name="course_category_id" defaultValue={''} >
                                         <option disabled value="">{intl.formatMessage({ id: "page.my_courses.form.select_course_category" })}</option>
@@ -253,7 +269,7 @@ export default function EditCourse() {
                                 </div>
                             </div>
                             <div className="col-span-12 lg:col-span-3">
-                                <div className="form-group-border active label-inactive">
+                                <div className="form-group-border select active label-inactive">
                                     <AiOutlineFlag />
                                     <select name="course_lang_id" defaultValue={''} >
                                         <option disabled value="">{intl.formatMessage({ id: "page.my_courses.form.select_course_language" })}</option>
@@ -267,7 +283,7 @@ export default function EditCourse() {
                                 </div>
                             </div>
                             <div className="col-span-12 lg:col-span-3">
-                                <div className="form-group-border active label-inactive">
+                                <div className="form-group-border select active label-inactive">
                                     <AiOutlineRise />
                                     <select name="level_type_id" defaultValue={''} >
                                         <option disabled value="">{intl.formatMessage({ id: "page.my_courses.form.select_course_level" })}</option>
@@ -281,7 +297,7 @@ export default function EditCourse() {
                                 </div>
                             </div>
                             <div className="col-span-12 lg:col-span-3">
-                                <div className="form-group-border active label-inactive">
+                                <div className="form-group-border select active label-inactive">
                                     <AiOutlineUser />
                                     <select name="author_id" defaultValue={''} >
                                         <option disabled value="">{intl.formatMessage({ id: "page.my_courses.form.select_course_author" })}</option>
@@ -293,6 +309,30 @@ export default function EditCourse() {
                                     </select>
                                     <label className={(error.author_id && 'label-error')}>{error.author_id ? error.author_id : intl.formatMessage({ id: "page.my_courses.form.course_author" })}</label>
                                 </div>
+                            </div>
+                            <div className="col-span-12 relative">
+                                <div className={"list-wrap inactive p-3"}>
+                                    {
+                                        course_attributes.course_authors?.length > 0 &&
+                                        course_attributes.course_authors?.map(item => (
+                                            <div key={item.user_id}>
+                                                <div className="flex gap-2 items-center">
+                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8 p-0.5'} />
+                                                    <span>{item.last_name} {item.first_name}</span>
+                                                </div>
+                                                <div className="btn-wrap">
+                                                    {mentors.includes(item.user_id)
+                                                        ?
+                                                        <button onClick={e => deleteFromMentors(item.user_id)} className="btn btn-sm btn-outline-danger" type="button"><AiOutlineDelete /> <span>{intl.formatMessage({ id: "delete" })}</span></button>
+                                                        :
+                                                        <button onClick={e => addToMentors(item.user_id)} className="btn btn-sm btn-outline-primary" type="button"><AiOutlinePlusCircle /> <span>{intl.formatMessage({ id: "choose" })}</span></button>
+                                                    }
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                                <label className={(error.course_mentors_count && 'label-error')}>{error.course_mentors_count ? error.course_mentors_count : intl.formatMessage({ id: "page.my_courses.form.course_mentors" })}</label>
                             </div>
                             <div className="col-span-12 lg:col-span-4 relative">
                                 <AddTag items={course_skills} setItems={setCourseSkills} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-skill-input"} label={"page.my_courses.form.what_skills_will_this_course_provide"} />

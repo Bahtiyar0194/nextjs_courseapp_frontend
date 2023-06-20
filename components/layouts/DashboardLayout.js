@@ -3,7 +3,7 @@ import ThemeChanger from "../ui/ThemeChanger";
 import Locales from "../ui/Locales";
 import Link from "next/link";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineLogout, AiOutlineDashboard, AiOutlinePlaySquare, AiOutlineTeam, AiOutlineRead, AiOutlineSetting, AiOutlineFile, AiOutlineUser, AiOutlineCheckSquare } from "react-icons/ai";
+import { AiOutlineLogout, AiOutlineDashboard, AiOutlinePlaySquare, AiOutlineTeam, AiOutlineRead, AiOutlineSetting, AiOutlineFile, AiOutlineUser, AiOutlineCheckSquare, AiOutlineClockCircle } from "react-icons/ai";
 import AuthProvider from "../../services/AuthProvider";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -162,6 +162,7 @@ export default function DashboardLayout(props) {
                     <RoleProvider roles={[2,3]}> 
                         <Link href={'/dashboard/tasks'}><AiOutlineCheckSquare /><span>{intl.formatMessage({ id: "page.tasks.title" })}</span></Link>
                     </RoleProvider>
+                    <Link href={'/'}><AiOutlineClockCircle /><span>{intl.formatMessage({ id: "page.schedule.title" })}</span></Link>
                 </div>
                 <div className="db__content">
                     {props.showLoader && <Loader className="full-overlay" />}

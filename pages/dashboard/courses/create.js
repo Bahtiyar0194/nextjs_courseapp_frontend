@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { AiOutlineRead, AiOutlineCheck, AiOutlineFlag, AiOutlinePicture, AiOutlineVideoCamera, AiOutlineRise, AiOutlineUser, AiOutlineDollar, } from "react-icons/ai";
+import { AiOutlineRead, AiOutlineCheck, AiOutlineFlag, AiOutlinePicture, AiOutlineVideoCamera, AiOutlineRise, AiOutlineUser, AiOutlineDollar, AiOutlinePlusCircle, AiOutlineDelete, } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
@@ -13,6 +13,7 @@ import { scrollIntoView } from "seamless-scroll-polyfill";
 import RoleProvider from "../../../services/RoleProvider";
 import AddTag from '../../../components/ui/AddTag';
 import FileUploadButton from '../../../components/ui/FileUploadButton';
+import UserAvatar from '../../../components/ui/UserAvatar';
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
@@ -36,6 +37,7 @@ export default function CreateCourse() {
     const [course_trailer, setCourseTrailer] = useState('');
     const [course_free, setCourseFree] = useState(false);
     const [text, setText] = useState('');
+    const [mentors, setMentors] = useState([]);
 
     const modules = {
         toolbar: [
@@ -88,6 +90,8 @@ export default function CreateCourse() {
             form_data.append('course_cost', document.querySelector('input[name="course_cost"]').value);
         }
         form_data.append('course_free', course_free);
+        form_data.append('course_mentors', JSON.stringify(mentors));
+        form_data.append('course_mentors_count', mentors.length);
         form_data.append('course_skills', JSON.stringify(course_skills));
         form_data.append('course_suitables', JSON.stringify(course_suitables));
         form_data.append('course_requirements', JSON.stringify(course_requirements));
@@ -121,6 +125,18 @@ export default function CreateCourse() {
                     router.push('/error');
                 }
             });
+    }
+
+    const addToMentors = (user_id) => {
+        let newArr = JSON.parse(JSON.stringify(mentors));
+        newArr.push(user_id);
+        setMentors(newArr);
+    }
+
+    const deleteFromMentors = (user_id) => {
+        let newArr = JSON.parse(JSON.stringify(mentors));
+        newArr = newArr.filter(item => item !== user_id)
+        setMentors(newArr);
     }
 
     const getCourseAttributes = async () => {
@@ -237,6 +253,30 @@ export default function CreateCourse() {
                                     </select>
                                     <label className={(error.author_id && 'label-error')}>{error.author_id ? error.author_id : intl.formatMessage({ id: "page.my_courses.form.course_author" })}</label>
                                 </div>
+                            </div>
+                            <div className="col-span-12 relative">
+                                <div className={"list-wrap inactive p-3"}>
+                                    {
+                                        course_attributes.course_authors?.length > 0 &&
+                                        course_attributes.course_authors?.map(item => (
+                                            <div key={item.user_id}>
+                                                <div className="flex gap-2 items-center">
+                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8 p-0.5'} />
+                                                    <span>{item.last_name} {item.first_name}</span>
+                                                </div>
+                                                <div className="btn-wrap">
+                                                    {mentors.includes(item.user_id)
+                                                        ?
+                                                        <button onClick={e => deleteFromMentors(item.user_id)} className="btn btn-sm btn-outline-danger" type="button"><AiOutlineDelete /> <span>{intl.formatMessage({ id: "delete" })}</span></button>
+                                                        :
+                                                        <button onClick={e => addToMentors(item.user_id)} className="btn btn-sm btn-outline-primary" type="button"><AiOutlinePlusCircle /> <span>{intl.formatMessage({ id: "choose" })}</span></button>
+                                                    }
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                                <label className={(error.course_mentors_count && 'label-error')}>{error.course_mentors_count ? error.course_mentors_count : intl.formatMessage({ id: "page.my_courses.form.course_mentors" })}</label>
                             </div>
                             <div className="col-span-12 lg:col-span-4 relative">
                                 <AddTag items={course_skills} setItems={setCourseSkills} className={"inactive p-4"} tagClass={"tag-outline-primary"} tagInputId={"add-skill-input"} label={"page.my_courses.form.what_skills_will_this_course_provide"} />
