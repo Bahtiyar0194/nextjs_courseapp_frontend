@@ -5,24 +5,23 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/icon.png"></link>
-          <link type="image/x-icon" rel="shortcut icon" href="/favicon.ico"></link>
-          <link type="image/png" sizes="16x16" rel="icon" href="/favicon-16x16.png"></link>
-          <link type="image/png" sizes="32x32" rel="icon" href="/favicon-32x32.png"></link>
-          <link type="image/png" sizes="96x96" rel="icon" href="/favicon-96x96.png"></link>
-          <link type="image/png" sizes="192x192" rel="icon" href="/android-icon-192x192.png"></link>
-
-          <link sizes="57x57" rel="apple-touch-icon" href="/apple-touch-icon-57x57.png"></link>
-          <link sizes="60x60" rel="apple-touch-icon" href="/apple-touch-icon-60x60.png"></link>
-          <link sizes="72x72" rel="apple-touch-icon" href="/apple-touch-icon-72x72.png"></link>
-          <link sizes="76x76" rel="apple-touch-icon" href="/apple-touch-icon-76x76.png"></link>
-          <link sizes="114x114" rel="apple-touch-icon" href="/apple-touch-icon-114x114.png"></link>
-          <link sizes="120x120" rel="apple-touch-icon" href="/apple-touch-icon-120x120.png"></link>
-          <link sizes="144x144" rel="apple-touch-icon" href="/apple-touch-icon-144x144.png"></link>
-          <link sizes="152x152" rel="apple-touch-icon" href="/apple-touch-icon-152x152.png"></link>
-          <link sizes="180x180" rel="apple-touch-icon" href="/apple-touch-icon-180x180.png"></link>
-          <meta name="theme-color" content="#fff" />
+          <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png"></link>
+          <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png"></link>
+          <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png"></link>
+          <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png"></link>
+          <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png"></link>
+          <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png"></link>
+          <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png"></link>
+          <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png"></link>
+          <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png"></link>
+          <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png"></link>
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"></link>
+          <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png"></link>
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
+          <link rel="manifest" href="/manifest.json"></link>
+          <meta name="msapplication-TileColor" content="#ffffff" />
+          <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+          <meta name="theme-color" content="#ffffff" />
         </Head>
         <body>
           <Main />
