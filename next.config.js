@@ -7,6 +7,11 @@ const withPWA = require("next-pwa")({
 
 const nextConfig = withPWA({
   reactStrictMode: false,
+  pwa: {
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  },
   i18n: {
     defaultLocale: "ru",
     locales: ["kk", "ru", "en"],
