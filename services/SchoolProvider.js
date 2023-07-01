@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { setSchoolData } from "../store/slices/schoolSlice";
+import API_URL from "../config/api";
 
 export default function SchoolProvider(props) {
     const router = useRouter();
@@ -16,6 +17,9 @@ export default function SchoolProvider(props) {
                     document.querySelector('body').classList.add(response.data.title_font_class.toString());
                     document.querySelector('body').classList.add(response.data.body_font_class.toString());
                     document.querySelector('body').classList.add(response.data.color_scheme_class.toString());
+
+                    let manifestElement = document.getElementById("manifest");
+                    manifestElement.setAttribute("href", API_URL + '/school/' + response.data.school_id + '/manifest.json');
                     
                     if (router.asPath === '/') {
                         router.push('/login');
