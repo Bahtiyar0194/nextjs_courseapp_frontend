@@ -138,14 +138,20 @@ export default function SchoolProvider(props) {
                     link.href = URL.createObjectURL(blob);
                     document.getElementsByTagName('head')[0].appendChild(link);
 
-                    if (response.data.favicons && response.data.favicons?.length > 0) {
-                        let favicons = response.data.favicons;
+                    if (school.favicons && school.favicons?.length > 0) {
+                        let favicons = school.favicons;
                         for (let index = 0; index < favicons.length; index++) {
                             let link = document.createElement('link');
-                            link.rel = favicons[index].icon_name;
+                            link.rel = favicons[index].rel;
                             link.sizes = favicons[index].size + 'x' + favicons[index].size;
                             link.type = "image/png";
-                            link.href = API_URL + '/school/get_favicon/' + response.data.school_id + '/' + favicons[index].icon_name + '-' + (favicons[index].size + 'x' + favicons[index].size) + '.png';
+                            if(school.favicon){
+                                link.href = API_URL + '/school/get_favicon/' + school.school_id + '/' + favicons[index].icon_name + '-' + (favicons[index].size + 'x' + favicons[index].size) + '.png';
+                            }
+                            else{
+                                link.href = '/' + favicons[index].icon_name + '-' + (favicons[index].size + 'x' + favicons[index].size) + '.png';
+                            }
+
                             document.getElementsByTagName('head')[0].appendChild(link);
                         }
                     }
