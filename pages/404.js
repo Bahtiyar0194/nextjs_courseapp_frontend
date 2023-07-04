@@ -11,7 +11,7 @@ export default function Page404() {
                 <p className="text-active">
                     {intl.formatMessage({ id: "page.error.404" })}
                 </p>
-                <Link href={'/'}>{intl.formatMessage({ id: "page.home.to" })}</Link>
+                <Link className="btn btn-primary btn-sm" href={'/'}>{intl.formatMessage({ id: "page.home.to" })}</Link>
             </div>
         </ErrorLayout>
     );

@@ -160,9 +160,9 @@ export default function DashboardLayout(props) {
                         <Link href={'/dashboard/users-groups'}><AiOutlineTeam /><span>{intl.formatMessage({ id: "page.users.title" })}</span></Link>
                     </RoleProvider>
                     <RoleProvider roles={[2,3]}> 
-                        <Link href={'/dashboard/tasks'}><AiOutlineCheckSquare /><span>{intl.formatMessage({ id: "page.tasks.title" })}</span></Link>
+                        <Link href={'/under_construction'}><AiOutlineCheckSquare /><span>{intl.formatMessage({ id: "page.tasks.title" })}</span></Link>
                     </RoleProvider>
-                    <Link href={'/'}><AiOutlineClockCircle /><span>{intl.formatMessage({ id: "page.schedule.title" })}</span></Link>
+                    <Link href={'/under_construction'}><AiOutlineClockCircle /><span>{intl.formatMessage({ id: "page.schedule.title" })}</span></Link>
                 </div>
                 <div className="db__content">
                     {props.showLoader && <Loader className="full-overlay" />}
