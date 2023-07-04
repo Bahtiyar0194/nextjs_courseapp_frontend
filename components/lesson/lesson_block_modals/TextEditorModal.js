@@ -45,6 +45,7 @@ const TextEditorModal = ({ create_lesson, create_task, closeModal }) => {
         'bullet',
         'indent'
     ]
+    
     const router = useRouter();
     const { locale } = router;
     const intl = useIntl();

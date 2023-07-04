@@ -385,6 +385,15 @@
     "theme.use_both_themes": "Екі тақырыпты да қолдану",
     "theme.light_theme": "Тек қана жарық тақырып",
     "theme.dark_theme": "Тек қана қараңғы тақырып",
+
+    "theme.upload_favicon": "Белгішені жүктеу",
+    "theme.change_favicon": "Белгішені өзгерту",
+    "theme.delete_favicon": "Белгішені жою",
+    "theme.delete_favicon_title": "Белгішені жою",
+    "theme.delete_favicon_confirm": "Сіз расыменде осы белгішені жойғыңыз келеді ме?",
+    "theme.favicon": "Белгіше",
+    "theme.favicon_title": "Белгішені жүктеу",
+
     "theme.upload_logo": "Логотип жүктеу",
     "theme.change_logo": "Логотипті өзгерту",
     "theme.delete_logo": "Логотипті жою",

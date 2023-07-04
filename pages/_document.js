@@ -5,7 +5,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="manifest" href="/manifest.json" id="manifest"></link>
+          {/* <link rel="manifest" href="/manifest.json" id="manifest"></link>
           <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png"></link>
           <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png"></link>
           <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png"></link>
@@ -21,7 +21,9 @@ class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"></link>
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-          <meta name="theme-color" content="#ffffff" />
+          <meta name="theme-color" content="#ffffff" /> */}
+
+          
         </Head>
         <body>
           <Main />

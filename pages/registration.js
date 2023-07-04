@@ -105,8 +105,7 @@ export default function Registration() {
                     <input onInput={e => setLastName(e.target.value)} type="text" value={last_name} placeholder=" " />
                     <label className={(error.last_name && 'label-error')}>{error.last_name ? error.last_name : intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
                 </div>
-
-
+                
                 {!school.school_domain &&
                     <>
                         <div className="form-group">

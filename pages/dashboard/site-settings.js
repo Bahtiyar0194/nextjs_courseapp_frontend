@@ -14,9 +14,11 @@ import { setSchoolData } from "../../store/slices/schoolSlice";
 import debounceHandler from "../../utils/debounceHandler";
 import RoleProvider from "../../services/RoleProvider";
 import Modal from "../../components/ui/Modal";
-import UploadLogoModal from "../../components/site-settings/UploadLogo";
+import UploadLogoModal from "../../components/site-settings/UploadLogoModal";
+import UploadFaviconModal from "../../components/site-settings/UploadFaviconModal";
 import API_URL from "../../config/api";
 import DeleteLogoModal from "../../components/site-settings/DeleteLogoModal";
+import DeleteFaviconModal from "../../components/site-settings/DeleteFaviconModal";
 import { scrollIntoView } from "seamless-scroll-polyfill";
 
 export default function SiteSettings() {
@@ -38,6 +40,10 @@ export default function SiteSettings() {
 
     const [delete_logo_modal, setDeleteLogoModal] = useState(false);
     const [delete_logo_variable, setDeleteLogoVariable] = useState('');
+
+    const [favicon_modal, setFaviconModal] = useState(false);
+    const [delete_favicon_modal, setDeleteFaviconModal] = useState(false);
+    const [favicon_file, setFaviconFile] = useState(null);
 
     const dispatch = useDispatch();
 
@@ -140,6 +146,8 @@ export default function SiteSettings() {
         setLightLogoModal(false);
         setDarkLogoFile(null);
         setDarkLogoModal(false);
+        setFaviconFile(null);
+        setFaviconModal(false);
     }
 
     const deleteLogo = (logo_variable) => {
@@ -165,91 +173,107 @@ export default function SiteSettings() {
 
                 <div className="col-span-12 lg:col-span-6">
                     <form onSubmit={e => saveSchoolSubmit(e)} encType="multipart/form-data">
-                        <div className="form-group-border active label-inactive">
-                            <AiOutlineRead />
-                            <input autoComplete="edit_school_name" type="text" defaultValue={school.school_name} name="school_name" placeholder=" " />
-                            <label className={(error.school_name && 'label-error')}>{error.school_name ? error.school_name : intl.formatMessage({ id: "page.site.school_name" })}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <AiOutlineRead />
-                            <textarea autoComplete="edit_about_school" type="text" defaultValue={school.about} name="about" placeholder=" "></textarea>
-                            <label className={(error.about && 'label-error')}>{error.about ? error.about : intl.formatMessage({ id: "page.registration.form.about_school" })}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <AiOutlineMail />
-                            <input autoComplete="edit_school_email" type="text" defaultValue={school.email} name="email" placeholder=" " />
-                            <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <AiOutlinePhone />
-                            <InputMask autoComplete="edit_school_phone" mask="+7 (799) 999-9999" onInput={e => setEditSchoolPhone(e.target.value)} value={edit_school_phone} name="phone" placeholder=" " />
-                            <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <AiOutlineInstagram />
-                            <input autoComplete="edit_school_instagram" type="text" defaultValue={school.instagram} name="instagram" placeholder=" " />
-                            <label className={(error.instagram && 'label-error')}>{error.instagram ? error.instagram : "Instagram"}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <AiOutlineFacebook />
-                            <input autoComplete="edit_school_facebook" type="text" defaultValue={school.facebook} name="facebook" placeholder=" " />
-                            <label className={(error.facebook && 'label-error')}>{error.facebook ? error.facebook : "Facebook"}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <FaTiktok />
-                            <input autoComplete="edit_school_tiktok" type="text" defaultValue={school.tiktok} name="tiktok" placeholder=" " />
-                            <label className={(error.tiktok && 'label-error')}>{error.tiktok ? error.tiktok : "TikTok"}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <AiOutlineWhatsApp />
-                            <InputMask autoComplete="edit_school_whatsapp" mask="+7 (799) 999-9999" onInput={e => setEditSchoolWhatsApp(e.target.value)} value={edit_school_whatsapp} name="whatsapp" placeholder=" " />
-                            <label className={(error.whatsapp && 'label-error')}>{error.whatsapp ? error.whatsapp : "Whatsapp"}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <FaTelegram />
-                            <input autoComplete="edit_school_telegram" type="text" defaultValue={school.telegram} name="telegram" placeholder=" " />
-                            <label className={(error.telegram && 'label-error')}>{error.telegram ? error.telegram : "Telegram"}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <AiOutlineYoutube />
-                            <input autoComplete="edit_school_youtube" type="text" defaultValue={school.youtube} name="whatsapp" placeholder=" " />
-                            <label className={(error.youtube && 'label-error')}>{error.youtube ? error.youtube : "Youtube"}</label>
-                        </div>
-
-                        <div className="btn-wrap mt-6">
-                            <button disabled={button_loader} className="btn btn-primary" type="submit">
-                                {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
-                                <span>{intl.formatMessage({ id: "save_changes" })}</span>
-                            </button>
+                        <div className="custom-grid">
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive">
+                                    <AiOutlineRead />
+                                    <input autoComplete="edit_school_name" type="text" defaultValue={school.school_name} name="school_name" placeholder=" " />
+                                    <label className={(error.school_name && 'label-error')}>{error.school_name ? error.school_name : intl.formatMessage({ id: "page.site.school_name" })}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive">
+                                    <AiOutlineRead />
+                                    <textarea autoComplete="edit_about_school" type="text" defaultValue={school.about} name="about" placeholder=" "></textarea>
+                                    <label className={(error.about && 'label-error')}>{error.about ? error.about : intl.formatMessage({ id: "page.registration.form.about_school" })}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive">
+                                    <AiOutlineMail />
+                                    <input autoComplete="edit_school_email" type="text" defaultValue={school.email} name="email" placeholder=" " />
+                                    <label className={(error.email && 'label-error')}>{error.email ? error.email : intl.formatMessage({ id: "page.registration.form.email" })}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive">
+                                    <AiOutlinePhone />
+                                    <InputMask autoComplete="edit_school_phone" mask="+7 (799) 999-9999" onInput={e => setEditSchoolPhone(e.target.value)} value={edit_school_phone} name="phone" placeholder=" " />
+                                    <label className={(error.phone && 'label-error')}>{error.phone ? error.phone : intl.formatMessage({ id: "page.registration.form.phone" })}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive">
+                                    <AiOutlineInstagram />
+                                    <input autoComplete="edit_school_instagram" type="text" defaultValue={school.instagram} name="instagram" placeholder=" " />
+                                    <label className={(error.instagram && 'label-error')}>{error.instagram ? error.instagram : "Instagram"}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive">
+                                    <AiOutlineFacebook />
+                                    <input autoComplete="edit_school_facebook" type="text" defaultValue={school.facebook} name="facebook" placeholder=" " />
+                                    <label className={(error.facebook && 'label-error')}>{error.facebook ? error.facebook : "Facebook"}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive">
+                                    <FaTiktok />
+                                    <input autoComplete="edit_school_tiktok" type="text" defaultValue={school.tiktok} name="tiktok" placeholder=" " />
+                                    <label className={(error.tiktok && 'label-error')}>{error.tiktok ? error.tiktok : "TikTok"}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive">
+                                    <AiOutlineWhatsApp />
+                                    <InputMask autoComplete="edit_school_whatsapp" mask="+7 (799) 999-9999" onInput={e => setEditSchoolWhatsApp(e.target.value)} value={edit_school_whatsapp} name="whatsapp" placeholder=" " />
+                                    <label className={(error.whatsapp && 'label-error')}>{error.whatsapp ? error.whatsapp : "Whatsapp"}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive">
+                                    <FaTelegram />
+                                    <input autoComplete="edit_school_telegram" type="text" defaultValue={school.telegram} name="telegram" placeholder=" " />
+                                    <label className={(error.telegram && 'label-error')}>{error.telegram ? error.telegram : "Telegram"}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive">
+                                    <AiOutlineYoutube />
+                                    <input autoComplete="edit_school_youtube" type="text" defaultValue={school.youtube} name="whatsapp" placeholder=" " />
+                                    <label className={(error.youtube && 'label-error')}>{error.youtube ? error.youtube : "Youtube"}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="btn-wrap">
+                                    <button disabled={button_loader} className="btn btn-primary" type="submit">
+                                        {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
+                                        <span>{intl.formatMessage({ id: "save_changes" })}</span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
 
                 <div className="col-span-12 lg:col-span-6">
                     <form id="settings_form" onSubmit={e => saveSettingsSubmit(e)} encType="multipart/form-data">
-                        <div className="form-group-border active label-inactive">
-                            <AiOutlineFormatPainter />
-                            <select name="theme_id" defaultValue={school.theme_id} onChange={debounceHandler(e => setSchoolSettings(), 500)}>
-                                <option disabled value="">{intl.formatMessage({ id: "theme.select_default_theme" })}</option>
-                                {
-                                    school_attributes.themes?.map(theme => (
-                                        <option selected={school.theme_id === theme.theme_id} key={theme.theme_id} value={theme.theme_id}>{intl.formatMessage({ id: "theme." + theme.theme_slug })}</option>
-                                    ))
-                                }
-                            </select>
-                            <label className={(error.theme_id && 'label-error')}>{error.theme_id ? error.theme_id : intl.formatMessage({ id: "theme.default_theme" })}</label>
-                        </div>
+                        <div className="custom-grid">
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive select">
+                                    <AiOutlineFormatPainter />
+                                    <select name="theme_id" defaultValue={school.theme_id} onChange={debounceHandler(e => setSchoolSettings(), 500)}>
+                                        <option disabled value="">{intl.formatMessage({ id: "theme.select_default_theme" })}</option>
+                                        {
+                                            school_attributes.themes?.map(theme => (
+                                                <option selected={school.theme_id === theme.theme_id} key={theme.theme_id} value={theme.theme_id}>{intl.formatMessage({ id: "theme." + theme.theme_slug })}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <label className={(error.theme_id && 'label-error')}>{error.theme_id ? error.theme_id : intl.formatMessage({ id: "theme.default_theme" })}</label>
+                                </div>
+                            </div>
 
-                        <div className="custom-grid mt-6">
                             {(school.theme_id == 1 || school.theme_id == 2) &&
                                 <div className="col-span-12">
                                     <div className="border-inactive p-4 rounded-lg">
@@ -309,45 +333,76 @@ export default function SiteSettings() {
                                     </div>
                                 </div>
                             }
-                        </div>
 
-                        <div className="form-group-border active label-inactive mt-6">
-                            <AiOutlineFormatPainter />
-                            <select name="color_id" defaultValue={school.color_id} onChange={debounceHandler(e => setSchoolSettings(), 500)}>
-                                <option disabled value="">{intl.formatMessage({ id: "theme.select_default_color_scheme" })}</option>
-                                {
-                                    school_attributes.colors?.map(color => (
-                                        <option selected={school.color_id === color.color_id} key={color.color_id} value={color.color_id}>{color.color_name}</option>
-                                    ))
-                                }
-                            </select>
-                            <label className={(error.color_id && 'label-error')}>{error.color_id ? error.color_id : intl.formatMessage({ id: "theme.default_color_scheme" })}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <AiOutlineFontSize />
-                            <select name="title_font_id" defaultValue={school.title_font_id} onChange={debounceHandler(e => setSchoolSettings(), 500)}>
-                                <option disabled value="">{intl.formatMessage({ id: "theme.select_default_font" })}</option>
-                                {
-                                    school_attributes.fonts?.map(font => (
-                                        <option selected={school.title_font_id === font.font_id} key={font.font_id} value={font.font_id}>{font.font_name}</option>
-                                    ))
-                                }
-                            </select>
-                            <label className={(error.title_font_id && 'label-error')}>{error.title_font_id ? error.title_font_id : intl.formatMessage({ id: "theme.default_font_for_headings" })}</label>
-                        </div>
-
-                        <div className="form-group-border active label-inactive mt-6">
-                            <AiOutlineFontSize />
-                            <select name="body_font_id" defaultValue={school.body_font_id} onChange={debounceHandler(e => setSchoolSettings(), 500)}>
-                                <option disabled value="">{intl.formatMessage({ id: "theme.select_default_font" })}</option>
-                                {
-                                    school_attributes.fonts?.map(font => (
-                                        <option selected={school.body_font_id === font.font_id} key={font.font_id} value={font.font_id}>{font.font_name}</option>
-                                    ))
-                                }
-                            </select>
-                            <label className={(error.body_font_id && 'label-error')}>{error.body_font_id ? error.body_font_id : intl.formatMessage({ id: "theme.default_font_for_paragraphs" })}</label>
+                            <div className="col-span-12">
+                                <div className="border-inactive p-4 rounded-lg">
+                                    <div className="flex gap-4 flex-wrap">
+                                        {school.favicon ?
+                                            <>
+                                                <div className="border-inactive border-dashed p-1">
+                                                    <div className="bg-inactive w-24 h-fit">
+                                                        <img className="w-full h-auto" src={API_URL + '/school/get_favicon/' + school.school_id + '/' + school.favicon} />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h5 className="mb-2">{intl.formatMessage({ id: "theme.favicon" })}</h5>
+                                                    <div className="btn-wrap">
+                                                        <button type="button" className="btn btn-sm btn-outline-primary" onClick={e => setFaviconModal(true)}><AiOutlineCrown /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.change_favicon" })}</span></button>
+                                                        <button type="button" className="btn btn-sm btn-outline-danger" onClick={e => setDeleteFaviconModal(true)}><AiOutlineDelete /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.delete_favicon" })}</span></button>
+                                                    </div>
+                                                </div>
+                                            </>
+                                            :
+                                            <div>
+                                                <h5 className="mb-2">{intl.formatMessage({ id: "theme.favicon" })}</h5>
+                                                <button type="button" className="btn btn-sm btn-primary" onClick={e => setFaviconModal(true)}><AiOutlineCrown /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "theme.upload_favicon" })}</span></button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive select">
+                                    <AiOutlineFormatPainter />
+                                    <select name="color_id" defaultValue={school.color_id} onChange={debounceHandler(e => setSchoolSettings(), 500)}>
+                                        <option disabled value="">{intl.formatMessage({ id: "theme.select_default_color_scheme" })}</option>
+                                        {
+                                            school_attributes.colors?.map(color => (
+                                                <option selected={school.color_id === color.color_id} key={color.color_id} value={color.color_id}>{color.color_name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <label className={(error.color_id && 'label-error')}>{error.color_id ? error.color_id : intl.formatMessage({ id: "theme.default_color_scheme" })}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive select">
+                                    <AiOutlineFontSize />
+                                    <select name="title_font_id" defaultValue={school.title_font_id} onChange={debounceHandler(e => setSchoolSettings(), 500)}>
+                                        <option disabled value="">{intl.formatMessage({ id: "theme.select_default_font" })}</option>
+                                        {
+                                            school_attributes.fonts?.map(font => (
+                                                <option selected={school.title_font_id === font.font_id} key={font.font_id} value={font.font_id}>{font.font_name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <label className={(error.title_font_id && 'label-error')}>{error.title_font_id ? error.title_font_id : intl.formatMessage({ id: "theme.default_font_for_headings" })}</label>
+                                </div>
+                            </div>
+                            <div className="col-span-12">
+                                <div className="form-group-border active label-inactive select">
+                                    <AiOutlineFontSize />
+                                    <select name="body_font_id" defaultValue={school.body_font_id} onChange={debounceHandler(e => setSchoolSettings(), 500)}>
+                                        <option disabled value="">{intl.formatMessage({ id: "theme.select_default_font" })}</option>
+                                        {
+                                            school_attributes.fonts?.map(font => (
+                                                <option selected={school.body_font_id === font.font_id} key={font.font_id} value={font.font_id}>{font.font_name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <label className={(error.body_font_id && 'label-error')}>{error.body_font_id ? error.body_font_id : intl.formatMessage({ id: "theme.default_font_for_paragraphs" })}</label>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -362,6 +417,14 @@ export default function SiteSettings() {
 
                 <Modal show={delete_logo_modal} onClose={() => setDeleteLogoModal(false)} modal_title={intl.formatMessage({ id: "theme.delete_logo_title" })} modal_size="modal-xl">
                     <DeleteLogoModal closeModal={() => setDeleteLogoModal(false)} variable={delete_logo_variable} getSchoolAttributes={getSchoolAttributes} />
+                </Modal>
+
+                <Modal show={favicon_modal} onClose={cancelUpload} modal_title={intl.formatMessage({ id: "theme.favicon_title" })} modal_size="modal-xl">
+                    <UploadFaviconModal closeModal={cancelUpload} favicon_file={favicon_file} setFaviconFile={setFaviconFile} getSchoolAttributes={getSchoolAttributes} />
+                </Modal>
+
+                <Modal show={delete_favicon_modal} onClose={() => setDeleteFaviconModal(false)} modal_title={intl.formatMessage({ id: "theme.delete_favicon_title" })} modal_size="modal-xl">
+                    <DeleteFaviconModal closeModal={() => setDeleteFaviconModal(false)} getSchoolAttributes={getSchoolAttributes} />
                 </Modal>
             </RoleProvider>
         </DashboardLayout>

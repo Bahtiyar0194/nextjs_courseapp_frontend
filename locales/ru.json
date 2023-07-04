@@ -383,6 +383,7 @@
     "theme.use_both_themes": "Использовать обе темы",
     "theme.light_theme": "Только светлая тема",
     "theme.dark_theme": "Только тёмная тема",
+
     "theme.upload_logo": "Загрузить логотип",
     "theme.change_logo": "Изменить логотип",
     "theme.delete_logo": "Удалить логотип",
@@ -392,6 +393,14 @@
     "theme.light_logo_title": "Загрузка логотипа для светлой темы",
     "theme.dark_logo": "Логотип для тёмной темы",
     "theme.dark_logo_title": "Загрузка логотипа для темной темы",
+
+    "theme.upload_favicon": "Загрузить иконку",
+    "theme.change_favicon": "Изменить иконку",
+    "theme.delete_favicon": "Удалить иконку",
+    "theme.delete_favicon_title": "Удаление иконки",
+    "theme.delete_favicon_confirm": "Вы действительно хотите удалить данную иконку?",
+    "theme.favicon": "Иконка",
+    "theme.favicon_title": "Загрузка иконки",
 
     "theme.default_color_scheme": "Цветовая схема по умолчанию",
     "theme.select_default_color_scheme": "Выберите цветовую схему",

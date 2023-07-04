@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { IntlProvider } from "react-intl";
 import { store } from '../store/store';
 import axios from "axios";
@@ -42,6 +43,28 @@ export default function MyApp({ Component, pageProps }) {
     else {
         axios.defaults.headers.common['Accept-Language'] = defaultLocale;
     }
+
+    useEffect(() => {
+        if (router.isReady) {
+            let full_domain = window.location.host; // subdomain.domain.com
+            full_domain = full_domain.replace('www.', '');
+            full_domain = full_domain.replace(':3000', '');
+            let parts = full_domain.split('.');
+
+            if ((parts.length == 1 && parts[0] == 'localhost') || (parts.length == 2 && parts[1] != 'localhost')) {
+                let link = document.createElement('link');
+                link.rel = 'manifest';
+                link.href = '/manifest.json';
+                document.getElementsByTagName('head')[0].appendChild(link);
+            }
+            else{
+                if (router.asPath === '/') {
+                    router.push('/login');
+                }
+            }
+        }
+    }, [router.isReady]);
+
 
     return (
         <IntlProvider locale={locale} messages={messages[locale]}>
