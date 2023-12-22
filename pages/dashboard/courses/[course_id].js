@@ -187,7 +187,7 @@ export default function Course() {
                       <Link href={'/dashboard/courses/subscribers/' + course.course_id} className="btn btn-outline-primary"><AiOutlineTeam /> <span>{intl.formatMessage({ id: "page.my_courses.subscribers" })}</span>
                         {course.subscribers?.length > 0 &&
                           <>
-                            : <span className="font-medium text-active">{course.subscribers.length}</span>
+                            : <span className="font-medium">{course.subscribers.length}</span>
                           </>
                         }
                       </Link>
