@@ -23,6 +23,8 @@ import { scrollIntoView } from "seamless-scroll-polyfill";
 
 export default function SiteSettings() {
     const [button_loader, setButtonLoader] = useState(false);
+    const [showFullLoader, setShowFullLoader] = useState(true);
+
     const [error, setError] = useState([]);
     const intl = useIntl();
     const router = useRouter();
@@ -85,6 +87,7 @@ export default function SiteSettings() {
     }
 
     const setSchoolSettings = async () => {
+        setShowFullLoader(true);
         const settings_form = document.querySelector('#settings_form');
         const form_body = serialize(settings_form, { hash: true, empty: true });
 
@@ -120,10 +123,12 @@ export default function SiteSettings() {
     }
 
     const getSchoolAttributes = async () => {
+        setShowFullLoader(true);
         await axios.get('school/get_attributes')
             .then(response => {
                 dispatch(setSchoolData(response.data.school));
                 setSchoolAttributes(response.data);
+                setShowFullLoader(false);
             }).catch(err => {
                 if (err.response) {
                     router.push({
@@ -160,7 +165,7 @@ export default function SiteSettings() {
     }, []);
 
     return (
-        <DashboardLayout showLoader={false} title={intl.formatMessage({ id: "page.site_settings.title" })}>
+        <DashboardLayout showLoader={showFullLoader} title={intl.formatMessage({ id: "page.site_settings.title" })}>
             <RoleProvider roles={[2]} redirect={true}>
                 <Breadcrumb>
                     {intl.formatMessage({ id: "page.site_settings.title" })}

@@ -55,7 +55,7 @@ const ReviewForm = ({ title, description, url }) => {
 
                     <form onSubmit={e => createReviewSubmit(e)} encType="multipart/form-data">
                         <p className={error.rating ? "text-danger" : "text-inactive"}>{error.rating ? intl.formatMessage({ id: "put_a_rate" }) : intl.formatMessage({ id: "your_rating" })}</p>
-                        <div className="flex gap-2 -mt-6">
+                        <div className="flex gap-2 mt-2">
                             {items?.map(item => (
                                 <label key={item} title={item} className="rating-radio">
                                     <input type="radio" value={rating} onChange={e => setRating(item)} name="rating" />

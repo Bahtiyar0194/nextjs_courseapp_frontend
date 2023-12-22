@@ -10,6 +10,7 @@
     "page.home.feedback.succesfully_sent": "Сіздің өтінішіңіз сәтті жіберілді. Біздің менеджер жақын арада сізбен байланысады және сіздің сұрақтарыңызға жауап береді.",
 
     "subscription_plan.your_subscription_plan": "Сіздің тарифтік жоспарыңыз",
+    "subscription_plan.expiration_date": "Тарифтік жоспардың аяқталу күні",
     "subscription_plan.max_courses_count": "Курстардың жалпы саны", 
     "subscription_plan.max_users_count": "Қолданушылардың жалпы саны",
     "subscription_plan.disk_space": "Файл сақтау орны",
@@ -338,6 +339,7 @@
     "uploaded_at": "Жүктелген уақыты",
     "uploaded_at_from": "Жүктелген уақыты (бастап)",
     "uploaded_at_to": "Жүктелген уақыты (дейін)",
+    "expiration_at": "Аяқталу күні",
     "views": "Қараулар",
     "tasks": "Тапсырмалар",
     "operator": "Оператор",

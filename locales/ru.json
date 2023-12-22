@@ -10,6 +10,7 @@
     "page.home.feedback.succesfully_sent": "Ваша заявка была успешно отправлена. Наш менеджер свяжется с Вами в ближайшее время и ответит на Ваши вопросы.",
 
     "subscription_plan.your_subscription_plan": "Ваш тарифный план",
+    "subscription_plan.expiration_date": "Дата истечения тарифного плана",
     "subscription_plan.max_courses_count": "Макс. количество курсов", 
     "subscription_plan.max_users_count": "Макс. количество пользователей",
     "subscription_plan.disk_space": "Файловое хранилище",
@@ -336,6 +337,7 @@
     "uploaded_at": "Дата загрузки",
     "uploaded_at_from": "Дата загрузки (с)",
     "uploaded_at_to": "Дата загрузки (по)",
+    "expiration_at": "Дата истечения",
     "views": "Просмотров",
     "tasks": "Задании",
     "operator": "Оператор",

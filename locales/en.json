@@ -10,6 +10,7 @@
     "page.home.feedback.succesfully_sent": "Your feedback has been successfully sent. Our manager will contact you soon and answer your questions.",
 
     "subscription_plan.your_subscription_plan": "Your subscription plan",
+    "subscription_plan.expiration_date": "Expiration date of the subscription plan",
     "subscription_plan.max_courses_count": "Max courses count", 
     "subscription_plan.max_users_count": "Max users count",
     "subscription_plan.disk_space": "File storage",
@@ -336,6 +337,7 @@
     "uploaded_at": "Uploaded at",
     "uploaded_at_from": "Uploaded at (from)",
     "uploaded_at_to": "Uploaded at (to)",
+    "expiration_at": "Expiration at",
     "views": "Views",
     "tasks": "Tasks",
     "operator": "Operator",
