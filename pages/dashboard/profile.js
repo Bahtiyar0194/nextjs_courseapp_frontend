@@ -147,7 +147,7 @@ export default function Profile() {
             </div>
             <div className="col-span-12">
                 <div className="relative w-32">
-                    <UserAvatar user_avatar={current_user.avatar} className={'w-32 h-32 p-2'} />
+                    <UserAvatar user_avatar={current_user.avatar} className={'w-32 h-32'} padding={2} />
                     {current_user.avatar
                         ?
                         <CDropdown className="absolute bottom-0 right-0">
@@ -166,18 +166,6 @@ export default function Profile() {
             </div>
             <div className="col-span-12 lg:col-span-6">
                 <form onSubmit={e => editUserSubmit(e)} encType="multipart/form-data">
-                    {/* 
-                    {current_user.roles?.length > 1 &&
-                        <div className="flex flex-wrap gap-2 mt-6">
-                            {current_user.roles?.map(role =>
-                                <div key={role.role_type_id} className="badge">
-                                    <AiOutlineUser className="mr-0.5 -mt-1"/>
-                                    {role.user_role_type_name}
-                                </div>
-                            )}
-                        </div>
-                    } */}
-
                     <div className="form-group-border active label-inactive mt-6">
                         <AiOutlineUser />
                         <input autoComplete="edit_last_name" type="text" defaultValue={edit_user.last_name} name="last_name" placeholder=" " />

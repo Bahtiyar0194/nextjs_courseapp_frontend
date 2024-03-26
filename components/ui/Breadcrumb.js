@@ -5,8 +5,15 @@ const Breadcrumb = (props) => {
     return (
         <div className="col-span-12">
             <p className="breadcrumb">
-                <Link href={'/dashboard'}>{intl.formatMessage({ id: "page.dashboard.title" })}</Link>
-                {props.children}
+                {props.children
+                    ?
+                    <>
+                        <Link href={'/dashboard'}>{intl.formatMessage({ id: "page.dashboard.title" })}</Link>
+                        {props.children}
+                    </>
+                    :
+                    intl.formatMessage({ id: "page.dashboard.title" })
+                }
             </p>
         </div>
     );

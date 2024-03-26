@@ -104,7 +104,7 @@ const TableModal = ({ create_lesson, create_task, closeModal }) => {
         <>
             <div className="modal-body">
                 <form onSubmit={e => createTableSubmit(e)} encType="multipart/form-data">
-                    <div className="form-group mt-4">
+                    <div className="form-group">
                         <AiOutlineInsertRowAbove />
                         <input onInput={e => setColumnsCount(e.target.value)} type="number" max={10} value={columns_count} placeholder=" " />
                         <label className={(column_error && 'label-error')}>{column_error ? column_error : intl.formatMessage({ id: "tableModal.columns_count" })}</label>

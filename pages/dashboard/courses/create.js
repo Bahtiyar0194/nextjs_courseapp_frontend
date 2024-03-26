@@ -199,7 +199,7 @@ export default function CreateCourse() {
                                 </div>
                             </div>
                             <div className="col-span-12 lg:col-span-3">
-                                <div className="form-group-border active label-inactive">
+                                <div className="form-group-border select active label-inactive">
                                     <AiOutlineRead />
                                     <select name="course_category_id" defaultValue={''} >
                                         <option selected disabled value="">{intl.formatMessage({ id: "page.my_courses.form.select_course_category" })}</option>
@@ -213,7 +213,7 @@ export default function CreateCourse() {
                                 </div>
                             </div>
                             <div className="col-span-12 lg:col-span-3">
-                                <div className="form-group-border active label-inactive">
+                                <div className="form-group-border select active label-inactive">
                                     <AiOutlineFlag />
                                     <select name="course_lang_id" defaultValue={''} >
                                         <option selected disabled value="">{intl.formatMessage({ id: "page.my_courses.form.select_course_language" })}</option>
@@ -227,7 +227,7 @@ export default function CreateCourse() {
                                 </div>
                             </div>
                             <div className="col-span-12 lg:col-span-3">
-                                <div className="form-group-border active label-inactive">
+                                <div className="form-group-border select active label-inactive">
                                     <AiOutlineRise />
                                     <select name="level_type_id" defaultValue={''} >
                                         <option selected disabled value="">{intl.formatMessage({ id: "page.my_courses.form.select_course_level" })}</option>
@@ -241,7 +241,7 @@ export default function CreateCourse() {
                                 </div>
                             </div>
                             <div className="col-span-12 lg:col-span-3">
-                                <div className="form-group-border active label-inactive">
+                                <div className="form-group-border select active label-inactive">
                                     <AiOutlineUser />
                                     <select name="author_id" defaultValue={''} >
                                         <option selected disabled value="">{intl.formatMessage({ id: "page.my_courses.form.select_course_author" })}</option>
@@ -261,7 +261,7 @@ export default function CreateCourse() {
                                         course_attributes.course_authors?.map(item => (
                                             <div key={item.user_id}>
                                                 <div className="flex gap-2 items-center">
-                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8 p-0.5'} />
+                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8'} padding={0.5} />
                                                     <span>{item.last_name} {item.first_name}</span>
                                                 </div>
                                                 <div className="btn-wrap">

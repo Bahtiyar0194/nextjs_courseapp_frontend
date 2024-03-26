@@ -5,7 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Loader from "../ui/Loader";
 
-const UploadAvatarModal = ({ closeModal, image_file, setImageFile, getMe }) => {
+const UploadAvatarModal = ({ closeModal, image_file, setImageFile, userId, getMe, getUsers }) => {
     const router = useRouter();
     const intl = useIntl();
     const [error, setError] = useState([]);
@@ -26,9 +26,15 @@ const UploadAvatarModal = ({ closeModal, image_file, setImageFile, getMe }) => {
             },
         }
 
-        await axios.post('auth/upload_avatar', form_data, config)
+        await axios.post(userId ? ('auth/upload_avatar/' + userId) : 'auth/upload_avatar', form_data, config)
             .then(response => {
-                getMe();
+                if (userId) {
+                    getMe(userId);
+                    getUsers();
+                }
+                else {
+                    getMe();
+                }
                 setLoader(false);
                 setError([]);
                 closeModal();

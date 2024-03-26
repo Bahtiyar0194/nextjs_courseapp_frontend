@@ -5,7 +5,7 @@ import { useIntl } from "react-intl";
 import axios from "axios";
 import Loader from "../ui/Loader";
 
-const DeleteAvatarModal = ({ closeModal, getMe }) => {
+const DeleteAvatarModal = ({ closeModal, userId, getMe, getUsers }) => {
     const intl = useIntl();
     const [loader, setLoader] = useState(false);
     const router = useRouter();
@@ -14,9 +14,15 @@ const DeleteAvatarModal = ({ closeModal, getMe }) => {
         e.preventDefault();
         setLoader(true);
 
-        await axios.post('auth/delete_avatar')
+        await axios.post(userId ? ('auth/delete_avatar/' + userId) : 'auth/delete_avatar')
             .then(response => {
-                getMe();
+                if (userId) {
+                    getMe(userId);
+                    getUsers();
+                }
+                else {
+                    getMe();
+                }
                 setLoader(false);
                 closeModal();
             }).catch(err => {

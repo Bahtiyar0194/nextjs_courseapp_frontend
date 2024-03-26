@@ -71,7 +71,7 @@ const CreateGroupModal = ({ loader, setLoader, group_attributes, getGroups, erro
             {loader && <Loader className="overlay" />}
             <div className="modal-body">
                 <form onSubmit={createGroupSubmit} encType="multipart/form-data">
-                    <div className="custom-grid mt-6">
+                    <div className="custom-grid">
                         <div className="col-span-12">
                             <div id="create_group_modal_top" className="form-group-border active">
                                 <AiOutlineTeam />
@@ -108,7 +108,7 @@ const CreateGroupModal = ({ loader, setLoader, group_attributes, getGroups, erro
                                         group_attributes.group_members?.map(item => (
                                             <div key={item.user_id}>
                                                 <div className="flex gap-2 items-center">
-                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8 p-0.5'} />
+                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8'} padding={0.5} />
                                                     <span>{item.last_name} {item.first_name}</span>
                                                 </div>
                                                 <div className="btn-wrap">

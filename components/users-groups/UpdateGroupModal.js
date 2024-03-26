@@ -67,7 +67,7 @@ const UpdateGroupModal = ({ loader, setLoader, group_attributes, edit_group, set
             {loader && <Loader className="overlay" />}
             <div className="modal-body">
                 <form onSubmit={updateGroupSubmit} encType="multipart/form-data">
-                    <div className="custom-grid mt-6">
+                    <div className="custom-grid">
                         <div className="col-span-12">
                             <div id="edit_group_modal_top" className="form-group-border active">
                                 <AiOutlineTeam />
@@ -104,7 +104,7 @@ const UpdateGroupModal = ({ loader, setLoader, group_attributes, edit_group, set
                                         group_attributes.group_members?.map(item => (
                                             <div key={item.user_id}>
                                                 <div className="flex gap-2 items-center">
-                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8 p-0.5'} />
+                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8'} padding={0.5} />
                                                     <span>{item.last_name} {item.first_name}</span>
                                                 </div>
                                                 <div className="btn-wrap">

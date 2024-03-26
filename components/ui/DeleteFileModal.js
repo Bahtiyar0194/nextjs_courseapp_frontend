@@ -44,7 +44,7 @@ const DeleteFileModal = ({ file, closeModal, closePreviewFileModal, getDiskData 
             {loader && <Loader className="overlay" />}
             <div className="modal-body">
                 <form onSubmit={e => deleteFileSubmit(e)} encType="multipart/form-data">
-                    <p className="my-6">{intl.formatMessage({ id: "file_delete_confirm" })}</p>
+                    <p className="mb-6">{intl.formatMessage({ id: "file_delete_confirm" })}</p>
 
                     <div className="btn-wrap">
                         <button className="btn btn-outline-danger" type="submit"><AiOutlineDelete /> <span>{intl.formatMessage({ id: "yes" })}</span></button>

@@ -90,7 +90,10 @@ export default function Activation() {
         <AuthLayout title={title} school_name={school.school_name}>
             {loader && <Loader className="overlay" />}
             <form onSubmit={activateSubmit}>
-                {user.user_id && <Alert className="-mt-2 mb-6 outline-primary" text={intl.formatMessage({ id: "page.home.welcome" }) + ' ' + user.first_name + '! ' + intl.formatMessage({ id: "page.account_activation.description" })} />}
+                {user.user_id &&
+                    <Alert className="-mt-2 mb-6 outline-primary">
+                        <p className="mb-0">{intl.formatMessage({ id: "page.home.welcome" }) + ' ' + user.first_name + '! ' + intl.formatMessage({ id: "page.account_activation.description" })}</p>
+                    </Alert>}
                 <div className="form-group">
                     <AiOutlineKey />
                     <input autoComplete="new-password" name="password" type={showPassword ? 'text' : 'password'} placeholder=" " />

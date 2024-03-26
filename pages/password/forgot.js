@@ -70,7 +70,9 @@ export default function ForgotPassword() {
         <AuthLayout title={title} school_name={school.school_name}>
             {loader && <Loader className="overlay" />}
             <form onSubmit={forgotSubmit}>
-                <Alert className="-mt-2 mb-6 light" text={intl.formatMessage({ id: "page.password.forgot.instruction" })} />
+                <Alert className="-mt-2 mb-4 light">
+                    <p className="mb-0">{intl.formatMessage({ id: "page.password.forgot.instruction" })}</p>
+                </Alert>
 
                 {!school.school_domain &&
                     <div className="flex justify-between items-center">

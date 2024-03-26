@@ -19,7 +19,7 @@ const DeleteTestQuestionModal = ({ delete_question_id, closeModal }) => {
     return (
         <div className="modal-body">
             <form onSubmit={e => deleteQuestionSubmit(e)} encType="multipart/form-data">
-                <p className="my-6">{intl.formatMessage({ id: "task.test.deleteTestQuestionsModal.confirm" })}</p>
+                <p className="mb-6">{intl.formatMessage({ id: "task.test.deleteTestQuestionsModal.confirm" })}</p>
 
                 <div className="btn-wrap">
                     <button className="btn btn-outline-danger" type="submit"><AiOutlineDelete /> <span>{intl.formatMessage({ id: "yes" })}</span></button>

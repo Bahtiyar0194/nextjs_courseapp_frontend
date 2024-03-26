@@ -7,7 +7,7 @@ import AnswerElemInput from "./AnswerElemInput";
 import TestQuestionMaterialBlock from "./TestQuestionMaterialBlock";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
 
-const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuestionBlock, test_question, createQuestionImage, createQuestionAudio, createQuestionCode, edit }) => {
+const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuestionBlock, test_question, createQuestionImage, createQuestionAudio, createQuestionCode, properties, edit }) => {
 
     const dispatch = useDispatch();
     let test_question_blocks = useSelector((state) => state.testQuestionBlocks.test_question_blocks);
@@ -18,7 +18,7 @@ const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuest
         let obj = {
             answer_id: answers_count + 1,
             answer_value: '',
-            checked: false
+            checked: properties?.length > 0 ? null : false
         };
 
         let newArr = JSON.parse(JSON.stringify(test_question_blocks));
@@ -66,10 +66,10 @@ const TestQuestionBlock = ({ index, intl, moveTestQuestionBlock, deleteTestQuest
             </div>
 
             {test_question.answers.map((answer, i) => (
-                <AnswerElemInput key={i} index={i} question_id={test_question.question_id} question_index={index} answer={answer} intl={intl} />
+                <AnswerElemInput key={i} index={i} question_id={test_question.question_id} question_index={index} answer={answer} properties={properties} intl={intl} />
             ))}
 
-            <button type="button" onClick={e => addAnswerElem()} className="text-sm flex items-center mt-2 pb-1 border-dashed border-b-inactive text-corp"><AiOutlinePlusCircle className="mr-1" /> {intl.formatMessage({ id: "task.test.addTestQuestionsModal.add_variant" })}</button>
+            <button type="button" onClick={e => addAnswerElem()} className="text-sm flex items-center mt-4 pb-1 border-dashed border-b-inactive text-corp"><AiOutlinePlusCircle className="mr-1" /> {intl.formatMessage({ id: "task.test.addTestQuestionsModal.add_variant" })}</button>
         </div>
     )
 }

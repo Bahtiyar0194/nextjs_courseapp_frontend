@@ -317,7 +317,7 @@ export default function EditCourse() {
                                         course_attributes.course_authors?.map(item => (
                                             <div key={item.user_id}>
                                                 <div className="flex gap-2 items-center">
-                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8 p-0.5'} />
+                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8'} padding={0.5} />
                                                     <span>{item.last_name} {item.first_name}</span>
                                                 </div>
                                                 <div className="btn-wrap">

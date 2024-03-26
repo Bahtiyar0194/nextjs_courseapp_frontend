@@ -7,12 +7,16 @@
         "axios": "^1.2.1",
         "form-serialize": "^0.7.2",
         "html-react-parser": "^3.0.9",
+        "html-to-image": "^1.11.11",
+        "html2canvas": "^1.4.1",
         "js-cookie": "^3.0.1",
+        "jspdf": "^2.5.1",
         "next": "^13.0.4",
         "next-pwa": "^5.6.0",
         "next-themes": "^0.2.1",
         "react": "^18.2.0",
         "react-audio-player": "^0.17.0",
+        "react-countup": "^6.5.0",
         "react-dom": "^18.2.0",
         "react-icons": "^4.7.1",
         "react-input-mask": "^3.0.0-alpha.2",
@@ -23,7 +27,8 @@
         "react-sticky-box": "^2.0.0",
         "react-syntax-highlighter": "^15.5.0",
         "seamless-scroll-polyfill": "^2.3.3",
-        "video-react": "^0.16.0"
+        "video-react": "^0.16.0",
+        "xlsx": "^0.18.5"
     },
     "scripts": {
         "dev": "next dev",

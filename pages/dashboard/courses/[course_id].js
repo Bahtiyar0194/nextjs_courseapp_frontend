@@ -7,13 +7,12 @@ import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
 import DeleteLessonModal from "../../../components/lesson/DeleteLessonModal";
 import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
-import { AiOutlineCaretDown, AiOutlineFileText, AiOutlinePushpin, AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineEdit, AiOutlineDelete, AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineTeam } from "react-icons/ai";
+import { AiOutlineCaretDown, AiOutlineFileText, AiOutlinePushpin, AiOutlineArrowUp, AiOutlineArrowDown, AiOutlineEdit, AiOutlineDelete, AiOutlinePlusCircle, AiOutlineMinusCircle, AiOutlineTeam, AiOutlineCheckCircle, AiOutlineStop } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import CreateCourseSectionModal from "../../../components/lesson/CreateCourseSectionModal";
 import EditSectionModal from "../../../components/lesson/EditSectionModal";
-import BuyCourseModal from "../../../components/lesson/BuyCourseModal";
 import { scrollIntoView } from "seamless-scroll-polyfill";
 import StickyBox from "react-sticky-box";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
@@ -23,18 +22,20 @@ import RatingStars from "../../../components/ui/RatingStars";
 import ReviewForm from "../../../components/ui/ReviewForm";
 import ReviewsList from "../../../components/ui/ReviewsList";
 import UserAvatar from "../../../components/ui/UserAvatar";
+import Loader from "../../../components/ui/Loader";
 
 export default function Course() {
   const router = useRouter();
+  const [loader, setLoader] = useState(false);
   const [showFullLoader, setShowFullLoader] = useState(true);
   const intl = useIntl();
   const [sectionModal, setSectionModal] = useState(false);
-  const [buyCourseModal, setBuyCourseModal] = useState(false);
   const [edit_section_id, setEditSectionId] = useState('');
   const [section_name, setSectionName] = useState('');
   const [edit_section_modal, setEditSectionModal] = useState(false);
   const [delete_lesson_modal, setDeleteLessonModal] = useState(false);
   const [delete_lesson_id, setDeleteLessonId] = useState('');
+  const [subscribe_to_the_course_modal, setSubscribeToTheCourseModal] = useState(false);
   const [course, setCourse] = useState([]);
   const [lessons, setLessons] = useState([]);
   const [show_course_content, setShowCourseContent] = useState(false);
@@ -97,6 +98,7 @@ export default function Course() {
     await axios.get('courses/my-courses/' + course_id)
       .then(response => {
         setCourse(response.data);
+        setLoader(false);
       }).catch(err => {
         if (err.response) {
           router.push({
@@ -121,6 +123,29 @@ export default function Course() {
           setShowFullLoader(false);
           setLessons(response.data);
         }, 500)
+      }).catch(err => {
+        if (err.response) {
+          router.push({
+            pathname: '/error',
+            query: {
+              status: err.response.status,
+              message: err.response.data.message,
+              url: err.request.responseURL,
+            }
+          });
+        }
+        else {
+          router.push('/error');
+        }
+      });
+  }
+
+  const subscribeToTheCourse = async () => {
+    setLoader(true);
+    await axios.post('courses/subscribe/' + course.course_id)
+      .then(response => {
+        getCourse(course.course_id);
+        getLessons(course.course_id);
       }).catch(err => {
         if (err.response) {
           router.push({
@@ -197,12 +222,12 @@ export default function Course() {
                 </div>
               </div>
               <div className="col-span-12 sm:hidden">
-                <CourseCard course={course} lessons={lessons} getCourse={getCourse} getLessons={getLessons} />
+                <CourseCard course={course} lessons={lessons} openModal={() => setSubscribeToTheCourseModal(true)} />
               </div>
               <div className="col-span-12">
                 <div className="flex flex-wrap gap-4 md:gap-8 items-center">
                   <div className="flex gap-4 md:gap-6 items-center">
-                    <UserAvatar user_avatar={course.avatar} className={'w-20 h-20 p-1'} />
+                    <UserAvatar user_avatar={course.avatar} className={'w-20 h-20'} padding={1} />
                     <div>
                       <p className="text-inactive mb-0 text-sm">{intl.formatMessage({ id: "page.my_courses.form.course_author" })}:</p>
                       <p className="font-medium text-corp mb-0">{course.last_name} {course.first_name}</p>
@@ -359,7 +384,7 @@ export default function Course() {
                     <div className="flex flex-wrap gap-4 md:gap-6 items-center">
                       {course.mentors?.map(item => (
                         <div key={item.user_id} className="flex gap-4 items-center">
-                          <UserAvatar user_avatar={item.avatar} className={'w-14 h-14 p-1'} />
+                          <UserAvatar user_avatar={item.avatar} className={'w-14 h-14'} padding={1} />
                           <div>
                             <p className="font-medium text-corp mb-0">{item.last_name} {item.first_name}</p>
                             <p className="text-inactive mb-0 text-sm">{intl.formatMessage({ id: "mentor" })}</p>
@@ -391,7 +416,7 @@ export default function Course() {
 
           <div className="col-span-12 sm:col-span-6 md:col-span-5 max-sm:hidden lg:col-span-3">
             <StickyBox offsetTop={6} offsetBottom={6}>
-              <CourseCard course={course} lessons={lessons} getCourse={getCourse} getLessons={getLessons} />
+              <CourseCard course={course} lessons={lessons} openModal={() => setSubscribeToTheCourseModal(true)} />
             </StickyBox>
           </div>
         </>
@@ -415,11 +440,22 @@ export default function Course() {
         </Modal>
       </RoleProvider>
 
-
-      <Modal show={buyCourseModal} onClose={() => setBuyCourseModal(false)} modal_title={intl.formatMessage({ id: "courseSectionModal.title" })} modal_size="modal-xl">
-        <BuyCourseModal closeModal={() => setBuyCourseModal(false)} course_id={course.course_id} getLessons={getLessons} />
+      <Modal show={subscribe_to_the_course_modal} onClose={() => setSubscribeToTheCourseModal(false)} modal_title={intl.formatMessage({ id: "page.my_courses.subcribe_to_the_course" })} modal_size="modal-xl">
+        {loader && <Loader className="overlay" />}
+        <div className="modal-body">
+          {course?.subscribed === true && <p className="mb-0">{intl.formatMessage({id: "page.my_courses.you_are_subscribed_to_this_course"})}</p>}
+          {course?.requested === true && <p className="mb-0">{intl.formatMessage({ id: "page.my_courses.your_request_has_been_sent_successfully" })}</p>}
+          {course?.subscribed === false && 
+            <>
+              <p>{intl.formatMessage({ id: "page.my_courses.do_you_really_want_to_sign_up_for_this_course?" })}</p>
+              <div className="btn-wrap">
+                <button onClick={() => subscribeToTheCourse()} className="btn btn-outline-primary"><AiOutlineCheckCircle /> <span>{intl.formatMessage({ id: "yes" })}</span></button>
+                <button onClick={() => setSubscribeToTheCourseModal(false)} className="btn btn-light" type="button"><AiOutlineStop /> <span>{intl.formatMessage({ id: "no" })}</span></button>
+              </div>
+            </>
+          }
+        </div>
       </Modal>
-
     </DashboardLayout>
   );
 }

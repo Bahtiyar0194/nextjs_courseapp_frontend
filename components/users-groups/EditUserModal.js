@@ -1,11 +1,34 @@
 import axios from "axios";
+import { useState } from "react";
 import InputMask from "react-input-mask";
 import Loader from "../ui/Loader";
-import { AiOutlineUser, AiOutlinePhone, AiOutlineMail, AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineUser, AiOutlinePhone, AiOutlineMail, AiOutlineEdit, AiOutlineCamera, AiOutlineDelete } from "react-icons/ai";
 import serialize from 'form-serialize';
 import RoleProvider from "../../services/RoleProvider";
+import UserAvatar from "../ui/UserAvatar";
+import { CDropdown, CDropdownToggle, CDropdownMenu } from "@coreui/react";
+import Link from "next/link";
 
-const EditUserModal = ({ edit_user, getUsers, setEditUserPhone, edit_user_phone, loader, setLoader, error, setError, intl, router, closeModal }) => {
+import Modal from "../ui/Modal";
+import UploadAvatarModal from "../profile/UploadAvatarModal";
+import DeleteAvatarModal from "../profile/DeleteAvatarModal";
+
+import { useDispatch, useSelector } from "react-redux";
+import { authenticate } from "../../store/slices/userSlice";
+
+const EditUserModal = ({ edit_user, getUsers, getUser, setEditUserPhone, edit_user_phone, loader, setLoader, error, setError, intl, router, closeModal }) => {
+    const dispatch = useDispatch();
+    const [avatar_modal, setAvatarModal] = useState(false);
+    const [delete_avatar_modal, setDeleteAvatarModal] = useState(false);
+    const [image_file, setImageFile] = useState(null);
+
+    const current_user = useSelector((state) => state.authUser.user);
+
+    const cancelUpload = () => {
+        setImageFile(null);
+        setAvatarModal(false);
+    }
+
     const editUserSubmit = async (e) => {
         e.preventDefault();
         setLoader(true);
@@ -25,9 +48,13 @@ const EditUserModal = ({ edit_user, getUsers, setEditUserPhone, edit_user_phone,
         await axios.post('users/update/' + edit_user.user_id, form_body)
             .then(response => {
                 setError([]);
+                getUser(edit_user.user_id);
+
+                if(current_user.user_id === edit_user.user_id){
+                    dispatch(authenticate(response.data));
+                }
                 getUsers();
                 closeModal();
-                setLoader(false);
             }).catch(err => {
                 if (err.response) {
                     if (err.response.status == 422) {
@@ -55,8 +82,25 @@ const EditUserModal = ({ edit_user, getUsers, setEditUserPhone, edit_user_phone,
         <>
             {loader && <Loader className="overlay" />}
             <div className="modal-body">
+                <div className="relative w-32 mb-4">
+                    <UserAvatar user_avatar={edit_user.avatar} className={'w-32 h-32'} padding={2} />
+                    {edit_user.avatar
+                        ?
+                        <CDropdown className="absolute bottom-0 right-0">
+                            <CDropdownToggle color="light" href="#">
+                                <AiOutlineEdit />
+                            </CDropdownToggle>
+                            <CDropdownMenu>
+                                <Link href={'#'} onClick={e => setAvatarModal(true)}><AiOutlineCamera /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "page.users.change_photo" })}</span></Link>
+                                <Link href={'#'} onClick={e => setDeleteAvatarModal(true)}><AiOutlineDelete /> <span className="whitespace-nowrap">{intl.formatMessage({ id: "page.users.delete_photo" })}</span></Link>
+                            </CDropdownMenu>
+                        </CDropdown>
+                        :
+                        <button title={intl.formatMessage({ id: "page.users.upload_photo" })} type="button" onClick={e => setAvatarModal(true)} className="btn btn-light absolute bottom-0 right-0"><AiOutlineCamera /></button>
+                    }
+                </div>
                 <form key={edit_user.user_id} onSubmit={editUserSubmit} encType="multipart/form-data">
-                    <div className="custom-grid mt-6">
+                    <div className="custom-grid">
                         <div className="col-span-12">
                             <div className="form-group-border active">
                                 <AiOutlineUser />
@@ -105,6 +149,14 @@ const EditUserModal = ({ edit_user, getUsers, setEditUserPhone, edit_user_phone,
                     <button className="btn btn-primary mt-4" type="submit"><AiOutlineEdit /> <span>{intl.formatMessage({ id: "done" })}</span></button>
                 </form>
             </div>
+
+            <Modal show={avatar_modal} onClose={cancelUpload} modal_title={intl.formatMessage({ id: "page.users.upload_profile_photo" })} modal_size="modal-xl">
+                <UploadAvatarModal closeModal={cancelUpload} image_file={image_file} setImageFile={setImageFile} userId={edit_user.user_id} getMe={getUser} getUsers={getUsers} />
+            </Modal>
+
+            <Modal show={delete_avatar_modal} onClose={() => setDeleteAvatarModal(false)} modal_title={intl.formatMessage({ id: "page.users.delete_profile_photo" })} modal_size="modal-xl">
+                <DeleteAvatarModal closeModal={() => setDeleteAvatarModal(false)} userId={edit_user.user_id} getMe={getUser} getUsers={getUsers} />
+            </Modal>
         </>
     );
 };

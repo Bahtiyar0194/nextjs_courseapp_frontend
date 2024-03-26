@@ -4,10 +4,11 @@ import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Modal from "../../../components/ui/Modal";
-import { AiOutlineCalendar, AiOutlineEdit, AiOutlineMail, AiOutlinePhone, AiOutlineSearch, AiOutlineTeam, AiOutlineUndo, AiOutlineUser, AiOutlineUserAdd, AiOutlineUsergroupAdd } from "react-icons/ai";
+import { AiOutlineCalendar, AiOutlineCrown, AiOutlineHourglass, AiOutlineMail, AiOutlinePhone, AiOutlineSearch, AiOutlineTeam, AiOutlineUndo, AiOutlineUser, AiOutlineUserAdd, AiOutlineUsergroupAdd } from "react-icons/ai";
 import axios from "axios";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
 import RoleProvider from "../../../services/RoleProvider";
+import UserModal from "../../../components/users-groups/UserModal";
 import InviteUserModal from "../../../components/users-groups/InviteUserModal";
 import EditUserModal from "../../../components/users-groups/EditUserModal";
 import CreateGroupModal from "../../../components/users-groups/CreateGroupModal";
@@ -20,18 +21,25 @@ import Alert from "../../../components/ui/Alert";
 import debounceHandler from "../../../utils/debounceHandler";
 import StickyBox from "react-sticky-box";
 import UserAvatar from "../../../components/ui/UserAvatar";
+import { authenticate } from "../../../store/slices/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import TableToXLSXButton from "../../../components/ui/TableToXLSXButton";
 
 export default function Users() {
     const [main_tab, setMainTab] = useState('users');
+    const dispatch = useDispatch();
+    const current_user = useSelector((state) => state.authUser.user);
     const intl = useIntl();
     const [invite_user_modal, setInviteUserModal] = useState(false);
+    const [user_modal, setUserModal] = useState(false);
     const [edit_user_modal, setEditUserModal] = useState(false);
+    const [user, setUser] = useState([]);
     const [users, setUsers] = useState([]);
+    const [user_attributes, setUserAttributes] = useState([]);
     const [loader, setLoader] = useState(false);
     const [users_loader, setUsersLoader] = useState(false);
     const [showFullLoader, setShowFullLoader] = useState(true);
-    const [edit_user, setEditUser] = useState([]);
-    const [edit_user_phone, setEditUserPhone] = useState('');
+    const [user_phone, setUserPhone] = useState('');
     const [search_user_phone, setSearchUserPhone] = useState('');
     const router = useRouter();
     const [error, setError] = useState([]);
@@ -48,14 +56,17 @@ export default function Users() {
     const [groups, setGroups] = useState([]);
     const [search_group_filter, setSearchGroupFilter] = useState(false);
 
-    const getEditUser = async (user_id) => {
+    const getUser = async (user_id) => {
         setLoader(true);
-        setEditUserModal(true);
+        setUserModal(true);
         await axios.get('users/get/' + user_id)
             .then(response => {
                 setError([]);
-                setEditUser(response.data);
-                setEditUserPhone(response.data.phone);
+                setUser(response.data);
+                setUserPhone(response.data.phone);
+                if (current_user.user_id === user_id) {
+                    dispatch(authenticate(response.data));
+                }
                 setLoader(false);
             }).catch(err => {
                 if (err.response) {
@@ -74,6 +85,11 @@ export default function Users() {
             });
     }
 
+    const getEditUser = async () => {
+        setUserModal(false);
+        setEditUserModal(true);
+    }
+
     const getUsers = async (url) => {
         setUsersLoader(true);
         const search_form = document.querySelector('#user_search_form');
@@ -87,8 +103,31 @@ export default function Users() {
 
         await axios.post(url, form_body)
             .then(response => {
-                setUsers(response.data)
+                setUsers(response.data);
                 setUsersLoader(false);
+                setShowFullLoader(false);
+            }).catch(err => {
+                if (err.response) {
+                    router.push({
+                        pathname: '/error',
+                        query: {
+                            status: err.response.status,
+                            message: err.response.data.message,
+                            url: err.request.responseURL,
+                        }
+                    });
+                }
+                else {
+                    router.push('/error');
+                }
+            });
+    }
+
+    const getUserAttributes = async () => {
+        setShowFullLoader(true);
+        await axios.get('users/get_user_attributes')
+            .then(response => {
+                setUserAttributes(response.data);
                 setShowFullLoader(false);
             }).catch(err => {
                 if (err.response) {
@@ -202,12 +241,8 @@ export default function Users() {
 
     const resetUserSearchFilter = () => {
         const search_form = document.querySelector('#user_search_form');
-        search_form.querySelector('input[name="first_name"]').value = '';
-        search_form.querySelector('input[name="last_name"]').value = '';
-        search_form.querySelector('input[name="email"]').value = '';
+        search_form.reset();
         setSearchUserPhone('');
-        search_form.querySelector('input[name="created_at_from"]').value = '';
-        search_form.querySelector('input[name="created_at_to"]').value = '';
         getUsers();
     }
 
@@ -223,22 +258,21 @@ export default function Users() {
 
     const resetGroupSearchFilter = () => {
         const search_form = document.querySelector('#group_search_form');
-        search_form.querySelector('input[name="group_name"]').value = '';
-        search_form.querySelector('input[name="created_at_from"]').value = '';
-        search_form.querySelector('input[name="created_at_to"]').value = '';
+        search_form.reset();
         getGroups();
     }
 
     useEffect(() => {
         setShowFullLoader(true);
         getUsers();
+        getUserAttributes();
         getGroupAttributes();
         getGroups();
     }, []);
 
     return (
         <DashboardLayout showLoader={showFullLoader} title={intl.formatMessage({ id: "page.users.title" })}>
-            <RoleProvider roles={[2]} redirect={true}>
+            <RoleProvider roles={[2, 3]} redirect={true}>
                 <Breadcrumb>
                     {intl.formatMessage({ id: "page.users.title" })}
                 </Breadcrumb>
@@ -259,7 +293,6 @@ export default function Users() {
 
                 <div className="col-span-12">
                     <div className="tab-body">
-
                         <div className={'tab-body-item ' + (main_tab === 'users' && 'active')}>
                             <div className="custom-grid">
                                 <div className="col-span-12">
@@ -280,15 +313,8 @@ export default function Users() {
                                                         <div className="col-span-12">
                                                             <div className="form-group-border active">
                                                                 <AiOutlineUser />
-                                                                <input autoComplete="search-last-name" type="text" defaultValue={''} name="last_name" placeholder=" " onChange={debounceHandler(getUsers, 1000)} />
-                                                                <label>{intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-span-12">
-                                                            <div className="form-group-border active">
-                                                                <AiOutlineUser />
-                                                                <input autoComplete="search-first-name" type="text" defaultValue={''} name="first_name" placeholder=" " onChange={debounceHandler(getUsers, 1000)} />
-                                                                <label>{intl.formatMessage({ id: "page.registration.form.first_name" })}</label>
+                                                                <input autoComplete="search-user" type="text" defaultValue={''} name="user" placeholder=" " onChange={debounceHandler(getUsers, 1000)} />
+                                                                <label>{intl.formatMessage({ id: "page.registration.form.last_name" })}, {intl.formatMessage({ id: "page.registration.form.first_name" })}</label>
                                                             </div>
                                                         </div>
                                                         <div className="col-span-12">
@@ -298,6 +324,7 @@ export default function Users() {
                                                                 <label>{intl.formatMessage({ id: "page.registration.form.email" })}</label>
                                                             </div>
                                                         </div>
+
                                                         <div className="col-span-12">
                                                             <div className="form-group-border active">
                                                                 <AiOutlinePhone />
@@ -307,10 +334,40 @@ export default function Users() {
                                                         </div>
 
                                                         <div className="col-span-12">
+                                                            <div className="form-group-border select active label-active">
+                                                                <AiOutlineHourglass />
+                                                                <select name="status_type_id" defaultValue={''} onChange={() => getUsers()}>
+                                                                    <option selected value="">{intl.formatMessage({ id: "not_specified" })}</option>
+                                                                    {
+                                                                        user_attributes.user_statuses?.map(status => (
+                                                                            <option key={status.status_type_id} value={status.status_type_id}>{status.status_type_name}</option>
+                                                                        ))
+                                                                    }
+                                                                </select>
+                                                                <label>{intl.formatMessage({ id: "page.users.user_status" })}</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-span-12">
+                                                            <div className="form-group-border select active label-active">
+                                                                <AiOutlineCrown />
+                                                                <select name="role_type_id" defaultValue={''} onChange={() => getUsers()}>
+                                                                    <option selected value="">{intl.formatMessage({ id: "not_specified" })}</option>
+                                                                    {
+                                                                        user_attributes.user_roles?.map(role => (
+                                                                            <option key={role.role_type_id} value={role.role_type_id}>{role.user_role_type_name}</option>
+                                                                        ))
+                                                                    }
+                                                                </select>
+                                                                <label>{intl.formatMessage({ id: "page.users.user_role" })}</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-span-12">
                                                             <div className="form-group-border active">
                                                                 <AiOutlineCalendar />
                                                                 <input type="date" defaultValue={''} name="created_at_from" onChange={debounceHandler(getUsers, 1000)} placeholder=" " />
-                                                                <label>{intl.formatMessage({ id: "created_at_from" })}</label>
+                                                                <label>{intl.formatMessage({ id: "registered_at_from" })}</label>
                                                             </div>
                                                         </div>
 
@@ -318,7 +375,7 @@ export default function Users() {
                                                             <div className="form-group-border active">
                                                                 <AiOutlineCalendar />
                                                                 <input type="date" defaultValue={''} name="created_at_to" onChange={debounceHandler(getUsers, 1000)} placeholder=" " />
-                                                                <label>{intl.formatMessage({ id: "created_at_to" })}</label>
+                                                                <label>{intl.formatMessage({ id: "registered_at_to" })}</label>
                                                             </div>
                                                         </div>
 
@@ -334,56 +391,50 @@ export default function Users() {
                                     </div>
                                 }
 
-                                <div className={"relative col-span-12 " + (search_user_filter === true ? 'lg:col-span-9' : '')}>
+                                <div className={"col-span-12 " + (search_user_filter === true ? 'lg:col-span-9' : '')}>
                                     {users.data?.length > 0 ?
                                         <>
-                                            <div className="relative">
+                                            <div className="table table-sm selectable">
                                                 {users_loader && <Loader className="overlay" />}
-                                                <div className="table table-sm">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th></th>
-                                                                <th>{intl.formatMessage({ id: "page.registration.form.last_name" })}</th>
-                                                                <th>{intl.formatMessage({ id: "page.registration.form.first_name" })}</th>
-                                                                <th>{intl.formatMessage({ id: "page.registration.form.email" })}</th>
-                                                                <th>{intl.formatMessage({ id: "page.registration.form.phone" })}</th>
-                                                                <th>{intl.formatMessage({ id: "created_at" })}</th>
-                                                                <th>{intl.formatMessage({ id: "status" })}</th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
+                                                <table id={main_tab + "Table"}>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>{intl.formatMessage({ id: "page.registration.form.last_name" })}, {intl.formatMessage({ id: "page.registration.form.first_name" })}</th>
+                                                            <th>{intl.formatMessage({ id: "page.registration.form.email" })}</th>
+                                                            <th>{intl.formatMessage({ id: "page.registration.form.phone" })}</th>
+                                                            <th>{intl.formatMessage({ id: "registered_at" })}</th>
+                                                            <th>{intl.formatMessage({ id: "status" })}</th>
+                                                        </tr>
+                                                    </thead>
 
-                                                        <tbody>
-                                                            {users.data?.map(user => (
-                                                                <tr key={user.user_id}>
-                                                                    <th>
-                                                                        <UserAvatar user_avatar={user.avatar} className={'w-10 h-10 p-0.5 my-2 ml-3'} />
-                                                                    </th>
-                                                                    <td>{user.last_name}</td>
-                                                                    <td>{user.first_name}</td>
-                                                                    <td>{user.email}</td>
-                                                                    <td>{user.phone}</td>
-                                                                    <td>{new Date(user.created_at).toLocaleString()}</td>
-                                                                    <td>{user.status_type_name}</td>
-                                                                    <td>
-                                                                        <div className="btn-wrap">
-                                                                            <button onClick={() => getEditUser(user.user_id)} title={intl.formatMessage({ id: "edit" })} className="btn btn-edit"><AiOutlineEdit /></button>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            ))}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                    <tbody>
+                                                        {users.data?.map(user => (
+                                                            <tr key={user.user_id} onClick={() => getUser(user.user_id)}>
+                                                                <td>
+                                                                    <div className="flex gap-x-2 items-center">
+                                                                        <UserAvatar user_avatar={user.avatar} className={'w-10 h-10'} padding={0.5} />
+                                                                        {user.last_name} {user.first_name}
+                                                                    </div>
+                                                                </td>
+                                                                <td>{user.email}</td>
+                                                                <td>{user.phone}</td>
+                                                                <td>{new Date(user.created_at).toLocaleString()}</td>
+                                                                <td>{user.status_type_name}</td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <Pagination items={users} setItems={getUsers} select_id={"users-per-page-select"} />
+                                            <div className="btn-wrap mt-6">
+                                                <Pagination items={users} setItems={getUsers} select_id={"users-per-page-select"} />
+                                                <TableToXLSXButton btn_size_class={'btn-sm'} file_name={intl.formatMessage({ id: "page.users" }) + ' - ' + new Date().toLocaleString()} table_id={main_tab + "Table"} />
+                                            </div>
                                         </>
                                         :
-                                        <>
+                                        <Alert className="alert light">
                                             {users_loader && <Loader className="overlay" />}
-                                            <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
-                                        </>
+                                            <p className="mb-0">{intl.formatMessage({ id: "nothing_was_found_for_your_query" })}</p>
+                                        </Alert>
                                     }
                                 </div>
                             </div>
@@ -418,7 +469,7 @@ export default function Users() {
                                                             <div className="form-group-border active">
                                                                 <AiOutlineCalendar />
                                                                 <input type="date" defaultValue={''} name="created_at_from" onChange={debounceHandler(getGroups, 1000)} placeholder=" " />
-                                                                <label>{intl.formatMessage({ id: "created_at_from" })}</label>
+                                                                <label>{intl.formatMessage({ id: "registered_at_from" })}</label>
                                                             </div>
                                                         </div>
 
@@ -426,7 +477,7 @@ export default function Users() {
                                                             <div className="form-group-border active">
                                                                 <AiOutlineCalendar />
                                                                 <input type="date" defaultValue={''} name="created_at_to" onChange={debounceHandler(getGroups, 1000)} placeholder=" " />
-                                                                <label>{intl.formatMessage({ id: "created_at_to" })}</label>
+                                                                <label>{intl.formatMessage({ id: "registered_at_to" })}</label>
                                                             </div>
                                                         </div>
 
@@ -442,50 +493,44 @@ export default function Users() {
                                     </div>
                                 }
 
-                                <div className={"relative col-span-12 " + (search_group_filter === true ? 'lg:col-span-9' : '')}>
+                                <div className={"col-span-12 " + (search_group_filter === true ? 'lg:col-span-9' : '')}>
                                     {groups.data?.length > 0 ?
                                         <>
-                                            <div className="relative">
+                                            <div className="table table-sm selectable">
                                                 {groups_loader && <Loader className="overlay" />}
-                                                <div className="table table-sm">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>{intl.formatMessage({ id: "page.group.form.group_name" })}</th>
-                                                                <th>{intl.formatMessage({ id: "page.group.form.group_description" })}</th>
-                                                                <th>{intl.formatMessage({ id: "page.group.form.group_mentor" })}</th>
-                                                                <th>{intl.formatMessage({ id: "page.group.form.added_users" })}</th>
-                                                                <th>{intl.formatMessage({ id: "created_at" })}</th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>{intl.formatMessage({ id: "page.group.form.group_name" })}</th>
+                                                            <th>{intl.formatMessage({ id: "page.group.form.group_description" })}</th>
+                                                            <th>{intl.formatMessage({ id: "page.group.form.group_mentor" })}</th>
+                                                            <th>{intl.formatMessage({ id: "page.group.form.added_users" })}</th>
+                                                            <th>{intl.formatMessage({ id: "registered_at" })}</th>
+                                                        </tr>
+                                                    </thead>
 
-                                                        <tbody>
-                                                            {groups.data?.map(group => (
-                                                                <tr key={group.group_id}>
-                                                                    <td>{group.group_name}</td>
-                                                                    <td>{group.group_description}</td>
-                                                                    <td>{group.mentor_last_name} {group.mentor_first_name}</td>
-                                                                    <td>{group.members_count}</td>
-                                                                    <td>{new Date(group.created_at).toLocaleString()}</td>
-                                                                    <td>
-                                                                        <div className="btn-wrap">
-                                                                            <button onClick={() => getEditGroup(group.group_id)} title={intl.formatMessage({ id: "edit" })} className="btn btn-edit"><AiOutlineEdit /></button>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            ))}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                    <tbody>
+                                                        {groups.data?.map(group => (
+                                                            <tr key={group.group_id} onClick={() => getEditGroup(group.group_id)}>
+                                                                <td>{group.group_name}</td>
+                                                                <td>{group.group_description}</td>
+                                                                <td>{group.mentor_last_name} {group.mentor_first_name}</td>
+                                                                <td>{group.members_count}</td>
+                                                                <td>{new Date(group.created_at).toLocaleString()}</td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <Pagination items={groups} setItems={getGroups} select_id={"groups-per-page-select"} />
+                                            <div className="btn-wrap mt-6">
+                                                <Pagination items={groups} setItems={getGroups} select_id={"groups-per-page-select"} />
+                                            </div>
                                         </>
                                         :
-                                        <>
-                                            {users_loader && <Loader className="overlay" />}
-                                            <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
-                                        </>
+                                        <Alert className="alert light">
+                                            {groups_loader && <Loader className="overlay" />}
+                                            <p className="mb-0">{intl.formatMessage({ id: "nothing_was_found_for_your_query" })}</p>
+                                        </Alert>
                                     }
                                 </div>
                             </div>
@@ -505,19 +550,29 @@ export default function Users() {
                         closeModal={() => setInviteUserModal(false)} />
                 </Modal>
 
-                <Modal show={edit_user_modal} onClose={() => setEditUserModal(false)} modal_title={intl.formatMessage({ id: "page.users.edit_user_title" })} modal_size="modal-xl">
+                <Modal show={user_modal} onClose={() => setUserModal(false)} modal_title={intl.formatMessage({ id: "page.users.user_info" })} modal_size="modal-xl">
+                    <UserModal
+                        user={user}
+                        loader={loader}
+                        intl={intl}
+                        getEditUser={getEditUser}
+                    />
+                </Modal>
+
+                <Modal show={edit_user_modal} onClose={() => (setEditUserModal(false), setUserModal(true))} modal_title={intl.formatMessage({ id: "page.users.edit_user_title" })} modal_size="modal-xl">
                     <EditUserModal
-                        edit_user={edit_user}
+                        edit_user={user}
                         getUsers={getUsers}
-                        edit_user_phone={edit_user_phone}
-                        setEditUserPhone={setEditUserPhone}
+                        getUser={getUser}
+                        edit_user_phone={user_phone}
+                        setEditUserPhone={setUserPhone}
                         loader={loader}
                         setLoader={setLoader}
                         error={error}
                         setError={setError}
                         intl={intl}
                         router={router}
-                        closeModal={() => setEditUserModal(false)} />
+                        closeModal={() => (setEditUserModal(false), setUserModal(true))} />
                 </Modal>
 
                 <Modal show={create_group_modal} onClose={() => setCreateGroupModal(false)} modal_title={intl.formatMessage({ id: "page.groups.create_group_title" })} modal_size="modal-xl">

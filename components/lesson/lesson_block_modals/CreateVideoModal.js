@@ -145,8 +145,8 @@ const CreateVideoModal = ({ create_lesson, create_task, upload_file, getDiskData
             <div className="modal-body">
                 <form onSubmit={e => createVideoSubmit(e)} encType="multipart/form-data">
                     {upload_file === false &&
-                        <>
-                            <div className="mt-4">
+                        <div className="mb-4">
+                            <div>
                                 <label className="custom-radio">
                                     <input type="radio" onChange={e => changeVideoType('video_file')} checked={video_type === 'video_file'} name="video_type" />
                                     <span>{intl.formatMessage({ id: "videoModal.form.upload_new_video" })}</span>
@@ -159,13 +159,13 @@ const CreateVideoModal = ({ create_lesson, create_task, upload_file, getDiskData
                                     <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
                                 </label>
                             </div>
-                        </>
+                        </div>
                     }
 
                     {
                         video_type != 'video_from_media'
                         &&
-                        <div className="form-group mt-6">
+                        <div className="form-group">
                             <AiOutlineFile />
                             <input onInput={e => setVideoName(e.target.value)} type="text" value={video_name} placeholder=" " />
                             <label className={(error.video_name && 'label-error')}>{error.video_name ? error.video_name : intl.formatMessage({ id: "videoModal.video_name" })}</label>

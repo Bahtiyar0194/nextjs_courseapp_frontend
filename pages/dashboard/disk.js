@@ -22,6 +22,7 @@ import ContentViewTypeButtons from "../../components/ui/ContentViewTypeButtons";
 import API_URL from "../../config/api";
 import FileSize from "../../components/ui/FileSize";
 import UploadFileModals from "../../components/ui/UploadFileModals";
+import ProgressBar from "../../components/ui/ProgressBar";
 
 export default function Files() {
     const intl = useIntl();
@@ -162,10 +163,7 @@ export default function Files() {
 
     const resetFileSearchFilter = () => {
         const search_form = document.querySelector('#file_search_form');
-        search_form.querySelector('input[name="file_name"]').value = '';
-        search_form.querySelector('input[name="created_at_from"]').value = '';
-        search_form.querySelector('input[name="created_at_to"]').value = '';
-        search_form.querySelector('select[name="file_type_id"]').firstElementChild.selected = true;
+        search_form.reset();
         getFiles();
     }
 
@@ -209,9 +207,9 @@ export default function Files() {
                                         <p className="m-0 font-medium text-lg">{disk_data.plan_name}</p>
                                         <p className="m-0 font-medium text-lg">{disk_data.disk_space_gb?.toFixed()} {intl.formatMessage({ id: "gigabyte" })}</p>
                                     </div>
-                                    <div className="progress success sm">
-                                        <div className="progress-bar danger" style={{ 'width': disk_data.used_space_percent?.toFixed() + '%' }}></div>
-                                    </div>
+
+                                    <ProgressBar bg_class={'success'} className={"danger"} percentage={disk_data.used_space_percent} show_percentage={false} />
+
                                     <div className="flex justify-between">
                                         <p className="text-sm text-success m-0">{intl.formatMessage({ id: "free_space" })}: <span className="text-active">{disk_data.free_space_gb?.toFixed(2)} {intl.formatMessage({ id: "gigabyte" })}</span></p>
                                         <p className="text-sm text-inactive m-0">{disk_data.free_space_percent?.toFixed()}%</p>
@@ -284,94 +282,94 @@ export default function Files() {
                         ?
                         files.data?.length > 0 ?
                             <>
-                                <div className="relative">
-                                    {files_loader && <Loader className="overlay" />}
-                                    {
-                                        contentViewType === 'grid' ?
-                                            <div className="table table-sm">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>
+                                {
+                                    contentViewType === 'grid' ?
+                                        <div className="table table-sm selectable">
+                                            {files_loader && <Loader className="overlay" />}
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>
 
-                                                            </th>
-                                                            <th>{intl.formatMessage({ id: "file_name" })}</th>
-                                                            <th>{intl.formatMessage({ id: "file_type" })}</th>
-                                                            <th>{intl.formatMessage({ id: "file_size" })}</th>
-                                                            <th>{intl.formatMessage({ id: "uploaded_at" })}</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {files.data?.map(file => (
-                                                            <tr key={file.file_id} onClick={e => openPreviewFileModal(file)} className="hover:cursor-pointer">
-                                                                <td>
-                                                                    {
-                                                                        file.file_type_id == 1
-                                                                            ?
-                                                                            <div className="w-10 h-10 rounded-lg bg-active border-inactive flex items-center justify-center text-2xl">
-                                                                                <AiOutlinePlayCircle />
-                                                                            </div>
-                                                                            :
-                                                                            file.file_type_id == 2
-                                                                                ?
-                                                                                <div className="w-10 h-10 rounded-lg bg-active border-inactive flex items-center justify-center text-2xl">
-                                                                                    <AiOutlineAudio />
-                                                                                </div>
-                                                                                :
-                                                                                file.file_type_id == 3
-                                                                                    ?
-                                                                                    <div className="w-10 h-10 bg-center bg-cover bg-no-repeat border-inactive rounded-lg" style={{ backgroundImage: "url(" + API_URL + '/media/image/' + file.file_id + ")" }}></div>
-                                                                                    :
-                                                                                    <></>
-                                                                    }
-                                                                </td>
-                                                                <td>{file.file_name}</td>
-                                                                <td>{file.file_type_name}</td>
-                                                                <td>
-                                                                    <FileSize file_size={file.size} />
-                                                                </td>
-                                                                <td>{new Date(file.created_at).toLocaleString()}</td>
-                                                            </tr>
-                                                        ))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            :
-                                            <div className="custom-grid">
-                                                {files.data?.map(file => (
-                                                    <div key={file.file_id} className="col-span-6 md:col-span-4 lg:col-span-3">
-                                                        <div className="card p-2 hover:cursor-pointer" onClick={e => openPreviewFileModal(file)}>
-                                                            {
-                                                                file.file_type_id == 1
-                                                                    ?
-                                                                    <div className="w-full h-24 sm:h-48 lg:h-36 rounded-lg bg-active border-inactive flex items-center justify-center text-inactive text-5xl">
-                                                                        <AiOutlinePlayCircle />
-                                                                    </div>
-                                                                    :
-                                                                    file.file_type_id == 2
+                                                        </th>
+                                                        <th>{intl.formatMessage({ id: "file_name" })}</th>
+                                                        <th>{intl.formatMessage({ id: "file_type" })}</th>
+                                                        <th>{intl.formatMessage({ id: "file_size" })}</th>
+                                                        <th>{intl.formatMessage({ id: "uploaded_at" })}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {files.data?.map(file => (
+                                                        <tr key={file.file_id} onClick={e => openPreviewFileModal(file)} className="hover:cursor-pointer">
+                                                            <td>
+                                                                {
+                                                                    file.file_type_id == 1
                                                                         ?
-                                                                        <div className="w-full h-24 sm:h-48 lg:h-36 rounded-lg bg-active border-inactive flex items-center justify-center text-inactive text-5xl">
-                                                                            <AiOutlineAudio />
+                                                                        <div className="w-10 h-10 rounded-lg bg-active border-inactive flex items-center justify-center text-2xl">
+                                                                            <AiOutlinePlayCircle />
                                                                         </div>
                                                                         :
-                                                                        file.file_type_id == 3
+                                                                        file.file_type_id == 2
                                                                             ?
-                                                                            <div className="w-full h-24 sm:h-48 lg:h-36 bg-center bg-cover bg-no-repeat rounded-lg border-inactive" style={{ backgroundImage: "url(" + API_URL + '/media/image/' + file.file_id + ")" }}></div>
+                                                                            <div className="w-10 h-10 rounded-lg bg-active border-inactive flex items-center justify-center text-2xl">
+                                                                                <AiOutlineAudio />
+                                                                            </div>
                                                                             :
-                                                                            <></>
-                                                            }
-                                                            <p className="mt-2 mb-1">{file.file_name}</p>
-                                                            <div className="flex flex-wrap justify-between gap-2">
-                                                                <p className="text-xs text-inactive mb-0">{file.file_type_name}</p>
-                                                                <p className="text-xs text-inactive mb-0"><FileSize file_size={file.size} /></p>
-                                                            </div>
+                                                                            file.file_type_id == 3
+                                                                                ?
+                                                                                <div className="w-10 h-10 bg-center bg-cover bg-no-repeat border-inactive rounded-lg" style={{ backgroundImage: "url(" + API_URL + '/media/image/' + file.file_id + ")" }}></div>
+                                                                                :
+                                                                                <></>
+                                                                }
+                                                            </td>
+                                                            <td>{file.file_name}</td>
+                                                            <td>{file.file_type_name}</td>
+                                                            <td>
+                                                                <FileSize file_size={file.size} />
+                                                            </td>
+                                                            <td>{new Date(file.created_at).toLocaleString()}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        :
+                                        <div className="custom-grid">
+                                            {files.data?.map(file => (
+                                                <div key={file.file_id} className="col-span-6 md:col-span-4 lg:col-span-3">
+                                                    <div className="card p-2 hover:cursor-pointer" onClick={e => openPreviewFileModal(file)}>
+                                                        {
+                                                            file.file_type_id == 1
+                                                                ?
+                                                                <div className="w-full h-24 sm:h-48 lg:h-36 rounded-lg bg-active border-inactive flex items-center justify-center text-inactive text-5xl">
+                                                                    <AiOutlinePlayCircle />
+                                                                </div>
+                                                                :
+                                                                file.file_type_id == 2
+                                                                    ?
+                                                                    <div className="w-full h-24 sm:h-48 lg:h-36 rounded-lg bg-active border-inactive flex items-center justify-center text-inactive text-5xl">
+                                                                        <AiOutlineAudio />
+                                                                    </div>
+                                                                    :
+                                                                    file.file_type_id == 3
+                                                                        ?
+                                                                        <div className="w-full h-24 sm:h-48 lg:h-36 bg-center bg-cover bg-no-repeat rounded-lg border-inactive" style={{ backgroundImage: "url(" + API_URL + '/media/image/' + file.file_id + ")" }}></div>
+                                                                        :
+                                                                        <></>
+                                                        }
+                                                        <p className="mt-2 mb-1">{file.file_name}</p>
+                                                        <div className="flex flex-wrap justify-between gap-2">
+                                                            <p className="text-xs text-inactive mb-0">{file.file_type_name}</p>
+                                                            <p className="text-xs text-inactive mb-0"><FileSize file_size={file.size} /></p>
                                                         </div>
                                                     </div>
-                                                ))}
-                                            </div>
-                                    }
+                                                </div>
+                                            ))}
+                                        </div>
+                                }
+                                <div className="btn-wrap mt-6">
+                                    <Pagination items={files} setItems={getFiles} />
                                 </div>
-                                <Pagination items={files} setItems={getFiles} />
 
                                 <Modal show={preview_file_modal} onClose={() => closePreviewFileModal(preview_file)} modal_title={preview_file.file_name} modal_size="modal-xl">
                                     <PreviewFileModal
@@ -393,7 +391,10 @@ export default function Files() {
                                 </Modal>
                             </>
                             :
-                            <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
+                            <Alert className="alert light">
+                                {files_loader && <Loader className="overlay" />}
+                                <p className="mb-0">{intl.formatMessage({ id: "nothing_was_found_for_your_query" })}</p>
+                            </Alert>
                         :
                         <div className="p-6 bg-active border-inactive rounded-lg flex items-center flex-col">
                             <h3 className="text-center mb-2">{intl.formatMessage({ id: "page.disk.welcome" })}</h3>

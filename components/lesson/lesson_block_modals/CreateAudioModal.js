@@ -145,8 +145,8 @@ const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData
             <div className="modal-body">
                 <form onSubmit={e => createAudioSubmit(e)} encType="multipart/form-data">
                     {upload_file === false &&
-                        <>
-                            <div className="mt-4">
+                        <div className="mb-4">
+                            <div>
                                 <label className="custom-radio">
                                     <input type="radio" onChange={e => changeAudioType('audio_file')} checked={audio_type === 'audio_file'} name="audio_type" />
                                     <span>{intl.formatMessage({ id: "audioModal.form.upload_new_audio" })}</span>
@@ -159,11 +159,11 @@ const CreateAudioModal = ({ create_lesson, create_task, upload_file, getDiskData
                                     <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
                                 </label>
                             </div>
-                        </>
+                        </div>
                     }
 
                     {audio_type != 'audio_from_media' &&
-                        <div className="form-group mt-6">
+                        <div className="form-group">
                             <AiOutlineFile />
                             <input onInput={e => setAudioName(e.target.value)} type="text" value={audio_name} placeholder=" " />
                             <label className={(error.audio_name && 'label-error')}>{error.audio_name ? error.audio_name : intl.formatMessage({ id: "audioModal.audio_name" })}</label>

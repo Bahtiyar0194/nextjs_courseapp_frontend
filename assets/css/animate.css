@@ -1,0 +1,39 @@
+@tailwind components;
+@tailwind utilities;
+
+.animate{
+    @apply transition duration-300 ease-in;
+}
+
+.fadeInUp{
+    @apply -translate-y-full opacity-0;
+}
+
+.fadeInUp.animated{
+    @apply translate-y-0 opacity-100;
+}
+
+.fadeInRight{
+    @apply -translate-x-full opacity-0;
+}
+
+.fadeInRight.animated{
+    @apply translate-x-0 opacity-100;
+}
+
+.fadeInDown{
+    @apply translate-y-full opacity-0;
+}
+
+.fadeInDown.animated{
+    @apply translate-y-0 opacity-100;
+}
+
+.fadeInLeft{
+    @apply translate-x-full opacity-0;
+}
+
+.fadeInLeft.animated{
+    @apply translate-x-0 opacity-100;
+}
+

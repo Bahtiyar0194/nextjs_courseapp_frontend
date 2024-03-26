@@ -20,6 +20,7 @@ const messages = {
 };
 
 import '../assets/css/slider-animate.css';
+import '../assets/css/animate.css';
 import 'react-quill/dist/quill.snow.css';
 import '../assets/css/global.css';
 

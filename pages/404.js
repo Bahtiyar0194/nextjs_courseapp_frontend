@@ -6,7 +6,7 @@ export default function Page404() {
     const intl = useIntl();
     return (
         <ErrorLayout title={intl.formatMessage({ id: "page.error.404" })}>
-            <div className="text-center">
+            <div className="flex flex-col items-center">
                 <h1 className="mb-0 text-6xl">404</h1>
                 <p className="text-active">
                     {intl.formatMessage({ id: "page.error.404" })}

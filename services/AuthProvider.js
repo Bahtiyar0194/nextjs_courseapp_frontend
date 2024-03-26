@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { authenticate } from "../store/slices/userSlice";
 import { setDiskData } from "../store/slices/diskSlice";
+import { setDashboardData } from "../store/slices/dashboardSlice";
 import axios from "axios";
 
 export default function AuthProvider(props) {
@@ -37,11 +38,33 @@ export default function AuthProvider(props) {
                         });
                 }
 
+                const getDashboardData = async () => {
+                    await axios.get('dashboard/get')
+                        .then(response => {
+                            dispatch(setDashboardData(response.data));
+                        }).catch(err => {
+                            if (err.response) {
+                                router.push({
+                                    pathname: '/error',
+                                    query: {
+                                        status: err.response.status,
+                                        message: err.response.data.message,
+                                        url: err.request.responseURL,
+                                    }
+                                });
+                            }
+                            else {
+                                router.push('/error');
+                            }
+                        });
+                }
+
                 const getMe = async () => {
                     await axios.get('auth/me')
                         .then(response => {
                             dispatch(authenticate(response.data.user));
                             getDiskData();
+                            getDashboardData();
                         }).catch(err => {
                             if (err.response) {
                                 if(err.response.status == 401){

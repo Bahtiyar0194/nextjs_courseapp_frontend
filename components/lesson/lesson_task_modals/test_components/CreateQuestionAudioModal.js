@@ -34,6 +34,7 @@ const CreateQuestionAudioModal = ({ question_index, closeModal }) => {
 
         const form_data = new FormData();
         form_data.append('audio_name', audio_name);
+        form_data.append('audio_type', audio_type);
         form_data.append('audio_file', audio_file);
         form_data.append('operation_type_id', 8);
 
@@ -95,7 +96,7 @@ const CreateQuestionAudioModal = ({ question_index, closeModal }) => {
             {loader && <Loader className="overlay" progress={progress} />}
             <div className="modal-body">
                 <form onSubmit={e => createAudioSubmit(e)} encType="multipart/form-data">
-                    <div className="mt-4">
+                    <div>
                         <label className="custom-radio">
                             <input type="radio" onChange={e => setAudioType('audio_file')} defaultChecked name="audio_type" />
                             <span>{intl.formatMessage({ id: "audioModal.form.upload_new_audio" })}</span>
@@ -110,7 +111,7 @@ const CreateQuestionAudioModal = ({ question_index, closeModal }) => {
                     </div>
 
                     {audio_type != 'audio_from_media' &&
-                        <div className="form-group mt-4">
+                        <div className="form-group">
                             <AiOutlineFile />
                             <input onInput={e => setAudioName(e.target.value)} type="text" value={audio_name} placeholder=" " />
                             <label className={(error.audio_name && 'label-error')}>{error.audio_name ? error.audio_name : intl.formatMessage({ id: "audioModal.audio_name" })}</label>

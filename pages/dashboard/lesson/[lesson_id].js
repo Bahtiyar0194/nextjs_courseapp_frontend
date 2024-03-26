@@ -15,6 +15,7 @@ import Modal from "../../../components/ui/Modal";
 import DeleteLessonModal from "../../../components/lesson/DeleteLessonModal";
 import StickyBox from "react-sticky-box";
 import RoleProvider from "../../../services/RoleProvider";
+import Alert from "../../../components/ui/Alert";
 
 export default function Lesson() {
     const dispatch = useDispatch();
@@ -140,7 +141,7 @@ export default function Lesson() {
                                                 {lesson_tasks.map((lesson_task, i) => (
                                                     <li key={i}>
                                                         <Link href={
-                                                            lesson_task.task_type_id == 1
+                                                            lesson_task.task_type_id == 1 || lesson_task.task_type_id == 4
                                                                 ?
                                                                 "/dashboard/test/" + lesson_task.task_id
                                                                 :
@@ -167,7 +168,14 @@ export default function Lesson() {
                         </>
                         :
                         <div className="col-span-12">
-                            {intl.formatMessage({ id: "page.my_courses.you_are_not_subscribed_to_this_course" })}
+                            <Alert className="alert outline-primary">
+                                <div className="flex items-center justify-center flex-col">
+                                    <p>{intl.formatMessage({ id: "page.my_courses.you_are_not_subscribed_to_this_course" })}</p>
+                                    <Link className="btn btn-sm btn-primary" href={'/dashboard/courses/' + lesson.course_id}>
+                                        {intl.formatMessage({ id: "page.my_courses.subcribe_to_the_course" })}
+                                    </Link>
+                                </div>
+                            </Alert>
                         </div>
                     }
                 </>

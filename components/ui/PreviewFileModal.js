@@ -54,7 +54,7 @@ const PreviewFileModal = ({ file, closeModal, getFiles, edit_file_name, setEditF
         <>
             {loader && <Loader className="overlay" />}
             <div className="modal-body">
-                <div className="form-group-border active mt-6 mb-4">
+                <div className="form-group-border active mb-4">
                     <AiOutlineFile />
                     <input autoComplete="edit-file-name" onInput={e => setEditFileName(e.target.value)} type="text" value={edit_file_name} placeholder=" " />
                     <label className={(error.file_name && 'label-error')}>{error.file_name ? error.file_name : intl.formatMessage({ id: "file_name" })}</label>

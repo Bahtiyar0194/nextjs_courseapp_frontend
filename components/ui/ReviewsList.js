@@ -16,7 +16,7 @@ const ReviewsList = ({ items, rating, reviewers_count }) => {
             items?.map(item => (
                 <div className="review-item" key={item.id}>
                     <div className="flex gap-2 mb-2">
-                        <UserAvatar user_avatar={item.avatar} className={'w-12 h-12 p-1'} />
+                        <UserAvatar user_avatar={item.avatar} className={'w-12 h-12'} padding={1} />
                         <div>
                             <p className="font-medium mb-0">{item.last_name} {item.first_name}</p>
                             <RatingStars className={'text-base'} rating={item.rating} />

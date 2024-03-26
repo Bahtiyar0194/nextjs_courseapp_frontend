@@ -1,41 +1,12 @@
 import API_URL from "../../config/api";
-import ButtonLoader from "../ui/ButtonLoader";
 import { useIntl } from "react-intl";
-import { useState } from "react";
-import { AiOutlineCheckCircle, AiOutlineTeam, AiOutlineRead } from "react-icons/ai";
+import { AiOutlineCheckCircle, AiOutlineRead } from "react-icons/ai";
 import { Player, BigPlayButton, LoadingSpinner } from 'video-react';
 import "../../node_modules/video-react/dist/video-react.css";
 import { useRouter } from "next/router";
-import axios from "axios";
-const CourseCard = ({ course, lessons, getCourse, getLessons }) => {
+const CourseCard = ({ course, lessons, openModal }) => {
     const intl = useIntl();
     const router = useRouter();
-    const [button_loader, setButtonLoader] = useState(false);
-
-    const getFreeCourse = async (course_id) => {
-        setButtonLoader(true);
-        await axios.post('courses/free_subscribe/' + course_id)
-            .then(response => {
-                setTimeout(() => {
-                    getCourse(course_id);
-                    getLessons(course_id);
-                }, 500);
-            }).catch(err => {
-                if (err.response) {
-                    router.push({
-                        pathname: '/error',
-                        query: {
-                            status: err.response.status,
-                            message: err.response.data.message,
-                            url: err.request.responseURL,
-                        }
-                    });
-                }
-                else {
-                    router.push('/error');
-                }
-            });
-    }
 
     return (
         <div className="card">
@@ -65,23 +36,12 @@ const CourseCard = ({ course, lessons, getCourse, getLessons }) => {
                 </div>
 
                 <div className="btn-wrap">
-                    {course.subscribed == false
-                        ?
-                        <>
-                            {
-                                course.course_cost > 0
-                                    ?
-                                    <button onClick={() => setBuyCourseModal(true)} className="btn btn-outline-primary"><AiOutlineRead /> <span>{intl.formatMessage({ id: "page.my_courses.buy_a_course" })}</span></button>
-                                    :
-                                    <button onClick={() => getFreeCourse(course.course_id)} className="btn btn-outline-primary">{button_loader === true ? <ButtonLoader /> : <AiOutlineRead />} <span>{intl.formatMessage({ id: "page.my_courses.get_the_course_for_free" })}</span></button>
-                            }
-                        </>
-                        :
-                        <button className="btn btn-sm btn-outline-primary disabled"><AiOutlineCheckCircle /> <span>{intl.formatMessage({ id: "page.my_courses.you_are_subscribed_to_this_course" })}</span></button>
-                    }
+                    {course.subscribed == false && <button onClick={() => openModal()} className="btn btn-outline-primary"><AiOutlineRead /> <span>{intl.formatMessage({ id: "page.my_courses.subcribe_to_the_course" })}</span></button>}
+                    {course.subscribed == true && <button onClick={() => openModal()} className="btn btn-sm btn-outline-primary"><AiOutlineCheckCircle /> <span>{intl.formatMessage({ id: "page.my_courses.you_are_subscribed_to_this_course" })}</span></button>}
+                    {course.requested == true && <button onClick={() => openModal()} className="btn btn-sm btn-outline-primary"><AiOutlineCheckCircle /> <span>{intl.formatMessage({ id: "page.my_courses.subscription_requested" })}</span></button>}
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

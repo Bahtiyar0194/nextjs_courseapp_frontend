@@ -65,7 +65,7 @@ body {
     font-family: 'Euclid Circular A', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, .title-font {
     font-family: 'Euclid Circular A', sans-serif;
 }
 
@@ -94,7 +94,8 @@ body.comfortaa_body{
 .comfortaa_title h3,
 .comfortaa_title h4,
 .comfortaa_title h5,
-.comfortaa_title h6
+.comfortaa_title h6,
+.comfortaa_title .title-font
 {
     font-family: 'Comfortaa', sans-serif;
 }
@@ -124,7 +125,8 @@ body.gilroy_body{
 .gilroy_title h3,
 .gilroy_title h4,
 .gilroy_title h5,
-.gilroy_title h6
+.gilroy_title h6,
+.gilroy_title .title-font
 {
     font-family: 'Gilroy', sans-serif;
 }
@@ -168,7 +170,8 @@ body.montserrat_body{
 .montserrat_title h3,
 .montserrat_title h4,
 .montserrat_title h5,
-.montserrat_title h6
+.montserrat_title h6,
+.montserrat_title .title-font
 {
     font-family: 'Montserrat', sans-serif;
 }
@@ -212,7 +215,8 @@ body.opensans_body{
 .opensans_title h3,
 .opensans_title h4,
 .opensans_title h5,
-.opensans_title h6
+.opensans_title h6,
+.opensans_title .title-font
 {
     font-family: 'Open-Sans', sans-serif;
 }
@@ -256,7 +260,8 @@ body.proximanova_body{
 .proximanova_title h3,
 .proximanova_title h4,
 .proximanova_title h5,
-.proximanova_title h6
+.proximanova_title h6,
+.proximanova_title .title-font
 {
     font-family: 'ProximaNova', sans-serif;
 }
@@ -300,29 +305,20 @@ body.roboto_body{
 .roboto_title h3,
 .roboto_title h4,
 .roboto_title h5,
-.roboto_title h6
+.roboto_title h6,
+.roboto_title .title-font
 {
     font-family: 'Roboto', sans-serif;
 }
 
 /*DEFAULT THEME*/
 
-.bg-corp{
-    @apply bg-accent-300;
-}
-
-.border-corp{
-    @apply border-accent-300;
-}
-
-.text-corp{
-    @apply text-accent-300;
-}
-
-/*DEFAULT THEME*/
-
 .bg-corp {
     @apply bg-accent-300;
+}
+
+.bg-corp-100{
+    @apply bg-accent-100;
 }
 
 .border-corp {
@@ -340,6 +336,10 @@ body.roboto_body{
     @apply bg-amber-500;
 }
 
+.amber .bg-corp-100 {
+    @apply bg-amber-100;
+}
+
 .amber .border-corp {
     @apply border-amber-500;
 }
@@ -351,6 +351,10 @@ body.roboto_body{
 /*Blue*/
 .blue .bg-corp {
     @apply bg-blue-500;
+}
+
+.blue .bg-corp-100 {
+    @apply bg-blue-100;
 }
 
 .blue .border-corp {
@@ -366,6 +370,10 @@ body.roboto_body{
     @apply bg-cyan-500;
 }
 
+.cyan .bg-corp-100 {
+    @apply bg-cyan-100;
+}
+
 .cyan .border-corp {
     @apply border-cyan-500;
 }
@@ -377,6 +385,10 @@ body.roboto_body{
 /*Emerald*/
 .emerald .bg-corp {
     @apply bg-emerald-500;
+}
+
+.emerald .bg-corp-100 {
+    @apply bg-emerald-100;
 }
 
 .emerald .border-corp {
@@ -392,6 +404,10 @@ body.roboto_body{
     @apply bg-fuchsia-500;
 }
 
+.fuchsia .bg-corp-100 {
+    @apply bg-fuchsia-100;
+}
+
 .fuchsia .border-corp {
     @apply border-fuchsia-500;
 }
@@ -403,6 +419,10 @@ body.roboto_body{
 /*Green*/
 .green .bg-corp {
     @apply bg-green-500;
+}
+
+.green .bg-corp-100 {
+    @apply bg-green-100;
 }
 
 .green .border-corp {
@@ -418,6 +438,10 @@ body.roboto_body{
     @apply bg-indigo-500;
 }
 
+.indigo .bg-corp-100 {
+    @apply bg-indigo-100;
+}
+
 .indigo .border-corp {
     @apply border-indigo-500;
 }
@@ -429,6 +453,10 @@ body.roboto_body{
 /*Lime*/
 .lime .bg-corp {
     @apply bg-lime-500;
+}
+
+.lime .bg-corp-100 {
+    @apply bg-lime-100;
 }
 
 .lime .border-corp {
@@ -444,6 +472,10 @@ body.roboto_body{
     @apply bg-orange-500;
 }
 
+.orange .bg-corp-100 {
+    @apply bg-orange-100;
+}
+
 .orange .border-corp {
     @apply border-orange-500;
 }
@@ -455,6 +487,10 @@ body.roboto_body{
 /*Pink*/
 .pink .bg-corp {
     @apply bg-pink-500;
+}
+
+.pink .bg-corp-100 {
+    @apply bg-pink-100;
 }
 
 .pink .border-corp {
@@ -470,6 +506,10 @@ body.roboto_body{
     @apply bg-purple-500;
 }
 
+.purple .bg-corp-100 {
+    @apply bg-purple-100;
+}
+
 .purple .border-corp {
     @apply border-purple-500;
 }
@@ -481,6 +521,10 @@ body.roboto_body{
 /*Red*/
 .red .bg-corp {
     @apply bg-red-500;
+}
+
+.red .bg-corp-100 {
+    @apply bg-red-100;
 }
 
 .red .border-corp {
@@ -496,6 +540,10 @@ body.roboto_body{
     @apply bg-rose-500;
 }
 
+.rose .bg-corp-100 {
+    @apply bg-rose-100;
+}
+
 .rose .border-corp {
     @apply border-rose-500;
 }
@@ -507,6 +555,10 @@ body.roboto_body{
 /*Sky*/
 .sky .bg-corp {
     @apply bg-sky-500;
+}
+
+.sky .bg-corp-100 {
+    @apply bg-sky-100;
 }
 
 .sky .border-corp {
@@ -522,6 +574,10 @@ body.roboto_body{
     @apply bg-teal-500;
 }
 
+.teal .bg-corp-100 {
+    @apply bg-teal-100;
+}
+
 .teal .border-corp {
     @apply border-teal-500;
 }
@@ -535,6 +591,10 @@ body.roboto_body{
     @apply bg-violet-500;
 }
 
+.violet .bg-corp-100 {
+    @apply bg-violet-100;
+}
+
 .violet .border-corp {
     @apply border-violet-500;
 }
@@ -546,6 +606,10 @@ body.roboto_body{
 /*Yellow*/
 .yellow .bg-corp {
     @apply bg-yellow-500;
+}
+
+.yellow .bg-corp-100 {
+    @apply bg-yellow-100;
 }
 
 .yellow .border-corp {
@@ -578,8 +642,20 @@ body.roboto_body{
     @apply bg-green-500;
 }
 
+.bg-info{
+    @apply bg-blue-500;
+}
+
 .bg-danger{
     @apply bg-red-500;
+}
+
+.bg-warning{
+    @apply bg-yellow-500;
+}
+
+.bg-orange{
+    @apply bg-orange-500;
 }
 
 .border-active{
@@ -632,10 +708,6 @@ body.roboto_body{
 
 .text-active {
     @apply text-dark-500 dark:text-white;
-}
-
-.text-active-invert {
-    @apply text-white dark:text-dark-500;
 }
 
 .fill-active{
@@ -702,7 +774,7 @@ a:hover{
 }
 
 p {
-    @apply mb-2
+    @apply mb-4
 }
 
 h1,
@@ -786,38 +858,50 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .table{
-    @apply w-full overflow-x-auto rounded-lg shadow-md flex border-inactive;
+    @apply w-full relative overflow-x-auto rounded-lg shadow-md flex border-inactive;
 }
 
-.table > table{
-    @apply w-full overflow-hidden;
+.table table{
+    @apply w-full overflow-hidden relative;
 }
 
-.table > table > thead{
+.table table thead{
     @apply border-b-inactive bg-active;
 }
 
-.table > table > tbody > tr{
+.table table tbody tr{
     @apply bg-active;
 }
 
-.table > table > tbody > tr:nth-child(odd){
+.table table tbody tr:nth-child(odd){
     @apply bg-inactive;
 }
 
-.table > table > thead > tr > th{
+.table table thead tr th{
     @apply px-4 py-3 text-left font-medium tracking-wider;
 }
 
-.table > table > tbody > tr > td{
+.table.selectable table tbody tr{
+    @apply cursor-pointer duration-200;
+}
+
+.table.selectable table tbody tr:hover{
+    @apply bg-corp-100 text-white;
+}
+
+.dark .table.selectable table tbody tr:hover > td{
+    @apply text-dark-500;
+}
+
+.table table tbody tr td{
     @apply px-4 py-3 text-active
 }
 
-.table.table-sm > table > thead > tr > th{
+.table.table-sm table thead tr th{
     @apply px-3 py-2 text-sm;
 }
 
-.table.table-sm > table > tbody > tr > td{
+.table.table-sm table tbody tr td{
     @apply px-3 py-2 text-sm;
 }
 
@@ -825,24 +909,24 @@ input[type=number]::-webkit-outer-spin-button {
     @apply border-inactive;
 }
 
-.table.bordered > table > tbody > tr{
+.table.bordered table tbody tr{
     @apply border-b-inactive;
 }
 
-.table.bordered > table > tbody > tr:last-child{
+.table.bordered table tbody tr:last-child{
     @apply border-none;
 }
 
-.table.bordered > table > thead > tr > th,
-.table.bordered > table > thead > tr > td,
-.table.bordered > table > tbody > tr > th,
-.table.bordered > table > tbody > tr > td{
+.table.bordered table thead tr th,
+.table.bordered table thead tr td,
+.table.bordered table tbody tr th,
+.table.bordered table tbody tr td{
     @apply border-r-inactive;
 }
-.table.bordered > table > thead > tr > th:last-child,
-.table.bordered > table > thead > tr > td:last-child,
-.table.bordered > table > tbody > tr > th:last-child,
-.table.bordered > table > tbody > tr > td:last-child{
+.table.bordered table thead tr th:last-child,
+.table.bordered table thead tr td:last-child,
+.table.bordered table tbody tr th:last-child,
+.table.bordered table tbody tr td:last-child{
     @apply border-none;
 }
 
@@ -926,6 +1010,11 @@ select option {
     @apply bg-active;
 }
 
+
+select.error:has(option:checked:disabled) {
+    @apply !text-red-500;
+}
+
 .custom-container{
     @apply container mx-auto px-4;
 }
@@ -942,6 +1031,10 @@ select option {
 .form-group > select, 
 .form-group > textarea {
     @apply border-0 bg-transparent w-full text-active py-3 pl-8 pr-2 relative z-10; 
+}
+
+.form-group.input-group > select{
+    @apply pl-4 border-l-inactive;
 }
 
 .form-group > label {
@@ -989,6 +1082,14 @@ select option {
 .form-group-border > select, 
 .form-group-border > textarea {
     @apply border-0 bg-transparent w-full text-active py-2 pl-9 pr-2.5 relative z-10;
+}
+
+.form-group-border.input-group > select{
+    @apply pl-4 border-l-inactive;
+}
+
+.form-group-border > select{
+    @apply pr-8;
 }
 
 .form-group-border.select::after{
@@ -1162,7 +1263,7 @@ select option {
 .custom-radio > input:checked + span,
 .custom-radio-checkbox > input:checked + span,
 .custom-checkbox > input:checked + span{
-    @apply text-corp;
+    @apply text-corp cursor-default;
 }
 
 .custom-radio > input:checked + span.error,
@@ -1346,7 +1447,7 @@ select option {
 }
 
 .pagination-wrap{
-    @apply flex flex-wrap gap-x-2 gap-y-4 mt-6;
+    @apply flex flex-wrap gap-x-2 gap-y-4;
 }
 
 .pagination{
@@ -1355,6 +1456,12 @@ select option {
 
 .per-page-select{
     @apply relative w-48;
+}
+
+.per-page-select::after{
+    content: "›";
+    writing-mode: vertical-rl;
+    @apply absolute right-0 text-inactive text-2xl top-3 w-3 h-3;
 }
 
 .per-page-select > select {
@@ -1408,31 +1515,31 @@ select option {
 }
 
 .alert{
-    @apply p-4 text-center border-inactive text-inactive rounded-lg; 
+    @apply p-6 text-center text-inactive rounded-lg relative overflow-hidden; 
 }
 
 .alert.light{
-    @apply bg-active text-active;
+    @apply border-inactive bg-active text-active;
 }
 
 .alert.primary{
-    @apply bg-corp text-white;
+    @apply bg-corp-100 text-corp;
 }
 
 .alert.outline-primary{
-    @apply border-corp text-active;
+    @apply border border-corp text-corp;
 }
 
 .alert.danger{
-    @apply bg-red-500 text-white;
+    @apply bg-red-100 text-danger;
 }
 
 .alert.outline-danger{
-    @apply border-danger text-danger;
+    @apply border border-danger text-danger;
 }
 
 .card {
-    @apply bg-active rounded-lg max-w-full relative border-inactive overflow-hidden shadow-lg;
+    @apply bg-active rounded-xl max-w-full relative border-inactive overflow-hidden shadow-lg;
 }
 
 .card.card-inactive{
@@ -1456,6 +1563,10 @@ select option {
     @apply bg-active rounded-lg border-inactive flex flex-wrap gap-2;
 }
 
+.tag-wrap.tag-wrap-full{
+    @apply block;
+}
+
 .tag-wrap.inactive{
     @apply bg-inactive;
 }
@@ -1474,6 +1585,10 @@ select option {
 
 .tag{
     @apply text-sm pr-1.5 pl-2 py-1 rounded-lg flex items-center max-w-full break-all;
+}
+
+.tag-wrap.tag-wrap-full .tag{
+    @apply block p-3 break-normal mb-3;
 }
 
 .tag.tag-sm{
@@ -1635,7 +1750,7 @@ select option {
 }
 
 .modal-body{
-    @apply overflow-y-auto overflow-x-hidden;
+    @apply overflow-y-auto overflow-x-hidden pt-4;
     max-height: 90vh;
 }
 
@@ -1644,7 +1759,7 @@ select option {
 }
 
 .modal-close-button{
-    @apply absolute right-4 top-4 text-2xl cursor-pointer text-inactive;
+    @apply absolute right-6 top-6 text-2xl cursor-pointer text-inactive;
 }
 
 .full-overlay {
@@ -1653,6 +1768,7 @@ select option {
 
 .overlay {
     @apply absolute w-full h-full left-0 top-0 bg-active opacity-90 z-40 flex flex-col justify-center items-center duration-200;
+    border-radius: inherit;
 }
 
 .overlay-loding-circle {
@@ -1760,11 +1876,11 @@ select option {
 }
 
 .tab-header-item{
-    @apply px-3 py-2 border-inactive rounded-lg hover:cursor-pointer text-inactive flex items-center relative;
+    @apply px-3 py-2 border-inactive bg-active rounded-lg hover:cursor-pointer text-inactive flex items-center relative;
 }
 
 .tab-header-item.active{
-    @apply border-active text-active; 
+    @apply border-active text-active cursor-default; 
 }
 
 .tab-header-item > span{
@@ -1976,11 +2092,7 @@ select option {
 }
 
 .progress{
-    @apply w-full bg-inactive rounded-lg h-2.5 my-4 border-inactive;
-}
-
-.progress.sm{
-    @apply h-1.5 my-2 rounded-md;
+    @apply w-full bg-inactive rounded-lg border-inactive my-2 overflow-hidden;
 }
 
 .progress.active{
@@ -1992,11 +2104,27 @@ select option {
 }
 
 .progress-bar{
-    @apply h-full bg-corp rounded-lg duration-200;
+    @apply h-full bg-corp py-1 duration-200 text-center font-medium overflow-hidden text-white;
+}
+
+.progress-bar.sm{
+    @apply py-0.5 text-xs;
 }
 
 .progress-bar.danger{
     @apply bg-danger;
+}
+
+.progress-bar.success{
+    @apply bg-success;
+}
+
+.progress-bar.warning{
+    @apply bg-warning;
+}
+
+.progress-bar.orange{
+    @apply bg-orange;
 }
 
 .logo > img{

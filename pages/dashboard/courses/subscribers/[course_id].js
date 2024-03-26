@@ -4,7 +4,7 @@ import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Modal from "../../../../components/ui/Modal";
-import { AiOutlineCalendar, AiOutlineCheckCircle, AiOutlineEdit, AiOutlineMail, AiOutlineMessage, AiOutlineSearch, AiOutlineTeam, AiOutlineUndo, AiOutlineUser, AiOutlineUserAdd, AiOutlineUsergroupAdd } from "react-icons/ai";
+import { AiOutlineCalendar, AiOutlineCheckCircle, AiOutlineEdit, AiOutlineMail, AiOutlineMessage, AiOutlineSearch, AiOutlineUndo, AiOutlineUser, AiOutlineUserAdd, AiOutlineUsergroupAdd } from "react-icons/ai";
 import axios from "axios";
 import Breadcrumb from "../../../../components/ui/Breadcrumb";
 import RoleProvider from "../../../../services/RoleProvider";
@@ -27,7 +27,6 @@ export default function Subscribers() {
     const [subscribers, setSubscribers] = useState([]);
     const [invites, setInvites] = useState([]);
     const [requests, setRequests] = useState([]);
-    const [groups, setGroups] = useState([]);
     const [loader, setLoader] = useState(false);
     const [subscribers_loader, setSubscribersLoader] = useState(false);
     const [invites_loader, setInvitesLoader] = useState(false);
@@ -37,7 +36,6 @@ export default function Subscribers() {
     const [search_subscriber_filter, setSearchSubscriberFilter] = useState(false);
     const [search_invite_filter, setSearchInviteFilter] = useState(false);
     const [search_request_filter, setSearchRequestFilter] = useState(false);
-    const [search_group_filter, setSearchGroupFilter] = useState(false);
 
     const [accept_request_id, setAcceptRequestId] = useState('');
     const [accept_request_modal, setAcceptRequestModal] = useState(false);
@@ -172,12 +170,7 @@ export default function Subscribers() {
 
     const resetSubscriberSearchFilter = () => {
         const search_form = document.querySelector('#subscriber_search_form');
-        search_form.querySelector('input[name="first_name"]').value = '';
-        search_form.querySelector('input[name="last_name"]').value = '';
-        search_form.querySelector('select[name="subscribe_type_id"]').value = '';
-        search_form.querySelector('input[name="email"]').value = '';
-        search_form.querySelector('input[name="created_at_from"]').value = '';
-        search_form.querySelector('input[name="created_at_to"]').value = '';
+        search_form.reset();
         getSubscribers();
     }
 
@@ -193,9 +186,7 @@ export default function Subscribers() {
 
     const resetInviteSearchFilter = () => {
         const search_form = document.querySelector('#invite_search_form');
-        search_form.querySelector('input[name="email"]').value = '';
-        search_form.querySelector('input[name="created_at_from"]').value = '';
-        search_form.querySelector('input[name="created_at_to"]').value = '';
+        search_form.reset();
         getInvites();
     }
 
@@ -211,9 +202,7 @@ export default function Subscribers() {
 
     const resetRequestSearchFilter = () => {
         const search_form = document.querySelector('#request_search_form');
-        search_form.querySelector('input[name="email"]').value = '';
-        search_form.querySelector('input[name="created_at_from"]').value = '';
-        search_form.querySelector('input[name="created_at_to"]').value = '';
+        search_form.reset();
         getRequests();
     }
 
@@ -270,9 +259,6 @@ export default function Subscribers() {
                                     </>
                                 }
                             </div>
-                            <div onClick={e => setMainTab('groups')} className={"tab-header-item " + (main_tab === 'groups' && 'active')}>
-                                <AiOutlineTeam /> <span>{intl.formatMessage({ id: "page.groups.title" })}</span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -300,16 +286,8 @@ export default function Subscribers() {
                                                         <div className="col-span-12">
                                                             <div className="form-group-border active">
                                                                 <AiOutlineUser />
-                                                                <input autoComplete="search-subscriber-last-name" type="text" defaultValue={''} name="last_name" placeholder=" " onChange={debounceHandler(getSubscribers, 1000)} />
-                                                                <label>{intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-span-12">
-                                                            <div className="form-group-border active">
-                                                                <AiOutlineUser />
-                                                                <input autoComplete="search-subscriber-first-name" type="text" defaultValue={''} name="first_name" placeholder=" " onChange={debounceHandler(getSubscribers, 1000)} />
-                                                                <label>{intl.formatMessage({ id: "page.registration.form.first_name" })}</label>
+                                                                <input autoComplete="search-subscriber" type="text" defaultValue={''} name="subscriber" placeholder=" " onChange={debounceHandler(getSubscribers, 1000)} />
+                                                                <label>{intl.formatMessage({ id: "page.my_courses.subscriber" })} ({intl.formatMessage({ id: "page.registration.form.last_name" })}, {intl.formatMessage({ id: "page.registration.form.first_name" })})</label>
                                                             </div>
                                                         </div>
 
@@ -322,10 +300,10 @@ export default function Subscribers() {
                                                         </div>
 
                                                         <div className="col-span-12">
-                                                            <div className="form-group-border active">
+                                                            <div className="form-group-border select active">
                                                                 <AiOutlineUser />
                                                                 <select name="subscribe_type_id" defaultValue={''} onChange={debounceHandler(getSubscribers, 1000)}>
-                                                                    <option selected disabled value="">{intl.formatMessage({ id: "page.courses.subscribersModal.subscribe_type" })}</option>
+                                                                    <option selected value="">{intl.formatMessage({ id: "not_specified" })}</option>
                                                                     {
                                                                         course?.subscribe_types?.map(subscribe_type => (
                                                                             <option key={subscribe_type.subscribe_type_id} value={subscribe_type.subscribe_type_id}>{subscribe_type.subscribe_type_name}</option>
@@ -333,6 +311,22 @@ export default function Subscribers() {
                                                                     }
                                                                 </select>
                                                                 <label>{intl.formatMessage({ id: "page.courses.subscribersModal.subscribe_type" })}</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-span-12">
+                                                            <div className="form-group-border active">
+                                                                <AiOutlineUser />
+                                                                <input autoComplete="search-mentor" type="text" defaultValue={''} name="mentor" placeholder=" " onChange={debounceHandler(getSubscribers, 1000)} />
+                                                                <label>{intl.formatMessage({ id: "mentor" })} ({intl.formatMessage({ id: "page.registration.form.last_name" })}, {intl.formatMessage({ id: "page.registration.form.first_name" })})</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="col-span-12">
+                                                            <div className="form-group-border active">
+                                                                <AiOutlineUser />
+                                                                <input autoComplete="search-operator" type="text" defaultValue={''} name="operator" placeholder=" " onChange={debounceHandler(getSubscribers, 1000)} />
+                                                                <label>{intl.formatMessage({ id: "operator" })} ({intl.formatMessage({ id: "page.registration.form.last_name" })}, {intl.formatMessage({ id: "page.registration.form.first_name" })})</label>
                                                             </div>
                                                         </div>
 
@@ -369,11 +363,10 @@ export default function Subscribers() {
                                         <>
                                             <div className="relative">
                                                 {subscribers_loader && <Loader className="overlay" />}
-                                                <div className="table table-sm">
+                                                <div className="table table-sm table-responsive">
                                                     <table>
                                                         <thead>
                                                             <tr>
-                                                                <th></th>
                                                                 <th>{intl.formatMessage({ id: "page.my_courses.subscriber" })}</th>
                                                                 <th>{intl.formatMessage({ id: "page.registration.form.email" })}</th>
                                                                 <th>{intl.formatMessage({ id: "mentor" })}</th>
@@ -388,12 +381,24 @@ export default function Subscribers() {
                                                             {subscribers.data?.map(s => (
                                                                 <tr key={s.user_id}>
                                                                     <td>
-                                                                        <UserAvatar user_avatar={s.avatar} className={'w-10 h-10 p-0.5'} />
+                                                                        <div className="flex gap-x-2 items-center">
+                                                                            <UserAvatar user_avatar={s.recipient_avatar} className={'w-10 h-10'} padding={0.5} />
+                                                                            {s.recipient_last_name} {s.recipient_first_name}
+                                                                        </div>
                                                                     </td>
-                                                                    <td>{s.recipient_last_name} {s.recipient_first_name}</td>
                                                                     <td>{s.email}</td>
-                                                                    <td>{s.mentor_last_name} {s.mentor_first_name}</td>
-                                                                    <td>{s.operator_last_name} {s.operator_first_name}</td>
+                                                                    <td>
+                                                                        <div className="flex gap-x-2 items-center">
+                                                                            <UserAvatar user_avatar={s.mentor_avatar} className={'w-10 h-10'} padding={0.5} />
+                                                                            {s.mentor_last_name} {s.mentor_first_name}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div className="flex gap-x-2 items-center">
+                                                                            <UserAvatar user_avatar={s.operator_avatar} className={'w-10 h-10'} padding={0.5} />
+                                                                            {s.operator_last_name} {s.operator_first_name}
+                                                                        </div>
+                                                                    </td>
                                                                     <td>{s.subscribe_type_name}</td>
                                                                     <td>{s.cost.toLocaleString()}</td>
                                                                     <td>{new Date(s.created_at).toLocaleString()}</td>
@@ -403,13 +408,15 @@ export default function Subscribers() {
                                                     </table>
                                                 </div>
                                             </div>
-                                            <Pagination items={subscribers} setItems={getSubscribers} select_id={"subscriber-per-page-select"} />
+                                            <div className="btn-wrap mt-6">
+                                                <Pagination items={subscribers} setItems={getSubscribers} select_id={"subscriber-per-page-select"} />
+                                            </div>
                                         </>
                                         :
-                                        <>
+                                        <Alert className="alert light">
                                             {subscribers_loader && <Loader className="overlay" />}
-                                            <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
-                                        </>
+                                            <p className="mb-0">{intl.formatMessage({ id: "nothing_was_found_for_your_query" })}</p>
+                                        </Alert>
                                     }
                                 </div>
                             </div>
@@ -502,13 +509,15 @@ export default function Subscribers() {
                                                     </table>
                                                 </div>
                                             </div>
-                                            <Pagination items={invites} setItems={getInvites} select_id={"invites-per-page-select"} />
+                                            <div className="btn-wrap mt-6">
+                                                <Pagination items={invites} setItems={getInvites} select_id={"invites-per-page-select"} />
+                                            </div>
                                         </>
                                         :
-                                        <>
+                                        <Alert className="alert light">
                                             {invites_loader && <Loader className="overlay" />}
-                                            <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
-                                        </>
+                                            <p className="mb-0">{intl.formatMessage({ id: "nothing_was_found_for_your_query" })}</p>
+                                        </Alert>
                                     }
                                 </div>
                             </div>
@@ -534,16 +543,8 @@ export default function Subscribers() {
                                                         <div className="col-span-12">
                                                             <div className="form-group-border active">
                                                                 <AiOutlineUser />
-                                                                <input autoComplete="search-initiator-last-name" type="text" defaultValue={''} name="last_name" placeholder=" " onChange={debounceHandler(getRequests, 1000)} />
-                                                                <label>{intl.formatMessage({ id: "page.registration.form.last_name" })}</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-span-12">
-                                                            <div className="form-group-border active">
-                                                                <AiOutlineUser />
-                                                                <input autoComplete="search-initiator-first-name" type="text" defaultValue={''} name="first_name" placeholder=" " onChange={debounceHandler(getRequests, 1000)} />
-                                                                <label>{intl.formatMessage({ id: "page.registration.form.first_name" })}</label>
+                                                                <input autoComplete="search-initiator" type="text" defaultValue={''} name="initiator" placeholder=" " onChange={debounceHandler(getRequests, 1000)} />
+                                                                <label>{intl.formatMessage({ id: "applicant" })} ({intl.formatMessage({ id: "page.registration.form.last_name" })}, {intl.formatMessage({ id: "page.registration.form.first_name" })})</label>
                                                             </div>
                                                         </div>
 
@@ -592,7 +593,6 @@ export default function Subscribers() {
                                                     <table>
                                                         <thead>
                                                             <tr>
-                                                                <th></th>
                                                                 <th>{intl.formatMessage({ id: "applicant" })}</th>
                                                                 <th>{intl.formatMessage({ id: "page.registration.form.email" })}</th>
                                                                 <th>{intl.formatMessage({ id: "page.registration.form.phone" })}</th>
@@ -606,9 +606,11 @@ export default function Subscribers() {
                                                             {requests.data?.map(r => (
                                                                 <tr key={r.request_id}>
                                                                     <td>
-                                                                        <UserAvatar user_avatar={r.avatar} className={'w-10 h-10 p-0.5'} />
+                                                                        <div className="flex gap-x-2 items-center">
+                                                                            <UserAvatar user_avatar={r.initiator_avatar} className={'w-10 h-10'} padding={0.5} />
+                                                                            {r.initiator_last_name} {r.initiator_first_name}
+                                                                        </div>
                                                                     </td>
-                                                                    <td>{r.initiator_last_name} {r.initiator_first_name}</td>
                                                                     <td>{r.initiator_email}</td>
                                                                     <td>{r.initiator_phone}</td>
                                                                     <td>{r.status_type_name}</td>
@@ -622,115 +624,15 @@ export default function Subscribers() {
                                                     </table>
                                                 </div>
                                             </div>
-                                            <Pagination items={requests} setItems={getRequests} select_id={"requests-per-page-select"} />
+                                            <div className="btn-wrap mt-6">
+                                                <Pagination items={requests} setItems={getRequests} select_id={"requests-per-page-select"} />
+                                            </div>
                                         </>
                                         :
-                                        <>
+                                        <Alert className="alert light">
                                             {requests_loader && <Loader className="overlay" />}
-                                            <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
-                                        </>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className={'tab-body-item ' + (main_tab === 'groups' && 'active')}>
-                            <div className="custom-grid">
-                                <div className="col-span-12">
-                                    <div className="btn-wrap">
-                                        <button onClick={() => setCreateGroupModal(true)} className="btn btn-outline-primary"><AiOutlineUsergroupAdd /> <span>{intl.formatMessage({ id: "page.groups.create_group" })}</span></button>
-                                        <button onClick={() => showHideGroupSearchFilter()} className="btn btn-light"><AiOutlineSearch /> <span>{search_group_filter === true ? intl.formatMessage({ id: "hide_search_filter" }) : intl.formatMessage({ id: "show_search_filter" })}</span></button>
-                                    </div>
-                                </div>
-
-                                {search_group_filter === true
-                                    &&
-                                    <div className="col-span-12 lg:col-span-3">
-                                        <StickyBox offsetTop={6} offsetBottom={6}>
-                                            <div className="card p-4">
-                                                <h5>{intl.formatMessage({ id: "page.group.search_filter" })}</h5>
-                                                <form id="group_search_form">
-                                                    <div className="custom-grid">
-                                                        <div className="col-span-12">
-                                                            <div className="form-group-border active">
-                                                                <AiOutlineTeam />
-                                                                <input autoComplete="search-group-name" type="text" defaultValue={''} name="group_name" placeholder=" " onChange={debounceHandler(getGroups, 1000)} />
-                                                                <label>{intl.formatMessage({ id: "page.group.form.group_name" })}</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-span-12">
-                                                            <div className="form-group-border active">
-                                                                <AiOutlineCalendar />
-                                                                <input type="date" defaultValue={''} name="created_at_from" onChange={debounceHandler(getGroups, 1000)} placeholder=" " />
-                                                                <label>{intl.formatMessage({ id: "created_at_from" })}</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-span-12">
-                                                            <div className="form-group-border active">
-                                                                <AiOutlineCalendar />
-                                                                <input type="date" defaultValue={''} name="created_at_to" onChange={debounceHandler(getGroups, 1000)} placeholder=" " />
-                                                                <label>{intl.formatMessage({ id: "created_at_to" })}</label>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-span-12">
-                                                            <div className="btn-wrap">
-                                                                <button type="button" className="btn btn-sm btn-outline-primary" onClick={debounceHandler(resetGroupSearchFilter, 500)}> <AiOutlineUndo /> <span>{intl.formatMessage({ id: "reset_search_filter" })}</span></button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </StickyBox>
-                                    </div>
-                                }
-
-                                <div className={"relative col-span-12 " + (search_group_filter === true ? 'lg:col-span-9' : '')}>
-                                    {groups.data?.length > 0 ?
-                                        <>
-                                            <div className="relative">
-                                                {groups_loader && <Loader className="overlay" />}
-                                                <div className="table table-sm">
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>{intl.formatMessage({ id: "page.group.form.group_name" })}</th>
-                                                                <th>{intl.formatMessage({ id: "page.group.form.group_description" })}</th>
-                                                                <th>{intl.formatMessage({ id: "page.group.form.group_mentor" })}</th>
-                                                                <th>{intl.formatMessage({ id: "page.group.form.added_subscribers" })}</th>
-                                                                <th>{intl.formatMessage({ id: "created_at" })}</th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody>
-                                                            {groups.data?.map(group => (
-                                                                <tr key={group.group_id}>
-                                                                    <td>{group.group_name}</td>
-                                                                    <td>{group.group_description}</td>
-                                                                    <td>{group.mentor_last_name} {group.mentor_first_name}</td>
-                                                                    <td>{group.members_count}</td>
-                                                                    <td>{new Date(group.created_at).toLocaleString()}</td>
-                                                                    <td>
-                                                                        <div className="btn-wrap">
-                                                                            <button onClick={() => getEditGroup(group.group_id)} title={intl.formatMessage({ id: "edit" })} className="btn btn-edit"><AiOutlineEdit /></button>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            ))}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <Pagination items={groups} setItems={getGroups} />
-                                        </>
-                                        :
-                                        <>
-                                            {subscribers_loader && <Loader className="overlay" />}
-                                            <Alert className="alert light" text={intl.formatMessage({ id: "nothing_was_found_for_your_query" })} />
-                                        </>
+                                            <p className="mb-0">{intl.formatMessage({ id: "nothing_was_found_for_your_query" })}</p>
+                                        </Alert>
                                     }
                                 </div>
                             </div>

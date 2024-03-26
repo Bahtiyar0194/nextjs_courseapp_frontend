@@ -4,6 +4,7 @@ import schoolSlice from "./slices/schoolSlice";
 import lessonBlocksSlice from "./slices/lessonBlocksSlice";
 import taskBlocksSlice from "./slices/taskBlocksSlice";
 import testQuestionBlocksSlice from "./slices/testQuestionBlocksSlice";
+import dashboardSlice from "./slices/dashboardSlice";
 import diskSlice from "./slices/diskSlice";
 export const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
         lessonBlocks: lessonBlocksSlice,
         taskBlocks: taskBlocksSlice,
         testQuestionBlocks: testQuestionBlocksSlice,
+        dashboard: dashboardSlice,
         disk: diskSlice
     }
 })

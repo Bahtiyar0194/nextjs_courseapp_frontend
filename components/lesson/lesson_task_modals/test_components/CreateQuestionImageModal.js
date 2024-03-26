@@ -35,6 +35,7 @@ const CreateQuestionImageModal = ({ question_index, closeModal }) => {
 
         const form_data = new FormData();
         form_data.append('image_name', image_name);
+        form_data.append('image_type', image_type);
         form_data.append('image_file', image_file);
         form_data.append('operation_type_id', 9);
 
@@ -94,7 +95,7 @@ const CreateQuestionImageModal = ({ question_index, closeModal }) => {
             {loader && <Loader className="overlay" progress={progress} />}
             <div className="modal-body">
                 <form onSubmit={e => createImageSubmit(e)} encType="multipart/form-data">
-                    <div className="mt-4">
+                    <div>
                         <label className="custom-radio">
                             <input type="radio" onChange={e => setImageType('image_file')} defaultChecked name="image_type" />
                             <span>{intl.formatMessage({ id: "imageModal.form.upload_new_image" })}</span>

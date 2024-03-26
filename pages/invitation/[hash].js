@@ -8,7 +8,6 @@ import axios from "axios";
 import Loader from "../../components/ui/Loader";
 import { FiUserCheck } from "react-icons/fi";
 import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineKey, AiOutlineUser, AiOutlinePhone, AiOutlineMail } from "react-icons/ai";
-import Alert from "../../components/ui/Alert";
 import InputMask from "react-input-mask";
 import serialize from 'form-serialize';
 import Cookies from "js-cookie";

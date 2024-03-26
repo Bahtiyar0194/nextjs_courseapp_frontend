@@ -73,7 +73,9 @@ export default function Activation() {
         <AuthLayout title={title} school_name={school.school_name}>
             {loader && <Loader className="overlay" />}
             <form onSubmit={recoverySubmit}>
-                <Alert className="-mt-2 mb-6 light" text={intl.formatMessage({ id: "page.password.recovery.instruction" })} />
+                <Alert className="-mt-2 mb-4 light">
+                    <p className="mb-0">{intl.formatMessage({ id: "page.password.recovery.instruction" })}</p>
+                </Alert>
 
                 <div className="form-group">
                     <AiOutlineNumber />

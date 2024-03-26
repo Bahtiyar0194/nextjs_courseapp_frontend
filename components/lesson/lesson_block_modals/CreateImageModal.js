@@ -149,8 +149,8 @@ const CreateImageModal = ({ create_lesson, create_task, upload_file, getDiskData
             <div className="modal-body">
                 <form onSubmit={e => createImageSubmit(e)} encType="multipart/form-data">
                     {upload_file === false &&
-                        <>
-                            <div className="mt-4">
+                        <div className="mb-4">
+                            <div>
                                 <label className="custom-radio">
                                     <input type="radio" onChange={e => changeImageType('image_file')} checked={image_type === 'image_file'} name="image_type" />
                                     <span>{intl.formatMessage({ id: "imageModal.form.upload_new_image" })}</span>
@@ -163,11 +163,11 @@ const CreateImageModal = ({ create_lesson, create_task, upload_file, getDiskData
                                     <span>{intl.formatMessage({ id: "upload_from_media" })}</span>
                                 </label>
                             </div>
-                        </>
+                        </div>
                     }
 
                     {image_type != 'image_from_media' &&
-                        <div className="form-group mt-4">
+                        <div className="form-group">
                             <AiOutlineFile />
                             <input onInput={e => setImageName(e.target.value)} type="text" value={image_name} placeholder=" " />
                             <label className={(error.image_name && 'label-error')}>{error.image_name ? error.image_name : intl.formatMessage({ id: "imageModal.image_name" })}</label>

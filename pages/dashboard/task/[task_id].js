@@ -108,7 +108,7 @@ export default function LessonTask() {
 
             <div className="col-span-12 lg:col-span-4">
                 <StickyBox offsetTop={6} offsetBottom={6}>
-                    <div className="card p-3 lg:p-6">
+                    <div className="card p-4">
                         <form onSubmit={taskAnswerSubmit} encType="multipart/form-data">
                             <h4 className="mb-4">{intl.formatMessage({ id: "task.your_answer_to_this_task" })}</h4>
 

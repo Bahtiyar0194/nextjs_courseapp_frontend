@@ -16,6 +16,7 @@ export default function LessonTaskTypeModals({ lesson_id }) {
                 <CDropdownMenu>
                     <Link href={'/dashboard/task/create-task/' + lesson_id}><AiOutlineFileText /> {intl.formatMessage({ id: "task" })}</Link>
                     <Link href={'/dashboard/test/create-test/' + lesson_id}><AiOutlineFileDone /> {intl.formatMessage({ id: "task.test.title" })}</Link>
+                    <Link href={'/dashboard/test/create-analytical-test/' + lesson_id}><AiOutlineFileDone /> {intl.formatMessage({ id: "task.test.analytical_test" })}</Link>
                 </CDropdownMenu>
             </CDropdown>
         </RoleProvider>

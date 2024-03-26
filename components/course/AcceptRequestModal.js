@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import Loader from "../ui/Loader";
 import { AiOutlineUser, AiOutlineCheckCircle } from "react-icons/ai";
+import SubscriptionProlong from "../ui/SubscriptionProlong";
 import serialize from 'form-serialize';
 
 const AcceptRequestModal = ({ request_id, course, getSubscribers, getRequests, getCourse, loader, setLoader, intl, router, closeModal }) => {
     const [error, setError] = useState([]);
+    const school = useSelector((state) => state.school.school_data);
 
     const acceptRequestSubmit = async (e) => {
         e.preventDefault();
@@ -49,26 +52,30 @@ const AcceptRequestModal = ({ request_id, course, getSubscribers, getRequests, g
         <>
             {loader && <Loader className="overlay" />}
             <div className="modal-body">
-                <form onSubmit={acceptRequestSubmit} encType="multipart/form-data">
-                    <div className="custom-grid mt-6">
-                        <div className="col-span-12">
-                            <div className="form-group-border active">
-                                <AiOutlineUser />
-                                <select name="mentor_id" defaultValue={''} >
-                                    <option selected disabled value="">{intl.formatMessage({ id: "page.group.form.choose_a_mentor" })}</option>
-                                    {
-                                        course.mentors?.map(mentor => (
-                                            <option key={mentor.user_id} value={mentor.user_id}>{mentor.last_name} {mentor.first_name}</option>
-                                        ))
-                                    }
-                                </select>
-                                <label className={(error.mentor_id && 'label-error')}>{error.mentor_id ? error.mentor_id : intl.formatMessage({ id: "mentor" })}</label>
+                {school.subscription_expired == true ?
+                    <SubscriptionProlong />
+                    :
+                    <form onSubmit={acceptRequestSubmit} encType="multipart/form-data">
+                        <div className="custom-grid">
+                            <div className="col-span-12">
+                                <div className="form-group-border active">
+                                    <AiOutlineUser />
+                                    <select name="mentor_id" defaultValue={''} >
+                                        <option selected disabled value="">{intl.formatMessage({ id: "page.group.form.choose_a_mentor" })}</option>
+                                        {
+                                            course.mentors?.map(mentor => (
+                                                <option key={mentor.user_id} value={mentor.user_id}>{mentor.last_name} {mentor.first_name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <label className={(error.mentor_id && 'label-error')}>{error.mentor_id ? error.mentor_id : intl.formatMessage({ id: "mentor" })}</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <button className="btn btn-primary mt-4" type="submit"><AiOutlineCheckCircle /> <span>{intl.formatMessage({ id: "done" })}</span></button>
-                </form>
+                        <button className="btn btn-primary mt-4" type="submit"><AiOutlineCheckCircle /> <span>{intl.formatMessage({ id: "done" })}</span></button>
+                    </form>
+                }
             </div>
         </>
     );

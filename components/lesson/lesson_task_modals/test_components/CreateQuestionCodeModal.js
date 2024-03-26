@@ -59,7 +59,7 @@ const CreateQuestionCodeModal = ({ question_index, closeModal }) => {
         <>
             <div className="modal-body">
                 <form onSubmit={e => createCodeSubmit(e)} encType="multipart/form-data">
-                    <div className="form-group mt-4">
+                    <div className="form-group">
                         <AiOutlineCode />
                         <select defaultValue={defaultCodeLanguage} name="languages" onChange={(e) => setCodeLanguage(e.target.value)}>
                             {supportedLanguages.map((language, i) => (
