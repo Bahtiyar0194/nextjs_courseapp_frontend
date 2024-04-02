@@ -4,12 +4,13 @@ import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from 'react-redux';
 import { setLessonBlocks, setLessonBlocksCount } from "../../../store/slices/lessonBlocksSlice";
 import { setTaskBlocks, setTaskBlocksCount } from '../../../store/slices/taskBlocksSlice';
+import { setTaskAnswerBlocks, setTaskAnswerBlocksCount } from "../../../store/slices/taskAnswerBlocksSlice";
 
 import SyntaxHighlighter from "react-syntax-highlighter";
 import * as themes from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import supportedLanguages from 'react-syntax-highlighter/dist/cjs/languages/hljs/supported-languages';
 
-const CreateCodeModal = ({ create_lesson, create_task, closeModal }) => {
+const CreateCodeModal = ({ create_lesson, create_task, create_task_answer, closeModal }) => {
     const intl = useIntl();
     const dispatch = useDispatch();
 
@@ -18,6 +19,9 @@ const CreateCodeModal = ({ create_lesson, create_task, closeModal }) => {
 
     let task_blocks = useSelector((state) => state.taskBlocks.task_blocks);
     const task_blocks_count = useSelector((state) => state.taskBlocks.task_blocks_count);
+
+    let task_answer_blocks = useSelector((state) => state.taskAnswerBlocks.task_answer_blocks);
+    const task_answer_blocks_count = useSelector((state) => state.taskAnswerBlocks.task_answer_blocks_count);
 
     const defaultCodeLanguage = 'javascript';
     const defaultCodeTheme = 'monokaiSublime';
@@ -54,6 +58,18 @@ const CreateCodeModal = ({ create_lesson, create_task, closeModal }) => {
                     'code': code_text,
                 }];
                 dispatch(setTaskBlocks(task_blocks));
+            }
+
+            if (create_task_answer === true) {
+                dispatch(setTaskAnswerBlocksCount(task_answer_blocks_count + 1));
+                task_answer_blocks = [...task_answer_blocks, {
+                    'block_id': task_answer_blocks_count + 1,
+                    'block_type_id': 6,
+                    'code_language': code_language,
+                    'code_theme': code_theme,
+                    'code': code_text,
+                }];
+                dispatch(setTaskAnswerBlocks(task_answer_blocks));
             }
 
             setCodeText('');

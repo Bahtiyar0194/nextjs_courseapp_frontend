@@ -4,8 +4,9 @@ import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from 'react-redux';
 import { setLessonBlocks, setLessonBlocksCount } from "../../../store/slices/lessonBlocksSlice";
 import { setTaskBlocks, setTaskBlocksCount } from '../../../store/slices/taskBlocksSlice';
+import { setTaskAnswerBlocks, setTaskAnswerBlocksCount } from "../../../store/slices/taskAnswerBlocksSlice";
 
-const TableModal = ({ create_lesson, create_task, closeModal }) => {
+const TableModal = ({ create_lesson, create_task, create_task_answer, closeModal }) => {
     const intl = useIntl();
     const dispatch = useDispatch();
 
@@ -14,6 +15,9 @@ const TableModal = ({ create_lesson, create_task, closeModal }) => {
 
     let task_blocks = useSelector((state) => state.taskBlocks.task_blocks);
     const task_blocks_count = useSelector((state) => state.taskBlocks.task_blocks_count);
+
+    let task_answer_blocks = useSelector((state) => state.taskAnswerBlocks.task_answer_blocks);
+    const task_answer_blocks_count = useSelector((state) => state.taskAnswerBlocks.task_answer_blocks_count);
 
     const [columns_count, setColumnsCount] = useState('');
     const [rows_count, setRowsCount] = useState('');
@@ -85,6 +89,16 @@ const TableModal = ({ create_lesson, create_task, closeModal }) => {
                     'content': tableWrap.outerHTML,
                 }];
                 dispatch(setTaskBlocks(task_blocks));
+            }
+
+            if (create_task_answer === true) {
+                dispatch(setTaskAnswerBlocksCount(task_answer_blocks_count + 1));
+                task_answer_blocks = [...task_answer_blocks, {
+                    'block_id': task_answer_blocks_count + 1,
+                    'block_type_id': 5,
+                    'content': tableWrap.outerHTML,
+                }];
+                dispatch(setTaskAnswerBlocks(task_answer_blocks));
             }
 
             closeModal();

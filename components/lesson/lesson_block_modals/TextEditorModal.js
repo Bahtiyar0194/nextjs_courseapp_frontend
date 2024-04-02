@@ -6,13 +6,14 @@ import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from 'react-redux';
 import { setLessonBlocks, setLessonBlocksCount } from '../../../store/slices/lessonBlocksSlice';
 import { setTaskBlocks, setTaskBlocksCount } from '../../../store/slices/taskBlocksSlice';
+import { setTaskAnswerBlocks, setTaskAnswerBlocksCount } from "../../../store/slices/taskAnswerBlocksSlice";
 
 const QuillNoSSRWrapper = dynamic(import('react-quill'), {
     ssr: false,
     loading: () => <p>Loading ...</p>,
 })
 
-const TextEditorModal = ({ create_lesson, create_task, closeModal }) => {
+const TextEditorModal = ({ create_lesson, create_task, create_task_answer, closeModal }) => {
     const modules = {
         toolbar: [
             [{ size: [] }],
@@ -57,6 +58,9 @@ const TextEditorModal = ({ create_lesson, create_task, closeModal }) => {
     let task_blocks = useSelector((state) => state.taskBlocks.task_blocks);
     const task_blocks_count = useSelector((state) => state.taskBlocks.task_blocks_count);
 
+    let task_answer_blocks = useSelector((state) => state.taskAnswerBlocks.task_answer_blocks);
+    const task_answer_blocks_count = useSelector((state) => state.taskAnswerBlocks.task_answer_blocks_count);
+
     const [text, setText] = useState('');
     const [text_error, setTextError] = useState(false);
 
@@ -84,6 +88,17 @@ const TextEditorModal = ({ create_lesson, create_task, closeModal }) => {
                 }];
                 dispatch(setTaskBlocks(task_blocks));
             }
+
+            if (create_task_answer === true) {
+                dispatch(setTaskAnswerBlocksCount(task_answer_blocks_count + 1));
+                task_answer_blocks = [...task_answer_blocks, {
+                    'block_id': task_answer_blocks_count + 1,
+                    'block_type_id': 1,
+                    'content': text,
+                }];
+                dispatch(setTaskAnswerBlocks(task_answer_blocks));
+            }
+
             closeModal();
             setText('');
         }
