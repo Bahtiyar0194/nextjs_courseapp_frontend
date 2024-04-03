@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import DashboardLayout from '../../../../components/layouts/DashboardLayout';
 import { useState } from "react";
 import { useIntl } from "react-intl";
@@ -18,10 +17,7 @@ import { Player, BigPlayButton, LoadingSpinner } from 'video-react';
 import "../../../../node_modules/video-react/dist/video-react.css";
 import UserAvatar from '../../../../components/ui/UserAvatar';
 
-const QuillNoSSRWrapper = dynamic(import('react-quill'), {
-    ssr: false,
-    loading: () => <p>Loading ...</p>,
-})
+const QuillNoSSRWrapper = typeof window === 'object' ? require('react-quill') : () => false;
 
 export default function EditCourse() {
     const [showFullLoader, setShowFullLoader] = useState(true);
@@ -250,7 +246,8 @@ export default function EditCourse() {
                             </div>
                             <div className="col-span-12">
                                 <div className="relative">
-                                    {/* <QuillNoSSRWrapper className={'inactive ' + locale} value={text} onChange={setText} placeholder={intl.formatMessage({ id: "textModal.write_here" })} modules={modules} formats={formats} theme="snow" /> */}
+                                    {' '}
+                                    <QuillNoSSRWrapper className={'inactive ' + locale} value={text} onChange={setText} placeholder={intl.formatMessage({ id: "textModal.write_here" })} modules={modules} formats={formats} theme="snow" />
                                     <label className={(error.course_content && 'label-error')}>{error.course_content ? error.course_content : intl.formatMessage({ id: "page.my_courses.form.course_content" })}</label>
                                 </div>
                             </div>

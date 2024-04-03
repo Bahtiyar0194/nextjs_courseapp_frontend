@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { AiOutlineCheck } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -8,10 +7,7 @@ import { setLessonBlocks, setLessonBlocksCount } from '../../../store/slices/les
 import { setTaskBlocks, setTaskBlocksCount } from '../../../store/slices/taskBlocksSlice';
 import { setTaskAnswerBlocks, setTaskAnswerBlocksCount } from "../../../store/slices/taskAnswerBlocksSlice";
 
-const QuillNoSSRWrapper = dynamic(import('react-quill'), {
-    ssr: false,
-    loading: () => <p>Loading ...</p>,
-})
+const QuillNoSSRWrapper = typeof window === 'object' ? require('react-quill') : () => false;
 
 const TextEditorModal = ({ create_lesson, create_task, create_task_answer, closeModal }) => {
     const modules = {
@@ -108,7 +104,7 @@ const TextEditorModal = ({ create_lesson, create_task, create_task_answer, close
         <>
             <div className="modal-body">
                 {text_error === true && <p className='text-sm text-danger mb-0 mt-4'>{intl.formatMessage({ id: "textModal.write_text" })}</p>}
-                {/* <QuillNoSSRWrapper className={locale} value={text} onChange={setText} placeholder={intl.formatMessage({ id: "textModal.write_here" })} modules={modules} formats={formats} theme="snow" /> */}
+                <QuillNoSSRWrapper className={locale} value={text} onChange={setText} placeholder={intl.formatMessage({ id: "textModal.write_here" })} modules={modules} formats={formats} theme="snow" />
                 <button onClick={createTextSubmit} className="btn btn-primary mt-4"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "done" })}</span></button>
             </div>
         </>
