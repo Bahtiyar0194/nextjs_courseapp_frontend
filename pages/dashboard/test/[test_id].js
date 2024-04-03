@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { AiOutlineCheckCircle, AiOutlineFileImage, AiOutlineRight } from "react-icons/ai";
+import { AiOutlineCheckCircle, AiOutlineRight } from "react-icons/ai";
 import axios from "axios";
 import Link from "next/link";
 import Breadcrumb from "../../../components/ui/Breadcrumb";
@@ -11,8 +11,8 @@ import ButtonLoader from "../../../components/ui/ButtonLoader";
 import TestQuestionMaterialBlock from "../../../components/lesson/lesson_task_modals/test_components/TestQuestionMaterialBlock";
 import ProgressBar from "../../../components/ui/ProgressBar";
 import HtmlToImageButton from "../../../components/ui/HTMLToImageButton";
-import { useSelector } from "react-redux";
 import HtmlToPDFButton from "../../../components/ui/HtmlToPDFButton";
+import { useSelector } from "react-redux";
 
 export default function LessonTest() {
     const router = useRouter();
