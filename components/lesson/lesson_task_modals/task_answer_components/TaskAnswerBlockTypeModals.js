@@ -29,7 +29,7 @@ export default function TaskAnswerBlockTypeModals() {
                     <AiOutlinePlus /> {intl.formatMessage({ id: "lesson.add_material" })} <AiOutlineCaretDown className="ml-0.5 h-3 w-3" />
                 </CDropdownToggle>
                 <CDropdownMenu>
-                    {/* <Link href={'#'} onClick={() => setTextModal(true)}><AiOutlineFileText />{intl.formatMessage({ id: "textModal.text" })}</Link> */}
+                    <Link href={'#'} onClick={() => setTextModal(true)}><AiOutlineFileText />{intl.formatMessage({ id: "textModal.text" })}</Link>
                     <Link href={'#'} onClick={() => setTableModal(true)}><AiOutlineTable />{intl.formatMessage({ id: "tableModal.table" })}</Link>
                     <Link href={'#'} onClick={() => setImageModal(true)}><AiOutlineFileImage />{intl.formatMessage({ id: "imageModal.image" })}</Link>
                     <Link href={'#'} onClick={() => setVideoModal(true)}><AiOutlinePlayCircle />{intl.formatMessage({ id: "videoModal.video" })}</Link>
@@ -39,9 +39,9 @@ export default function TaskAnswerBlockTypeModals() {
             </CDropdown>
 
 
-            {/* <Modal show={textModal} onClose={() => setTextModal(false)} modal_title={intl.formatMessage({ id: "textModal.title" })} modal_size="modal-4xl">
+            <Modal show={textModal} onClose={() => setTextModal(false)} modal_title={intl.formatMessage({ id: "textModal.title" })} modal_size="modal-4xl">
                 <TextEditorModal create_task_answer={true} closeModal={() => setTextModal(false)} />
-            </Modal> */}
+            </Modal>
 
             <Modal show={tableModal} onClose={() => setTableModal(false)} modal_title={intl.formatMessage({ id: "tableModal.title" })} modal_size="modal-xl">
                 <TableModal create_task_answer={true} closeModal={() => setTableModal(false)} />

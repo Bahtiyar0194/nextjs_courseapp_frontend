@@ -250,7 +250,7 @@ export default function EditCourse() {
                             </div>
                             <div className="col-span-12">
                                 <div className="relative">
-                                    <QuillNoSSRWrapper className={'inactive ' + locale} value={text} onChange={setText} placeholder={intl.formatMessage({ id: "textModal.write_here" })} modules={modules} formats={formats} theme="snow" />
+                                    {/* <QuillNoSSRWrapper className={'inactive ' + locale} value={text} onChange={setText} placeholder={intl.formatMessage({ id: "textModal.write_here" })} modules={modules} formats={formats} theme="snow" /> */}
                                     <label className={(error.course_content && 'label-error')}>{error.course_content ? error.course_content : intl.formatMessage({ id: "page.my_courses.form.course_content" })}</label>
                                 </div>
                             </div>
