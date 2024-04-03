@@ -10,8 +10,8 @@ import Breadcrumb from "../../../components/ui/Breadcrumb";
 import ButtonLoader from "../../../components/ui/ButtonLoader";
 import TestQuestionMaterialBlock from "../../../components/lesson/lesson_task_modals/test_components/TestQuestionMaterialBlock";
 import ProgressBar from "../../../components/ui/ProgressBar";
-import HtmlToImageButton from "../../../components/ui/HTMLToImageButton";
-import HtmlToPDFButton from "../../../components/ui/HtmlToPDFButton";
+import ExportToImageButton from "../../../components/ui/ExportToImageButton";
+import ExportToPDFButton from "../../../components/ui/ExportToPDFButton";
 import { useSelector } from "react-redux";
 
 export default function LessonTest() {
@@ -237,8 +237,8 @@ export default function LessonTest() {
                                         </div>
                                         {task?.task_type_id === 4 &&
                                             <div className="btn-wrap">
-                                                <HtmlToImageButton btn_title={'export_to_png'} file_name={task.task_name + ' - ' + test_question.executor} elem_id={'test_result'} btn_size_class={'btn-sm'} />
-                                                <HtmlToPDFButton file_name={task.task_name + ' - ' + test_question.executor} elem_id={'test_result'} btn_size_class={'btn-sm'} />
+                                                <ExportToImageButton btn_title={'export_to_png'} file_name={task.task_name + ' - ' + test_question.executor} elem_id={'test_result'} btn_size_class={'btn-sm'} />
+                                                <ExportToPDFButton file_name={task.task_name + ' - ' + test_question.executor} elem_id={'test_result'} btn_size_class={'btn-sm'} />
                                             </div>
                                         }
                                     </div>

@@ -2,7 +2,7 @@ import { toPng } from 'html-to-image';
 import { AiOutlineFileImage } from "react-icons/ai";
 import { useIntl } from "react-intl";
 
-const HtmlToImageButton = ({ elem_id, btn_title, file_name, btn_size_class }) => {
+const ExportToImageButton = ({ elem_id, btn_title, file_name, btn_size_class }) => {
     const intl = useIntl();
 
     const exportToImage = () => {
@@ -21,4 +21,4 @@ const HtmlToImageButton = ({ elem_id, btn_title, file_name, btn_size_class }) =>
     );
 };
 
-export default HtmlToImageButton;
+export default ExportToImageButton;

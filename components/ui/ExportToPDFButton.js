@@ -3,7 +3,7 @@ import { jsPDF } from "jspdf";
 import { AiOutlineFilePdf } from "react-icons/ai";
 import { useIntl } from "react-intl";
 
-const HtmlToPDFButton = ({ file_name, elem_id, btn_size_class }) => {
+const ExportToPDFButton = ({ file_name, elem_id, btn_size_class }) => {
     const intl = useIntl();
 
     const exportToPDF = () => {
@@ -24,4 +24,4 @@ const HtmlToPDFButton = ({ file_name, elem_id, btn_size_class }) => {
     );
 };
 
-export default HtmlToPDFButton;
+export default ExportToPDFButton;
