@@ -17,7 +17,7 @@ export default function Dashboard() {
     const disk_data = useSelector((state) => state.disk.disk_data);
 
     return (
-        <DashboardLayout showLoader={user?.first_name && disk_data.used_space_percent ? false : true} title={intl.formatMessage({ id: "page.dashboard.title" })}>
+        <DashboardLayout showLoader={(user?.first_name && disk_data?.used_space_percent >= 0) ? false : true} title={intl.formatMessage({ id: "page.dashboard.title" })}>
             <Breadcrumb />
             <div className="col-span-12">
                 <h2>{user.first_name}, {intl.formatMessage({ id: "page.home.welcome" })}!</h2>
