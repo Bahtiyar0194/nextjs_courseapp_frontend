@@ -257,11 +257,11 @@ export default function CreateCourse() {
                                         course_attributes.course_authors?.length > 0 &&
                                         course_attributes.course_authors?.map(item => (
                                             <div key={item.user_id}>
-                                                <div className="flex gap-2 items-center">
-                                                    <UserAvatar user_avatar={item.avatar} className={'w-8 h-8'} padding={0.5} />
-                                                    <span>{item.last_name} {item.first_name}</span>
-                                                </div>
                                                 <div className="btn-wrap">
+                                                    <div className="flex gap-2 items-center">
+                                                        <UserAvatar user_avatar={item.avatar} className={'w-8 h-8'} padding={0.5} />
+                                                        <span>{item.last_name} {item.first_name}</span>
+                                                    </div>
                                                     {mentors.includes(item.user_id)
                                                         ?
                                                         <button onClick={e => deleteFromMentors(item.user_id)} className="btn btn-sm btn-outline-danger" type="button"><AiOutlineDelete /> <span>{intl.formatMessage({ id: "delete" })}</span></button>
