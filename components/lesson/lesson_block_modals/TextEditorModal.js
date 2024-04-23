@@ -42,7 +42,7 @@ const TextEditorModal = ({ create_lesson, create_task, create_task_answer, close
         'bullet',
         'indent'
     ]
-    
+
     const router = useRouter();
     const { locale } = router;
     const intl = useIntl();
@@ -101,13 +101,11 @@ const TextEditorModal = ({ create_lesson, create_task, create_task_answer, close
     }
 
     return (
-        <>
-            <div className="modal-body">
-                {text_error === true && <p className='text-sm text-danger mb-0 mt-4'>{intl.formatMessage({ id: "textModal.write_text" })}</p>}
-                <QuillNoSSRWrapper className={locale} value={text} onChange={setText} placeholder={intl.formatMessage({ id: "textModal.write_here" })} modules={modules} formats={formats} theme="snow" />
-                <button onClick={createTextSubmit} className="btn btn-primary mt-4"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "done" })}</span></button>
-            </div>
-        </>
+        <div className="modal-body">
+            {text_error === true && <p className='text-sm text-danger mb-0 mt-4'>{intl.formatMessage({ id: "textModal.write_text" })}</p>}
+            <QuillNoSSRWrapper className={locale} value={text} onChange={setText} placeholder={intl.formatMessage({ id: "textModal.write_here" })} modules={modules} formats={formats} theme="snow" />
+            <button onClick={createTextSubmit} className="btn btn-primary mt-4"><AiOutlineCheck /> <span>{intl.formatMessage({ id: "done" })}</span></button>
+        </div>
     );
 };
 

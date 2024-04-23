@@ -12,6 +12,7 @@ import TestQuestionMaterialBlock from "../../../components/lesson/lesson_task_mo
 import ProgressBar from "../../../components/ui/ProgressBar";
 import ExportToImageButton from "../../../components/ui/ExportToImageButton";
 import ExportToPDFButton from "../../../components/ui/ExportToPDFButton";
+import UserAvatar from "../../../components/ui/UserAvatar";
 import { useSelector } from "react-redux";
 
 export default function LessonTest() {
@@ -198,14 +199,14 @@ export default function LessonTest() {
                                     <h3 className={"animate fadeInUp " + (animated ? 'animated' : '')}>{test_question.question.question}</h3>
                                     <div className="custom-grid">
                                         {
-                                            test_question.question.question_materials.length > 0 &&
+                                            test_question.question.question_materials?.length > 0 &&
                                             test_question.question.question_materials?.map((question_material_block, i) => (
                                                 <TestQuestionMaterialBlock key={i} question_material_block={question_material_block} question_index={i} edit={false} />
                                             ))
                                         }
                                         <div className="col-span-12">
                                             <form onSubmit={e => saveUserAnswer(e, task.task_id)} encType="multipart/form-data">
-                                                {test_question.question.question_answers.length > 0 &&
+                                                {test_question.question.question_answers?.length > 0 &&
                                                     test_question.question.question_answers.map((answer, i) => (
                                                         <div key={answer.answer_id} className={"animate fadeInLeft mb-4" + (animated ? " animated" : "")} style={{ "transitionDelay": (i * 200) + "ms" }}>
                                                             <label className="custom-radio-checkbox">
@@ -237,13 +238,19 @@ export default function LessonTest() {
                                         </div>
                                         {task?.task_type_id === 4 &&
                                             <div className="btn-wrap">
-                                                <ExportToImageButton btn_title={'export_to_png'} file_name={task.task_name + ' - ' + test_question.executor} elem_id={'test_result'} btn_size_class={'btn-sm'} />
-                                                <ExportToPDFButton file_name={task.task_name + ' - ' + test_question.executor} elem_id={'test_result'} btn_size_class={'btn-sm'} />
+                                                <ExportToImageButton btn_title={'export_to_png'} file_name={task.task_name + ' - ' + test_question.executor.last_name + ' ' + test_question.executor.first_name} elem_id={'test_result'} btn_size_class={'btn-sm'} />
+                                                <ExportToPDFButton file_name={task.task_name + ' - ' + test_question.executor.last_name + ' ' + test_question.executor.first_name} elem_id={'test_result'} btn_size_class={'btn-sm'} />
                                             </div>
                                         }
                                     </div>
 
-                                    <p className="text-2xl title-font">{intl.formatMessage({ id: "executor" })}: <b>{test_question.executor}</b></p>
+                                    <div className="mb-4">
+                                        <p className="mb-2 text-xl">{intl.formatMessage({ id: "executor" })}:</p>
+                                        <div className="flex flex-wrap gap-x-2 items-center">
+                                            <UserAvatar user_avatar={test_question.executor.avatar} className={'w-12 h-12'} padding={0.5} />
+                                            <p className="text-2xl title-font mb-0">{test_question.executor.last_name + ' ' + test_question.executor.first_name}</p>
+                                        </div>
+                                    </div>
 
                                     {task?.task_type_id === 4 && test_question.analytic_test_result?.length > 0 &&
                                         <div className="flex flex-col gap-y-2">
@@ -257,9 +264,9 @@ export default function LessonTest() {
                                         </div>
                                     }
 
-                                    {test_question.all_questions.length > 0 && task?.task_type_id === 1 &&
+                                    {test_question.all_questions?.length > 0 && task?.task_type_id === 1 &&
                                         test_question.all_questions.map((question, q) => (
-                                            <div key={question.question_id} className={test_question.all_questions.length != (q + 1) ? 'my-4 border-b-active' : undefined}>
+                                            <div key={question.question_id} className={test_question.all_questions?.length != (q + 1) ? 'my-4 border-b-active' : undefined}>
                                                 <h4>{question.question}</h4>
                                                 <div className="custom-grid">
                                                     {question.question_materials.map((question_material_block, i) => (
@@ -268,7 +275,7 @@ export default function LessonTest() {
 
                                                     <div className="col-span-12">
                                                         {
-                                                            question.question_answers.length > 0 &&
+                                                            question.question_answers?.length > 0 &&
                                                             question.question_answers.map((answer, i) => (
                                                                 <p key={answer.answer_id} className='font-medium mb-4'>
                                                                     <span className={(answer.is_correct == 1 ? 'text-corp' : '')}>{i + 1}. {answer.answer}</span>

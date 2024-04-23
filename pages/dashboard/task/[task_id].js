@@ -12,12 +12,15 @@ import Breadcrumb from "../../../components/ui/Breadcrumb";
 import ButtonLoader from "../../../components/ui/ButtonLoader";
 import TaskBlock from "../../../components/lesson/lesson_task_modals/TaskBlock";
 import TaskAnswerBlockTypeModals from "../../../components/lesson/lesson_task_modals/task_answer_components/TaskAnswerBlockTypeModals";
+import UserAvatar from "../../../components/ui/UserAvatar";
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 export default function LessonTask() {
     const router = useRouter();
     const [showFullLoader, setShowFullLoader] = useState(true);
     const intl = useIntl();
+
+    const user = useSelector((state) => state.authUser.user);
 
     const [task, setTask] = useState([]);
 
@@ -29,7 +32,17 @@ export default function LessonTask() {
 
     const getTask = async (task_id) => {
         setShowFullLoader(true);
-        await axios.get('tasks/' + task_id)
+
+        let url = "";
+
+        if ((user.current_role_id == 2 || user.current_role_id == 3) && router.query.executor_id) {
+            url = 'tasks/get_user_task_answer/' + task_id + '/' + router.query.executor_id;
+        }
+        else {
+            url = 'tasks/' + task_id;
+        }
+
+        await axios.get(url)
             .then(response => {
                 setTask(response.data);
                 setShowFullLoader(false);
@@ -113,31 +126,48 @@ export default function LessonTask() {
             </div>
 
             <div className="col-span-12 lg:col-span-5">
-                {/* <StickyBox offsetTop={6} offsetBottom={6}> */}
-                <h4 className="mb-4">{intl.formatMessage({ id: "task.your_answer_to_this_task" })}</h4>
+                {(task && task.task_answer_blocks && task.task_answer_blocks?.length > 0) ?
+                    <>
+                            <div className="flex flex-wrap gap-x-2 items-center mb-4">
+                                <UserAvatar user_avatar={task.executor.avatar} className={'w-10 h-10'} padding={0.5} />
+                                <div>
+                                <p className="text-xl mb-0">{task.executor.last_name + ' ' + task.executor.first_name}</p>
+                                <p className="text-xs text-inactive mb-0">{intl.formatMessage({ id: "completion_at" })}: <b>{new Date(task.completed_task.updated_at).toLocaleString()}</b></p>
+                                </div>
+                            </div>
 
-                <div className="form-group-border label-inactive mb-4">
-                    <AiOutlineFileDone />
-                    <textarea name="task_answer" cols="40" defaultValue="" placeholder=" "></textarea>
-                    <label className={error.task_answer && 'label-error'}>{error.task_answer ? error.task_answer : intl.formatMessage({ id: "task.enter_the_answer_to_this_task" })}</label>
-                </div>
-
-                {task_answer_blocks.length > 0 &&
-                    <div className="custom-grid" ref={animateParent}>
-                        {task_answer_blocks.map((answer_block, i) => (
-                            <TaskAnswerBlock key={i} task_answer_block={answer_block} index={i} edit={true} />
-                        ))}
-                    </div>
+                        {task.task_answer_blocks.length > 0 &&
+                            <div className="custom-grid" ref={animateParent}>
+                                {task.task_answer_blocks.map((answer_block, i) => (
+                                    <TaskAnswerBlock key={i} task_answer_block={answer_block} index={i} edit={false} />
+                                ))}
+                            </div>
+                        }
+                    </>
+                    :
+                    <>
+                        <h4 className="mb-4">{intl.formatMessage({ id: "task.your_answer_to_this_task" })}</h4>
+                        <div className="form-group-border label-inactive mb-4">
+                            <AiOutlineFileDone />
+                            <textarea name="task_answer" cols="40" defaultValue="" placeholder=" "></textarea>
+                            <label className={error.task_answer && 'label-error'}>{error.task_answer ? error.task_answer : intl.formatMessage({ id: "task.enter_the_answer_to_this_task" })}</label>
+                        </div>
+                        {task_answer_blocks.length > 0 &&
+                            <div className="custom-grid" ref={animateParent}>
+                                {task_answer_blocks.map((answer_block, i) => (
+                                    <TaskAnswerBlock key={i} task_answer_block={answer_block} index={i} edit={true} />
+                                ))}
+                            </div>
+                        }
+                        <div className="btn-wrap mt-4">
+                            <TaskAnswerBlockTypeModals />
+                            <button onClick={() => taskAnswerSubmit()} disabled={button_loader} className="btn btn-outline-primary">
+                                {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
+                                <span>{intl.formatMessage({ id: "done" })}</span>
+                            </button>
+                        </div>
+                    </>
                 }
-
-                <div className="btn-wrap mt-4">
-                    <TaskAnswerBlockTypeModals />
-                    <button onClick={() => taskAnswerSubmit()} disabled={button_loader} className="btn btn-outline-primary">
-                        {button_loader === true ? <ButtonLoader /> : <AiOutlineCheck />}
-                        <span>{intl.formatMessage({ id: "done" })}</span>
-                    </button>
-                </div>
-                {/* </StickyBox> */}
             </div>
         </DashboardLayout>
     );

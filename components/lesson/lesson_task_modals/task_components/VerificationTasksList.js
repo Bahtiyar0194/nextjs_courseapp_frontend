@@ -143,7 +143,10 @@ const VerificationTasksList = ({ verification_tasks, getVerificationTasks, verif
 
                                 <tbody>
                                     {verification_tasks.data?.map(task => (
-                                        <tr key={task.task_id} onClick={() => router.push('/dashboard/' + task.task_type_slug + '/' + task.task_id)}>
+                                        <tr key={task.task_id} onClick={() => router.push({
+                                            pathname: '/dashboard/' + ((task.task_type_id === 1 || task.task_type_id === 4) ? 'test' : task.task_type_slug) + '/' + task.task_id,
+                                            query: { executor_id: task.executor_id }
+                                        })}>
                                             <td>{task.task_name}</td>
                                             <td>{task.task_type_name}</td>
                                             <RoleProvider roles={[2, 3]}>
