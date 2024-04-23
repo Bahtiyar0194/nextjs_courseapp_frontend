@@ -83,6 +83,14 @@ export default function Lesson() {
             const { lesson_id } = router.query;
             getLesson(lesson_id);
         }
+
+        const handleContextmenu = e => {
+            e.preventDefault()
+        }
+        document.addEventListener('contextmenu', handleContextmenu)
+        return function cleanup() {
+            document.removeEventListener('contextmenu', handleContextmenu)
+        }
     }, [router.isReady]);
 
     return (
