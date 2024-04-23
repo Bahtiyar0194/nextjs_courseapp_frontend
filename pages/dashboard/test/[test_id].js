@@ -238,8 +238,8 @@ export default function LessonTest() {
                                         </div>
                                         {task?.task_type_id === 4 &&
                                             <div className="btn-wrap">
-                                                <ExportToImageButton btn_title={'export_to_png'} file_name={task.task_name + ' - ' + test_question.executor.last_name + ' ' + test_question.executor.first_name} elem_id={'test_result'} btn_size_class={'btn-sm'} />
-                                                <ExportToPDFButton file_name={task.task_name + ' - ' + test_question.executor.last_name + ' ' + test_question.executor.first_name} elem_id={'test_result'} btn_size_class={'btn-sm'} />
+                                                <ExportToImageButton btn_title={'export_to_png'} file_name={task.task_name + ' - ' + test_question.executor?.last_name + ' ' + test_question.executor?.first_name} elem_id={'test_result'} btn_size_class={'btn-sm'} />
+                                                <ExportToPDFButton file_name={task.task_name + ' - ' + test_question.executor?.last_name + ' ' + test_question.executor?.first_name} elem_id={'test_result'} btn_size_class={'btn-sm'} />
                                             </div>
                                         }
                                     </div>
@@ -247,8 +247,8 @@ export default function LessonTest() {
                                     <div className="mb-4">
                                         <p className="mb-2 text-xl">{intl.formatMessage({ id: "executor" })}:</p>
                                         <div className="flex flex-wrap gap-x-2 items-center">
-                                            <UserAvatar user_avatar={test_question.executor.avatar} className={'w-12 h-12'} padding={0.5} />
-                                            <p className="text-2xl title-font mb-0">{test_question.executor.last_name + ' ' + test_question.executor.first_name}</p>
+                                            <UserAvatar user_avatar={test_question.executor?.avatar} className={'w-12 h-12'} padding={0.5} />
+                                            <p className="text-2xl title-font mb-0">{test_question.executor?.last_name + ' ' + test_question.executor?.first_name}</p>
                                         </div>
                                     </div>
 
